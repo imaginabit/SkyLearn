@@ -132,10 +132,11 @@ def course_single(request, slug):
         if is_editor:
             messages.error(request, "Solo los alumnos pueden entregar trabajos.")
             return redirect("course_detail", slug=slug)
-        form = SubmissionForm(request.POST, request.FILES)
+        form = SubmissionForm(request.POST, request.FILES, course=course)
         if form.is_valid():
+            quiz = form.cleaned_data["quiz"]
             submission, _ = Submission.objects.get_or_create(
-                course=course, student=request.user
+                course=course, student=request.user, quiz=quiz
             )
             if submission.file:
                 submission.file.delete(save=False)
@@ -145,15 +146,21 @@ def course_single(request, slug):
             return redirect("course_detail", slug=slug)
         messages.error(request, "Revisa los errores del formulario.")
     else:
-        form = SubmissionForm()
+        form = SubmissionForm(course=course)
 
-    submission = None
+    my_submissions = None
     submissions = None
     if is_editor:
-        submissions = Submission.objects.filter(course=course).select_related("student")
+        submissions = (
+            Submission.objects.filter(course=course)
+            .select_related("student", "quiz")
+            .order_by("quiz__title", "student__username")
+        )
     else:
-        submission = (
-            Submission.objects.filter(course=course, student=request.user).first()
+        my_submissions = (
+            Submission.objects.filter(course=course, student=request.user)
+            .select_related("quiz")
+            .order_by("quiz__title")
         )
 
     return render(
@@ -167,7 +174,7 @@ def course_single(request, slug):
             "lecturers": lecturers,
             "media_url": settings.MEDIA_URL,
             "submission_form": form,
-            "submission": submission,
+            "my_submissions": my_submissions,
             "submissions": submissions,
         },
     )

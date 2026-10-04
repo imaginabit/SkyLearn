@@ -258,10 +258,17 @@ class CourseOffer(models.Model):
 
 
 class Submission(models.Model):
-    """Entrega de un alumno: un unico fichero por curso, reemplazable."""
+    """Entrega de un alumno para una actividad: un fichero, reemplazable."""
 
     course = models.ForeignKey(
         Course, on_delete=models.CASCADE, related_name="submissions"
+    )
+    quiz = models.ForeignKey(
+        "quiz.Quiz",
+        on_delete=models.CASCADE,
+        related_name="submissions",
+        null=True,
+        blank=False,
     )
     student = models.ForeignKey(
         settings.AUTH_USER_MODEL,
@@ -293,7 +300,8 @@ class Submission(models.Model):
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=["course", "student"], name="one_submission_per_student"
+                fields=["course", "student", "quiz"],
+                name="one_submission_per_student_and_quiz",
             )
         ]
 
@@ -302,4 +310,4 @@ class Submission(models.Model):
         return self.file.name.rsplit("/", 1)[-1]
 
     def __str__(self):
-        return f"{self.student} - {self.course}"
+        return f"{self.student} - {self.quiz}"

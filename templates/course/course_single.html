@@ -57,6 +57,7 @@
                 <tr>
                     <th>#</th>
                     <th>{% trans "Alumno" %}</th>
+                    <th>{% trans "Actividad" %}</th>
                     <th>{% trans "Fecha de entrega" %}</th>
                     <th>{% trans "Archivo" %}</th>
                 </tr>
@@ -66,6 +67,7 @@
                 <tr>
                     <td>{{ forloop.counter }}</td>
                     <td>{{ s.student.get_full_name|default:s.student.username }}</td>
+                    <td>{{ s.quiz.title|default:"-" }}</td>
                     <td>{{ s.uploaded_at|date:"SHORT_DATETIME_FORMAT" }}</td>
                     <td>
                         <a class="download-btn" href="{% url 'submission_download' slug=course.slug pk=s.pk %}">
@@ -73,32 +75,46 @@
                     </td>
                 </tr>
                 {% empty %}
-                <tr><td colspan="4" class="text-muted">{% trans "Todavia no ha entregado nadie." %}</td></tr>
+                <tr><td colspan="5" class="text-muted">{% trans "Todavia no ha entregado nadie." %}</td></tr>
                 {% endfor %}
             </tbody>
         </table>
     </div>
     {% else %}
-    <p class="form-title m-0">{% trans "Tu entrega" %}</p>
+    <p class="form-title m-0">{% trans "Tus entregas" %}</p>
     <div class="card p-3">
-        {% if submission %}
-        <p class="mb-2">
-            <i class="fas fa-check-circle text-success me-1"></i>
-            {% trans "Entregado" %} {{ submission.uploaded_at|date:"SHORT_DATETIME_FORMAT" }}:
-            <a href="{% url 'submission_download' slug=course.slug pk=submission.pk %}">{{ submission.filename }}</a>
-        </p>
+        {% if my_submissions %}
+        <ul class="list-unstyled mb-3">
+            {% for s in my_submissions %}
+            <li class="mb-1">
+                <i class="fas fa-check-circle text-success me-1"></i>
+                <strong>{{ s.quiz.title|default:"-" }}</strong> &mdash;
+                {{ s.uploaded_at|date:"SHORT_DATETIME_FORMAT" }}:
+                <a href="{% url 'submission_download' slug=course.slug pk=s.pk %}">{{ s.filename }}</a>
+            </li>
+            {% endfor %}
+        </ul>
         {% else %}
         <p class="text-muted small mb-2">{% trans "Todavia no has entregado nada." %}</p>
         {% endif %}
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
-            <div class="mb-2">{{ submission_form.file }}</div>
-            {% if submission_form.file.errors %}
-            <div class="text-danger small mb-2">{{ submission_form.file.errors }}</div>
-            {% endif %}
+            <div class="mb-2">
+                <label class="form-label small text-muted">{% trans "Actividad" %}</label>
+                {{ submission_form.quiz }}
+                {% if submission_form.quiz.errors %}
+                <div class="text-danger small">{{ submission_form.quiz.errors }}</div>
+                {% endif %}
+            </div>
+            <div class="mb-2">
+                <label class="form-label small text-muted">{% trans "Archivo" %}</label>
+                {{ submission_form.file }}
+                {% if submission_form.file.errors %}
+                <div class="text-danger small">{{ submission_form.file.errors }}</div>
+                {% endif %}
+            </div>
             <button class="btn btn-sm btn-primary" type="submit">
-                <i class="fas fa-upload me-1"></i>
-                {% if submission %}{% trans "Reemplazar entrega" %}{% else %}{% trans "Enviar mi entrega" %}{% endif %}
+                <i class="fas fa-upload me-1"></i>{% trans "Enviar mi entrega" %}
             </button>
         </form>
     </div>
