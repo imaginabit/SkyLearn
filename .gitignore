@@ -150,3 +150,6 @@ media/result_sheet/*
 # Custom
 dump.rdb
 *.DS_Store
+
+# Localizacion castellano: se versiona el .mo compilado para el despliegue
+!locale/es/LC_MESSAGES/*.mo
