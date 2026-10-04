@@ -44,7 +44,11 @@ echo ">> Repo:    $SRC"
 echo ">> Commit:  $(git -C "$SRC" rev-parse --short HEAD 2>/dev/null || echo '?')"
 echo ">> Destino: ${REMOTE}:${DEST} ${DRY:+[dry-run]}"
 
-rsync -az --rsync-path="sudo rsync" "${EXCLUDES[@]}" -e ssh "$SRC" "${REMOTE}:${DEST}/"
+# --chown: sin esto el rsync con sudo deja el directorio como el usuario local
+# (debian) y www-data pierde el permiso de escritura en /opt/skylearn; SQLite
+# necesita crear db.sqlite3-journal ahi y falla con "attempt to write a
+# readonly database" en la primera escritura.
+rsync -az --rsync-path="sudo rsync" --chown=www-data:www-data "${EXCLUDES[@]}" -e ssh "$SRC" "${REMOTE}:${DEST}/"
 
 if [ -n "$DRY" ]; then
   echo ">> Dry-run: servidor intacto."
