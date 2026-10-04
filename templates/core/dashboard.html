@@ -166,7 +166,7 @@
 
 <script src="{% url 'javascript-catalog' %}"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="{% static 'js/dashboard.js' %}"></script>
+{# js/dashboard.js no existe en el proyecto: la referencia venía del repositorio original y, con el manifiesto de estáticos activo, hacía que esta página diera 500. El trabajo de los gráficos está en los script en línea de debajo. #}
 <script>
 	$('.fa-expand-alt').click(function () {
 		if ($(this).parent('.chart-wrap').parent('.col-md-6').hasClass('expand')) {
