@@ -2,10 +2,9 @@
 #
 # Despliega SkyLearn (fork imaginabit) en el servidor Rocinante.
 #
-# Sincroniza SOLO el codigo. NUNCA toca los datos en vivo del servidor:
-#   .env, venv/, db.sqlite3, media/, staticfiles/, __pycache__ ...
-# (rsync --delete respeta los --exclude: esos ficheros no se borran ni se
-#  sobreescriben aunque no existan en el repo.)
+# Sincroniza SOLO el codigo. NUNCA borra ni sobreescribe datos en vivo del
+# servidor (.env, venv/, db.sqlite3, media/, staticfiles/, __pycache__ ...).
+# No usa --delete: el despliegue jamas elimina ficheros del servidor.
 #
 # Uso:
 #   ./deploy.sh             Despliega desde este clon.
@@ -44,7 +43,7 @@ echo ">> Repo:    $SRC"
 echo ">> Commit:  $(git -C "$SRC" rev-parse --short HEAD 2>/dev/null || echo '?')"
 echo ">> Destino: ${REMOTE}:${DEST} ${DRY:+[dry-run]}"
 
-rsync -az --delete "${EXCLUDES[@]}" -e ssh "$SRC" "${REMOTE}:${DEST}/"
+rsync -az --rsync-path="sudo rsync" "${EXCLUDES[@]}" -e ssh "$SRC" "${REMOTE}:${DEST}/"
 
 if [ -n "$DRY" ]; then
   echo ">> Dry-run: servidor intacto."

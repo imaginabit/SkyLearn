@@ -21,7 +21,8 @@ configurado en este clon.
 
 ## Qué hace `deploy.sh`
 
-1. Sincroniza el **código** al servidor con `rsync -az --delete`.
+1. Sincroniza el **código** al servidor con `rsync -az` (con `sudo` remoto
+   para poder escribir en `/opt/skylearn`, propiedad de `www-data`).
 2. En el servidor: permisos (`www-data`), `pip install`, `migrate`,
    `compilemessages -l es`, `collectstatic` y `systemctl restart skylearn`.
 3. Al terminar: https://curso.imaginabit.com
@@ -38,8 +39,8 @@ Estos ficheros del servidor **nunca** se sobreescriben ni se borran:
 | `staticfiles/` | Estáticos generados (se regeneran con `collectstatic`) |
 | `venv/` | Entorno Python del servidor |
 
-> `rsync --delete` borra en el servidor lo que ya no exista en el repo, pero
-> **respeta los `--exclude`**, así que los anteriores quedan a salvo.
+> El despliegue **no usa `--delete`**: nunca borra ficheros del servidor. Solo
+> añade/actualiza. Los `--exclude` evitan además tocar los datos en vivo.
 
 ## Requisitos
 
