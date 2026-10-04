@@ -46,6 +46,23 @@
         </div>
     </div>
 
+    <div class="card mb-3">
+        <p class="form-title">{% trans 'Data protection' %}</p>
+        <div class="card-body">
+            <div class="form-check">
+                {{ form.consent }}
+                <label class="form-check-label" for="{{ form.consent.id_for_label }}">
+                    <b>{{ form.consent.label }}</b>. He leído y acepto la
+                    <a href="{% url 'privacy' %}" target="_blank" rel="noopener">política de privacidad</a>.
+                </label>
+                <div class="form-text">{{ form.consent.help_text }}</div>
+                {% if form.consent.errors %}
+                    <div class="text-danger small mt-1">{{ form.consent.errors|join:" " }}</div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
     <input class="btn btn-primary" type="submit" value="{% trans 'Save' %}">
 </form>
 

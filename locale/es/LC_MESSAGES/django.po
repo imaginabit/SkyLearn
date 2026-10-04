@@ -12,7 +12,7 @@ msgstr ""
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -84,11 +84,11 @@ msgstr ""
 
 #: accounts/models.py:105 templates/result/add_score_for.html:52
 msgid "Student"
-msgstr ""
+msgstr "Estudiante"
 
 #: accounts/models.py:107 templates/course/course_allocation_view.html:32
 msgid "Lecturer"
-msgstr ""
+msgstr "Docente"
 
 #: accounts/models.py:109
 msgid "Parent"
@@ -120,7 +120,7 @@ msgstr ""
 #: templates/core/index.html:52 templates/setting/admin_panel.html:80
 #: templates/setting/admin_panel.html:81
 msgid "News"
-msgstr ""
+msgstr "Noticias"
 
 #: core/models.py:10 core/models.py:14
 msgid "Event"
@@ -169,8 +169,8 @@ msgstr ""
 #: course/models.py:218
 #, python-brace-format
 msgid ""
-"The file '{instance.title}' has been uploaded to the course '{instance."
-"course}'."
+"The file '{instance.title}' has been uploaded to the course "
+"'{instance.course}'."
 msgstr ""
 
 #: course/models.py:224
@@ -194,8 +194,8 @@ msgstr ""
 #: course/models.py:278
 #, python-brace-format
 msgid ""
-"The video '{instance.title}' has been uploaded to the course {instance."
-"course}."
+"The video '{instance.title}' has been uploaded to the course "
+"{instance.course}."
 msgstr ""
 
 #: course/models.py:284
@@ -219,7 +219,7 @@ msgstr ""
 #: quiz/admin.py:31 quiz/admin.py:32 quiz/forms.py:38 quiz/forms.py:39
 #: quiz/models.py:468 templates/quiz/quiz_list.html:41
 msgid "Questions"
-msgstr ""
+msgstr "Preguntas"
 
 #: quiz/models.py:23 quiz/models.py:529
 msgid "Content"
@@ -238,7 +238,7 @@ msgstr ""
 #: templates/result/assessment_results.html:40
 #: templates/result/assessment_results.html:82
 msgid "Assignment"
-msgstr ""
+msgstr "Tarea"
 
 #: quiz/models.py:30
 msgid "Exam"
@@ -320,24 +320,24 @@ msgstr ""
 #: templates/result/assessment_results.html:84
 #: templates/search/search_view.html:79 templates/search/search_view.html:127
 msgid "Quiz"
-msgstr ""
+msgstr "Cuestionario"
 
 #: quiz/models.py:130 templates/question.html:16
 #: templates/quiz/mcquestion_form.html:13 templates/quiz/quiz_form.html:13
 #: templates/quiz/quiz_list.html:16 templates/quiz/quiz_list.html:26
 #: templates/result.html:18
 msgid "Quizzes"
-msgstr ""
+msgstr "Cuestionarios"
 
 #: quiz/models.py:164 quiz/models.py:288 templates/quiz/sitting_detail.html:24
 #: templates/quiz/sitting_list.html:35
 msgid "User"
-msgstr ""
+msgstr "Usuario"
 
 #: quiz/models.py:168 templates/progress.html:68
 #: templates/quiz/sitting_detail.html:26 templates/quiz/sitting_list.html:39
 msgid "Score"
-msgstr ""
+msgstr "Puntuación"
 
 #: quiz/models.py:175
 msgid "User Progress"
@@ -362,7 +362,7 @@ msgstr ""
 #: quiz/models.py:292 templates/quiz/sitting_list.html:36
 #: templates/search/search_view.html:59 templates/search/search_view.html:125
 msgid "Course"
-msgstr ""
+msgstr "Curso"
 
 #: quiz/models.py:297
 msgid "Question Order"
@@ -390,11 +390,11 @@ msgstr ""
 
 #: quiz/models.py:321 templates/quiz/sitting_detail.html:27
 msgid "Start"
-msgstr ""
+msgstr "Inicio"
 
 #: quiz/models.py:322 templates/quiz/sitting_detail.html:28
 msgid "End"
-msgstr ""
+msgstr "Fin"
 
 #: quiz/models.py:327
 msgid "Can see completed exams."
@@ -423,7 +423,7 @@ msgstr ""
 #: quiz/models.py:455 quiz/models.py:467 quiz/models.py:522
 #: templates/question.html:125 templates/quiz/sitting_detail.html:34
 msgid "Question"
-msgstr ""
+msgstr "Pregunta"
 
 #: quiz/models.py:460
 msgid "Explanation to be shown after the question has been answered."
@@ -432,10 +432,11 @@ msgstr ""
 #: quiz/models.py:461 templates/question.html:80 templates/question.html:89
 #: templates/result.html:80 templates/result.html:150
 msgid "Explanation"
-msgstr ""
+msgstr "Explicación"
 
 #: quiz/models.py:481
-msgid "The order in which multichoice choice options are displayed to the user"
+msgid ""
+"The order in which multichoice choice options are displayed to the user"
 msgstr ""
 
 #: quiz/models.py:483
@@ -461,7 +462,7 @@ msgstr ""
 #: quiz/models.py:536 templates/quiz/mcquestion_form.html:53
 #: templates/quiz/sitting_detail.html:56
 msgid "Correct"
-msgstr ""
+msgstr "Correcto"
 
 #: quiz/models.py:543
 msgid "Choice"
@@ -469,7 +470,7 @@ msgstr ""
 
 #: quiz/models.py:544 templates/quiz/mcquestion_form.html:47
 msgid "Choices"
-msgstr ""
+msgstr "Opciones"
 
 #: quiz/models.py:564
 msgid "Essay style question"
@@ -481,36 +482,36 @@ msgstr ""
 
 #: templates/400.html:5
 msgid "Bad request"
-msgstr ""
+msgstr "Solicitud incorrecta"
 
 #: templates/400.html:6
 msgid "Please make sure the form is correctly filled."
-msgstr ""
+msgstr "Asegúrate de que el formulario esté correctamente rellenado."
 
 #: templates/400.html:7 templates/403.html:7 templates/404.html:7
 #: templates/500.html:7
 msgid "Return to the app"
-msgstr ""
+msgstr "Volver a la aplicación"
 
 #: templates/403.html:5
 msgid "forbidden"
-msgstr ""
+msgstr "prohibido"
 
 #: templates/403.html:6
 msgid "You need the proper permission to make that request."
-msgstr ""
+msgstr "Necesitas los permisos adecuados para realizar esa solicitud."
 
 #: templates/404.html:6
 msgid "Looks like the page you"
-msgstr ""
+msgstr "Parece que la página que"
 
 #: templates/500.html:5
 msgid "Server error"
-msgstr ""
+msgstr "Error del servidor"
 
 #: templates/500.html:6
 msgid "Please try again later."
-msgstr ""
+msgstr "Inténtalo de nuevo más tarde."
 
 #: templates/accounts/add_staff.html:3 templates/accounts/add_student.html:3
 #: templates/accounts/edit_lecturer.html:3
@@ -541,7 +542,7 @@ msgstr ""
 #: templates/upload/upload_video_form.html:3
 #: templates/upload/video_single.html:3
 msgid "Learning management system"
-msgstr ""
+msgstr "Sistema de gestión del aprendizaje"
 
 #: templates/accounts/add_staff.html:11 templates/accounts/add_student.html:12
 #: templates/accounts/edit_lecturer.html:11
@@ -557,7 +558,8 @@ msgstr ""
 #: templates/course/course_allocation_view.html:9
 #: templates/course/course_registration.html:12
 #: templates/course/course_single.html:10 templates/course/program_add.html:11
-#: templates/course/program_list.html:9 templates/course/program_single.html:10
+#: templates/course/program_list.html:9
+#: templates/course/program_single.html:10
 #: templates/course/user_course_list.html:10 templates/progress.html:11
 #: templates/question.html:12 templates/quiz/mcquestion_form.html:9
 #: templates/quiz/quiz_form.html:9 templates/quiz/quiz_list.html:12
@@ -573,7 +575,7 @@ msgstr ""
 #: templates/upload/upload_video_form.html:10
 #: templates/upload/video_single.html:10
 msgid "Home"
-msgstr ""
+msgstr "Inicio"
 
 #: templates/accounts/add_staff.html:12
 #: templates/accounts/edit_lecturer.html:12
@@ -582,37 +584,38 @@ msgstr ""
 #: templates/core/dashboard.html:63 templates/pdf/lecturer_list.html:35
 #: templates/setting/admin_panel.html:37
 msgid "Lecturers"
-msgstr ""
+msgstr "Docentes"
 
 #: templates/accounts/add_staff.html:13 templates/accounts/add_student.html:14
 #: templates/aside.html:113
 msgid "Add"
-msgstr ""
+msgstr "Añadir"
 
 #: templates/accounts/add_staff.html:17
 msgid "Lecturer Add Form"
-msgstr ""
+msgstr "Formulario de alta de docente"
 
 #: templates/accounts/add_staff.html:26 templates/accounts/add_student.html:27
 #: templates/accounts/edit_lecturer.html:27
 #: templates/accounts/edit_student.html:25 templates/accounts/profile.html:75
 #: templates/accounts/profile_single.html:88
-#: templates/pdf/profile_single.html:65 templates/registration/register.html:40
+#: templates/pdf/profile_single.html:65
+#: templates/registration/register.html:40
 #: templates/setting/profile_info_change.html:24
 msgid "Personal Info"
-msgstr ""
+msgstr "Información personal"
 
 #: templates/accounts/add_staff.html:37 templates/accounts/add_student.html:49
 #: templates/accounts/edit_lecturer.html:46
 #: templates/accounts/edit_student.html:46
 #: templates/accounts/parent_form.html:11 templates/core/post_add.html:25
-#: templates/core/semester_update.html:38 templates/core/session_update.html:38
-#: templates/course/course_add.html:49
+#: templates/core/semester_update.html:38
+#: templates/core/session_update.html:38 templates/course/course_add.html:49
 #: templates/course/course_allocation_form.html:49
 #: templates/course/program_add.html:26 templates/quiz/mcquestion_form.html:67
 #: templates/quiz/quiz_form.html:66 templates/result/add_score_for.html:38
 msgid "Save"
-msgstr ""
+msgstr "Guardar"
 
 #: templates/accounts/add_student.html:13
 #: templates/accounts/edit_student.html:12
@@ -621,18 +624,18 @@ msgstr ""
 #: templates/core/dashboard.html:54 templates/pdf/student_list.html:35
 #: templates/setting/admin_panel.html:42
 msgid "Students"
-msgstr ""
+msgstr "Estudiantes"
 
 #: templates/accounts/add_student.html:18
 msgid "Student Add Form"
-msgstr ""
+msgstr "Formulario de alta de estudiante"
 
 #: templates/accounts/add_student.html:40
 #: templates/accounts/edit_lecturer.html:39
 #: templates/accounts/edit_student.html:39 templates/core/dashboard.html:117
 #: templates/setting/profile_info_change.html:37
 msgid "Others"
-msgstr ""
+msgstr "Otros"
 
 #: templates/accounts/edit_lecturer.html:13
 #: templates/accounts/edit_student.html:13
@@ -640,11 +643,11 @@ msgstr ""
 #: templates/accounts/student_list.html:61
 #: templates/course/program_list.html:56
 msgid "Update"
-msgstr ""
+msgstr "Actualizar"
 
 #: templates/accounts/edit_lecturer.html:17
 msgid "Lecturer Update Form"
-msgstr ""
+msgstr "Formulario de edición de docente"
 
 #: templates/accounts/edit_lecturer.html:27
 #: templates/accounts/edit_student.html:25
@@ -655,49 +658,49 @@ msgstr ""
 #: templates/registration/password_reset.html:13
 #: templates/setting/profile_info_change.html:24
 msgid "Email"
-msgstr ""
+msgstr "Correo electrónico"
 
 #: templates/accounts/edit_student.html:17
 msgid "Student Update Form"
-msgstr ""
+msgstr "Formulario de edición de estudiante"
 
 #: templates/accounts/lecturer_list.html:16
 msgid "Add Lecturer"
-msgstr ""
+msgstr "Añadir docente"
 
 #: templates/accounts/lecturer_list.html:17
 #: templates/accounts/student_list.html:20
 msgid "Download pdf"
-msgstr ""
+msgstr "Descargar PDF"
 
 #: templates/accounts/lecturer_list.html:31
 #: templates/accounts/profile_single.html:92
 #: templates/accounts/student_list.html:36 templates/pdf/lecturer_list.html:42
 #: templates/pdf/student_list.html:41
 msgid "ID No."
-msgstr ""
+msgstr "N.º de ID"
 
 #: templates/accounts/lecturer_list.html:32
 #: templates/accounts/student_list.html:37 templates/pdf/lecturer_list.html:43
 #: templates/pdf/student_list.html:42
 msgid "Full Name"
-msgstr ""
+msgstr "Nombre completo"
 
-#: templates/accounts/lecturer_list.html:34 templates/pdf/lecturer_list.html:45
-#: templates/pdf/student_list.html:44
+#: templates/accounts/lecturer_list.html:34
+#: templates/pdf/lecturer_list.html:45 templates/pdf/student_list.html:44
 msgid "Mob No."
-msgstr ""
+msgstr "N.º de móvil"
 
 #: templates/accounts/lecturer_list.html:35
 #: templates/accounts/profile_single.html:109
 msgid "Address/city"
-msgstr ""
+msgstr "Dirección/ciudad"
 
 #: templates/accounts/lecturer_list.html:36
 #: templates/accounts/profile_single.html:29
 #: templates/accounts/profile_single.html:115
 msgid "Last login"
-msgstr ""
+msgstr "Último acceso"
 
 #: templates/accounts/lecturer_list.html:38
 #: templates/accounts/student_list.html:41
@@ -705,12 +708,12 @@ msgstr ""
 #: templates/course/program_list.html:35
 #: templates/course/program_single.html:47
 msgid "Action"
-msgstr ""
+msgstr "Acción"
 
 #: templates/accounts/lecturer_list.html:60
 #: templates/accounts/student_list.html:62
 msgid "Download PDF"
-msgstr ""
+msgstr "Descargar PDF"
 
 #: templates/accounts/lecturer_list.html:61
 #: templates/accounts/student_list.html:63 templates/core/index.html:78
@@ -722,452 +725,458 @@ msgstr ""
 #: templates/quiz/mcquestion_form.html:57 templates/quiz/quiz_list.html:68
 #: venv/lib/python3.9/site-packages/django/forms/formsets.py:499
 msgid "Delete"
-msgstr ""
+msgstr "Eliminar"
 
-#: templates/accounts/lecturer_list.html:71 templates/pdf/lecturer_list.html:63
-#: templates/pdf/student_list.html:61
+#: templates/accounts/lecturer_list.html:71
+#: templates/pdf/lecturer_list.html:63 templates/pdf/student_list.html:61
 msgid "No Lecturer(s)."
-msgstr ""
+msgstr "Sin docentes."
 
 #: templates/accounts/lecturer_list.html:75
 msgid "Add Lecturer Now."
-msgstr ""
+msgstr "Añadir docente ahora."
 
 #: templates/accounts/profile.html:29 templates/accounts/profile.html:101
 #: templates/navbar.html:29 templates/pdf/profile_single.html:41
 #: templates/pdf/profile_single.html:92
 msgid "Last login:"
-msgstr ""
+msgstr "Último acceso:"
 
 #: templates/accounts/profile.html:30 templates/pdf/profile_single.html:42
 msgid "Role:"
-msgstr ""
+msgstr "Rol:"
 
-#: templates/accounts/profile.html:37 templates/accounts/profile_single.html:40
+#: templates/accounts/profile.html:37
+#: templates/accounts/profile_single.html:40
 #: templates/accounts/profile_single.html:48
 msgid "Edit Profile"
-msgstr ""
+msgstr "Editar perfil"
 
 #: templates/accounts/profile.html:39
 msgid "Change password"
-msgstr ""
+msgstr "Cambiar contraseña"
 
-#: templates/accounts/profile.html:62 templates/accounts/profile_single.html:75
-#: templates/aside.html:67 templates/course/user_course_list.html:3
+#: templates/accounts/profile.html:62
+#: templates/accounts/profile_single.html:75 templates/aside.html:67
+#: templates/course/user_course_list.html:3
 #: templates/course/user_course_list.html:11
 #: templates/course/user_course_list.html:23 templates/navbar.html:34
 #: templates/pdf/profile_single.html:52
 msgid "My Courses"
-msgstr ""
+msgstr "Mis cursos"
 
-#: templates/accounts/profile.html:70 templates/accounts/profile_single.html:83
+#: templates/accounts/profile.html:70
+#: templates/accounts/profile_single.html:83
 #: templates/pdf/profile_single.html:60
 msgid "No courses assigned!"
-msgstr ""
+msgstr "¡No hay cursos asignados!"
 
 #: templates/accounts/profile.html:77 templates/pdf/profile_single.html:67
 msgid "First Name:"
-msgstr ""
+msgstr "Nombre:"
 
 #: templates/accounts/profile.html:78 templates/pdf/profile_single.html:68
 msgid "Last Name:"
-msgstr ""
+msgstr "Apellidos:"
 
 #: templates/accounts/profile.html:79 templates/pdf/profile_single.html:69
 msgid "ID No.:"
-msgstr ""
+msgstr "N.º de ID:"
 
-#: templates/accounts/profile.html:83 templates/accounts/profile_single.html:96
+#: templates/accounts/profile.html:83
+#: templates/accounts/profile_single.html:96
 #: templates/pdf/profile_single.html:74
 msgid "Applicant Info"
-msgstr ""
+msgstr "Datos del solicitante"
 
 #: templates/accounts/profile.html:85 templates/pdf/profile_single.html:76
 msgid "School:"
-msgstr ""
+msgstr "Centro:"
 
 #: templates/accounts/profile.html:85 templates/pdf/profile_single.html:76
 msgid "Hawas Preparatory School"
-msgstr ""
+msgstr "Escuela Preparatoria Hawas"
 
 #: templates/accounts/profile.html:86 templates/pdf/profile_single.html:77
 msgid "Level:"
-msgstr ""
+msgstr "Nivel:"
 
 #: templates/accounts/profile.html:91
 #: templates/accounts/profile_single.html:105
 #: templates/pdf/profile_single.html:82
 msgid "Contact Info"
-msgstr ""
+msgstr "Información de contacto"
 
 #: templates/accounts/profile.html:93 templates/pdf/profile_single.html:84
 msgid "Email:"
-msgstr ""
+msgstr "Correo electrónico:"
 
 #: templates/accounts/profile.html:94 templates/pdf/profile_single.html:85
 msgid "Tel No.:"
-msgstr ""
+msgstr "N.º de teléfono:"
 
 #: templates/accounts/profile.html:95 templates/pdf/profile_single.html:86
 msgid "Address/city:"
-msgstr ""
+msgstr "Dirección/ciudad:"
 
 #: templates/accounts/profile.html:99
 #: templates/accounts/profile_single.html:113
 #: templates/pdf/profile_single.html:90
 msgid "Important Dates"
-msgstr ""
+msgstr "Fechas importantes"
 
 #: templates/accounts/profile.html:103 templates/pdf/profile_single.html:94
 msgid "Academic Year:"
-msgstr ""
+msgstr "Año académico:"
 
 #: templates/accounts/profile.html:103
 #: templates/accounts/profile_single.html:117
-#: templates/core/semester_list.html:41 templates/course/program_single.html:44
+#: templates/core/semester_list.html:41
+#: templates/course/program_single.html:44
 #: templates/course/user_course_list.html:52
 #: templates/course/user_course_list.html:96
 #: templates/pdf/profile_single.html:94 templates/result/add_score.html:24
-#: templates/result/add_score_for.html:46 templates/setting/admin_panel.html:52
+#: templates/result/add_score_for.html:46
+#: templates/setting/admin_panel.html:52
 msgid "Semester"
-msgstr ""
+msgstr "Semestre"
 
 #: templates/accounts/profile.html:105 templates/pdf/profile_single.html:96
 msgid "Registered Date:"
-msgstr ""
+msgstr "Fecha de registro:"
 
 #: templates/accounts/profile_single.html:30
 msgid "Role"
-msgstr ""
+msgstr "Rol"
 
 #: templates/accounts/profile_single.html:43
 msgid "Change Program"
-msgstr ""
+msgstr "Cambiar programa"
 
 #: templates/accounts/profile_single.html:90
 msgid "First Name"
-msgstr ""
+msgstr "Nombre"
 
 #: templates/accounts/profile_single.html:91
 msgid "Last Name"
-msgstr ""
+msgstr "Apellidos"
 
 #: templates/accounts/profile_single.html:98
 msgid "School"
-msgstr ""
+msgstr "Centro"
 
 #: templates/accounts/profile_single.html:99
 #: templates/course/program_single.html:42
 msgid "Level"
-msgstr ""
+msgstr "Nivel"
 
 #: templates/accounts/profile_single.html:100
 #: templates/accounts/student_list.html:39 templates/pdf/student_list.html:45
 #: templates/search/search_view.html:49 templates/search/search_view.html:89
 #: templates/search/search_view.html:124
 msgid "Program"
-msgstr ""
+msgstr "Programa"
 
 #: templates/accounts/profile_single.html:108
 msgid "Tel No."
-msgstr ""
+msgstr "N.º de teléfono"
 
 #: templates/accounts/profile_single.html:117
 msgid "Academic Year"
-msgstr ""
+msgstr "Año académico"
 
 #: templates/accounts/profile_single.html:119
 msgid "Registered Date"
-msgstr ""
+msgstr "Fecha de registro"
 
 #: templates/accounts/student_list.html:19
 msgid "Add Student"
-msgstr ""
+msgstr "Añadir estudiante"
 
 #: templates/accounts/student_list.html:73
 #: templates/result/add_score_for.html:105
 msgid "No Student."
-msgstr ""
+msgstr "Sin estudiantes."
 
 #: templates/accounts/student_list.html:77
 msgid "Add Student Now."
-msgstr ""
+msgstr "Añadir estudiante ahora."
 
 #: templates/aside.html:43 templates/core/dashboard.html:3
 #: templates/core/dashboard.html:14 templates/core/dashboard.html:33
 msgid "Dashboard"
-msgstr ""
+msgstr "Panel"
 
 #: templates/aside.html:50 templates/navbar.html:41
 msgid "Profile"
-msgstr ""
+msgstr "Perfil"
 
 #: templates/aside.html:55 templates/navbar.html:38
 #: templates/setting/admin_panel.html:12 templates/setting/admin_panel.html:16
 msgid "Admin Panel"
-msgstr ""
+msgstr "Panel de administración"
 
 #: templates/aside.html:72
 msgid "Programs & Courses"
-msgstr ""
+msgstr "Programas y cursos"
 
 #: templates/aside.html:77 templates/quiz/sitting_list.html:10
 msgid "Complete Exams"
-msgstr ""
+msgstr "Exámenes completados"
 
 #: templates/aside.html:83 templates/aside.html:104
 msgid "Quiz Progress Rec"
-msgstr ""
+msgstr "Registro de progreso de cuestionarios"
 
 #: templates/aside.html:86
 msgid "Course Allocation"
-msgstr ""
+msgstr "Asignación de cursos"
 
 #: templates/aside.html:89
 msgid "Manage Session"
-msgstr ""
+msgstr "Gestionar sesiones"
 
 #: templates/aside.html:92
 msgid "Manage Semester"
-msgstr ""
+msgstr "Gestionar semestres"
 
 #: templates/aside.html:98 templates/result/add_score.html:11
 #: templates/result/add_score.html:17 templates/result/add_score_for.html:12
 msgid "Manage Score"
-msgstr ""
+msgstr "Gestionar puntuaciones"
 
 #: templates/aside.html:107 templates/result/grade_results.html:10
 #: templates/result/grade_results.html:28
 msgid "Grade Results"
-msgstr ""
+msgstr "Resultados de notas"
 
 #: templates/aside.html:110 templates/result/assessment_results.html:10
 #: templates/result/assessment_results.html:28
 msgid "Assesment Results"
-msgstr ""
+msgstr "Resultados de evaluación"
 
 #: templates/aside.html:113
 msgid "Drop Course"
-msgstr ""
+msgstr "Abandonar curso"
 
 #: templates/aside.html:119
 msgid "Account Setting"
-msgstr ""
+msgstr "Configuración de la cuenta"
 
 #: templates/aside.html:122 templates/setting/password_change.html:21
 #: templates/setting/password_change.html:25
 msgid "Change Password"
-msgstr ""
+msgstr "Cambiar contraseña"
 
 #: templates/aside.html:130
 msgid "Read our"
-msgstr ""
+msgstr "Lee nuestra"
 
 #: templates/aside.html:130
 msgid "Privacy"
-msgstr ""
+msgstr "Privacidad"
 
 #: templates/aside.html:130
 #: venv/lib/python3.9/site-packages/django/db/models/base.py:1423
 #: venv/lib/python3.9/site-packages/django/forms/models.py:893
 msgid "and"
-msgstr ""
+msgstr "y"
 
 #: templates/aside.html:130
 msgid "Terms of use."
-msgstr ""
+msgstr "Términos de uso."
 
 #: templates/aside.html:135
 msgid "⭐️ Star This Project"
-msgstr ""
+msgstr "⭐️ Dale una estrella al proyecto"
 
 #: templates/core/dashboard.html:40
 msgid "Dashboard settings"
-msgstr ""
+msgstr "Configuración del panel"
 
 #: templates/core/dashboard.html:41
 msgid "Display grid"
-msgstr ""
+msgstr "Vista de cuadrícula"
 
 #: templates/core/dashboard.html:42
 msgid "Display table"
-msgstr ""
+msgstr "Vista de tabla"
 
 #: templates/core/dashboard.html:44
 msgid "Manage dashboard"
-msgstr ""
+msgstr "Gestionar panel"
 
 #: templates/core/dashboard.html:72
 msgid "Administrators"
-msgstr ""
+msgstr "Administradores"
 
 #: templates/core/dashboard.html:81
 msgid "Lab Assistance"
-msgstr ""
+msgstr "Auxiliar de laboratorio"
 
 #: templates/core/dashboard.html:90
 msgid "Librarians"
-msgstr ""
+msgstr "Bibliotecarios"
 
 #: templates/core/dashboard.html:99
 msgid "Supervisors"
-msgstr ""
+msgstr "Supervisores"
 
 #: templates/core/dashboard.html:108
 msgid "Office Assistance"
-msgstr ""
+msgstr "Auxiliar de oficina"
 
 #: templates/core/dashboard.html:145
 msgid "Latest activities"
-msgstr ""
+msgstr "Actividad reciente"
 
 #: templates/core/dashboard.html:150
 msgid "No recent activity"
-msgstr ""
+msgstr "Sin actividad reciente"
 
 #: templates/core/dashboard.html:158
 msgid "School Demographics"
-msgstr ""
+msgstr "Datos demográficos del centro"
 
 #: templates/core/index.html:40
 msgid "Add New Post"
-msgstr ""
+msgstr "Añadir publicación"
 
 #: templates/core/index.html:47 templates/core/index.html:55
 #: templates/setting/admin_panel.html:80 templates/setting/admin_panel.html:81
 msgid "Events"
-msgstr ""
+msgstr "Eventos"
 
 #: templates/core/index.html:65
 msgid "news"
-msgstr ""
+msgstr "noticias"
 
 #: templates/core/index.html:65
 msgid "events"
-msgstr ""
+msgstr "eventos"
 
 #: templates/core/index.html:76 templates/core/semester_list.html:69
 #: templates/core/session_list.html:65 templates/course/course_single.html:87
 #: templates/course/course_single.html:164
 #: templates/course/program_single.html:78 templates/quiz/quiz_list.html:65
 msgid "Edit"
-msgstr ""
+msgstr "Editar"
 
 #: templates/core/index.html:88 templates/upload/video_single.html:31
 msgid "ago"
-msgstr ""
+msgstr "hace"
 
 #: templates/core/index.html:98
 msgid "School news and events will appear here."
-msgstr ""
+msgstr "Las noticias y eventos del centro aparecerán aquí."
 
 #: templates/core/post_add.html:12
 msgid "Post form"
-msgstr ""
+msgstr "Formulario de publicación"
 
 #: templates/core/post_add.html:21
 msgid "Post Form"
-msgstr ""
+msgstr "Formulario de publicación"
 
 #: templates/core/post_add.html:26 templates/upload/upload_file_form.html:34
 #: templates/upload/upload_video_form.html:33
 msgid "Cancel"
-msgstr ""
+msgstr "Cancelar"
 
 #: templates/core/semester_list.html:10
 msgid "Semester list"
-msgstr ""
+msgstr "Lista de semestres"
 
 #: templates/core/semester_list.html:16
 msgid "Add New Semester"
-msgstr ""
+msgstr "Añadir semestre"
 
 #: templates/core/semester_list.html:20 templates/core/semester_update.html:12
 msgid "Semester List"
-msgstr ""
+msgstr "Lista de semestres"
 
 #: templates/core/semester_list.html:42
 msgid "Is Current semester"
-msgstr ""
+msgstr "Es el semestre actual"
 
 #: templates/core/semester_list.html:43 templates/core/session_list.html:41
 #: templates/setting/admin_panel.html:47
 msgid "Session"
-msgstr ""
+msgstr "Sesión"
 
 #: templates/core/semester_list.html:44
 msgid "Next Semester Begins"
-msgstr ""
+msgstr "Comienzo del próximo semestre"
 
 #: templates/core/semester_list.html:46 templates/core/session_list.html:45
 #: templates/course/course_single.html:61
 #: templates/course/course_single.html:138
 msgid "Actions"
-msgstr ""
+msgstr "Acciones"
 
 #: templates/core/semester_list.html:83
 msgid "No Semester."
-msgstr ""
+msgstr "Sin semestres."
 
 #: templates/core/semester_list.html:87
 msgid "Add Semester Now."
-msgstr ""
+msgstr "Añadir semestre ahora."
 
 #: templates/core/semester_update.html:13
 msgid "Semester Form"
-msgstr ""
+msgstr "Formulario de semestre"
 
 #: templates/core/semester_update.html:34
 msgid "Semester Add & update Form"
-msgstr ""
+msgstr "Formulario de alta y edición de semestre"
 
 #: templates/core/session_list.html:10 templates/core/session_list.html:20
 #: templates/core/session_update.html:12
 msgid "Session List"
-msgstr ""
+msgstr "Lista de sesiones"
 
 #: templates/core/session_list.html:16
 msgid "Add New Session"
-msgstr ""
+msgstr "Añadir sesión"
 
 #: templates/core/session_list.html:42
 msgid "Is Current Session"
-msgstr ""
+msgstr "Es la sesión actual"
 
 #: templates/core/session_list.html:43
 msgid "Next Session Begins"
-msgstr ""
+msgstr "Comienzo de la próxima sesión"
 
 #: templates/core/session_list.html:77
 msgid "No Session."
-msgstr ""
+msgstr "Sin sesiones."
 
 #: templates/core/session_list.html:81
 msgid "Add Session Now."
-msgstr ""
+msgstr "Añadir sesión ahora."
 
 #: templates/core/session_update.html:13
 msgid "Session Form"
-msgstr ""
+msgstr "Formulario de sesión"
 
 #: templates/core/session_update.html:34
 msgid "Session Add & update Form"
-msgstr ""
+msgstr "Formulario de alta y edición de sesión"
 
 #: templates/correct_answer.html:6 templates/question.html:50
 #: templates/result.html:51
 msgid "You answered the above question incorrectly"
-msgstr ""
+msgstr "Respondiste incorrectamente a la pregunta anterior"
 
 #: templates/correct_answer.html:16 templates/question.html:60
 #: templates/result.html:61
 msgid "This is the correct answer"
-msgstr ""
+msgstr "Esta es la respuesta correcta"
 
 #: templates/correct_answer.html:24 templates/question.html:68
 #: templates/result.html:69
 msgid "This was your answer."
-msgstr ""
+msgstr "Esta fue tu respuesta."
 
 #: templates/course/course_add.html:12 templates/course/course_single.html:11
 #: templates/course/program_add.html:12 templates/course/program_list.html:10
@@ -1179,102 +1188,102 @@ msgstr ""
 #: templates/upload/upload_video_form.html:11
 #: templates/upload/video_single.html:11
 msgid "Programs"
-msgstr ""
+msgstr "Programas"
 
 #: templates/course/course_add.html:13 templates/course/course_add.html:17
 msgid "Course Form"
-msgstr ""
+msgstr "Formulario de curso"
 
 #: templates/course/course_add.html:27
 msgid "Course Detail"
-msgstr ""
+msgstr "Detalle del curso"
 
 #: templates/course/course_add.html:37
 msgid "Other Info"
-msgstr ""
+msgstr "Otra información"
 
 #: templates/course/course_allocation_form.html:12
 #: templates/course/course_allocation_view.html:20
 #: templates/setting/admin_panel.html:75
 msgid "Course Allocations"
-msgstr ""
+msgstr "Asignaciones de cursos"
 
 #: templates/course/course_allocation_form.html:13
 msgid "Allocation Form"
-msgstr ""
+msgstr "Formulario de asignación"
 
 #: templates/course/course_allocation_form.html:34
 msgid "Course Allocation Form"
-msgstr ""
+msgstr "Formulario de asignación de curso"
 
 #: templates/course/course_allocation_view.html:10
 msgid "Allocation list"
-msgstr ""
+msgstr "Lista de asignaciones"
 
 #: templates/course/course_allocation_view.html:16
 msgid "Allocate Now"
-msgstr ""
+msgstr "Asignar ahora"
 
 #: templates/course/course_allocation_view.html:33
 #: templates/setting/admin_panel.html:70
 msgid "Courses"
-msgstr ""
+msgstr "Cursos"
 
 #: templates/course/course_allocation_view.html:50
 msgid "Edit or Update"
-msgstr ""
+msgstr "Editar o actualizar"
 
 #: templates/course/course_allocation_view.html:53
 msgid "Deallocate"
-msgstr ""
+msgstr "Desasignar"
 
 #: templates/course/course_allocation_view.html:65
 msgid "No Course Allocated."
-msgstr ""
+msgstr "Sin cursos asignados."
 
 #: templates/course/course_allocation_view.html:69
 msgid "Allocate now"
-msgstr ""
+msgstr "Asignar ahora"
 
 #: templates/course/course_registration.html:13
 msgid "Course Registration"
-msgstr ""
+msgstr "Matrícula de cursos"
 
 #: templates/course/course_registration.html:17
 #: templates/course/course_registration.html:35
 #: templates/setting/admin_panel.html:58
 msgid "Course Add"
-msgstr ""
+msgstr "Añadir curso"
 
 #: templates/course/course_registration.html:17
 #: templates/setting/admin_panel.html:58
 msgid "Drop"
-msgstr ""
+msgstr "Abandonar"
 
 #: templates/course/course_registration.html:25
 msgid "Calender is off"
-msgstr ""
+msgstr "El calendario está desactivado"
 
 #: templates/course/course_registration.html:26
 msgid "Check the university calender"
-msgstr ""
+msgstr "Consulta el calendario de la universidad"
 
 #: templates/course/course_registration.html:38
 #: templates/course/course_registration.html:200
 msgid "Save Score"
-msgstr ""
+msgstr "Guardar puntuación"
 
 #: templates/course/course_registration.html:43
 #: templates/result/assessment_results.html:32
 #: templates/result/grade_results.html:32
 msgid "First Semester:"
-msgstr ""
+msgstr "Primer semestre:"
 
 #: templates/course/course_registration.html:48
 #: templates/course/course_registration.html:111
 #: templates/course/course_registration.html:216
 msgid "Mark"
-msgstr ""
+msgstr "Nota"
 
 #: templates/course/course_registration.html:49
 #: templates/course/course_registration.html:112
@@ -1286,7 +1295,7 @@ msgstr ""
 #: templates/result/grade_results.html:38
 #: templates/result/grade_results.html:103
 msgid "Course Code"
-msgstr ""
+msgstr "Código del curso"
 
 #: templates/course/course_registration.html:50
 #: templates/course/course_registration.html:113
@@ -1296,7 +1305,7 @@ msgstr ""
 #: templates/result/grade_results.html:37
 #: templates/result/grade_results.html:102
 msgid "Course Title"
-msgstr ""
+msgstr "Título del curso"
 
 #: templates/course/course_registration.html:51
 #: templates/course/course_registration.html:114
@@ -1304,7 +1313,7 @@ msgstr ""
 #: templates/result/assessment_results.html:39
 #: templates/result/assessment_results.html:81
 msgid "Cr.Hr(s)"
-msgstr ""
+msgstr "Cr.Hr(s)"
 
 #: templates/course/course_registration.html:52
 #: templates/course/course_registration.html:115
@@ -1313,196 +1322,196 @@ msgstr ""
 #: templates/course/user_course_list.html:51
 #: templates/course/user_course_list.html:95
 msgid "Year"
-msgstr ""
+msgstr "Año"
 
 #: templates/course/course_registration.html:53
 #: templates/course/course_registration.html:116
 #: templates/course/course_registration.html:221
 msgid "Classification"
-msgstr ""
+msgstr "Clasificación"
 
 #: templates/course/course_registration.html:54
 #: templates/course/course_registration.html:117
 #: templates/course/course_registration.html:222
 msgid "Elective Group"
-msgstr ""
+msgstr "Grupo de optativas"
 
 #: templates/course/course_registration.html:69
 #: templates/course/course_registration.html:132
 #: templates/course/course_registration.html:236
 msgid "Elective"
-msgstr ""
+msgstr "Optativa"
 
 #: templates/course/course_registration.html:71
 #: templates/course/course_registration.html:134
 #: templates/course/course_registration.html:238
 msgid "Core"
-msgstr ""
+msgstr "Troncal"
 
 #: templates/course/course_registration.html:83
 #: templates/course/course_registration.html:146
 #: templates/course/course_registration.html:249
 msgid "No Course."
-msgstr ""
+msgstr "Sin cursos."
 
 #: templates/course/course_registration.html:97
 msgid "First semester Credit(s):"
-msgstr ""
+msgstr "Créditos del primer semestre:"
 
 #: templates/course/course_registration.html:106
 #: templates/result/assessment_results.html:74
 #: templates/result/grade_results.html:97
 msgid "Second Semester:"
-msgstr ""
+msgstr "Segundo semestre:"
 
 #: templates/course/course_registration.html:160
 msgid "Second semester credit(s):"
-msgstr ""
+msgstr "Créditos del segundo semestre:"
 
 #: templates/course/course_registration.html:165
 msgid "Registerd course credit(s):"
-msgstr ""
+msgstr "Créditos de cursos matriculados:"
 
 #: templates/course/course_registration.html:170
 #: templates/course/course_registration.html:263
 msgid "Total credit(s):"
-msgstr ""
+msgstr "Créditos totales:"
 
 #: templates/course/course_registration.html:186
 msgid "Print Registration Form"
-msgstr ""
+msgstr "Imprimir formulario de matrícula"
 
 #: templates/course/course_registration.html:187
 msgid "Print Registerd Courses"
-msgstr ""
+msgstr "Imprimir cursos matriculados"
 
 #: templates/course/course_registration.html:191
 msgid "Course Drop"
-msgstr ""
+msgstr "Abandono de curso"
 
 #: templates/course/course_registration.html:201
 msgid "Drop Selected"
-msgstr ""
+msgstr "Abandonar seleccionados"
 
 #: templates/course/course_single.html:22
 msgid "Edit course"
-msgstr ""
+msgstr "Editar curso"
 
 #: templates/course/course_single.html:27
 msgid "Upload new file"
-msgstr ""
+msgstr "Subir archivo"
 
 #: templates/course/course_single.html:30
 msgid "Upload new video"
-msgstr ""
+msgstr "Subir vídeo"
 
 #: templates/course/course_single.html:36
 msgid "Take a Quiz"
-msgstr ""
+msgstr "Hacer un cuestionario"
 
 #: templates/course/course_single.html:51
 msgid "Video Tutorials"
-msgstr ""
+msgstr "Vídeotutoriales"
 
 #: templates/course/course_single.html:57
 msgid "Video Title"
-msgstr ""
+msgstr "Título del vídeo"
 
 #: templates/course/course_single.html:58
 #: templates/course/course_single.html:134
 msgid "Uploaded Date"
-msgstr ""
+msgstr "Fecha de subida"
 
 #: templates/course/course_single.html:59
 msgid "Get Started"
-msgstr ""
+msgstr "Empezar"
 
 #: templates/course/course_single.html:79
 msgid "Play now"
-msgstr ""
+msgstr "Reproducir"
 
 #: templates/course/course_single.html:104
 msgid "No video Uploaded."
-msgstr ""
+msgstr "Sin vídeos subidos."
 
 #: templates/course/course_single.html:108
 #: templates/course/course_single.html:185
 msgid "Upload now."
-msgstr ""
+msgstr "Subir ahora."
 
 #: templates/course/course_single.html:127
 msgid "Documentations"
-msgstr ""
+msgstr "Documentación"
 
 #: templates/course/course_single.html:133
 msgid "File name"
-msgstr ""
+msgstr "Nombre del archivo"
 
 #: templates/course/course_single.html:135
 msgid "Updated Date"
-msgstr ""
+msgstr "Fecha de actualización"
 
 #: templates/course/course_single.html:136
 msgid "Downloads"
-msgstr ""
+msgstr "Descargas"
 
 #: templates/course/course_single.html:156
 msgid "Download"
-msgstr ""
+msgstr "Descargar"
 
 #: templates/course/course_single.html:181
 msgid "No File Uploaded."
-msgstr ""
+msgstr "Sin archivos subidos."
 
 #: templates/course/course_single.html:205
 msgid "Lecturer(s)"
-msgstr ""
+msgstr "Docente(s)"
 
 #: templates/course/course_single.html:232
 msgid "No lecturer assigned for this course"
-msgstr ""
+msgstr "No hay docente asignado a este curso"
 
 #: templates/course/program_add.html:13
 msgid "Program Form"
-msgstr ""
+msgstr "Formulario de programa"
 
 #: templates/course/program_add.html:22
 msgid "Program Add Form"
-msgstr ""
+msgstr "Formulario de alta de programa"
 
 #: templates/course/program_list.html:16
 msgid "Add Program"
-msgstr ""
+msgstr "Añadir programa"
 
 #: templates/course/program_list.html:20
 msgid "Program List"
-msgstr ""
+msgstr "Lista de programas"
 
 #: templates/course/program_list.html:32
 msgid "Program Name"
-msgstr ""
+msgstr "Nombre del programa"
 
 #: templates/course/program_list.html:33
 msgid "Summary"
-msgstr ""
+msgstr "Resumen"
 
 #: templates/course/program_list.html:69
 msgid "No program."
-msgstr ""
+msgstr "Sin programas."
 
 #: templates/course/program_list.html:73
 msgid "Add program now."
-msgstr ""
+msgstr "Añadir programa ahora."
 
 #: templates/course/program_single.html:18
 msgid "Add Course"
-msgstr ""
+msgstr "Añadir curso"
 
 #: templates/course/program_single.html:39
 #: templates/course/user_course_list.html:48
 #: templates/course/user_course_list.html:92
 msgid "Course Name"
-msgstr ""
+msgstr "Nombre del curso"
 
 #: templates/course/program_single.html:41
 #: templates/course/user_course_list.html:50
@@ -1510,659 +1519,665 @@ msgstr ""
 #: templates/result/grade_results.html:39
 #: templates/result/grade_results.html:104
 msgid "Cr.Hr"
-msgstr ""
+msgstr "Cr.Hr"
 
 #: templates/course/program_single.html:45
 #: templates/course/user_course_list.html:53
 #: templates/course/user_course_list.html:97
 msgid "Current Semester"
-msgstr ""
+msgstr "Semestre actual"
 
 #: templates/course/program_single.html:92
 msgid "No course for this progrm."
-msgstr ""
+msgstr "No hay cursos para este programa."
 
 #: templates/course/program_single.html:96
 msgid "Add one now."
-msgstr ""
+msgstr "Añade uno ahora."
 
 #: templates/course/user_course_list.html:42
 msgid "Taken Courses:"
-msgstr ""
+msgstr "Cursos cursados:"
 
 #: templates/course/user_course_list.html:54
 #: templates/course/user_course_list.html:75
 msgid "Taken"
-msgstr ""
+msgstr "Cursado"
 
 #: templates/course/user_course_list.html:86
 msgid "All Courses:"
-msgstr ""
+msgstr "Todos los cursos:"
 
 #: templates/invoice_detail.html:2 templates/invoices.html:1
 msgid "Invoices"
-msgstr ""
+msgstr "Facturas"
 
 #: templates/invoices.html:5
 msgid "Pay now"
-msgstr ""
+msgstr "Pagar ahora"
 
 #: templates/navbar.html:12
 msgid "Search All... #course, #program, #Quiz, #News, #Events"
-msgstr ""
+msgstr "Buscar todo... #curso, #programa, #cuestionario, #noticias, #eventos"
 
 #: templates/navbar.html:42
 msgid "Setting"
-msgstr ""
+msgstr "Configuración"
 
 #: templates/navbar.html:46
 msgid "Signout"
-msgstr ""
+msgstr "Cerrar sesión"
 
 #: templates/payments/charge.html:24
 msgid "Payment Succeed, You has been make payment successfuly."
-msgstr ""
+msgstr "Pago completado correctamente."
 
 #: templates/payments/charge.html:25
 msgid "Redirect to your dashboard in"
-msgstr ""
+msgstr "Redirigiendo a tu panel en"
 
 #: templates/payments/coinbase.html:3 templates/payments/coinbase.html:8
 msgid "Coinbase"
-msgstr ""
+msgstr "Coinbase"
 
 #: templates/pdf/lecturer_list.html:46
 msgid "Address/City"
-msgstr ""
+msgstr "Dirección/ciudad"
 
 #: templates/progress.html:4 templates/progress.html:12
 msgid "Progress Page"
-msgstr ""
+msgstr "Página de progreso"
 
 #: templates/progress.html:5
 msgid "User Progress Page"
-msgstr ""
+msgstr "Página de progreso del usuario"
 
 #: templates/progress.html:18
 msgid "Question Category Scores"
-msgstr ""
+msgstr "Puntuaciones por categoría"
 
 #: templates/progress.html:25 templates/quiz/sitting_detail.html:19
 msgid "Category"
-msgstr ""
+msgstr "Categoría"
 
 #: templates/progress.html:26
 msgid "Correctly answererd"
-msgstr ""
+msgstr "Respondidas correctamente"
 
 #: templates/progress.html:27
 msgid "Incorrect"
-msgstr ""
+msgstr "Incorrectas"
 
 #: templates/progress.html:56
 msgid "Previous exam papers"
-msgstr ""
+msgstr "Exámenes anteriores"
 
 #: templates/progress.html:58
 msgid "Below are the results of exams that you have sat."
-msgstr ""
+msgstr "A continuación, los resultados de los exámenes realizados."
 
 #: templates/progress.html:60 templates/quiz/sitting_list.html:29
 msgid "Total complete exams:"
-msgstr ""
+msgstr "Exámenes completados en total:"
 
 #: templates/progress.html:67
 msgid "Quiz Title"
-msgstr ""
+msgstr "Título del cuestionario"
 
 #: templates/progress.html:69
 msgid "Possible Score"
-msgstr ""
+msgstr "Puntuación posible"
 
 #: templates/progress.html:70
 #, python-format
 msgid "Out of 100%%"
-msgstr ""
+msgstr "Sobre 100%%"
 
 #: templates/progress.html:94
 msgid "No recordes yet. Try to do some quizzes in your course."
 msgstr ""
+"Aún no hay registros. Intenta hacer algunos cuestionarios de tu curso."
 
 #: templates/question.html:28 templates/result.html:38
 msgid "The previous question"
-msgstr ""
+msgstr "La pregunta anterior"
 
 #: templates/question.html:37
 msgid "Your answer was"
-msgstr ""
+msgstr "Tu respuesta fue"
 
 #: templates/question.html:85 templates/result.html:85
 msgid "No explanation set to this question."
-msgstr ""
+msgstr "No hay explicación para esta pregunta."
 
 #: templates/question.html:108
 msgid "Quiz instractions"
-msgstr ""
+msgstr "Instrucciones del cuestionario"
 
 #: templates/question.html:116
 msgid "Understood"
-msgstr ""
+msgstr "Entendido"
 
 #: templates/question.html:125
 msgid "of"
-msgstr ""
+msgstr "de"
 
 #: templates/question.html:130
 msgid "Quiz category"
-msgstr ""
+msgstr "Categoría del cuestionario"
 
 #: templates/question.html:157
 msgid "Previous"
-msgstr ""
+msgstr "Anterior"
 
 #: templates/quiz/mcquestion_form.html:14
 msgid "MC Question Form"
-msgstr ""
+msgstr "Formulario de pregunta de opción múltiple"
 
 #: templates/quiz/mcquestion_form.html:18
 msgid "Add questions"
-msgstr ""
+msgstr "Añadir preguntas"
 
 #: templates/quiz/mcquestion_form.html:31
 msgid "question added"
-msgstr ""
+msgstr "pregunta añadida"
 
 #: templates/quiz/mcquestion_form.html:34
 msgid "Correct the error(s) below."
-msgstr ""
+msgstr "Corrige los errores a continuación."
 
 #: templates/quiz/quiz_form.html:14
 msgid "Quiz Form"
-msgstr ""
+msgstr "Formulario de cuestionario"
 
 #: templates/quiz/quiz_form.html:18
 msgid "Quiz form for"
-msgstr ""
+msgstr "Formulario de cuestionario para"
 
 #: templates/quiz/quiz_form.html:55
 msgid "Hold down"
-msgstr ""
+msgstr "Mantén pulsada"
 
 #: templates/quiz/quiz_form.html:55
 #: venv/lib/python3.9/site-packages/django/utils/text.py:322
 msgid "or"
-msgstr ""
+msgstr "o"
 
 #: templates/quiz/quiz_form.html:55
 msgid "on a Mac, to select more than one."
-msgstr ""
+msgstr "en un Mac, para seleccionar más de uno."
 
 #: templates/quiz/quiz_form.html:66
 msgid "Continue"
-msgstr ""
+msgstr "Continuar"
 
 #: templates/quiz/quiz_list.html:22
 msgid "Add Quiz"
-msgstr ""
+msgstr "Añadir cuestionario"
 
 #: templates/quiz/quiz_list.html:54
 msgid "You will only get one attempt at this quiz"
-msgstr ""
+msgstr "Solo tendrás un intento en este cuestionario"
 
 #: templates/quiz/quiz_list.html:58
 msgid "Start quiz"
-msgstr ""
+msgstr "Comenzar cuestionario"
 
 #: templates/quiz/sitting_detail.html:4
 msgid "Result of"
-msgstr ""
+msgstr "Resultado de"
 
 #: templates/quiz/sitting_detail.html:4 templates/search/search_view.html:43
 msgid "for"
-msgstr ""
+msgstr "para"
 
 #: templates/quiz/sitting_detail.html:12
 msgid "Completed Exams"
-msgstr ""
+msgstr "Exámenes completados"
 
 #: templates/quiz/sitting_detail.html:13
 msgid "Marking"
-msgstr ""
+msgstr "Corrección"
 
 #: templates/quiz/sitting_detail.html:18 templates/result.html:99
 msgid "Quiz title"
-msgstr ""
+msgstr "Título del cuestionario"
 
 #: templates/quiz/sitting_detail.html:25 templates/quiz/sitting_list.html:38
 msgid "Completed"
-msgstr ""
+msgstr "Completado"
 
 #: templates/quiz/sitting_detail.html:35
 msgid "User answer"
-msgstr ""
+msgstr "Respuesta del usuario"
 
 #: templates/quiz/sitting_detail.html:54
 msgid "incorrect"
-msgstr ""
+msgstr "incorrecta"
 
 #: templates/quiz/sitting_detail.html:62
 msgid "Toggle whether correct"
-msgstr ""
+msgstr "Alternar si es correcta"
 
 #: templates/quiz/sitting_list.html:3
 msgid "All Quizzes"
-msgstr ""
+msgstr "Todos los cuestionarios"
 
 #: templates/quiz/sitting_list.html:16
 msgid "List of complete exams"
-msgstr ""
+msgstr "Lista de exámenes completados"
 
 #: templates/quiz/sitting_list.html:24 templates/snippets/filter_form.html:12
 msgid "Filter"
-msgstr ""
+msgstr "Filtrar"
 
 #: templates/quiz/sitting_list.html:54
 msgid "View details"
-msgstr ""
+msgstr "Ver detalles"
 
 #: templates/quiz/sitting_list.html:63
 msgid "No completed exams for you"
-msgstr ""
+msgstr "No tienes exámenes completados"
 
 #: templates/registration/login.html:3
 msgid "Dj Learning Management System - Login"
-msgstr ""
+msgstr "Sistema de gestión del aprendizaje - Iniciar sesión"
 
 #: templates/registration/login.html:11
 msgid "Sign in"
-msgstr ""
+msgstr "Iniciar sesión"
 
 #: templates/registration/login.html:16
 msgid "ID Number"
-msgstr ""
+msgstr "Número de ID"
 
 #: templates/registration/login.html:21
 msgid "Password"
-msgstr ""
+msgstr "Contraseña"
 
-#: templates/registration/login.html:25 templates/registration/register.html:73
+#: templates/registration/login.html:25
+#: templates/registration/register.html:73
 msgid "Invalid ID & Password."
-msgstr ""
+msgstr "ID y contraseña no válidos."
 
 #: templates/registration/login.html:28
 msgid "SIGN IN"
-msgstr ""
+msgstr "INICIAR SESIÓN"
 
 #: templates/registration/login.html:32
 msgid "Forgot password ?"
-msgstr ""
+msgstr "¿Olvidaste tu contraseña?"
 
 #: templates/registration/password_reset.html:3
 msgid "Password Reset | Learning management system"
-msgstr ""
+msgstr "Restablecer contraseña | Sistema de gestión del aprendizaje"
 
 #: templates/registration/password_reset.html:7
 msgid "Password Reset"
-msgstr ""
+msgstr "Restablecer contraseña"
 
 #: templates/registration/password_reset.html:17
 msgid "Request Password Reset"
-msgstr ""
+msgstr "Solicitar restablecimiento de contraseña"
 
 #: templates/registration/password_reset_complete.html:3
 msgid "Password Reset Complete | Learning management system"
-msgstr ""
+msgstr "Restablecimiento completado | Sistema de gestión del aprendizaje"
 
 #: templates/registration/password_reset_complete.html:8
 msgid "Password Reset Complete"
-msgstr ""
+msgstr "Restablecimiento de contraseña completado"
 
 #: templates/registration/password_reset_complete.html:11
 msgid "Your password has been set, you are now able to Log In!"
-msgstr ""
+msgstr "Tu contraseña se ha establecido, ¡ya puedes iniciar sesión!"
 
 #: templates/registration/password_reset_complete.html:13
 msgid "Sign In Here"
-msgstr ""
+msgstr "Inicia sesión aquí"
 
 #: templates/registration/password_reset_confirm.html:22
 msgid "Confirm New Password"
-msgstr ""
+msgstr "Confirmar nueva contraseña"
 
 #: templates/registration/password_reset_confirm.html:31
 msgid "Reset Password"
-msgstr ""
+msgstr "Restablecer contraseña"
 
 #: templates/registration/password_reset_done.html:3
 msgid "Email Sent | Learning management system"
-msgstr ""
+msgstr "Correo enviado | Sistema de gestión del aprendizaje"
 
 #: templates/registration/password_reset_done.html:8
 msgid "Email sent"
-msgstr ""
+msgstr "Correo enviado"
 
 #: templates/registration/password_reset_done.html:14
 msgid "Back To Login"
-msgstr ""
+msgstr "Volver al inicio de sesión"
 
 #: templates/registration/register.html:3
 msgid "Register | Learning management system"
-msgstr ""
+msgstr "Registro | Sistema de gestión del aprendizaje"
 
 #: templates/registration/register.html:12
 msgid "Create Your Account"
-msgstr ""
+msgstr "Crea tu cuenta"
 
 #: templates/registration/register.html:20
 msgid "Login Form"
-msgstr ""
+msgstr "Formulario de inicio de sesión"
 
 #: templates/registration/register.html:76
 msgid "SIGN UP"
-msgstr ""
+msgstr "REGISTRARSE"
 
 #: templates/registration/register.html:79
 msgid "Already Registered ?"
-msgstr ""
+msgstr "¿Ya estás registrado?"
 
 #: templates/registration/register.html:79
 msgid "Login"
-msgstr ""
+msgstr "Iniciar sesión"
 
 #: templates/result.html:8
 msgid "Quiz Results for"
-msgstr ""
+msgstr "Resultados del cuestionario de"
 
 #: templates/result.html:20 templates/result/assessment_results.html:29
 #: templates/result/grade_results.html:29
 msgid "Result"
-msgstr ""
+msgstr "Resultado"
 
 #: templates/result.html:26
 msgid "Calculating your result..."
-msgstr ""
+msgstr "Calculando tu resultado..."
 
 #: templates/result.html:96
 msgid "Quiz result"
-msgstr ""
+msgstr "Resultado del cuestionario"
 
 #: templates/result.html:103
 msgid "You answered"
-msgstr ""
+msgstr "Acertaste"
 
 #: templates/result.html:103
 msgid "questions correctly out of"
-msgstr ""
+msgstr "preguntas correctamente de"
 
 #: templates/result.html:103
 msgid "giving you"
-msgstr ""
+msgstr "obteniendo un"
 
 #: templates/result.html:103
 #, python-format
 msgid "%% correct"
-msgstr ""
+msgstr "%% de aciertos"
 
 #: templates/result.html:117
 msgid "Review the questions below and try the quiz again in the future"
 msgstr ""
+"Revisa las preguntas a continuación e intenta el cuestionario de nuevo más "
+"adelante"
 
 #: templates/result.html:119
 msgid "The result of this quiz will be stored in your progress section"
 msgstr ""
+"El resultado de este cuestionario se guardará en tu sección de progreso"
 
 #: templates/result.html:121
 msgid "so you can review and monitor your progression"
-msgstr ""
+msgstr "para que puedas revisar y seguir tu progreso"
 
 #: templates/result.html:134
 msgid "Your session score is"
-msgstr ""
+msgstr "La puntuación de tu sesión es"
 
 #: templates/result.html:134
 msgid "out of a possible"
-msgstr ""
+msgstr "sobre un máximo de"
 
 #: templates/result.html:157
 msgid "No explanation set for this question."
-msgstr ""
+msgstr "No hay explicación para esta pregunta."
 
 #: templates/result.html:164
 msgid "Your answer"
-msgstr ""
+msgstr "Tu respuesta"
 
 #: templates/result/add_score.html:29
 msgid "Select Your Course Here"
-msgstr ""
+msgstr "Selecciona tu curso aquí"
 
 #: templates/result/add_score.html:35 templates/result/add_score_for.html:24
 msgid "No course."
-msgstr ""
+msgstr "Sin cursos."
 
 #: templates/result/add_score.html:39
 msgid "To manage scores, please select the course using the button above."
 msgstr ""
+"Para gestionar las puntuaciones, selecciona el curso con el botón de arriba."
 
 #: templates/result/add_score_for.html:30
 msgid "Students result form"
-msgstr ""
+msgstr "Formulario de resultados de estudiantes"
 
 #: templates/result/add_score_for.html:41
 msgid "Grade report"
-msgstr ""
+msgstr "Informe de notas"
 
 #: templates/result/add_score_for.html:54
 #: templates/result/assessment_results.html:41
 #: templates/result/assessment_results.html:83
 msgid "Mid exam"
-msgstr ""
+msgstr "Examen parcial"
 
 #: templates/result/add_score_for.html:56
 #: templates/result/assessment_results.html:43
 #: templates/result/assessment_results.html:85
 msgid "Attendance"
-msgstr ""
+msgstr "Asistencia"
 
 #: templates/result/add_score_for.html:57
 #: templates/result/assessment_results.html:44
 #: templates/result/assessment_results.html:86
 msgid "Final exam"
-msgstr ""
+msgstr "Examen final"
 
 #: templates/result/add_score_for.html:58
 #: templates/result/assessment_results.html:45
 #: templates/result/assessment_results.html:87
 msgid "Total"
-msgstr ""
+msgstr "Total"
 
 #: templates/result/add_score_for.html:59
 msgid "Point"
-msgstr ""
+msgstr "Punto"
 
 #: templates/result/add_score_for.html:60
 #: templates/result/grade_results.html:40
 msgid "Grade"
-msgstr ""
+msgstr "Nota"
 
 #: templates/result/add_score_for.html:61
 #: templates/result/grade_results.html:42
 #: templates/result/grade_results.html:107
 msgid "Comment"
-msgstr ""
+msgstr "Comentario"
 
 #: templates/result/grade_results.html:41
 #: templates/result/grade_results.html:106
 msgid "Points"
-msgstr ""
+msgstr "Puntos"
 
 #: templates/result/grade_results.html:58
 #: templates/result/grade_results.html:123
 msgid "PASS"
-msgstr ""
+msgstr "APROBADO"
 
 #: templates/result/grade_results.html:60
 #: templates/result/grade_results.html:125
 msgid "FAIL"
-msgstr ""
+msgstr "SUSPENSO"
 
 #: templates/result/grade_results.html:79
 msgid "Total first semester credit:"
-msgstr ""
+msgstr "Créditos totales del primer semestre:"
 
 #: templates/result/grade_results.html:88
 #: templates/result/grade_results.html:177
 msgid "First Semester GPA:"
-msgstr ""
+msgstr "Nota media del primer semestre:"
 
 #: templates/result/grade_results.html:105
 msgid "GRADE"
-msgstr ""
+msgstr "NOTA"
 
 #: templates/result/grade_results.html:139
 msgid "Total second semester credit:"
-msgstr ""
+msgstr "Créditos totales del segundo semestre:"
 
 #: templates/result/grade_results.html:144
 msgid "Total Credit:"
-msgstr ""
+msgstr "Créditos totales:"
 
 #: templates/result/grade_results.html:153
 #: templates/result/grade_results.html:184
 msgid "Second Semester GPA:"
-msgstr ""
+msgstr "Nota media del segundo semestre:"
 
 #: templates/result/grade_results.html:162
 #: templates/result/grade_results.html:192
 msgid "Previous CGPA:"
-msgstr ""
+msgstr "Nota media acumulada previa:"
 
 #: templates/search/search_view.html:3
 msgid "Search result for"
-msgstr ""
+msgstr "Resultados de búsqueda de"
 
 #: templates/search/search_view.html:12
 msgid "Search"
-msgstr ""
+msgstr "Buscar"
 
 #: templates/search/search_view.html:43
 msgid "result"
-msgstr ""
+msgstr "resultado"
 
 #: templates/search/search_view.html:62
 msgid "Program of"
-msgstr ""
+msgstr "Programa de"
 
 #: templates/search/search_view.html:69 templates/search/search_view.html:126
 msgid "News And Events"
-msgstr ""
+msgstr "Noticias y eventos"
 
 #: templates/search/search_view.html:72
 msgid "Date:"
-msgstr ""
+msgstr "Fecha:"
 
 #: templates/search/search_view.html:82
 msgid "quiz"
-msgstr ""
+msgstr "cuestionario"
 
 #: templates/search/search_view.html:82
 msgid "Course:"
-msgstr ""
+msgstr "Curso:"
 
 #: templates/search/search_view.html:122
 msgid "Search by:"
-msgstr ""
+msgstr "Buscar por:"
 
 #: templates/search/search_view.html:124
 msgid "Title or Description"
-msgstr ""
+msgstr "Título o descripción"
 
 #: templates/search/search_view.html:125
 msgid "Title, Code or Description"
-msgstr ""
+msgstr "Título, código o descripción"
 
 #: templates/search/search_view.html:127
 msgid "Title, Description or Category(practice, assignment and exam)"
-msgstr ""
+msgstr "Título, descripción o categoría (práctica, tarea y examen)"
 
 #: templates/setting/admin_panel.html:37 templates/setting/admin_panel.html:42
 #: templates/setting/admin_panel.html:47 templates/setting/admin_panel.html:52
 #: templates/setting/admin_panel.html:70 templates/setting/admin_panel.html:75
 #: templates/setting/admin_panel.html:80
 msgid "Manage"
-msgstr ""
+msgstr "Gestionar"
 
 #: templates/setting/admin_panel.html:43
 msgid "students"
-msgstr ""
+msgstr "estudiantes"
 
 #: templates/setting/admin_panel.html:48
 msgid "sessions"
-msgstr ""
+msgstr "sesiones"
 
 #: templates/setting/admin_panel.html:53
 msgid "semesters"
-msgstr ""
+msgstr "semestres"
 
 #: templates/setting/admin_panel.html:64
 msgid "Switch"
-msgstr ""
+msgstr "Cambiar"
 
 #: templates/setting/admin_panel.html:71
 msgid "programs"
-msgstr ""
+msgstr "programas"
 
 #: templates/setting/admin_panel.html:76
 msgid "course allocations"
-msgstr ""
+msgstr "asignaciones de cursos"
 
 #: templates/setting/password_change.html:12
 msgid "Password Change"
-msgstr ""
+msgstr "Cambio de contraseña"
 
 #: templates/setting/profile_info_change.html:12
 msgid "Account setting"
-msgstr ""
+msgstr "Configuración de la cuenta"
 
 #: templates/setting/profile_info_change.html:16
 msgid "Account Settings"
-msgstr ""
+msgstr "Configuración de la cuenta"
 
 #: templates/setting/profile_info_change.html:44
 msgid "Update Profile"
-msgstr ""
+msgstr "Actualizar perfil"
 
 #: templates/upload/upload_file_form.html:14
 msgid "File upload"
-msgstr ""
+msgstr "Subida de archivos"
 
 #: templates/upload/upload_file_form.html:18
 msgid "File upload for"
-msgstr ""
+msgstr "Subida de archivos para"
 
 #: templates/upload/upload_file_form.html:26
 msgid "File Upload Form"
-msgstr ""
+msgstr "Formulario de subida de archivo"
 
 #: templates/upload/upload_file_form.html:33
 #: templates/upload/upload_video_form.html:32
 msgid "Upload"
-msgstr ""
+msgstr "Subir"
 
 #: templates/upload/upload_video_form.html:14
 msgid "Video upload"
-msgstr ""
+msgstr "Subida de vídeos"
 
 #: templates/upload/upload_video_form.html:18
 msgid "Video upload for"
-msgstr ""
+msgstr "Subida de vídeos para"
 
 #: templates/upload/upload_video_form.html:26
 msgid "Video Upload Form"
-msgstr ""
+msgstr "Formulario de subida de vídeo"
 
 #: templates/upload/video_single.html:35
 msgid "No video description set."
-msgstr ""
+msgstr "No hay descripción del vídeo."
 
 #: venv/lib/python3.9/site-packages/click/_termui_impl.py:518
 #, python-brace-format
@@ -2518,8 +2533,8 @@ msgstr ""
 
 #: venv/lib/python3.9/site-packages/django/core/validators.py:267
 msgid ""
-"Enter a valid “slug” consisting of Unicode letters, numbers, underscores, or "
-"hyphens."
+"Enter a valid “slug” consisting of Unicode letters, numbers, underscores, or"
+" hyphens."
 msgstr ""
 
 #: venv/lib/python3.9/site-packages/django/core/validators.py:279
@@ -2714,15 +2729,15 @@ msgstr ""
 #: venv/lib/python3.9/site-packages/django/db/models/fields/__init__.py:1489
 #, python-format
 msgid ""
-"“%(value)s” value has an invalid format. It must be in YYYY-MM-DD HH:MM[:ss[."
-"uuuuuu]][TZ] format."
+"“%(value)s” value has an invalid format. It must be in YYYY-MM-DD "
+"HH:MM[:ss[.uuuuuu]][TZ] format."
 msgstr ""
 
 #: venv/lib/python3.9/site-packages/django/db/models/fields/__init__.py:1497
 #, python-format
 msgid ""
-"“%(value)s” value has the correct format (YYYY-MM-DD HH:MM[:ss[.uuuuuu]]"
-"[TZ]) but it is an invalid date/time."
+"“%(value)s” value has the correct format (YYYY-MM-DD "
+"HH:MM[:ss[.uuuuuu]][TZ]) but it is an invalid date/time."
 msgstr ""
 
 #: venv/lib/python3.9/site-packages/django/db/models/fields/__init__.py:1502
@@ -2741,8 +2756,8 @@ msgstr ""
 #: venv/lib/python3.9/site-packages/django/db/models/fields/__init__.py:1789
 #, python-format
 msgid ""
-"“%(value)s” value has an invalid format. It must be in [DD] [[HH:]MM:]ss[."
-"uuuuuu] format."
+"“%(value)s” value has an invalid format. It must be in [DD] "
+"[[HH:]MM:]ss[.uuuuuu] format."
 msgstr ""
 
 #: venv/lib/python3.9/site-packages/django/db/models/fields/__init__.py:1793
@@ -2901,7 +2916,8 @@ msgid "Many-to-many relationship"
 msgstr ""
 
 #. Translators: If found as last label character, these punctuation
-#. characters will prevent the default label_suffix to be appended to the label
+#. characters will prevent the default label_suffix to be appended to the
+#. label
 #: venv/lib/python3.9/site-packages/django/forms/boundfield.py:184
 msgid ":?.!"
 msgstr ""
@@ -2947,7 +2963,8 @@ msgstr ""
 
 #: venv/lib/python3.9/site-packages/django/forms/fields.py:625
 #, python-format
-msgid "Ensure this filename has at most %(max)d character (it has %(length)d)."
+msgid ""
+"Ensure this filename has at most %(max)d character (it has %(length)d)."
 msgid_plural ""
 "Ensure this filename has at most %(max)d characters (it has %(length)d)."
 msgstr[0] ""
@@ -3051,7 +3068,8 @@ msgid "The inline value did not match the parent instance."
 msgstr ""
 
 #: venv/lib/python3.9/site-packages/django/forms/models.py:1429
-msgid "Select a valid choice. That choice is not one of the available choices."
+msgid ""
+"Select a valid choice. That choice is not one of the available choices."
 msgstr ""
 
 #: venv/lib/python3.9/site-packages/django/forms/models.py:1568
@@ -3507,10 +3525,10 @@ msgstr ""
 
 #: venv/lib/python3.9/site-packages/django/views/csrf.py:127
 msgid ""
-"If you are using the <meta name=\"referrer\" content=\"no-referrer\"> tag or "
-"including the “Referrer-Policy: no-referrer” header, please remove them. The "
-"CSRF protection requires the “Referer” header to do strict referer checking. "
-"If you’re concerned about privacy, use alternatives like <a "
+"If you are using the <meta name=\"referrer\" content=\"no-referrer\"> tag or"
+" including the “Referrer-Policy: no-referrer” header, please remove them. "
+"The CSRF protection requires the “Referer” header to do strict referer "
+"checking. If you’re concerned about privacy, use alternatives like <a "
 "rel=\"noreferrer\" …> for links to third-party sites."
 msgstr ""
 
@@ -3562,8 +3580,8 @@ msgstr ""
 #: venv/lib/python3.9/site-packages/django/views/generic/dates.py:652
 #, python-format
 msgid ""
-"Future %(verbose_name_plural)s not available because %(class_name)s."
-"allow_future is False."
+"Future %(verbose_name_plural)s not available because "
+"%(class_name)s.allow_future is False."
 msgstr ""
 
 #: venv/lib/python3.9/site-packages/django/views/generic/dates.py:692
@@ -3619,10 +3637,10 @@ msgstr ""
 #: venv/lib/python3.9/site-packages/django/views/templates/default_urlconf.html:221
 #, python-format
 msgid ""
-"You are seeing this page because <a href=\"https://docs.djangoproject.com/en/"
-"%(version)s/ref/settings/#debug\" target=\"_blank\" "
-"rel=\"noopener\">DEBUG=True</a> is in your settings file and you have not "
-"configured any URLs."
+"You are seeing this page because <a "
+"href=\"https://docs.djangoproject.com/en/%(version)s/ref/settings/#debug\" "
+"target=\"_blank\" rel=\"noopener\">DEBUG=True</a> is in your settings file "
+"and you have not configured any URLs."
 msgstr ""
 
 #: venv/lib/python3.9/site-packages/django/views/templates/default_urlconf.html:229
@@ -3663,3 +3681,6 @@ msgstr ""
 #, python-format
 msgid "Unable to connect to qpid with SASL mechanism %s"
 msgstr ""
+
+msgid "Looks like the page you're looking for does not exist."
+msgstr "Parece que la página que buscas no existe."

@@ -1,11 +1,42 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.conf import settings
 
 from accounts.decorators import admin_required, lecturer_required
 from accounts.models import User, Student
 from .forms import SessionForm, SemesterForm, NewsAndEventsForm
 from .models import NewsAndEvents, ActivityLog, Session, Semester
+
+
+# ########################################################
+# Páginas legales
+# ########################################################
+def _datos_legales(extra):
+    """Lo que el texto legal toma de los ajustes, para no repetirlo.
+
+    El responsable, su dirección y el correo se cambian en el .env; el texto de
+    las plantillas no lleva datos fijos.
+    """
+    contexto = {
+        "responsable": settings.DATA_CONTROLLER,
+        "direccion": settings.DATA_CONTROLLER_ADDRESS,
+        "email_dpo": settings.DATA_PROTECTION_EMAIL,
+        "version": settings.PRIVACY_VERSION,
+        "retencion": settings.DATA_RETENTION,
+    }
+    contexto.update(extra)
+    return contexto
+
+
+def privacy_view(request):
+    return render(request, "legal/privacy.html", _datos_legales(
+        {"title": "Política de privacidad"}))
+
+
+def terms_view(request):
+    return render(request, "legal/terms.html", _datos_legales(
+        {"title": "Términos de uso"}))
 
 
 # ########################################################

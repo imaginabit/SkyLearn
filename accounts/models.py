@@ -210,3 +210,41 @@ class DepartmentHead(models.Model):
 
     def __str__(self):
         return "{}".format(self.user)
+
+
+class ConsentRecord(models.Model):
+    """Prueba del consentimiento informado (RGPD, art. 7.1).
+
+    El responsable tiene que poder demostrar que la persona consintió el
+    tratamiento. Aquí se guarda quién, cuándo, con qué versión del texto y desde
+    qué dirección, que es lo que se exige como prueba.
+
+    Es una tabla de solo-añadir: si cambia el texto de la política, se sube
+    `PRIVACY_VERSION` y el consentimiento anterior sigue en su fila, con la
+    versión con la que se dio.
+    """
+
+    user = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name="consents"
+    )
+    version = models.CharField(max_length=32)
+    accepted_at = models.DateTimeField(auto_now_add=True)
+    ip = models.GenericIPAddressField(null=True, blank=True)
+    user_agent = models.CharField(max_length=255, blank=True)
+    # quién lo registró: el propio alumno o el administrador que dio el alta
+    recorded_by = models.ForeignKey(
+        User,
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name="consents_recorded",
+    )
+
+    class Meta:
+        ordering = ("-accepted_at",)
+        verbose_name = "consentimiento"
+        verbose_name_plural = "consentimientos"
+
+    def __str__(self):
+        return f"{self.user} aceptó la versión {self.version}"
+

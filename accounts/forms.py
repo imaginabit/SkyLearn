@@ -218,6 +218,21 @@ class StudentAddForm(UserCreationForm):
         label="Email Address",
     )
 
+    consent = forms.BooleanField(
+        required=True,
+        widget=forms.CheckboxInput(attrs={"class": "form-check-input"}),
+        label="Consentimiento informado",
+        help_text=(
+            "Confirmo que la persona interesada ha sido informada y consiente "
+            "el tratamiento de sus datos personales para la gestión del curso, "
+            "según la política de privacidad."
+        ),
+        error_messages={
+            "required": "Hay que marcar el consentimiento informado para dar "
+                        "de alta al alumno.",
+        },
+    )
+
     password1 = forms.CharField(
         max_length=30,
         widget=forms.TextInput(

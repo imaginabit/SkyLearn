@@ -20,6 +20,7 @@ from accounts.forms import (
     StudentAddForm,
 )
 from accounts.models import Parent, Student, User
+from accounts.utils import record_consent
 from core.models import Semester, Session
 from course.models import Course
 from result.models import TakenCourse
@@ -55,7 +56,9 @@ def register(request):
     if request.method == "POST":
         form = StudentAddForm(request.POST)
         if form.is_valid():
-            form.save()
+            student = form.save()
+            # el propio alumno ha marcado el consentimiento: se guarda con su IP
+            record_consent(student, request)
             messages.success(request, "Account created successfully.")
             return redirect("login")
         messages.error(
@@ -301,6 +304,9 @@ def student_add_view(request):
         form = StudentAddForm(request.POST)
         if form.is_valid():
             student = form.save()
+            # el alta la hace el administrador, que responde por el
+            # consentimiento del alumno: queda registrado quién lo metió
+            record_consent(student, request, recorded_by=request.user)
             full_name = student.get_full_name
             email = student.email
             messages.success(

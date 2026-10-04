@@ -28,7 +28,16 @@ SECRET_KEY = config(
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config("DEBUG", default=True, cast=bool)
 
-ALLOWED_HOSTS = ["127.0.0.1", "adilmohak1.pythonanywhere.com"]
+ALLOWED_HOSTS = config(
+    "ALLOWED_HOSTS",
+    default="127.0.0.1,curso.imaginabit.com",
+    cast=lambda v: [s.strip() for s in v.split(",") if s.strip()],
+)
+CSRF_TRUSTED_ORIGINS = config(
+    "CSRF_TRUSTED_ORIGINS",
+    default="https://curso.imaginabit.com",
+    cast=lambda v: [s.strip() for s in v.split(",") if s.strip()],
+)
 
 # change the default user models to our custom model
 AUTH_USER_MODEL = "accounts.User"
@@ -153,8 +162,8 @@ LANGUAGES = (
 
 LOCALE_PATHS = (os.path.join(BASE_DIR, "locale"),)
 
-MODELTRANSLATION_DEFAULT_LANGUAGE = "en"
-LANGUAGE_CODE = "en-us"
+MODELTRANSLATION_DEFAULT_LANGUAGE = "es"
+LANGUAGE_CODE = "es"
 
 TIME_ZONE = "UTC"
 
@@ -198,7 +207,7 @@ EMAIL_USE_TLS = config("EMAIL_USE_TLS", default=True, cast=bool)
 EMAIL_HOST_USER = config("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD")
 EMAIL_FROM_ADDRESS = config("EMAIL_FROM_ADDRESS")
-EMAIL_USE_SSL = False
+EMAIL_USE_SSL = config("EMAIL_USE_SSL", default=False, cast=bool)
 
 # crispy config
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
@@ -241,6 +250,29 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 STUDENT_ID_PREFIX = config("STUDENT_ID_PREFIX", "ugr")
 LECTURER_ID_PREFIX = config("LECTURER_ID_PREFIX", "lec")
 
+
+# ---------------------------------------------------------------------------
+# Protección de datos (RGPD / LOPDGDD)
+# ---------------------------------------------------------------------------
+# El responsable del tratamiento y su contacto son decisiones del centro, no del
+# programa: se cambian en el .env sin tocar el código. `PRIVACY_VERSION` es la
+# versión del texto publicado: al cambiarlo hay que subirla, porque las pruebas
+# de consentimiento que ya están guardadas dicen con qué versión se dieron.
+PRIVACY_VERSION = config("PRIVACY_VERSION", "2026-10-04")
+DATA_CONTROLLER = config(
+    "DATA_CONTROLLER", "Canarias Auxiliares y Suministros, S.L."
+)
+DATA_CONTROLLER_ADDRESS = config(
+    "DATA_CONTROLLER_ADDRESS", "C/ Carlos H.M Hamilton 11 · S/C de Tenerife"
+)
+DATA_PROTECTION_EMAIL = config("DATA_PROTECTION_EMAIL", "admin@imaginabit.com")
+DATA_RETENTION = config(
+    "DATA_RETENTION",
+    "hasta la finalización del curso y el cierre administrativo de la acción "
+    "formativa, y después solo durante los plazos de conservación que exige la "
+    "normativa de formación para el empleo",
+)
+SITE_URL = config("SITE_URL", "https://curso.imaginabit.com")
 
 # Constants
 YEARS = (

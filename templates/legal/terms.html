@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %}Términos de uso | {% trans 'Learning management system' %}{% endblock title %}
+
+{% block content %}
+<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/">{% trans 'Home' %}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Términos de uso</li>
+  </ol>
+</nav>
+
+<div class="card">
+  <div class="card-body">
+    <h4 class="mb-3 fw-bold">Términos de uso</h4>
+
+    <h6 class="fw-bold mt-4">1. Qué es esta plataforma</h6>
+    <p>
+      Esta plataforma da soporte al curso <b>MF0487_3 · Auditoría de seguridad
+      informática</b>. La cuenta que se te entrega es personal y sirve solo para
+      seguir el curso y entregar las actividades.
+    </p>
+
+    <h6 class="fw-bold mt-4">2. Tu cuenta</h6>
+    <p>
+      Las credenciales son personales e intransferibles. No las compartas. Eres
+      responsable del uso que se haga con ellas y debes cambiar la contraseña la
+      primera vez que entres.
+    </p>
+
+    <h6 class="fw-bold mt-4">3. Uso correcto</h6>
+    <p class="mb-1">Al usar la plataforma te comprometes a no:</p>
+    <ul>
+      <li>Intentar acceder a datos de otras personas o a partes del sistema que no te corresponden.</li>
+      <li>Subir contenido ilícito, ofensivo o que vulnere derechos de terceros.</li>
+      <li>Realizar acciones que impidan el funcionamiento normal de la plataforma.</li>
+    </ul>
+    <p class="text-muted small">
+      El módulo trata precisamente de seguridad, así que las prácticas de ataque
+      se hacen siempre contra las máquinas virtuales propias y con autorización
+      firmada, nunca contra esta plataforma ni contra equipos ajenos.
+    </p>
+
+    <h6 class="fw-bold mt-4">4. Contenidos</h6>
+    <p>
+      Los materiales del curso son para tu uso personal dentro de la acción
+      formativa. No se pueden difundir ni reutilizar fuera de ella sin
+      autorización.
+    </p>
+
+    <h6 class="fw-bold mt-4">5. Protección de datos</h6>
+    <p>
+      El tratamiento de tus datos se explica en la
+      <a href="{% url 'privacy' %}">política de privacidad</a>.
+    </p>
+
+    <h6 class="fw-bold mt-4">6. Final del curso</h6>
+    <p>
+      Al terminar el curso se eliminan el curso y sus datos asociados. Si
+      necesitas conservar algún documento o calificación, descárgalo antes.
+    </p>
+  </div>
+</div>
+{% endblock content %}

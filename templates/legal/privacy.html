@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %}Política de privacidad | {% trans 'Learning management system' %}{% endblock title %}
+
+{% block content %}
+<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/">{% trans 'Home' %}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Política de privacidad</li>
+  </ol>
+</nav>
+
+<div class="card">
+  <div class="card-body">
+    <h4 class="mb-3 fw-bold">Política de privacidad</h4>
+    <p class="text-muted small mb-4">Versión {{ version }}</p>
+
+    <h6 class="fw-bold mt-4">1. Responsable del tratamiento</h6>
+    <p>
+      <b>{{ responsable }}</b><br />
+      {{ direccion }}<br />
+      Correo de contacto: <a href="mailto:{{ email_dpo }}">{{ email_dpo }}</a>
+    </p>
+
+    <h6 class="fw-bold mt-4">2. Para qué tratamos tus datos</h6>
+    <p>
+      Los datos que facilitas al matricularte —nombre, apellidos, correo, teléfono,
+      dirección y los resultados de las actividades y pruebas— se tratan con una
+      única finalidad: <b>gestionar tu participación en el curso</b>. Es decir,
+      darte de alta en la plataforma, darte acceso a los contenidos, corregir tus
+      actividades, calificarte y emitir, si procede, el certificado o el diploma.
+    </p>
+    <p class="mb-1">También se tratan para:</p>
+    <ul>
+      <li>Enviarte los avisos necesarios para el desarrollo del curso.</li>
+      <li>
+        Atender las obligaciones de justificación de la formación ante la
+        administración que subvenciona o autoriza la acción formativa.
+      </li>
+    </ul>
+    <p class="text-muted small">
+      No se usan tus datos para publicidad, ni se crean perfiles, ni se toman
+      decisiones automatizadas sobre ti.
+    </p>
+
+    <h6 class="fw-bold mt-4">3. Base jurídica</h6>
+    <p>
+      El tratamiento se basa en tu <b>consentimiento</b> (art. 6.1.a RGPD), que
+      otorgas al aceptar esta política, y en la <b>ejecución de la relación
+      formativa</b> (art. 6.1.b RGPD). El tratamiento de los datos necesarios para
+      justificar la formación ante la administración se ampara en el
+      <b>cumplimiento de una obligación legal</b> (art. 6.1.c RGPD).
+    </p>
+
+    <h6 class="fw-bold mt-4">4. Cuánto tiempo los conservamos</h6>
+    <p>{{ retencion }}.</p>
+
+    <h6 class="fw-bold mt-4">5. Quién más los ve</h6>
+    <p>
+      No se ceden tus datos a terceros, salvo a los proveedores que prestan
+      servicios necesarios para la plataforma (alojamiento y envío de correo) y
+      salvo obligación legal. Esos proveedores actúan como encargados del
+      tratamiento y están sujetos a contrato.
+    </p>
+
+    <h6 class="fw-bold mt-4">6. Tus derechos</h6>
+    <p>
+      Puedes ejercer los derechos de acceso, rectificación, supresión,
+      oposición, limitación del tratamiento y portabilidad escribiendo a
+      <a href="mailto:{{ email_dpo }}">{{ email_dpo }}</a>. Si consideras que no
+      se han atendido correctamente, puedes reclamar ante la Agencia Española de
+      Protección de Datos (<a href="https://www.aepd.es" target="_blank" rel="noopener">www.aepd.es</a>).
+    </p>
+
+    <h6 class="fw-bold mt-4">7. Seguridad</h6>
+    <p>
+      Los datos se guardan en un servidor con acceso restringido al personal
+      responsable de la plataforma y con las contraseñas almacenadas cifradas.
+      Las contraseñas de acceso son personales e intransferibles.
+    </p>
+
+    <h6 class="fw-bold mt-4">8. Borrado al terminar el curso</h6>
+    <p>
+      Al finalizar el curso se eliminan el curso y los datos asociados: tu cuenta,
+      tu matrícula y tus calificaciones. Si necesitas conservar algún documento o
+      calificación, descárgalo antes de que termine.
+    </p>
+  </div>
+</div>
+{% endblock content %}
