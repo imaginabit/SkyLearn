@@ -132,7 +132,7 @@ class Upload(models.Model):
     file = models.FileField(
         upload_to="course_files/",
         help_text=_(
-            "Valid Files: pdf, docx, doc, odt, xls, xlsx, ppt, pptx, zip, rar, 7zip"
+            "Valid Files: pdf, docx, doc, odt, html, xls, xlsx, ppt, pptx, zip, rar, 7zip"
         ),
         validators=[
             FileExtensionValidator(
@@ -141,6 +141,7 @@ class Upload(models.Model):
                     "docx",
                     "doc",
                     "odt",
+                    "html",
                     "xls",
                     "xlsx",
                     "ppt",

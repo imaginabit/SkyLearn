@@ -128,6 +128,10 @@ def course_single(request, slug):
     videos = UploadVideo.objects.filter(course__slug=slug)
     lecturers = CourseAllocation.objects.filter(courses__pk=course.id)
     is_editor = request.user.is_lecturer or request.user.is_superuser
+    # el mazo de diapositivas, si lo hay: se muestra embebido arriba del curso
+    deck = next(
+        (f for f in files if f.file.name.lower().endswith(".html")), None
+    )
 
     if request.method == "POST":
         # ponytail: entrega el alumno; el profesor solo revisa la tabla de abajo
@@ -175,6 +179,7 @@ def course_single(request, slug):
             "videos": videos,
             "lecturers": lecturers,
             "media_url": settings.MEDIA_URL,
+            "deck": deck,
             "submission_form": form,
             "my_submissions": my_submissions,
             "submissions": submissions,

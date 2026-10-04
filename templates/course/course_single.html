@@ -48,6 +48,16 @@
 
 {% include 'snippets/messages.html' %}
 
+{% if deck %}
+<div class="container mt-3">
+    <div class="card">
+        <p class="form-title m-0">{{ deck.title }}</p>
+        <iframe src="{{ deck.file.url }}" title="{{ deck.title }}"
+                style="width:100%;height:78vh;border:0;display:block;border-radius:0 0 8px 8px"></iframe>
+    </div>
+</div>
+{% endif %}
+
 <div class="container mt-3">
     {% if request.user.is_superuser or request.user.is_lecturer %}
     <p class="form-title m-0">{% trans "Entregas de los alumnos" %}</p>
