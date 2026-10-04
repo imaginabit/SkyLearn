@@ -95,6 +95,8 @@ def quiz_delete(request, slug, pk):
 def quiz_list(request, slug):
     course = get_object_or_404(Course, slug=slug)
     quizzes = Quiz.objects.filter(course=course).order_by("-timestamp")
+    if not (request.user.is_lecturer or request.user.is_superuser):
+        quizzes = quizzes.filter(draft=False)
     return render(
         request, "quiz/quiz_list.html", {"quizzes": quizzes, "course": course}
     )
@@ -233,6 +235,11 @@ class QuizTake(FormView):
     def dispatch(self, request, *args, **kwargs):
         self.quiz = get_object_or_404(Quiz, slug=self.kwargs["slug"])
         self.course = get_object_or_404(Course, pk=self.kwargs["pk"])
+        if self.quiz.draft and not (
+            request.user.is_lecturer or request.user.is_superuser
+        ):
+            messages.info(request, "This quiz is not available yet.")
+            return redirect("quiz_index", slug=self.course.slug)
         if not Question.objects.filter(quiz=self.quiz).exists():
             messages.warning(request, "This quiz has no questions available.")
             return redirect("quiz_index", slug=self.course.slug)

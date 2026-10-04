@@ -126,7 +126,7 @@ class Upload(models.Model):
     file = models.FileField(
         upload_to="course_files/",
         help_text=_(
-            "Valid Files: pdf, docx, doc, xls, xlsx, ppt, pptx, zip, rar, 7zip"
+            "Valid Files: pdf, docx, doc, odt, xls, xlsx, ppt, pptx, zip, rar, 7zip"
         ),
         validators=[
             FileExtensionValidator(
@@ -134,6 +134,7 @@ class Upload(models.Model):
                     "pdf",
                     "docx",
                     "doc",
+                    "odt",
                     "xls",
                     "xlsx",
                     "ppt",
@@ -254,3 +255,51 @@ class CourseOffer(models.Model):
 
     def __str__(self):
         return str(self.dep_head)
+
+
+class Submission(models.Model):
+    """Entrega de un alumno: un unico fichero por curso, reemplazable."""
+
+    course = models.ForeignKey(
+        Course, on_delete=models.CASCADE, related_name="submissions"
+    )
+    student = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="submissions",
+    )
+    file = models.FileField(
+        upload_to="submissions/",
+        help_text=_("Valid Files: pdf, docx, doc, odt, zip, rar, 7zip, png, jpg"),
+        validators=[
+            FileExtensionValidator(
+                [
+                    "pdf",
+                    "docx",
+                    "doc",
+                    "odt",
+                    "zip",
+                    "rar",
+                    "7zip",
+                    "png",
+                    "jpg",
+                    "jpeg",
+                ]
+            )
+        ],
+    )
+    uploaded_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=["course", "student"], name="one_submission_per_student"
+            )
+        ]
+
+    @property
+    def filename(self):
+        return self.file.name.rsplit("/", 1)[-1]
+
+    def __str__(self):
+        return f"{self.student} - {self.course}"

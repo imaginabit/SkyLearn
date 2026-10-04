@@ -11,6 +11,11 @@ urlpatterns = [
     path("<int:pk>/delete/", views.program_delete, name="program_delete"),
     # Course urls
     path("course/<slug>/detail/", views.course_single, name="course_detail"),
+    path(
+        "course/<slug>/submission/<int:pk>/download/",
+        views.submission_download,
+        name="submission_download",
+    ),
     path("<int:pk>/course/add/", views.course_add, name="course_add"),
     path("course/<slug>/edit/", views.course_edit, name="edit_course"),
     path("course/delete/<slug>/", views.course_delete, name="delete_course"),

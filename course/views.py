@@ -3,6 +3,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.db.models import Sum
+from django.http import FileResponse, Http404
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils.decorators import method_decorator
 from django.views.generic import CreateView
@@ -17,6 +18,7 @@ from course.forms import (
     CourseAllocationForm,
     EditCourseAllocationForm,
     ProgramForm,
+    SubmissionForm,
     UploadFormFile,
     UploadFormVideo,
 )
@@ -24,6 +26,7 @@ from course.models import (
     Course,
     CourseAllocation,
     Program,
+    Submission,
     Upload,
     UploadVideo,
 )
@@ -122,6 +125,37 @@ def course_single(request, slug):
     files = Upload.objects.filter(course__slug=slug)
     videos = UploadVideo.objects.filter(course__slug=slug)
     lecturers = CourseAllocation.objects.filter(courses__pk=course.id)
+    is_editor = request.user.is_lecturer or request.user.is_superuser
+
+    if request.method == "POST":
+        # ponytail: entrega el alumno; el profesor solo revisa la tabla de abajo
+        if is_editor:
+            messages.error(request, "Solo los alumnos pueden entregar trabajos.")
+            return redirect("course_detail", slug=slug)
+        form = SubmissionForm(request.POST, request.FILES)
+        if form.is_valid():
+            submission, _ = Submission.objects.get_or_create(
+                course=course, student=request.user
+            )
+            if submission.file:
+                submission.file.delete(save=False)
+            submission.file = form.cleaned_data["file"]
+            submission.save()
+            messages.success(request, "Tu entrega se ha enviado correctamente.")
+            return redirect("course_detail", slug=slug)
+        messages.error(request, "Revisa los errores del formulario.")
+    else:
+        form = SubmissionForm()
+
+    submission = None
+    submissions = None
+    if is_editor:
+        submissions = Submission.objects.filter(course=course).select_related("student")
+    else:
+        submission = (
+            Submission.objects.filter(course=course, student=request.user).first()
+        )
+
     return render(
         request,
         "course/course_single.html",
@@ -132,7 +166,26 @@ def course_single(request, slug):
             "videos": videos,
             "lecturers": lecturers,
             "media_url": settings.MEDIA_URL,
+            "submission_form": form,
+            "submission": submission,
+            "submissions": submissions,
         },
+    )
+
+
+@login_required
+def submission_download(request, slug, pk):
+    course = get_object_or_404(Course, slug=slug)
+    submission = get_object_or_404(Submission, pk=pk, course=course)
+    if (
+        not (request.user.is_lecturer or request.user.is_superuser)
+        and submission.student_id != request.user.id
+    ):
+        raise Http404
+    return FileResponse(
+        submission.file.open("rb"),
+        as_attachment=True,
+        filename=submission.filename,
     )
 
 

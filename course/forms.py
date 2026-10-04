@@ -1,6 +1,13 @@
 from django import forms
 from accounts.models import User
-from .models import Program, Course, CourseAllocation, Upload, UploadVideo
+from .models import (
+    Course,
+    CourseAllocation,
+    Program,
+    Submission,
+    Upload,
+    UploadVideo,
+)
 
 
 class ProgramForm(forms.ModelForm):
@@ -105,3 +112,13 @@ class UploadFormVideo(forms.ModelForm):
         super().__init__(*args, **kwargs)
         self.fields["title"].widget.attrs.update({"class": "form-control"})
         self.fields["video"].widget.attrs.update({"class": "form-control"})
+
+
+class SubmissionForm(forms.ModelForm):
+    class Meta:
+        model = Submission
+        fields = ("file",)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["file"].widget.attrs.update({"class": "form-control"})
