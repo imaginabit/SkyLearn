@@ -36,6 +36,7 @@ EXCLUDES=(
   --exclude='local_note.txt'
   --exclude='datadump.json'
   --exclude='deploy.sh'
+  --exclude='backup.sh'
   --exclude='DEPLOY.md'
 )
 

@@ -42,6 +42,25 @@ Estos ficheros del servidor **nunca** se sobreescriben ni se borran:
 > El despliegue **no usa `--delete`**: nunca borra ficheros del servidor. Solo
 > añade/actualiza. Los `--exclude` evitan además tocar los datos en vivo.
 
+## Copia de seguridad
+
+`backup.sh` descarga a este equipo la base de datos y los ficheros subidos:
+
+```bash
+./backup.sh
+```
+
+- Deja cada copia en `~/backups/skylearn/<fecha-hora>/` (BD, `.env` y `media/`).
+- La BD se copia con la API de backup de SQLite (consistente con la app en marcha).
+- Conserva las 7 últimas copias (`SKYLEARN_BACKUP_KEEP`).
+- El servidor **no** guarda copias; están solo en local.
+
+Cron sugerido (diario a las 3:00):
+
+```
+0 3 * * *  /home/fer/Proyectos/SkyLearn-Git/backup.sh >> /home/fer/backups/skylearn.log 2>&1
+```
+
 ## Requisitos
 
 - Acceso SSH por alias `rocinante` (ver `~/.ssh/config`).
