@@ -134,9 +134,9 @@ def course_single(request, slug):
             return redirect("course_detail", slug=slug)
         form = SubmissionForm(request.POST, request.FILES, course=course)
         if form.is_valid():
-            quiz = form.cleaned_data["quiz"]
+            document = form.cleaned_data["document"]
             submission, _ = Submission.objects.get_or_create(
-                course=course, student=request.user, quiz=quiz
+                course=course, student=request.user, document=document
             )
             if submission.file:
                 submission.file.delete(save=False)
@@ -153,14 +153,14 @@ def course_single(request, slug):
     if is_editor:
         submissions = (
             Submission.objects.filter(course=course)
-            .select_related("student", "quiz")
-            .order_by("quiz__title", "student__username")
+            .select_related("student", "document")
+            .order_by("document__upload_time", "student__username")
         )
     else:
         my_submissions = (
             Submission.objects.filter(course=course, student=request.user)
-            .select_related("quiz")
-            .order_by("quiz__title")
+            .select_related("document")
+            .order_by("document__upload_time")
         )
 
     return render(

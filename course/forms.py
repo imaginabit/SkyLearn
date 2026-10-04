@@ -8,7 +8,6 @@ from .models import (
     Upload,
     UploadVideo,
 )
-from quiz.models import Quiz
 
 
 class ProgramForm(forms.ModelForm):
@@ -118,13 +117,13 @@ class UploadFormVideo(forms.ModelForm):
 class SubmissionForm(forms.ModelForm):
     class Meta:
         model = Submission
-        fields = ("quiz", "file")
+        fields = ("document", "file")
 
     def __init__(self, *args, course=None, **kwargs):
         super().__init__(*args, **kwargs)
         if course is not None:
-            self.fields["quiz"].queryset = Quiz.objects.filter(
+            self.fields["document"].queryset = Upload.objects.filter(
                 course=course
-            ).order_by("-timestamp")
-        self.fields["quiz"].widget.attrs.update({"class": "form-select"})
+            ).order_by("upload_time")
+        self.fields["document"].widget.attrs.update({"class": "form-select"})
         self.fields["file"].widget.attrs.update({"class": "form-control"})

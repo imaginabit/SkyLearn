@@ -67,7 +67,7 @@
                 <tr>
                     <td>{{ forloop.counter }}</td>
                     <td>{{ s.student.get_full_name|default:s.student.username }}</td>
-                    <td>{{ s.quiz.title|default:"-" }}</td>
+                    <td>{{ s.document.title|default:"-" }}</td>
                     <td>{{ s.uploaded_at|date:"SHORT_DATETIME_FORMAT" }}</td>
                     <td>
                         <a class="download-btn" href="{% url 'submission_download' slug=course.slug pk=s.pk %}">
@@ -88,7 +88,7 @@
             {% for s in my_submissions %}
             <li class="mb-1">
                 <i class="fas fa-check-circle text-success me-1"></i>
-                <strong>{{ s.quiz.title|default:"-" }}</strong> &mdash;
+                <strong>{{ s.document.title|default:"-" }}</strong> &mdash;
                 {{ s.uploaded_at|date:"SHORT_DATETIME_FORMAT" }}:
                 <a href="{% url 'submission_download' slug=course.slug pk=s.pk %}">{{ s.filename }}</a>
             </li>
@@ -101,9 +101,9 @@
             {% csrf_token %}
             <div class="mb-2">
                 <label class="form-label small text-muted">{% trans "Actividad" %}</label>
-                {{ submission_form.quiz }}
-                {% if submission_form.quiz.errors %}
-                <div class="text-danger small">{{ submission_form.quiz.errors }}</div>
+                {{ submission_form.document }}
+                {% if submission_form.document.errors %}
+                <div class="text-danger small">{{ submission_form.document.errors }}</div>
                 {% endif %}
             </div>
             <div class="mb-2">
