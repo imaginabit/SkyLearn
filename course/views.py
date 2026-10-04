@@ -5,6 +5,7 @@ from django.core.paginator import Paginator
 from django.db.models import Sum
 from django.http import FileResponse, Http404
 from django.shortcuts import get_object_or_404, redirect, render
+from django.utils import timezone
 from django.utils.decorators import method_decorator
 from django.views.generic import CreateView
 from django_filters.views import FilterView
@@ -19,6 +20,7 @@ from course.forms import (
     EditCourseAllocationForm,
     ProgramForm,
     SubmissionForm,
+    SubmissionGradeForm,
     UploadFormFile,
     UploadFormVideo,
 )
@@ -193,6 +195,29 @@ def submission_download(request, slug, pk):
         submission.file.open("rb"),
         as_attachment=True,
         filename=submission.filename,
+    )
+
+
+@login_required
+@lecturer_required
+def submission_grade(request, slug, pk):
+    course = get_object_or_404(Course, slug=slug)
+    submission = get_object_or_404(Submission, pk=pk, course=course)
+    if request.method == "POST":
+        form = SubmissionGradeForm(request.POST, instance=submission)
+        if form.is_valid():
+            submission = form.save(commit=False)
+            submission.graded_at = timezone.now()
+            submission.save()
+            messages.success(request, "Calificacion guardada.")
+            return redirect("course_detail", slug=slug)
+        messages.error(request, "Revisa los errores del formulario.")
+    else:
+        form = SubmissionGradeForm(instance=submission)
+    return render(
+        request,
+        "course/submission_grade.html",
+        {"title": "Calificar entrega", "course": course, "submission": submission, "form": form},
     )
 
 

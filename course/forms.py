@@ -91,12 +91,16 @@ class UploadFormFile(forms.ModelForm):
         fields = (
             "title",
             "file",
+            "is_activity",
+            "is_evaluable",
         )
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields["title"].widget.attrs.update({"class": "form-control"})
         self.fields["file"].widget.attrs.update({"class": "form-control"})
+        self.fields["is_activity"].widget.attrs.update({"class": "form-check-input"})
+        self.fields["is_evaluable"].widget.attrs.update({"class": "form-check-input"})
 
 
 # Upload video to specific course
@@ -123,7 +127,22 @@ class SubmissionForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         if course is not None:
             self.fields["document"].queryset = Upload.objects.filter(
-                course=course
+                course=course, is_activity=True
             ).order_by("upload_time")
         self.fields["document"].widget.attrs.update({"class": "form-select"})
         self.fields["file"].widget.attrs.update({"class": "form-control"})
+
+
+class SubmissionGradeForm(forms.ModelForm):
+    class Meta:
+        model = Submission
+        fields = ("mark", "feedback")
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["mark"].widget.attrs.update(
+            {"class": "form-control", "step": "0.01", "min": "0", "max": "10"}
+        )
+        self.fields["feedback"].widget.attrs.update(
+            {"class": "form-control", "rows": 4}
+        )

@@ -16,6 +16,11 @@ urlpatterns = [
         views.submission_download,
         name="submission_download",
     ),
+    path(
+        "course/<slug>/submission/<int:pk>/grade/",
+        views.submission_grade,
+        name="submission_grade",
+    ),
     path("<int:pk>/course/add/", views.course_add, name="course_add"),
     path("course/<slug>/edit/", views.course_edit, name="edit_course"),
     path("course/delete/<slug>/", views.course_delete, name="delete_course"),

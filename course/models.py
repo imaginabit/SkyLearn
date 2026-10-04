@@ -1,5 +1,11 @@
+from decimal import Decimal
+
 from django.conf import settings
-from django.core.validators import FileExtensionValidator
+from django.core.validators import (
+    FileExtensionValidator,
+    MaxValueValidator,
+    MinValueValidator,
+)
 from django.db import models
 from django.db.models import Q
 from django.db.models.signals import pre_save, post_delete, post_save
@@ -148,6 +154,16 @@ class Upload(models.Model):
     )
     updated_date = models.DateTimeField(auto_now=True)
     upload_time = models.DateTimeField(auto_now_add=True)
+    is_activity = models.BooleanField(
+        default=False,
+        verbose_name=_("Actividad"),
+        help_text=_("El alumno puede entregar su ejercicio de esta actividad."),
+    )
+    is_evaluable = models.BooleanField(
+        default=False,
+        verbose_name=_("Actividad evaluable"),
+        help_text=_("Solo las actividades evaluables cuentan para la nota final."),
+    )
 
     def __str__(self):
         return f"{self.title}"
@@ -297,6 +313,16 @@ class Submission(models.Model):
         ],
     )
     uploaded_at = models.DateTimeField(auto_now=True)
+    mark = models.DecimalField(
+        max_digits=4,
+        decimal_places=2,
+        null=True,
+        blank=True,
+        verbose_name=_("Nota"),
+        validators=[MinValueValidator(Decimal("0")), MaxValueValidator(Decimal("10"))],
+    )
+    feedback = models.TextField(blank=True, verbose_name=_("Comentarios"))
+    graded_at = models.DateTimeField(null=True, blank=True, editable=False)
 
     class Meta:
         constraints = [

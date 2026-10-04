@@ -60,6 +60,8 @@
                     <th>{% trans "Actividad" %}</th>
                     <th>{% trans "Fecha de entrega" %}</th>
                     <th>{% trans "Archivo" %}</th>
+                    <th>{% trans "Nota" %}</th>
+                    <th>{% trans "Acciones" %}</th>
                 </tr>
             </thead>
             <tbody>
@@ -67,15 +69,25 @@
                 <tr>
                     <td>{{ forloop.counter }}</td>
                     <td>{{ s.student.get_full_name|default:s.student.username }}</td>
-                    <td>{{ s.document.title|default:"-" }}</td>
+                    <td>
+                        {{ s.document.title|default:"-" }}
+                        {% if s.document.is_evaluable %}
+                        <span class="badge bg-warning text-dark ms-1" title="{% trans 'Cuenta para la nota final' %}">E</span>
+                        {% endif %}
+                    </td>
                     <td>{{ s.uploaded_at|date:"SHORT_DATETIME_FORMAT" }}</td>
                     <td>
                         <a class="download-btn" href="{% url 'submission_download' slug=course.slug pk=s.pk %}">
                             <i class="fas fa-download me-1"></i>{{ s.filename }}</a>
                     </td>
+                    <td>{% if s.mark is not None %}{{ s.mark }}{% else %}<span class="text-muted">&mdash;</span>{% endif %}</td>
+                    <td>
+                        <a href="{% url 'submission_grade' slug=course.slug pk=s.pk %}" title="{% trans 'Calificar' %}">
+                            <i class="fas fa-pencil-alt"></i> {% trans "Calificar" %}</a>
+                    </td>
                 </tr>
                 {% empty %}
-                <tr><td colspan="5" class="text-muted">{% trans "Todavia no ha entregado nadie." %}</td></tr>
+                <tr><td colspan="7" class="text-muted">{% trans "Todavia no ha entregado nadie." %}</td></tr>
                 {% endfor %}
             </tbody>
         </table>
@@ -86,11 +98,17 @@
         {% if my_submissions %}
         <ul class="list-unstyled mb-3">
             {% for s in my_submissions %}
-            <li class="mb-1">
+            <li class="mb-2">
                 <i class="fas fa-check-circle text-success me-1"></i>
                 <strong>{{ s.document.title|default:"-" }}</strong> &mdash;
                 {{ s.uploaded_at|date:"SHORT_DATETIME_FORMAT" }}:
                 <a href="{% url 'submission_download' slug=course.slug pk=s.pk %}">{{ s.filename }}</a>
+                {% if s.mark is not None %}
+                <span class="badge bg-primary ms-1">{% trans "Nota" %}: {{ s.mark }}</span>
+                {% endif %}
+                {% if s.feedback %}
+                <div class="small text-muted mt-1 ps-4">{{ s.feedback|linebreaksbr }}</div>
+                {% endif %}
             </li>
             {% endfor %}
         </ul>
