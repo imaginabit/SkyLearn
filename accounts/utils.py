@@ -9,18 +9,33 @@ def generate_password():
     return get_user_model().objects.make_random_password()
 
 
+def _next_numbered_id(prefix):
+    """Siguiente id libre del tipo <prefijo>-<año>-<n>.
+
+    Va por el máximo existente, no por la cuenta: si se borra a alguien del
+    medio, la cuenta baja y el siguiente recibiría un número ya ocupado. El
+    espacio de ids es el de los usernames, así que no se filtra por rol.
+    """
+    year = datetime.now().strftime("%Y")
+    start = f"{prefix}-{year}-"
+    taken = [
+        int(name[len(start) :])
+        for name in get_user_model()
+        .objects.filter(username__startswith=start)
+        .values_list("username", flat=True)
+        if name[len(start) :].isdigit()
+    ]
+    # ponytail: dos altas simultáneas pueden pedir el mismo número y el UNIQUE
+    # de la BD hace fallar una de las dos. Con altas simultáneas, reintentar.
+    return f"{start}{max(taken, default=0) + 1}"
+
+
 def generate_student_id():
-    # Generate a username based on first and last name and registration date
-    registered_year = datetime.now().strftime("%Y")
-    students_count = get_user_model().objects.filter(is_student=True).count()
-    return f"{settings.STUDENT_ID_PREFIX}-{registered_year}-{students_count}"
+    return _next_numbered_id(settings.STUDENT_ID_PREFIX)
 
 
 def generate_lecturer_id():
-    # Generate a username based on first and last name and registration date
-    registered_year = datetime.now().strftime("%Y")
-    lecturers_count = get_user_model().objects.filter(is_lecturer=True).count()
-    return f"{settings.LECTURER_ID_PREFIX}-{registered_year}-{lecturers_count}"
+    return _next_numbered_id(settings.LECTURER_ID_PREFIX)
 
 
 def generate_student_credentials():
@@ -98,4 +113,3 @@ def record_consent(user, request, recorded_by=None):
         user_agent=(request.META.get("HTTP_USER_AGENT", "") or "")[:255],
         recorded_by=recorded_by,
     )
-
