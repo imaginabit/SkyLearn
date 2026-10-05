@@ -65,6 +65,22 @@ def add_score(request):
     return render(request, "result/add_score.html", context)
 
 
+def _alumnos_del_curso(id, request, current_semester):
+    """Alumnos de un curso a los que este docente puede poner notas.
+
+    El POST se sirve de la misma queryset que el GET. Antes tomaba los ids del
+    POST tal cual (`TakenCourse.objects.get(id=...)`) y cualquier docente
+    podía escribir las notas de cualquier alumno de cualquier curso.
+    """
+    return (
+        TakenCourse.objects.filter(
+            course__allocated_course__lecturer__pk=request.user.id
+        )
+        .filter(course__id=id)
+        .filter(course__semester=current_semester)
+    )
+
+
 @login_required
 @lecturer_required
 def add_score_for(request, id):
@@ -89,13 +105,7 @@ def add_score_for(request, id):
         #  course__id=id).filter(
         #  student__allocated_student__lecturer__pk=request.user.id).filter(
         #  course__semester=current_semester)
-        students = (
-            TakenCourse.objects.filter(
-                course__allocated_course__lecturer__pk=request.user.id
-            )
-            .filter(course__id=id)
-            .filter(course__semester=current_semester)
-        )
+        students = _alumnos_del_curso(id, request, current_semester)
         context = {
             "title": "Submit Score",
             "courses": courses,
@@ -108,23 +118,17 @@ def add_score_for(request, id):
         return render(request, "result/add_score_for.html", context)
 
     if request.method == "POST":
-        ids = ()
         data = request.POST.copy()
         data.pop("csrfmiddlewaretoken", None)  # remove csrf_token
-        for key in data.keys():
-            ids = ids + (
-                str(key),
-            )  # gather all the all students id (i.e the keys) in a tuple
-        for s in range(
-            0, len(ids)
-        ):  # iterate over the list of student ids gathered above
-            student = TakenCourse.objects.get(id=ids[s])
+        for obj in _alumnos_del_curso(id, request, current_semester).filter(
+            pk__in=list(data.keys())
+        ):
             # print(student)
             # print(student.student)
             # print(student.student.program.id)
             courses = (
-                Course.objects.filter(level=student.student.level)
-                .filter(program__pk=student.student.program.id)
+                Course.objects.filter(level=obj.student.level)
+                .filter(program__pk=obj.student.program.id)
                 .filter(semester=current_semester)
             )  # all courses of a specific level in current semester
             total_credit_in_semester = 0
@@ -133,7 +137,7 @@ def add_score_for(request, id):
                     break
                 total_credit_in_semester += int(i.credit)
             score = data.getlist(
-                ids[s]
+                str(obj.pk)
             )  # get list of score for current student in the loop
             assignment = score[
                 0
@@ -142,7 +146,6 @@ def add_score_for(request, id):
             quiz = score[2]
             attendance = score[3]
             final_exam = score[4]
-            obj = TakenCourse.objects.get(pk=ids[s])  # get the current student data
             obj.assignment = assignment  # set current student assignment score
             obj.mid_exam = mid_exam  # set current student mid_exam score
             obj.quiz = quiz  # set current student quiz score
@@ -165,21 +168,21 @@ def add_score_for(request, id):
 
             try:
                 a = Result.objects.get(
-                    student=student.student,
+                    student=obj.student,
                     semester=current_semester,
                     session=current_session,
-                    level=student.student.level,
+                    level=obj.student.level,
                 )
                 a.gpa = gpa
                 a.cgpa = cgpa
                 a.save()
             except:
                 Result.objects.get_or_create(
-                    student=student.student,
+                    student=obj.student,
                     gpa=gpa,
                     semester=current_semester,
                     session=current_session,
-                    level=student.student.level,
+                    level=obj.student.level,
                 )
 
             # try:
