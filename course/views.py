@@ -7,6 +7,7 @@ from django.http import FileResponse, Http404
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
 from django.utils.decorators import method_decorator
+from django.views.decorators.http import require_POST
 from django.views.generic import CreateView
 from django_filters.views import FilterView
 
@@ -556,6 +557,7 @@ def course_registration(request):
         return render(request, "course/course_registration.html", context)
 
 
+@require_POST
 @login_required
 @student_required
 def course_drop(request):
