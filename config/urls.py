@@ -25,7 +25,10 @@ urlpatterns += i18n_patterns(
     path("result/", include("result.urls")),
     path("search/", include("search.urls")),
     path("quiz/", include("quiz.urls")),
-    path("payments/", include("payments.urls")),
+    # payments: app sin usar (andamiaje de Stripe/gopay, sin enlaces en la UI y
+    # sin verificar el pago). Desvinculada para no exponer facturas ni un POST
+    # que marcaba la factura como pagada. Se revive montando la ruta de nuevo.
+    # path("payments/", include("payments.urls")),
 )
 
 

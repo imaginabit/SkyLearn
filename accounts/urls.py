@@ -25,7 +25,6 @@ from .views import (
     edit_student_program,
     ParentAdd,
     validate_username,
-    register,
     render_lecturer_pdf_list,  # new
     render_student_pdf_list,  # new
 )
@@ -55,7 +54,11 @@ urlpatterns = [
     ),
     path("parents/add/", ParentAdd.as_view(), name="add_parent"),
     path("ajax/validate-username/", validate_username, name="validate_username"),
-    path("register/", register, name="register"),
+    # Alta de alumno: la hace el administrador (student_add_view), que además
+    # registra el consentimiento en su nombre. El registro público quedaba
+    # desvinculado porque dejaba elegir programa y nivel, y con eso matricularse
+    # en cualquier curso. Se revive montando la ruta de nuevo.
+    # path("register/", register, name="register"),
     # paths to pdf
     path(
         "create_lecturers_pdf_list/", render_lecturer_pdf_list, name="lecturer_list_pdf"
