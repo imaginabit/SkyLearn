@@ -1,12 +1,17 @@
+import tempfile
+
 from django.contrib.auth import get_user_model
+from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import TestCase
 from django.urls import reverse
 
 from accounts.models import Student
+from core.models import Semester, Session
 from course.models import (
     Course,
     CourseAllocation,
     Program,
+    Submission,
     Upload,
     UploadVideo,
 )
@@ -141,3 +146,144 @@ class MaterialDeCursoAuthorizationTests(TestCase):
 
         self.assertEqual(response.status_code, 405)
         self.assertTrue(Upload.objects.filter(pk=self.fichero.pk).exists())
+
+
+class MatriculaTests(TestCase):
+    """Solo se puede matricular en los cursos que le tocan.
+
+    El POST cogia los ids del POST tal cual (`Course.objects.get(pk=ids[s])`),
+    con lo que servia mandar cualquier curso del mundo y crear la matricula a
+    mano, y `create` permitia repetirla.
+    """
+
+    def setUp(self):
+        Session.objects.create(session="2026-2027", is_current_session=True)
+        self.semester = Semester.objects.create(
+            semester="First", is_current_semester=True, session=Session.objects.first()
+        )
+        self.program = Program.objects.create(title="Programa propio")
+        self.program_ajeno = Program.objects.create(title="Programa ajeno")
+        self.curso = self._curso("MIO-1", self.program)
+        self.curso_ajeno = self._curso("AJENO-1", self.program_ajeno)
+        self.curso_ajeno_nivel = self._curso("AJENO-2", self.program, level="Master")
+        alumno = User.objects.create_user(
+            username="tmp-alumno", password="password", is_student=True
+        )
+        self.student = Student.objects.create(
+            student=alumno, level="Bachelor", program=self.program
+        )
+        self.url = reverse("course_registration")
+
+    def _curso(self, code, program, level="Bachelor"):
+        return Course.objects.create(
+            title="Curso %s" % code,
+            code=code,
+            program=program,
+            level=level,
+            year=1,
+            semester="First",
+        )
+
+    def test_se_matricula_en_un_curso_de_su_programa_y_nivel(self):
+        self.client.force_login(self.student.student)
+
+        response = self.client.post(self.url, {str(self.curso.pk): "1"})
+
+        self.assertEqual(response.status_code, 302)
+        self.assertTrue(
+            TakenCourse.objects.filter(student=self.student, course=self.curso).exists()
+        )
+
+    def test_no_se_matricula_en_un_curso_de_otro_programa(self):
+        self.client.force_login(self.student.student)
+
+        response = self.client.post(self.url, {str(self.curso_ajeno.pk): "1"})
+
+        self.assertEqual(response.status_code, 302)
+        self.assertFalse(
+            TakenCourse.objects.filter(
+                student=self.student, course=self.curso_ajeno
+            ).exists()
+        )
+
+    def test_no_se_matricula_en_un_curso_de_otro_nivel(self):
+        self.client.force_login(self.student.student)
+
+        self.client.post(self.url, {str(self.curso_ajeno_nivel.pk): "1"})
+
+        self.assertFalse(
+            TakenCourse.objects.filter(
+                student=self.student, course=self.curso_ajeno_nivel
+            ).exists()
+        )
+
+    def test_no_repite_la_misma_matricula(self):
+        self.client.force_login(self.student.student)
+
+        self.client.post(self.url, {str(self.curso.pk): "1"})
+        self.client.post(self.url, {str(self.curso.pk): "1"})
+
+        self.assertEqual(TakenCourse.objects.filter(student=self.student).count(), 1)
+
+
+class EntregaTests(TestCase):
+    """Solo se entrega si hay matricula en el curso."""
+
+    def setUp(self):
+        self.program = Program.objects.create(title="Programa de prueba")
+        self.curso = Course.objects.create(
+            title="Curso de prueba",
+            code="MIO-1",
+            program=self.program,
+            level="Bachelor",
+            year=1,
+            semester="First",
+        )
+        self.actividad = Upload.objects.create(
+            title="Actividad 1",
+            course=self.curso,
+            file="actividad.pdf",
+            is_activity=True,
+        )
+        alumno = User.objects.create_user(
+            username="tmp-alumno", password="password", is_student=True
+        )
+        self.student = Student.objects.create(
+            student=alumno, level="Bachelor", program=self.program
+        )
+        self.url = reverse("course_detail", kwargs={"slug": self.curso.slug})
+
+    def _entrega(self):
+        with tempfile.TemporaryDirectory() as media:
+            with self.settings(MEDIA_ROOT=media):
+                return self.client.post(
+                    self.url,
+                    {
+                        "document": self.actividad.pk,
+                        "file": SimpleUploadedFile("trabajo.pdf", b"%PDF-1.4"),
+                    },
+                )
+
+    def test_entrega_con_matricula(self):
+        TakenCourse.objects.create(student=self.student, course=self.curso)
+        self.client.force_login(self.student.student)
+
+        response = self._entrega()
+
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(Submission.objects.count(), 1)
+
+    def test_no_entrega_sin_matricula(self):
+        self.client.force_login(self.student.student)
+
+        response = self._entrega()
+
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(Submission.objects.count(), 0)
+
+    def test_no_muestra_el_formulario_sin_matricula(self):
+        self.client.force_login(self.student.student)
+
+        html = self.client.get(self.url).content.decode()
+
+        self.assertNotIn("Enviar mi entrega", html)

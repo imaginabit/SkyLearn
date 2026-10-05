@@ -131,15 +131,23 @@ def course_single(request, slug):
     videos = UploadVideo.objects.filter(course__slug=slug)
     lecturers = CourseAllocation.objects.filter(courses__pk=course.id)
     is_editor = request.user.is_lecturer or request.user.is_superuser
+    # solo se entrega si hay matricula: antes cualquier cuenta que entraba
+    # podia entregar en cualquier curso
+    matriculado = TakenCourse.objects.filter(
+        student__student=request.user, course=course
+    ).exists()
     # el mazo de diapositivas, si lo hay: se muestra embebido arriba del curso
     deck = next(
         (f for f in files if f.file.name.lower().endswith(".html")), None
     )
 
     if request.method == "POST":
-        # ponytail: entrega el alumno; el profesor solo revisa la tabla de abajo
+        # ponytail: entrega del alumno; el profesor solo revisa la tabla de abajo
         if is_editor:
             messages.error(request, "Solo los alumnos pueden entregar trabajos.")
+            return redirect("course_detail", slug=slug)
+        if not matriculado:
+            messages.error(request, "No estas matriculado en este curso.")
             return redirect("course_detail", slug=slug)
         form = SubmissionForm(request.POST, request.FILES, course=course)
         if form.is_valid():
@@ -155,7 +163,7 @@ def course_single(request, slug):
             return redirect("course_detail", slug=slug)
         messages.error(request, "Revisa los errores del formulario.")
     else:
-        form = SubmissionForm(course=course)
+        form = SubmissionForm(course=course) if matriculado else None
 
     my_submissions = None
     submissions = None
@@ -490,16 +498,24 @@ def handle_video_delete(request, slug, video_slug):
 @student_required
 def course_registration(request):
     if request.method == "POST":
-        student = Student.objects.get(student__pk=request.user.id)
-        ids = ()
+        student = get_object_or_404(Student, student__pk=request.user.id)
+        current_semester = Semester.objects.filter(is_current_semester=True).first()
+        if not current_semester:
+            messages.error(request, "No active semester found.")
+            return render(request, "course/course_registration.html")
+
         data = request.POST.copy()
         data.pop("csrfmiddlewaretoken", None)  # remove csrf_token
-        for key in data.keys():
-            ids = ids + (str(key),)
-        for s in range(0, len(ids)):
-            course = Course.objects.get(pk=ids[s])
-            obj = TakenCourse.objects.create(student=student, course=course)
-            obj.save()
+        # antes cogia los ids del POST tal cual (Course.objects.get) y admitia
+        # cualquier curso del mundo; ahora solo los de su programa, nivel y
+        # semestre, que es lo mismo que le ofrecian en el formulario
+        cursos = Course.objects.filter(
+            program__pk=student.program_id,
+            level=student.level,
+            semester=current_semester,
+        ).filter(pk__in=list(data.keys()))
+        for course in cursos:
+            TakenCourse.objects.get_or_create(student=student, course=course)
         messages.success(request, "Courses registered successfully!")
         return redirect("course_registration")
     else:
@@ -517,7 +533,7 @@ def course_registration(request):
 
         courses = (
             Course.objects.filter(
-                program__pk=student.program.id,
+                program__pk=student.program_id,
                 level=student.level,
                 semester=current_semester,
             )
@@ -525,7 +541,7 @@ def course_registration(request):
             .order_by("year")
         )
         all_courses = Course.objects.filter(
-            level=student.level, program__pk=student.program.id
+            level=student.level, program__pk=student.program_id
         )
 
         no_course_is_registered = False  # Check if no course is registered
