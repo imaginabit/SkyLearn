@@ -169,16 +169,7 @@ def add_score_for(request, id):
             for campo, valor in fila.items():
                 setattr(obj, campo, valor)
 
-            obj.total = obj.get_total()
-            obj.grade = obj.get_grade()
-
-            # obj.total = obj.get_total(assignment, mid_exam, quiz, attendance, final_exam)
-            # obj.grade = obj.get_grade(assignment, mid_exam, quiz, attendance, final_exam)
-
-            obj.point = obj.get_point()
-            obj.comment = obj.get_comment()
-            # obj.carry_over(obj.grade)
-            # obj.is_repeating()
+            # total, grade, point y comment los recalcula TakenCourse.save()
             obj.save()
             gpa = obj.calculate_gpa()
             cgpa = obj.calculate_cgpa()
