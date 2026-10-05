@@ -1,3 +1,5 @@
+from decimal import Decimal, InvalidOperation
+
 from django.shortcuts import render, get_object_or_404
 from django.contrib import messages
 from django.http import HttpResponseRedirect
@@ -65,6 +67,29 @@ def add_score(request):
     return render(request, "result/add_score.html", context)
 
 
+CAMPOS_NOTA = ("assignment", "mid_exam", "quiz", "attendance", "final_exam")
+
+
+def _notas_del_post(data, matricula):
+    """Las 5 notas de una fila del POST ya validadas, o None si no valen.
+
+    La escala no se inventa: la fija `TakenCourse.get_grade()`, que reparte de 0
+    a 100 (GRADE_BOUNDARIES). Antes estas notas iban en crudo al DecimalField y
+    con un valor no numerico la pagina de notas reventaba al leerlos, para
+    todos los que miraran a ese alumno.
+    """
+    valores = data.getlist(str(matricula.pk))
+    if len(valores) != len(CAMPOS_NOTA):
+        return None
+    try:
+        notas = [Decimal(v) for v in valores]
+    except (InvalidOperation, TypeError, ValueError):
+        return None
+    if any(n < 0 for n in notas) or sum(notas) > 100:
+        return None
+    return dict(zip(CAMPOS_NOTA, notas))
+
+
 def _alumnos_del_curso(id, request, current_semester):
     """Alumnos de un curso a los que este docente puede poner notas.
 
@@ -120,27 +145,29 @@ def add_score_for(request, id):
     if request.method == "POST":
         data = request.POST.copy()
         data.pop("csrfmiddlewaretoken", None)  # remove csrf_token
-        for obj in _alumnos_del_curso(id, request, current_semester).filter(
+        matrices = _alumnos_del_curso(id, request, current_semester).filter(
             pk__in=list(data.keys())
-        ):
-            # print(student)
-            # print(student.student)
-            # print(student.student.program.id)
-            score = data.getlist(
-                str(obj.pk)
-            )  # get list of score for current student in the loop
-            assignment = score[
-                0
-            ]  # subscript the list to get the fisrt value > ca score
-            mid_exam = score[1]  # do the same for exam score
-            quiz = score[2]
-            attendance = score[3]
-            final_exam = score[4]
-            obj.assignment = assignment  # set current student assignment score
-            obj.mid_exam = mid_exam  # set current student mid_exam score
-            obj.quiz = quiz  # set current student quiz score
-            obj.attendance = attendance  # set current student attendance score
-            obj.final_exam = final_exam  # set current student final_exam score
+        )
+
+        # primero se validan todas las filas y despues se guardan, para que un
+        # dato malo no deje la mitad de las notas puestas y la otra mitad no
+        notas = []
+        for obj in matrices:
+            fila = _notas_del_post(data, obj)
+            if fila is None:
+                messages.error(
+                    request,
+                    "Las notas tienen que ser numeros, no negativos y cuya suma "
+                    "no pase de 100. No se ha guardado nada.",
+                )
+                return HttpResponseRedirect(
+                    reverse_lazy("add_score_for", kwargs={"id": id})
+                )
+            notas.append((obj, fila))
+
+        for obj, fila in notas:
+            for campo, valor in fila.items():
+                setattr(obj, campo, valor)
 
             obj.total = obj.get_total()
             obj.grade = obj.get_grade()
