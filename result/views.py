@@ -126,16 +126,6 @@ def add_score_for(request, id):
             # print(student)
             # print(student.student)
             # print(student.student.program.id)
-            courses = (
-                Course.objects.filter(level=obj.student.level)
-                .filter(program__pk=obj.student.program.id)
-                .filter(semester=current_semester)
-            )  # all courses of a specific level in current semester
-            total_credit_in_semester = 0
-            for i in courses:
-                if i == courses.count():
-                    break
-                total_credit_in_semester += int(i.credit)
             score = data.getlist(
                 str(obj.pk)
             )  # get list of score for current student in the loop
