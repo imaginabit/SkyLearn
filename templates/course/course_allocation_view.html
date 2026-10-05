@@ -50,9 +50,7 @@
                     <a href="{% url 'edit_allocated_course' pk=course.pk %}" class="update" title="{% trans 'Edit or Update' %}">
                         <i class="fas fa-edit"></i>
                     </a>
-                    <a href="{% url 'course_deallocate' pk=course.pk %}" class="delete" title="{% trans 'Deallocate' %}">
-                        <i class="fas fa-trash-alt"></i>
-                    </a>
+                    {% url 'course_deallocate' pk=course.pk as borrar_url %}{% trans 'Deallocate' as label %}{% include "snippets/delete_form.html" with url=borrar_url clase="border-0 bg-transparent p-0 align-baseline" titulo=label etiqueta="" %}
                     </div>
                 </td>
                 {% endif %}

@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.db import transaction
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils.decorators import method_decorator
+from django.views.decorators.http import require_POST
 from django.views.generic import (
     CreateView,
     DetailView,
@@ -83,6 +84,7 @@ class QuizUpdateView(UpdateView):
             return redirect("quiz_index", self.kwargs["slug"])
 
 
+@require_POST
 @login_required
 @lecturer_required
 def quiz_delete(request, slug, pk):

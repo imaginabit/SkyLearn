@@ -108,7 +108,7 @@ class MaterialDeCursoAuthorizationTests(TestCase):
     def test_docente_de_otro_curso_no_borra_el_fichero(self):
         self.client.force_login(self.docente_ajeno)
 
-        response = self.client.get(self.url_fichero)
+        response = self.client.post(self.url_fichero)
 
         self.assertEqual(response.status_code, 404)
         self.assertTrue(Upload.objects.filter(pk=self.fichero.pk).exists())
@@ -116,7 +116,7 @@ class MaterialDeCursoAuthorizationTests(TestCase):
     def test_docente_de_otro_curso_no_borra_el_video(self):
         self.client.force_login(self.docente_ajeno)
 
-        response = self.client.get(self.url_video)
+        response = self.client.post(self.url_video)
 
         self.assertEqual(response.status_code, 404)
         self.assertTrue(UploadVideo.objects.filter(pk=self.video.pk).exists())
@@ -124,11 +124,20 @@ class MaterialDeCursoAuthorizationTests(TestCase):
     def test_docente_asignado_borra_el_fichero(self):
         self.client.force_login(self.docente)
 
-        self.assertEqual(self.client.get(self.url_fichero).status_code, 302)
+        self.assertEqual(self.client.post(self.url_fichero).status_code, 302)
         self.assertFalse(Upload.objects.filter(pk=self.fichero.pk).exists())
 
     def test_superusuario_sigue_pudiendo_borrar(self):
         self.client.force_login(self.admin)
 
-        self.assertEqual(self.client.get(self.url_video).status_code, 302)
+        self.assertEqual(self.client.post(self.url_video).status_code, 302)
         self.assertFalse(UploadVideo.objects.filter(pk=self.video.pk).exists())
+
+    def test_borrar_por_get_no_hace_nada(self):
+        # era un enlace <a href>: un GET bastaba para destruir
+        self.client.force_login(self.docente)
+
+        response = self.client.get(self.url_fichero)
+
+        self.assertEqual(response.status_code, 405)
+        self.assertTrue(Upload.objects.filter(pk=self.fichero.pk).exists())

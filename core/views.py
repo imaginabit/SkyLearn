@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
+from django.views.decorators.http import require_POST
 
 from accounts.decorators import admin_required, lecturer_required
 from accounts.models import User, Student
@@ -100,6 +101,7 @@ def edit_post(request, pk):
     return render(request, "core/post_add.html", {"title": "Edit Post", "form": form})
 
 
+@require_POST
 @login_required
 @lecturer_required
 def delete_post(request, pk):
@@ -155,6 +157,7 @@ def session_update_view(request, pk):
     return render(request, "core/session_update.html", {"form": form})
 
 
+@require_POST
 @login_required
 @lecturer_required
 def session_delete_view(request, pk):
@@ -220,6 +223,7 @@ def semester_update_view(request, pk):
     return render(request, "core/semester_update.html", {"form": form})
 
 
+@require_POST
 @login_required
 @lecturer_required
 def semester_delete_view(request, pk):

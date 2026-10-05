@@ -108,6 +108,7 @@ def program_edit(request, pk):
     )
 
 
+@require_POST
 @login_required
 @lecturer_required
 def program_delete(request, pk):
@@ -270,6 +271,7 @@ def course_edit(request, slug):
     )
 
 
+@require_POST
 @login_required
 @lecturer_required
 def course_delete(request, slug):
@@ -338,6 +340,7 @@ def edit_allocated_course(request, pk):
     )
 
 
+@require_POST
 @login_required
 @lecturer_required
 def deallocate_course(request, pk):
@@ -395,6 +398,7 @@ def handle_file_edit(request, slug, file_id):
     )
 
 
+@require_POST
 @login_required
 @lecturer_required
 def handle_file_delete(request, slug, file_id):
@@ -465,6 +469,7 @@ def handle_video_edit(request, slug, video_slug):
     )
 
 
+@require_POST
 @login_required
 @lecturer_required
 def handle_video_delete(request, slug, video_slug):

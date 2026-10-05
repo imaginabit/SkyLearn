@@ -54,7 +54,7 @@
                             </button>
                             <ul class="dropdown-menu">
                               <li><a class="dropdown-item" href="{% url 'edit_program' pk=program.pk %}"><i class="unstyled me-2 fas fa-edit"></i>{% trans 'Update' %}</a></li>
-                              <li><a class="dropdown-item text-danger" href="{% url 'program_delete' pk=program.pk %}"><i class="unstyled me-2 fas fa-trash-alt"></i>{% trans 'Delete' %}</a></li>
+                              <li>{% url 'program_delete' pk=program.pk as borrar_url %}{% trans 'Delete' as label %}{% include "snippets/delete_form.html" with url=borrar_url clase="dropdown-item text-danger" titulo=label etiqueta=label icono="unstyled me-2 fas fa-trash-alt" %}</li>
                             </ul>
                         </div>
                     </td>

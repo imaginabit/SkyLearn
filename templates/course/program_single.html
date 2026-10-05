@@ -81,9 +81,7 @@
                                 <a class="dropdown-item" href="{% url 'edit_course' slug=course.slug %}">
                                     <i class="unstyled me-2 fas fa-pencil-alt"></i> {% trans 'Edit' %}
                                 </a>
-                                <a class="dropdown-item" href="{% url 'delete_course' slug=course.slug %}">
-                                    <i class="unstyled me-2 fas fa-trash-alt"></i> {% trans 'Delete' %}
-                                </a>
+                                {% url 'delete_course' slug=course.slug as borrar_url %}{% trans 'Delete' as label %}{% include "snippets/delete_form.html" with url=borrar_url clase="dropdown-item" titulo=label etiqueta=label icono="unstyled me-2 fas fa-trash-alt" %}
                             </div>
                         </div>
                     </td>

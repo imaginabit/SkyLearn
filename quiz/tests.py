@@ -44,7 +44,7 @@ class QuizDeleteAuthorizationTests(TestCase):
     def test_docente_de_otro_curso_no_borra_el_quiz(self):
         self.client.force_login(self.docente_ajeno)
 
-        response = self.client.get(self.url)
+        response = self.client.post(self.url)
 
         self.assertEqual(response.status_code, 404)
         self.assertTrue(Quiz.objects.filter(pk=self.quiz.pk).exists())
@@ -52,5 +52,14 @@ class QuizDeleteAuthorizationTests(TestCase):
     def test_docente_asignado_borra_el_quiz(self):
         self.client.force_login(self.docente)
 
-        self.assertEqual(self.client.get(self.url).status_code, 302)
+        self.assertEqual(self.client.post(self.url).status_code, 302)
         self.assertFalse(Quiz.objects.filter(pk=self.quiz.pk).exists())
+
+    def test_borrar_por_get_no_hace_nada(self):
+        # era un enlace <a href>: un GET bastaba para destruir
+        self.client.force_login(self.docente)
+
+        response = self.client.get(self.url)
+
+        self.assertEqual(response.status_code, 405)
+        self.assertTrue(Quiz.objects.filter(pk=self.quiz.pk).exists())

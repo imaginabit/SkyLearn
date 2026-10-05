@@ -6,6 +6,7 @@ from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.template.loader import get_template, render_to_string
 from django.utils.decorators import method_decorator
+from django.views.decorators.http import require_POST
 from django.views.generic import CreateView
 from django_filters.views import FilterView
 from xhtml2pdf import pisa
@@ -282,6 +283,7 @@ def render_lecturer_pdf_list(request):
     return response
 
 
+@require_POST
 @login_required
 @admin_required
 def delete_staff(request, pk):
@@ -371,6 +373,7 @@ def render_student_pdf_list(request):
     return response
 
 
+@require_POST
 @login_required
 @admin_required
 def delete_student(request, pk):

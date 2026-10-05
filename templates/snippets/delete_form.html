@@ -1,0 +1,14 @@
+{% comment %}
+Borrar por POST. Antes era un <a href> y Django no exige POST para destruir:
+un enlace de correo o de una imagen ajena bastaba para borrar.
+
+Quien lo llama resuelve la URL con {% url ... as borrar_url %} porque cada
+sitio pasa sus argumentos, y pasa la clase para que el boton siga teniendo el
+aspecto que tenía el enlace.
+{% endcomment %}
+<form action="{{ url }}" method="POST" class="d-inline">
+  {% csrf_token %}
+  <button type="submit" class="{{ clase }}" title="{{ titulo }}">
+    <i class="{{ icono|default:'fas fa-trash-alt' }}"></i>{% if etiqueta %} {{ etiqueta }}{% endif %}
+  </button>
+</form>
