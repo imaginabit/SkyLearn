@@ -196,7 +196,9 @@ def add_score_for(request, id):
 @login_required
 @student_required
 def grade_result(request):
-    student = Student.objects.get(student__pk=request.user.id)
+    # get_object_or_404 y no get: si el alumno no tiene fila Student, esto era
+    # un 500 en vez de un 404 (pasa si el alta quedo a medias)
+    student = get_object_or_404(Student, student__pk=request.user.id)
     courses = TakenCourse.objects.filter(student__student__pk=request.user.id).filter(
         course__level=student.level
     )
@@ -252,7 +254,9 @@ def grade_result(request):
 @login_required
 @student_required
 def assessment_result(request):
-    student = Student.objects.get(student__pk=request.user.id)
+    # get_object_or_404 y no get: si el alumno no tiene fila Student, esto era
+    # un 500 en vez de un 404 (pasa si el alta quedo a medias)
+    student = get_object_or_404(Student, student__pk=request.user.id)
     courses = TakenCourse.objects.filter(
         student__student__pk=request.user.id, course__level=student.level
     )
@@ -497,7 +501,9 @@ def course_registration_form(request):
     title = "<b><u>STUDENT COURSE REGISTRATION FORM</u></b>"
     title = Paragraph(title.upper(), normal)
     Story.append(title)
-    student = Student.objects.get(student__pk=request.user.id)
+    # get_object_or_404 y no get: si el alumno no tiene fila Student, esto era
+    # un 500 en vez de un 404 (pasa si el alta quedo a medias)
+    student = get_object_or_404(Student, student__pk=request.user.id)
 
     tbl_data = [
         [
@@ -706,7 +712,9 @@ def course_registration_form(request):
     certification.fontName = "Helvetica"
     certification.fontSize = 8
     certification.leading = 18
-    student = Student.objects.get(student__pk=request.user.id)
+    # get_object_or_404 y no get: si el alumno no tiene fila Student, esto era
+    # un 500 en vez de un 404 (pasa si el alta quedo a medias)
+    student = get_object_or_404(Student, student__pk=request.user.id)
     certification_text = (
         "CERTIFICATION OF REGISTRATION: I certify that <b>"
         + str(request.user.get_full_name.upper())

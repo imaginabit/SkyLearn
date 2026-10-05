@@ -5,6 +5,7 @@ from django.test import TestCase
 from django.urls import reverse
 
 from accounts.models import Student
+from core.models import Session
 from core.models import Semester, Session
 from course.models import Course, CourseAllocation, Program
 from result.models import TakenCourse
@@ -86,3 +87,25 @@ class AddScoreForAuthorizationTests(TestCase):
         self.assertEqual(response.status_code, 302)
         self.tc_propio.refresh_from_db()
         self.assertEqual(self.tc_propio.assignment, Decimal("1"))
+
+
+class AlumnoSinFichaTests(TestCase):
+    """Un alumno sin fila Student da 404, no 500.
+
+    Puede pasar si el alta quedo a medias: la cuenta existe con is_student pero
+    sin la ficha, y estas vistas reventaban con DoesNotExist.
+    """
+
+    def setUp(self):
+        Session.objects.create(session="2026-2027", is_current_session=True)
+        self.user = User.objects.create_user(
+            username="tmp-alumno", password="password", is_student=True
+        )
+        self.user = User.objects.get(pk=self.user.pk)
+
+    def test_las_paginas_de_notas_dan_404(self):
+        self.client.force_login(self.user)
+
+        for url in [reverse("grade_results"), reverse("ass_results")]:
+            with self.subTest(url=url):
+                self.assertEqual(self.client.get(url).status_code, 404)
