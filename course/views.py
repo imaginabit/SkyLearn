@@ -33,6 +33,7 @@ from course.models import (
     Upload,
     UploadVideo,
 )
+from course.utils import curso_asignado
 from result.models import TakenCourse
 
 
@@ -376,8 +377,8 @@ def handle_file_upload(request, slug):
 @login_required
 @lecturer_required
 def handle_file_edit(request, slug, file_id):
-    course = get_object_or_404(Course, slug=slug)
-    upload = get_object_or_404(Upload, pk=file_id)
+    course = curso_asignado(request, slug)
+    upload = get_object_or_404(Upload, pk=file_id, course=course)
     if request.method == "POST":
         form = UploadFormFile(request.POST, request.FILES, instance=upload)
         if form.is_valid():
@@ -397,7 +398,8 @@ def handle_file_edit(request, slug, file_id):
 @login_required
 @lecturer_required
 def handle_file_delete(request, slug, file_id):
-    upload = get_object_or_404(Upload, pk=file_id)
+    course = curso_asignado(request, slug)
+    upload = get_object_or_404(Upload, pk=file_id, course=course)
     title = upload.title
     upload.delete()
     messages.success(request, f"{title} has been deleted.")
@@ -445,8 +447,8 @@ def handle_video_single(request, slug, video_slug):
 @login_required
 @lecturer_required
 def handle_video_edit(request, slug, video_slug):
-    course = get_object_or_404(Course, slug=slug)
-    video = get_object_or_404(UploadVideo, slug=video_slug)
+    course = curso_asignado(request, slug)
+    video = get_object_or_404(UploadVideo, slug=video_slug, course=course)
     if request.method == "POST":
         form = UploadFormVideo(request.POST, request.FILES, instance=video)
         if form.is_valid():
@@ -466,7 +468,8 @@ def handle_video_edit(request, slug, video_slug):
 @login_required
 @lecturer_required
 def handle_video_delete(request, slug, video_slug):
-    video = get_object_or_404(UploadVideo, slug=video_slug)
+    course = curso_asignado(request, slug)
+    video = get_object_or_404(UploadVideo, slug=video_slug, course=course)
     title = video.title
     video.delete()
     messages.success(request, f"{title} has been deleted.")

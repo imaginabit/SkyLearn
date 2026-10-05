@@ -13,6 +13,7 @@ from django.views.generic import (
 )
 
 from accounts.decorators import lecturer_required
+from course.utils import curso_asignado
 from .forms import (
     EssayForm,
     MCQuestionForm,
@@ -85,7 +86,8 @@ class QuizUpdateView(UpdateView):
 @login_required
 @lecturer_required
 def quiz_delete(request, slug, pk):
-    quiz = get_object_or_404(Quiz, pk=pk)
+    course = curso_asignado(request, slug)
+    quiz = get_object_or_404(Quiz, pk=pk, course=course)
     quiz.delete()
     messages.success(request, "Quiz successfully deleted.")
     return redirect("quiz_index", slug=slug)
