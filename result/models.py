@@ -105,6 +105,17 @@ class TakenCourse(models.Model):
         choices=COMMENT_CHOICES, max_length=200, blank=True, editable=False
     )
 
+    class Meta:
+        constraints = [
+            # sin esto se puede matricular dos veces en el mismo curso, y cada
+            # fila cuenta para los credits y para el GPA (course_registration
+            # ahora usa get_or_create, pero el modelo no se fia de nadie)
+            models.UniqueConstraint(
+                fields=["student", "course"],
+                name="one_enrollment_per_student_and_course",
+            )
+        ]
+
     def get_absolute_url(self):
         return reverse("course_detail", kwargs={"slug": self.course.slug})
 

@@ -1,6 +1,7 @@
 from decimal import Decimal
 
 from django.contrib.auth import get_user_model
+from django.db import IntegrityError, transaction
 from django.test import TestCase
 from django.urls import reverse
 
@@ -204,3 +205,21 @@ class AlumnoSinFichaTests(TestCase):
         for url in [reverse("grade_results"), reverse("ass_results")]:
             with self.subTest(url=url):
                 self.assertEqual(self.client.get(url).status_code, 404)
+
+
+class MatriculaUnicaTests(_NotasEscenario, TestCase):
+    """No se puede matricular dos veces en el mismo curso.
+
+    Una matricula repetida cuenta dos veces para los credits y para el GPA, con
+    lo que descuadraba el expediente entero.
+    """
+
+    def setUp(self):
+        self._montar()
+
+    def test_no_admite_doble_matricula(self):
+        with self.assertRaises(IntegrityError):
+            with transaction.atomic():
+                TakenCourse.objects.create(
+                    student=self.tc_propio.student, course=self.curso
+                )
