@@ -25,10 +25,9 @@ este. El borrado es de un curso, no de la plataforma.
 from django.core.management.base import BaseCommand, CommandError
 from django.db import transaction
 
-from accounts.models import Student, User
+from accounts.models import User
 from course.models import Course
-from result.models import Result
-from quiz.models import Progress, Question, Sitting
+from quiz.models import Question
 
 
 class Command(BaseCommand):
