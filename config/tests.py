@@ -80,3 +80,16 @@ class PaginasConBorradoTests(TestCase):
         self.assertIn("csrfmiddlewaretoken", html)
         # lo que faltaba: que un GET (un enlace) bastara para borrar
         self.assertNotIn('href="%s"' % url_borrar, html)
+        # y que ademas pregunte antes, que esto no tiene vuelta atras
+        self.assertIn("onsubmit", html)
+        self.assertIn("confirm(", html)
+
+    def test_el_borrado_de_material_del_curso_pregunta_que_se_borra(self):
+        self.client.force_login(self.admin)
+
+        html = self.client.get(
+            reverse("course_detail", kwargs={"slug": self.course.slug})
+        ).content.decode()
+
+        self.assertIn("confirm(", html)
+        self.assertIn("¿Borrar esta actividad", html)

@@ -1,12 +1,18 @@
-{% comment %}
+{% load i18n %}{% comment %}
 Borrar por POST. Antes era un <a href> y Django no exige POST para destruir:
 un enlace de correo o de una imagen ajena bastaba para borrar.
 
 Quien lo llama resuelve la URL con {% url ... as borrar_url %} porque cada
 sitio pasa sus argumentos, y pasa la clase para que el boton siga teniendo el
 aspecto que tenía el enlace.
+
+El onsubmit pregunta antes de borrar: son cosas que no tienen vuelta atras
+(un curso, una cuenta, un fichero). Quien lo llama puede pasar `confirmar`
+con un texto mejor; el texto por defecto no lleva apostrofes porque va
+dentro de comillas simples en el javascript del onsubmit.
 {% endcomment %}
-<form action="{{ url }}" method="POST" class="d-inline">
+<form action="{{ url }}" method="POST" class="d-inline"
+      onsubmit="return confirm('{% if confirmar %}{{ confirmar }}{% else %}{% trans "¿Seguro que quieres borrar? Esta acción no se puede deshacer." %}{% endif %}');">
   {% csrf_token %}
   <button type="submit" class="{{ clase }}" title="{{ titulo }}">
     <i class="{{ icono|default:'fas fa-trash-alt' }}"></i>{% if etiqueta %} {{ etiqueta }}{% endif %}

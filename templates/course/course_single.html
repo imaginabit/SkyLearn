@@ -194,7 +194,7 @@
                                         class="update" title="{% trans 'Edit' %}">
                                         <i class="fas fa-pencil-alt"></i>
                                     </a>
-                                    {% url 'upload_video_delete' slug=course.slug video_slug=video.slug as borrar_url %}{% trans 'Delete' as label %}{% include "snippets/delete_form.html" with url=borrar_url clase="border-0 bg-transparent p-0 align-baseline" titulo=label etiqueta="" %}
+                                    {% url 'upload_video_delete' slug=course.slug video_slug=video.slug as borrar_url %}{% trans 'Delete' as label %}{% include "snippets/delete_form.html" with url=borrar_url clase="border-0 bg-transparent p-0 align-baseline" titulo=label etiqueta="" confirmar="¿Borrar este vídeo del curso? Esta acción no se puede deshacer." %}
                                 </div>
                             </td>
                             {% endif %}
@@ -268,7 +268,7 @@
                                         class="update" title="{% trans 'Edit' %}">
                                         <i class="fas fa-pencil-alt"></i>
                                     </a>
-                                    {% url 'upload_file_delete' slug=course.slug file_id=file.pk as borrar_url %}{% trans 'Delete' as label %}{% include "snippets/delete_form.html" with url=borrar_url clase="border-0 bg-transparent p-0 align-baseline" titulo=label etiqueta="" %}
+                                    {% url 'upload_file_delete' slug=course.slug file_id=file.pk as borrar_url %}{% trans 'Delete' as label %}{% include "snippets/delete_form.html" with url=borrar_url clase="border-0 bg-transparent p-0 align-baseline" titulo=label etiqueta="" confirmar="¿Borrar esta actividad y el fichero que tiene asociado? Esta acción no se puede deshacer." %}
                                 </div>
                             </td>
                             {% endif %}
