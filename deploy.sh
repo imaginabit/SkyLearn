@@ -26,6 +26,8 @@ EXCLUDES=(
   --exclude='.git/'
   --exclude='.env'
   --exclude='venv/'
+  # venv local de desarrollo (uv lo crea como .venv): sin esto se subia entero
+  --exclude='.venv/'
   --exclude='db.sqlite3'
   --exclude='db.sqlite3-journal'
   --exclude='media/'
