@@ -59,6 +59,11 @@ urlpatterns = [
         views.handle_file_delete,
         name="upload_file_delete",
     ),
+    path(
+        "course/<slug>/documentations/<int:file_id>/archivo/<int:archivo_id>/delete/",
+        views.handle_archivo_delete,
+        name="upload_archivo_delete",
+    ),
     # Video uploads urls
     path(
         "course/<slug>/video_tutorials/upload/",

@@ -8,13 +8,49 @@ from django.core.validators import (
 )
 from django.db import models
 from django.db.models import Q
-from django.db.models.signals import pre_save, post_delete, post_save
+from django.db.models.signals import pre_delete, pre_save, post_delete, post_save
 from django.dispatch import receiver
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
 from core.models import ActivityLog, Semester
 from core.utils import unique_slug_generator
+
+
+# Las extensiones que se admiten, para el fichero principal de una actividad y
+# para los adicionales. De aquí sale tambien el icono del fichero.
+EXTENSIONES = [
+    "pdf",
+    "docx",
+    "doc",
+    "odt",
+    "html",
+    "xls",
+    "xlsx",
+    "ppt",
+    "pptx",
+    "zip",
+    "rar",
+    "7zip",
+]
+
+ICONOS = {
+    "doc": "word",
+    "docx": "word",
+    "pdf": "pdf",
+    "xls": "excel",
+    "xlsx": "excel",
+    "ppt": "powerpoint",
+    "pptx": "powerpoint",
+    "zip": "archive",
+    "rar": "archive",
+    "7zip": "archive",
+}
+
+
+def extension_short(nombre):
+    """El nombre del icono de Font Awesome para un fichero, por su extensión."""
+    return ICONOS.get(nombre.rsplit(".", 1)[-1].lower(), "file")
 
 
 class ProgramManager(models.Manager):
@@ -134,24 +170,7 @@ class Upload(models.Model):
         help_text=_(
             "Valid Files: pdf, docx, doc, odt, html, xls, xlsx, ppt, pptx, zip, rar, 7zip"
         ),
-        validators=[
-            FileExtensionValidator(
-                [
-                    "pdf",
-                    "docx",
-                    "doc",
-                    "odt",
-                    "html",
-                    "xls",
-                    "xlsx",
-                    "ppt",
-                    "pptx",
-                    "zip",
-                    "rar",
-                    "7zip",
-                ]
-            )
-        ],
+        validators=[FileExtensionValidator(EXTENSIONES)],
     )
     updated_date = models.DateTimeField(auto_now=True)
     upload_time = models.DateTimeField(auto_now_add=True)
@@ -170,22 +189,45 @@ class Upload(models.Model):
         return f"{self.title}"
 
     def get_extension_short(self):
-        ext = self.file.name.split(".")[-1].lower()
-        if ext in ("doc", "docx"):
-            return "word"
-        elif ext == "pdf":
-            return "pdf"
-        elif ext in ("xls", "xlsx"):
-            return "excel"
-        elif ext in ("ppt", "pptx"):
-            return "powerpoint"
-        elif ext in ("zip", "rar", "7zip"):
-            return "archive"
-        return "file"
+        return extension_short(self.file.name)
 
-    def delete(self, *args, **kwargs):
-        self.file.delete(save=False)
-        super().delete(*args, **kwargs)
+
+class UploadFile(models.Model):
+    """Un fichero más de una actividad, que el alumno también puede bajar.
+
+    El principal sigue siendo `Upload.file`; estos son los adicionales: el
+    mismo documento en otro formato, el enunciado aparte, las capturas.
+    """
+
+    upload = models.ForeignKey(
+        Upload, on_delete=models.CASCADE, related_name="archivos"
+    )
+    file = models.FileField(
+        upload_to="course_files/",
+        help_text=_(
+            "Valid Files: pdf, docx, doc, odt, html, xls, xlsx, ppt, pptx, zip, rar, 7zip"
+        ),
+        validators=[FileExtensionValidator(EXTENSIONES)],
+    )
+
+    class Meta:
+        verbose_name = _("Fichero adicional")
+        verbose_name_plural = _("Ficheros adicionales")
+
+    def __str__(self):
+        return f"{self.upload.title}: {self.file.name}"
+
+    @property
+    def nombre(self):
+        """El nombre tal cual se sube, sin la carpeta de `MEDIA_ROOT`.
+
+        `file.name` lleva delante `course_files/` porque Django lo guarda ahí;
+        al alumno le interesa el nombre del fichero, no dónde se guarda.
+        """
+        return self.file.name.rsplit("/", 1)[-1]
+
+    def get_extension_short(self):
+        return extension_short(self.file.name)
 
 
 @receiver(post_save, sender=Upload)
@@ -199,6 +241,20 @@ def log_upload_save(sender, instance, created, **kwargs):
             f"The file '{instance.title}' of the course '{instance.course}' has been updated."
         )
     ActivityLog.objects.create(message=message)
+
+
+@receiver(pre_delete, sender=Upload)
+@receiver(pre_delete, sender=UploadFile)
+def borra_el_fichero_del_disco(sender, instance, **kwargs):
+    """Se borra el fichero de verdad, y no solo su fila.
+
+    Con el `delete()` reescrito en `Upload` el borrado en cascada (al borrar un
+    curso entero, o al borrar una actividad con sus archivos adicionales) se
+    llevaba por delante la fila y dejaba el fichero en el disco. Por eso la
+    limpieza va en `pre_delete` y no en un método: así salta por cualquier vía.
+    """
+    if instance.file:
+        instance.file.delete(save=False)
 
 
 @receiver(post_delete, sender=Upload)

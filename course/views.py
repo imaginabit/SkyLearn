@@ -31,6 +31,7 @@ from course.models import (
     Program,
     Submission,
     Upload,
+    UploadFile,
     UploadVideo,
 )
 from course.utils import curso_asignado
@@ -127,7 +128,9 @@ def program_delete(request, pk):
 @login_required
 def course_single(request, slug):
     course = get_object_or_404(Course, slug=slug)
-    files = Upload.objects.filter(course__slug=slug)
+    # prefetch de los ficheros adicionales: sin esto, la tabla del curso hace
+    # una consulta por actividad para listar sus .odt y .docx alternativos
+    files = Upload.objects.filter(course__slug=slug).prefetch_related("archivos")
     videos = UploadVideo.objects.filter(course__slug=slug)
     lecturers = CourseAllocation.objects.filter(courses__pk=course.id)
     is_editor = request.user.is_lecturer or request.user.is_superuser
@@ -137,9 +140,7 @@ def course_single(request, slug):
         student__student=request.user, course=course
     ).exists()
     # el mazo de diapositivas, si lo hay: se muestra embebido arriba del curso
-    deck = next(
-        (f for f in files if f.file.name.lower().endswith(".html")), None
-    )
+    deck = next((f for f in files if f.file.name.lower().endswith(".html")), None)
 
     if request.method == "POST":
         # ponytail: entrega del alumno; el profesor solo revisa la tabla de abajo
@@ -233,7 +234,12 @@ def submission_grade(request, slug, pk):
     return render(
         request,
         "course/submission_grade.html",
-        {"title": "Calificar entrega", "course": course, "submission": submission, "form": form},
+        {
+            "title": "Calificar entrega",
+            "course": course,
+            "submission": submission,
+            "form": form,
+        },
     )
 
 
@@ -373,6 +379,7 @@ def handle_file_upload(request, slug):
             upload = form.save(commit=False)
             upload.course = course
             upload.save()
+            form.guardar_archivos(upload)
             messages.success(request, f"{upload.title} has been uploaded.")
             return redirect("course_detail", slug=slug)
         messages.error(request, "Correct the error(s) below.")
@@ -394,6 +401,7 @@ def handle_file_edit(request, slug, file_id):
         form = UploadFormFile(request.POST, request.FILES, instance=upload)
         if form.is_valid():
             upload = form.save()
+            form.guardar_archivos(upload)
             messages.success(request, f"{upload.title} has been updated.")
             return redirect("course_detail", slug=slug)
         messages.error(request, "Correct the error(s) below.")
@@ -415,6 +423,20 @@ def handle_file_delete(request, slug, file_id):
     title = upload.title
     upload.delete()
     messages.success(request, f"{title} has been deleted.")
+    return redirect("course_detail", slug=slug)
+
+
+@require_POST
+@login_required
+@lecturer_required
+def handle_archivo_delete(request, slug, file_id, archivo_id):
+    """Borra un fichero adicional suelto, sin tocar el principal ni el resto."""
+    course = curso_asignado(request, slug)
+    upload = get_object_or_404(Upload, pk=file_id, course=course)
+    archivo = get_object_or_404(UploadFile, pk=archivo_id, upload=upload)
+    nombre = archivo.file.name
+    archivo.delete()
+    messages.success(request, f"{nombre} has been deleted.")
     return redirect("course_detail", slug=slug)
 
 

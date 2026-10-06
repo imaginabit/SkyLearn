@@ -1,5 +1,7 @@
+import os
 import tempfile
 
+from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import TestCase
@@ -13,11 +15,13 @@ from course.models import (
     Program,
     Submission,
     Upload,
+    UploadFile,
     UploadVideo,
 )
 from result.models import TakenCourse
 
 User = get_user_model()
+MEDIA_URL = settings.MEDIA_URL
 
 
 class CourseDropTests(TestCase):
@@ -287,3 +291,137 @@ class EntregaTests(TestCase):
         html = self.client.get(self.url).content.decode()
 
         self.assertNotIn("Enviar mi entrega", html)
+
+
+class ArchivosAdicionalesTests(TestCase):
+    """Una actividad lleva mas de un fichero: el .docx y el .odt, el enunciado
+    aparte, un .zip. El principal sigue siendo `Upload.file`; los demas son
+    filas de `UploadFile`, que el alumno tambien ve y puede bajar.
+
+    El servidor no tiene LibreOffice, asi que la conversion no se hace aqui:
+    el docente sube los dos formatos y el alumno elige.
+    """
+
+    def setUp(self):
+        self.program = Program.objects.create(title="Programa de prueba")
+        self.curso = Course.objects.create(
+            title="Curso con anexos",
+            code="MIO-2",
+            program=self.program,
+            level="Bachelor",
+            year=1,
+            semester="First",
+        )
+        self.docente = User.objects.create_user(
+            username="tmp-docente-anexos", password="password", is_lecturer=True
+        )
+        # el signal renombra la cuenta al crearla: hay que releerla
+        self.docente = User.objects.get(pk=self.docente.pk)
+        asignacion = CourseAllocation.objects.create(lecturer=self.docente)
+        asignacion.courses.set([self.curso])
+        self.url_subida = reverse("upload_file_view", kwargs={"slug": self.curso.slug})
+        self.url_curso = reverse("course_detail", kwargs={"slug": self.curso.slug})
+
+    def _sube(self, titulo="Actividad 1", archivos=None):
+        datos = {
+            "title": titulo,
+            "file": SimpleUploadedFile("guia.docx", b"PK\x03\x04"),
+        }
+        if archivos:
+            datos["archivos"] = [
+                SimpleUploadedFile(nombre, b"%PDF-1.4") for nombre in archivos
+            ]
+        with tempfile.TemporaryDirectory() as media:
+            with self.settings(MEDIA_ROOT=media):
+                self.client.force_login(self.docente)
+                response = self.client.post(self.url_subida, datos)
+                self.url_curso_html = self.client.get(self.url_curso).content.decode()
+        return response
+
+    def test_una_actividad_admite_varios_ficheros(self):
+        self._sube(archivos=["actividad.odt", "enunciado.pdf"])
+
+        self.assertEqual(Upload.objects.count(), 1)
+        self.assertEqual(
+            sorted(u.file.name.rsplit("/", 1)[-1] for u in UploadFile.objects.all()),
+            ["actividad.odt", "enunciado.pdf"],
+        )
+
+    def test_el_alumno_ve_y_puede_bajar_los_dos_formatos(self):
+        self._sube(archivos=["actividad.odt"])
+
+        html = self.url_curso_html
+
+        self.assertIn(f"{MEDIA_URL}course_files/actividad.odt", html)
+        self.assertIn(f"{MEDIA_URL}course_files/guia", html)
+
+    def test_editar_suma_ficheros_sin_tocar_el_principal(self):
+        self._sube(archivos=[])
+        upload = Upload.objects.get()
+        url_edicion = reverse(
+            "upload_file_edit",
+            kwargs={"slug": self.curso.slug, "file_id": upload.pk},
+        )
+        with tempfile.TemporaryDirectory() as media:
+            with self.settings(MEDIA_ROOT=media):
+                self.client.force_login(self.docente)
+                response = self.client.post(
+                    url_edicion,
+                    {
+                        "title": upload.title,
+                        "archivos": [SimpleUploadedFile("actividad.odt", b"%PDF-1.4")],
+                    },
+                )
+
+        self.assertEqual(response.status_code, 302)
+        self.assertTrue(upload.file.name.endswith("guia.docx"))
+        self.assertEqual(UploadFile.objects.count(), 1)
+
+    def test_borrar_la_actividad_borra_sus_ficheros_del_disco(self):
+        with tempfile.TemporaryDirectory() as media:
+            with self.settings(MEDIA_ROOT=media):
+                self.client.force_login(self.docente)
+                self.client.post(
+                    self.url_subida,
+                    {
+                        "title": "Actividad con anexos",
+                        "file": SimpleUploadedFile("guia.docx", b"PK\x03\x04"),
+                        "archivos": [SimpleUploadedFile("actividad.odt", b"%PDF-1.4")],
+                    },
+                )
+                upload = Upload.objects.get()
+                principal = upload.file.path
+                adicional = upload.archivos.get().file.path
+                self.assertTrue(os.path.exists(adicional))
+
+                url_borrado = reverse(
+                    "upload_file_delete",
+                    kwargs={"slug": self.curso.slug, "file_id": upload.pk},
+                )
+                self.client.post(url_borrado)
+
+                self.assertFalse(os.path.exists(principal))
+                self.assertFalse(os.path.exists(adicional))
+
+    def test_docente_de_otro_curso_no_borra_un_fichero_adicional(self):
+        self._sube(archivos=["actividad.odt"])
+        upload = Upload.objects.get()
+        archivo = upload.archivos.get()
+        ajeno = User.objects.create_user(
+            username="tmp-docente-ajeno-anexos", password="password", is_lecturer=True
+        )
+        ajeno = User.objects.get(pk=ajeno.pk)
+        url = reverse(
+            "upload_archivo_delete",
+            kwargs={
+                "slug": self.curso.slug,
+                "file_id": upload.pk,
+                "archivo_id": archivo.pk,
+            },
+        )
+
+        self.client.force_login(ajeno)
+        response = self.client.post(url)
+
+        self.assertEqual(response.status_code, 404)
+        self.assertTrue(UploadFile.objects.filter(pk=archivo.pk).exists())

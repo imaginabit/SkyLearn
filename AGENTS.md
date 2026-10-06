@@ -63,6 +63,12 @@ python manage.py collectstatic --noinput
 - `course.Upload` = actividad/material del curso; `course.Submission` = entrega del
   alumno (opcionalmente vinculada a un quiz). Entregar es subir un fichero, no
   hacer un quiz.
+- Una actividad puede llevar **varios ficheros**: `Upload.file` es el principal y
+  `UploadFile` (`Upload.archivos`, FK con `CASCADE`) son los adicionales — el mismo
+  documento en `.docx` y `.odt`, el enunciado aparte, un `.zip`. **El servidor no tiene
+  LibreOffice**: la conversión se hace en local y el docente sube los dos formatos.
+  Los ficheros se borran del disco en `pre_delete`, no en `Upload.delete()`, para que el
+  borrado en cascada no los deje huérfanos.
 
 ## Datos vivos y despliegue
 
