@@ -34,7 +34,7 @@ from course.models import (
     UploadFile,
     UploadVideo,
 )
-from course.utils import curso_asignado
+from course.utils import curso_asignado, deck_del_curso
 from result.models import TakenCourse
 
 
@@ -140,7 +140,7 @@ def course_single(request, slug):
         student__student=request.user, course=course
     ).exists()
     # el mazo de diapositivas, si lo hay: se muestra embebido arriba del curso
-    deck = next((f for f in files if f.file.name.lower().endswith(".html")), None)
+    deck = deck_del_curso(course)
 
     if request.method == "POST":
         # ponytail: entrega del alumno; el profesor solo revisa la tabla de abajo
@@ -212,6 +212,25 @@ def submission_download(request, slug, pk):
         submission.file.open("rb"),
         as_attachment=True,
         filename=submission.filename,
+    )
+
+
+@login_required
+def deck_download(request, slug):
+    """Descarga el mazo de diapositivas del curso como fichero adjunto.
+
+    `as_attachment` manda Content-Disposition: attachment, asi que el navegador
+    guarda el HTML en vez de abrirlo en una pestana. Es lo mismo que hace
+    submission_download con las entregas.
+    """
+    course = get_object_or_404(Course, slug=slug)
+    deck = deck_del_curso(course)
+    if deck is None:
+        raise Http404("Este curso no tiene presentacion")
+    return FileResponse(
+        deck.file.open("rb"),
+        as_attachment=True,
+        filename=deck.file.name.rsplit("/", 1)[-1],
     )
 
 

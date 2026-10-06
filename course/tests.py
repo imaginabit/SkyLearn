@@ -425,3 +425,84 @@ class ArchivosAdicionalesTests(TestCase):
 
         self.assertEqual(response.status_code, 404)
         self.assertTrue(UploadFile.objects.filter(pk=archivo.pk).exists())
+
+
+class DeckDownloadTests(TestCase):
+    """La presentacion se descarga como adjunto y no se abre en el navegador."""
+
+    def setUp(self):
+        self.program = Program.objects.create(title="Programa de prueba")
+        self.curso = Course.objects.create(
+            title="Curso de prueba",
+            code="MIO-1",
+            program=self.program,
+            level="Bachelor",
+            year=1,
+            semester="First",
+        )
+        self.url = reverse("deck_download", kwargs={"slug": self.curso.slug})
+
+    def _deck(self, media):
+        Upload.objects.create(
+            title="Presentacion del curso",
+            course=self.curso,
+            file=SimpleUploadedFile("presentacion.html", b"<html>mazo</html>"),
+        )
+
+    def test_404_si_el_curso_no_tiene_presentacion(self):
+        self.client.force_login(User.objects.create_user(username="tmp-lector", password="password"))
+
+        self.assertEqual(self.client.get(self.url).status_code, 404)
+
+    def test_devuelve_el_html_con_disposition_adjunto(self):
+        with tempfile.TemporaryDirectory() as media:
+            with self.settings(MEDIA_ROOT=media):
+                self._deck(media)
+                self.client.force_login(
+                    User.objects.create_user(username="tmp-lector", password="password")
+                )
+
+                response = self.client.get(self.url)
+
+                self.assertEqual(response.status_code, 200)
+                self.assertIn("attachment", response["Content-Disposition"])
+                self.assertIn("presentacion.html", response["Content-Disposition"])
+                self.assertEqual(b"".join(response.streaming_content), b"<html>mazo</html>")
+
+    def test_el_embed_y_la_descarga_coinciden_en_el_mismo_fichero(self):
+        # hay dos .html en el curso: la vista y la descarga tienen que teachcar
+        # el mismo, y no depender del orden en que salga la consulta
+        with tempfile.TemporaryDirectory() as media:
+            with self.settings(MEDIA_ROOT=media):
+                segunda = Upload.objects.create(
+                    title="Segunda presentacion",
+                    course=self.curso,
+                    file=SimpleUploadedFile("segunda.html", b"<html>segunda</html>"),
+                )
+                self._deck(media)
+                self.client.force_login(
+                    User.objects.create_user(username="tmp-lector", password="password")
+                )
+
+                pagina = self.client.get(
+                    reverse("course_detail", kwargs={"slug": self.curso.slug})
+                ).content.decode()
+                descarga = self.client.get(self.url)
+
+                self.assertIn(segunda.file.url, pagina)
+                self.assertIn(b"segunda", b"".join(descarga.streaming_content))
+
+    def test_la_pagina_muestra_el_boton_de_descarga(self):
+        with tempfile.TemporaryDirectory() as media:
+            with self.settings(MEDIA_ROOT=media):
+                self._deck(media)
+                self.client.force_login(
+                    User.objects.create_user(username="tmp-lector", password="password")
+                )
+
+                html = self.client.get(
+                    reverse("course_detail", kwargs={"slug": self.curso.slug})
+                ).content.decode()
+
+                self.assertIn(reverse("deck_download", kwargs={"slug": self.curso.slug}), html)
+                self.assertIn("Descargar HTML", html)

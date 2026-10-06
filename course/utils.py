@@ -1,6 +1,19 @@
 from django.shortcuts import get_object_or_404
 
-from .models import Course
+from .models import Course, Upload
+
+
+def deck_del_curso(curso):
+    """El mazo de diapositivas del curso, si tiene uno.
+
+    Se reconoce por extension (.html). Ordena por pk para que el embed y la
+    descarga cojan siempre el mismo fichero, y no uno distinto segun el dia.
+    """
+    return (
+        Upload.objects.filter(course=curso, file__iendswith=".html")
+        .order_by("pk")
+        .first()
+    )
 
 
 def curso_asignado(request, slug):
