@@ -107,6 +107,10 @@ class User(AbstractUser):
             role = _("Lecturer")
         elif self.is_parent:
             role = _("Parent")
+        else:
+            # sin esto, una cuenta sin ninguno de esos flags (un jefe de
+            # departamento, por ejemplo) reventaba con UnboundLocalError
+            role = _("User")
 
         return role
 
@@ -247,4 +251,3 @@ class ConsentRecord(models.Model):
 
     def __str__(self):
         return f"{self.user} aceptó la versión {self.version}"
-
