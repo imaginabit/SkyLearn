@@ -17,8 +17,10 @@ REMOTE="${SKYLEARN_REMOTE:-rocinante}"
 DEST="${SKYLEARN_DEST:-/opt/skylearn}"
 
 DRY=""
+ITEMIZE=""
 if [ "${1:-}" = "--dry-run" ]; then
   DRY="--dry-run"
+  ITEMIZE="--itemize-changes"
 fi
 
 # Rutas del servidor que se protegen (datos en vivo + especificos del servidor).
@@ -50,10 +52,13 @@ echo ">> Destino: ${REMOTE}:${DEST} ${DRY:+[dry-run]}"
 # (debian) y www-data pierde el permiso de escritura en /opt/skylearn; SQLite
 # necesita crear db.sqlite3-journal ahi y falla con "attempt to write a
 # readonly database" en la primera escritura.
-rsync -az --rsync-path="sudo rsync" --chown=www-data:www-data "${EXCLUDES[@]}" -e ssh "$SRC" "${REMOTE}:${DEST}/"
+# --dry-run va en el rsync: si no, el "simulacro" sincroniza igual y solo se
+# salta el migrate/restart, que es justo lo que hay que evitar.
+rsync -az ${DRY} ${ITEMIZE} --rsync-path="sudo rsync" --chown=www-data:www-data "${EXCLUDES[@]}" -e ssh "$SRC" "${REMOTE}:${DEST}/"
 
 if [ -n "$DRY" ]; then
-  echo ">> Dry-run: servidor intacto."
+  echo ">> Dry-run: servidor intacto. La lista de arriba es lo que se"
+  echo "   sincronizaria. Esto NO aplica migraciones ni reinicia el servicio."
   exit 0
 fi
 
