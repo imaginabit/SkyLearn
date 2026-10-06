@@ -251,3 +251,4 @@ class ConsentRecord(models.Model):
 
     def __str__(self):
         return f"{self.user} aceptó la versión {self.version}"
+
