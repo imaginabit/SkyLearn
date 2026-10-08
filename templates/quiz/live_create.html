@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %}{% trans "Nueva partida en vivo" %} | SkyLearn{% endblock title %}
+
+{% block content %}
+<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">{% trans 'Home' %}</a></li>
+        <li class="breadcrumb-item"><a href="{{ course.get_absolute_url }}">{{ course }}</a></li>
+        <li class="breadcrumb-item active" aria-current="page">{% trans "Partida en vivo" %}</li>
+    </ol>
+</nav>
+
+<div class="title-1">{% trans "Nueva partida en vivo" %} [{{ course|truncatechars:25 }}]</div>
+<br>
+{% include 'snippets/messages.html' %}
+
+{% if quizzes %}
+<div class="container">
+    <form method="post" class="card p-4">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label class="form-label">{% trans "Cuestionario" %}</label>
+            <select name="quiz" class="form-select" required>
+                {% for q in quizzes %}
+                <option value="{{ q.id }}">{{ q.title }} ({{ q.get_questions.count }} {% trans "preguntas" %})</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">{% trans "Número de preguntas (0 = todas)" %}</label>
+            <input type="number" name="cuantas" value="0" min="0" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">{% trans "Segundos por pregunta" %}</label>
+            <input type="number" name="time_limit" value="20" min="5" max="120" class="form-control">
+        </div>
+        <div>
+            <button type="submit" class="btn btn-primary"><i class="fas fa-play me-2"></i>{% trans "Crear partida" %}</button>
+        </div>
+    </form>
+</div>
+{% else %}
+<h4 class="text-center mt-5 py-5 text-muted">
+    <i class="fa-regular fa-folder-open me-2"></i> {% trans "Este curso no tiene cuestionarios todavía." %}
+</h4>
+{% endif %}
+{% endblock content %}

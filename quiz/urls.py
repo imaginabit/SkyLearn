@@ -20,5 +20,13 @@ urlpatterns = [
         views.MCQuestionCreate.as_view(),
         name="mc_create",
     ),
+    # Partidas en vivo (al estilo Kahoot)
+    path("live/create/<slug>/", views.live_create, name="live_create"),
+    path("live/join/", views.live_join, name="live_join"),
+    path("live/host/<str:code>/", views.live_host, name="live_host"),
+    path("live/play/<str:code>/", views.live_play, name="live_play"),
+    path("live/<str:code>/state/", views.live_state, name="live_state"),
+    path("live/<str:code>/action/", views.live_action, name="live_action"),
+    path("live/<str:code>/answer/", views.live_answer, name="live_answer"),
     # path('mc-question/add/<int:pk>/<quiz_pk>/', MCQuestionCreate.as_view(), name='mc_create'),
 ]

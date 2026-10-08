@@ -12,6 +12,7 @@ from django.db.models import Q
 from django.db.models.signals import pre_save
 from django.urls import reverse
 from django.utils.timezone import now
+from django.utils.crypto import get_random_string
 from django.utils.translation import gettext_lazy as _
 from django.dispatch import receiver
 from model_utils.managers import InheritanceManager
@@ -481,3 +482,140 @@ class EssayQuestion(Question):
 
     def answer_choice_to_string(self, guess):
         return str(guess)
+
+
+# ############################################################################
+# Partidas en vivo (al estilo Kahoot)
+# ############################################################################
+
+
+def _nuevo_codigo():
+    """Un código corto, sin letras ni cifras que se confunden al dictarlo."""
+    alfabeto = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"
+    while True:
+        code = get_random_string(6, alfabeto)
+        if not LiveSession.objects.filter(code=code).exists():
+            return code
+
+
+class LiveSession(models.Model):
+    """Una partida en vivo sobre las preguntas de opción múltiple de un quiz."""
+
+    ESTADOS = (
+        ("lobby", _("Sala de espera")),
+        ("question", _("Pregunta en curso")),
+        ("reveal", _("Respuesta y recuento")),
+        ("ranking", _("Clasificación")),
+        ("ended", _("Terminada")),
+    )
+
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
+    host = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    code = models.CharField(max_length=8, unique=True, blank=True)
+    state = models.CharField(max_length=10, choices=ESTADOS, default="lobby")
+    question_ids = models.CharField(max_length=4000, blank=True, default="")
+    current_index = models.PositiveIntegerField(default=0)
+    time_limit = models.PositiveIntegerField(default=20)
+    question_started = models.DateTimeField(null=True, blank=True)
+    created = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = _("Partida en vivo")
+        verbose_name_plural = _("Partidas en vivo")
+        ordering = ("-created",)
+
+    def __str__(self):
+        return f"{self.quiz} · {self.code}"
+
+    def save(self, *args, **kwargs):
+        if not self.code:
+            self.code = _nuevo_codigo()
+        super().save(*args, **kwargs)
+
+    def ids(self):
+        return [int(x) for x in self.question_ids.split(",") if x]
+
+    @property
+    def total(self):
+        return len(self.ids())
+
+    @property
+    def current_question(self):
+        ids = self.ids()
+        if not ids or self.current_index >= len(ids):
+            return None
+        return MCQuestion.objects.filter(pk=ids[self.current_index]).first()
+
+    @property
+    def seconds_left(self):
+        if self.state != "question" or not self.question_started:
+            return 0
+        restante = self.time_limit - (now() - self.question_started).total_seconds()
+        return max(0, int(round(restante)))
+
+    def empezar(self):
+        self.current_index = 0
+        self.question_started = now()
+        self.state = "question"
+        self.save()
+
+    def revelar(self):
+        self.state = "reveal"
+        self.save()
+
+    def avanzar(self):
+        """Pasa a la siguiente pregunta, o a la clasificación si era la última."""
+        self.current_index += 1
+        if self.current_index >= self.total:
+            self.state = "ranking"
+        else:
+            self.question_started = now()
+            self.state = "question"
+        self.save()
+
+    def terminar(self):
+        self.state = "ended"
+        self.save()
+
+
+class LiveParticipant(models.Model):
+    session = models.ForeignKey(
+        LiveSession, on_delete=models.CASCADE, related_name="participants"
+    )
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    nickname = models.CharField(max_length=40)
+    score = models.IntegerField(default=0)
+    joined = models.DateTimeField(auto_now_add=True)
+    last_seen = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        unique_together = ("session", "user")
+        verbose_name = _("Participante")
+        verbose_name_plural = _("Participantes")
+
+    def __str__(self):
+        return f"{self.nickname} ({self.session.code})"
+
+    def ha_respondido(self, question):
+        return bool(question) and self.answers.filter(question=question).exists()
+
+
+class LiveAnswer(models.Model):
+    participant = models.ForeignKey(
+        LiveParticipant, on_delete=models.CASCADE, related_name="answers"
+    )
+    question = models.ForeignKey(MCQuestion, on_delete=models.CASCADE)
+    choice = models.ForeignKey(Choice, on_delete=models.CASCADE)
+    correct = models.BooleanField(default=False)
+    seconds = models.FloatField(default=0)
+    points = models.IntegerField(default=0)
+    answered = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ("participant", "question")
+        verbose_name = _("Respuesta en vivo")
+        verbose_name_plural = _("Respuestas en vivo")
+
+    def __str__(self):
+        return f"{self.participant} · {self.question_id}"

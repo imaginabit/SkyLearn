@@ -13,6 +13,9 @@ from .models import (
     Choice,
     EssayQuestion,
     Sitting,
+    LiveSession,
+    LiveParticipant,
+    LiveAnswer,
 )
 
 
@@ -35,9 +38,9 @@ class QuizAdminForm(TranslationModelForm):
     def __init__(self, *args, **kwargs):
         super(QuizAdminForm, self).__init__(*args, **kwargs)
         if self.instance.pk:
-            self.fields["questions"].initial = (
-                self.instance.question_set.all().select_subclasses()
-            )
+            self.fields[
+                "questions"
+            ].initial = self.instance.question_set.all().select_subclasses()
 
     def save(self, commit=True):
         quiz = super(QuizAdminForm, self).save(commit=False)
@@ -99,3 +102,23 @@ admin.site.register(MCQuestion, MCQuestionAdmin)
 admin.site.register(Progress, ProgressAdmin)
 admin.site.register(EssayQuestion, EssayQuestionAdmin)
 admin.site.register(Sitting)
+
+
+@admin.register(LiveSession)
+class LiveSessionAdmin(admin.ModelAdmin):
+    list_display = ("code", "quiz", "course", "state", "current_index", "created")
+    list_filter = ("state", "course")
+    search_fields = ("code", "quiz__title")
+
+
+@admin.register(LiveParticipant)
+class LiveParticipantAdmin(admin.ModelAdmin):
+    list_display = ("nickname", "session", "user", "score", "joined")
+    list_filter = ("session",)
+    search_fields = ("nickname", "user__username")
+
+
+@admin.register(LiveAnswer)
+class LiveAnswerAdmin(admin.ModelAdmin):
+    list_display = ("participant", "question", "choice", "correct", "points", "seconds")
+    list_filter = ("correct",)

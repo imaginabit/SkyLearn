@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %}{% trans "Entrar en una partida" %} | SkyLearn{% endblock title %}
+
+{% block content %}
+<div class="title-1">{% trans "Entrar en una partida" %}</div>
+<br>
+{% include 'snippets/messages.html' %}
+{% if error %}
+<div class="alert alert-danger">{{ error }}</div>
+{% endif %}
+
+<div class="container">
+    <form method="post" class="card p-4" style="max-width: 480px;">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label class="form-label">{% trans "Código de la partida" %}</label>
+            <input name="code" value="{{ code }}" maxlength="8" class="form-control text-uppercase" required autofocus>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">{% trans "Tu apodo" %}</label>
+            <input name="nickname" maxlength="40" class="form-control" required>
+            <div class="form-text">{% trans "Con este nombre aparecerás en el ranking." %}</div>
+        </div>
+        <div>
+            <button type="submit" class="btn btn-primary"><i class="fas fa-right-to-bracket me-2"></i>{% trans "Entrar" %}</button>
+        </div>
+    </form>
+</div>
+{% endblock content %}

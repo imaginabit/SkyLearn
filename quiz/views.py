@@ -1,8 +1,15 @@
+import random
+
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db import transaction
+from django.db.models import F
+from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
+from django.urls import reverse
 from django.utils.decorators import method_decorator
+from django.utils.timezone import now
+from django.utils.translation import gettext as _
 from django.views.decorators.http import require_POST
 from django.views.generic import (
     CreateView,
@@ -25,6 +32,9 @@ from .forms import (
 from .models import (
     Course,
     EssayQuestion,
+    LiveAnswer,
+    LiveParticipant,
+    LiveSession,
     MCQuestion,
     Progress,
     Question,
@@ -345,3 +355,251 @@ class QuizTake(FormView):
             self.sitting.delete()
 
         return render(self.request, self.result_template_name, results)
+
+
+# ############################################################################
+# Partidas en vivo (al estilo Kahoot)
+# ############################################################################
+
+
+def _puntos_kahoot(correcto, seconds, limite):
+    """Puntuación tipo Kahoot: hasta 1000, más cuanto antes se acierte."""
+    if not correcto:
+        return 0
+    if not limite:
+        return 1000
+    frac = min(max(seconds, 0.0), float(limite)) / float(limite)
+    return int(round(1000 * (1 - frac / 2)))
+
+
+def _preguntas_mc(quiz):
+    """Las preguntas de opción múltiple del quiz, en el orden que toca."""
+    preguntas = list(MCQuestion.objects.filter(quiz=quiz).order_by("pk"))
+    if quiz.random_order:
+        random.shuffle(preguntas)
+    return preguntas
+
+
+def _es_host(request, session):
+    return request.user.is_superuser or session.host_id == request.user.id
+
+
+@login_required
+@lecturer_required
+def live_create(request, slug):
+    course = curso_asignado(request, slug)
+    quizzes = Quiz.objects.filter(course=course).order_by("title")
+    if request.method == "POST":
+        quiz = get_object_or_404(Quiz, pk=request.POST.get("quiz"), course=course)
+        preguntas = _preguntas_mc(quiz)
+        cuantas = int(request.POST.get("cuantas") or 0)
+        if cuantas and cuantas < len(preguntas):
+            preguntas = random.sample(preguntas, cuantas)
+        if not preguntas:
+            messages.error(
+                request, _("Ese cuestionario no tiene preguntas de opción múltiple.")
+            )
+            return redirect("live_create", slug=slug)
+        session = LiveSession.objects.create(
+            course=course,
+            quiz=quiz,
+            host=request.user,
+            question_ids=",".join(str(q.id) for q in preguntas),
+            time_limit=int(request.POST.get("time_limit") or 20),
+        )
+        messages.success(
+            request,
+            _("Partida creada. El código es %(code)s.") % {"code": session.code},
+        )
+        return redirect("live_host", code=session.code)
+    return render(
+        request, "quiz/live_create.html", {"course": course, "quizzes": quizzes}
+    )
+
+
+@login_required
+def live_host(request, code):
+    session = get_object_or_404(LiveSession, code=code)
+    if not _es_host(request, session):
+        return redirect("/")
+    return render(request, "quiz/live_host.html", {"session": session})
+
+
+@login_required
+def live_join(request):
+    error = None
+    code = (request.GET.get("code") or "").strip().upper()
+    if request.method == "POST":
+        code = (request.POST.get("code") or "").strip().upper()
+        nickname = (request.POST.get("nickname") or "").strip()
+        session = LiveSession.objects.filter(code=code).first()
+        if not session:
+            error = _("Ese código no existe. Comprueba que lo has copiado bien.")
+        elif not nickname:
+            error = _("Escribe un apodo para el ranking.")
+        else:
+            participante, creado = LiveParticipant.objects.get_or_create(
+                session=session,
+                user=request.user,
+                defaults={"nickname": nickname[:40]},
+            )
+            if not creado and participante.nickname != nickname[:40]:
+                participante.nickname = nickname[:40]
+                participante.save(update_fields=["nickname"])
+            return redirect("live_play", code=session.code)
+    return render(request, "quiz/live_join.html", {"code": code, "error": error})
+
+
+@login_required
+def live_play(request, code):
+    session = get_object_or_404(LiveSession, code=code)
+    participante = LiveParticipant.objects.filter(
+        session=session, user=request.user
+    ).first()
+    if not participante:
+        return redirect(f"{reverse('live_join')}?code={session.code}")
+    return render(
+        request,
+        "quiz/live_play.html",
+        {"session": session, "participante": participante},
+    )
+
+
+@login_required
+def live_state(request, code):
+    session = get_object_or_404(LiveSession, code=code)
+    host = _es_host(request, session)
+    participante = None
+    if not host:
+        participante = LiveParticipant.objects.filter(
+            session=session, user=request.user
+        ).first()
+        if participante:
+            LiveParticipant.objects.filter(pk=participante.pk).update(last_seen=now())
+
+    data = {
+        "state": session.state,
+        "index": session.current_index,
+        "total": session.total,
+        "seconds_left": session.seconds_left,
+        "time_limit": session.time_limit,
+        "quiz": session.quiz.title,
+        "code": session.code,
+    }
+
+    pregunta = session.current_question
+    if pregunta and session.state in ("question", "reveal"):
+        choices = list(pregunta.get_choices())
+        data["question"] = {
+            "id": pregunta.id,
+            "content": pregunta.content,
+            "choices": [{"id": c.id, "text": c.choice_text} for c in choices],
+        }
+        if session.state == "reveal":
+            correcta = next((c for c in choices if c.correct), None)
+            data["question"]["correct_id"] = correcta.id if correcta else None
+            data["question"]["explanation"] = pregunta.explanation
+            data["question"]["counts"] = {
+                c.id: LiveAnswer.objects.filter(
+                    participant__session=session, question=pregunta, choice=c
+                ).count()
+                for c in choices
+            }
+
+    data["count"] = session.participants.count()
+    if host:
+        data["participants"] = [
+            {
+                "nickname": p.nickname,
+                "score": p.score,
+                "answered": p.ha_respondido(pregunta),
+            }
+            for p in session.participants.order_by("-score", "joined")
+        ]
+
+    if participante:
+        data["you"] = {
+            "nickname": participante.nickname,
+            "score": participante.score,
+        }
+        if pregunta:
+            respuesta = participante.answers.filter(question=pregunta).first()
+            data["you"]["answered"] = bool(respuesta)
+            if respuesta:
+                data["you"]["correct"] = respuesta.correct
+                data["you"]["points"] = respuesta.points
+        data["you"]["rank"] = (
+            session.participants.filter(score__gt=participante.score).count() + 1
+        )
+
+    if session.state in ("ranking", "ended"):
+        data["ranking"] = [
+            {"rank": i, "nickname": p.nickname, "score": p.score}
+            for i, p in enumerate(
+                session.participants.order_by("-score", "joined"), start=1
+            )
+        ]
+
+    return JsonResponse(data)
+
+
+@login_required
+@require_POST
+def live_action(request, code):
+    session = get_object_or_404(LiveSession, code=code)
+    if not _es_host(request, session):
+        return JsonResponse({"error": "no autorizado"}, status=403)
+    accion = request.POST.get("action")
+    if accion == "start":
+        session.empezar()
+    elif accion == "reveal":
+        session.revelar()
+    elif accion == "next":
+        session.avanzar()
+    elif accion == "ranking":
+        session.state = "ranking"
+        session.save()
+    elif accion == "end":
+        session.terminar()
+    return JsonResponse({"ok": True, "state": session.state})
+
+
+@login_required
+@require_POST
+def live_answer(request, code):
+    session = get_object_or_404(LiveSession, code=code)
+    if session.state != "question":
+        return JsonResponse({"error": "no es el momento de responder"}, status=400)
+    participante = LiveParticipant.objects.filter(
+        session=session, user=request.user
+    ).first()
+    if not participante:
+        return JsonResponse({"error": "no participas en esta partida"}, status=403)
+    pregunta = session.current_question
+    if not pregunta:
+        return JsonResponse({"error": "sin pregunta"}, status=400)
+    if participante.answers.filter(question=pregunta).exists():
+        return JsonResponse({"error": "ya has respondido"}, status=400)
+    choice = pregunta.get_choices().filter(pk=request.POST.get("choice")).first()
+    if not choice:
+        return JsonResponse({"error": "opción no válida"}, status=400)
+    seconds = 0.0
+    if session.question_started:
+        seconds = (now() - session.question_started).total_seconds()
+    if seconds > session.time_limit + 2:
+        return JsonResponse({"error": "se acabó el tiempo"}, status=400)
+    correcto = bool(choice.correct)
+    puntos = _puntos_kahoot(correcto, seconds, session.time_limit)
+    LiveAnswer.objects.create(
+        participant=participante,
+        question=pregunta,
+        choice=choice,
+        correct=correcto,
+        seconds=seconds,
+        points=puntos,
+    )
+    if puntos:
+        LiveParticipant.objects.filter(pk=participante.pk).update(
+            score=F("score") + puntos
+        )
+    return JsonResponse({"ok": True, "correct": correcto, "points": puntos})

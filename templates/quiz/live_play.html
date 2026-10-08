@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %}{% trans "Partida en vivo" %} | SkyLearn{% endblock title %}
+
+{% block content %}
+<div id="play"
+     data-state-url="{% url 'live_state' code=session.code %}"
+     data-answer-url="{% url 'live_answer' code=session.code %}">
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <div class="h4 mb-0">{{ participante.nickname }}</div>
+        <div class="text-end">
+            <span class="badge bg-primary fs-6"><span id="myscore">0</span> {% trans "puntos" %}</span>
+            <span class="badge bg-secondary fs-6" id="myrank">#–</span>
+        </div>
+    </div>
+
+    <div class="card p-4" id="stage">
+        <div id="stage-body" class="text-center py-5">
+            <div class="h3">{% trans "Esperando al profesor…" %}</div>
+        </div>
+    </div>
+</div>
+
+<form style="display:none">{% csrf_token %}</form>
+{% endblock content %}
+
+{% block js %}
+<script>
+(function () {
+    var root = document.getElementById('play');
+    var stateUrl = root.dataset.stateUrl;
+    var answerUrl = root.dataset.answerUrl;
+    var csrf = document.querySelector('[name=csrfmiddlewaretoken]').value;
+    var stageBody = document.getElementById('stage-body');
+    var myscore = document.getElementById('myscore');
+    var myrank = document.getElementById('myrank');
+    var yaRespondido = false;
+
+    function esc(t) { var d = document.createElement('div'); d.textContent = (t == null ? '' : t); return d.innerHTML; }
+    function letra(i) { return String.fromCharCode(65 + i) + ')'; }
+
+    function pintarPregunta(s) {
+        var html = '<div class="display-4 mb-2">' + s.seconds_left + '</div>';
+        html += '<div class="h3">' + esc(s.question.content) + '</div>';
+        if (yaRespondido) {
+            html += '<p class="text-success h5 mt-4 mb-0">Respuesta enviada. Espera…</p>';
+        } else {
+            html += '<div class="row mt-4 justify-content-center">';
+            s.question.choices.forEach(function (c, i) {
+                html += '<div class="col-md-5 mb-2"><button class="btn btn-outline-primary btn-lg w-100 choice" data-choice="' + c.id + '">'
+                    + letra(i) + ' ' + esc(c.text) + '</button></div>';
+            });
+            html += '</div>';
+        }
+        stageBody.innerHTML = html;
+        stageBody.querySelectorAll('.choice').forEach(function (b) {
+            b.addEventListener('click', function () { responder(b.dataset.choice); });
+        });
+    }
+
+    function pintarReveal(s) {
+        var html = '<div class="h4">' + esc(s.question.content) + '</div><div class="row mt-4 justify-content-center">';
+        s.question.choices.forEach(function (c, i) {
+            var bien = c.id === s.question.correct_id;
+            html += '<div class="col-md-5 mb-2"><div class="border rounded p-3 ' + (bien ? 'border-success bg-success-subtle' : '') + ' h5 mb-0">'
+                + letra(i) + ' ' + esc(c.text) + (bien ? ' <span class="text-success fw-bold">✓</span>' : '') + '</div></div>';
+        });
+        html += '</div>';
+        if (s.you && s.you.answered) {
+            var acierto = s.you.correct;
+            html += '<p class="h4 mt-3 mb-0">' + (acierto ? '<span class="text-success">¡Correcto! +' + (s.you.points || 0) + '</span>' : '<span class="text-danger">Incorrecto</span>') + '</p>';
+        }
+        stageBody.innerHTML = html;
+    }
+
+    function pintarRanking(s) {
+        var html = '<div class="h3 mb-3">Clasificación</div><ol class="h5 text-start d-inline-block">';
+        (s.ranking || []).forEach(function (p) {
+            html += '<li>' + esc(p.nickname) + ' — <strong>' + p.score + '</strong></li>';
+        });
+        html += '</ol>';
+        if (s.you) { html += '<p class="text-muted">Vas #' + s.you.rank + '.</p>'; }
+        stageBody.innerHTML = html;
+    }
+
+    function render(s) {
+        if (s.you) {
+            myscore.textContent = s.you.score;
+            myrank.textContent = '#' + s.you.rank;
+        }
+        if (s.state === 'lobby') {
+            yaRespondido = false;
+            stageBody.innerHTML = '<div class="h3">Esperando al profesor…</div>';
+        } else if (s.state === 'question' && s.question) {
+            yaRespondido = !!(s.you && s.you.answered);
+            pintarPregunta(s);
+        } else if (s.state === 'reveal' && s.question) {
+            pintarReveal(s);
+        } else if (s.state === 'ranking' || s.state === 'ended') {
+            pintarRanking(s);
+        }
+    }
+
+    function responder(choiceId) {
+        var fd = new FormData();
+        fd.append('choice', choiceId);
+        fetch(answerUrl, { method: 'POST', headers: { 'X-CSRFToken': csrf }, body: fd })
+            .then(function (r) { return r.json(); })
+            .then(function () { yaRespondido = true; })
+            .catch(function () { });
+        stageBody.querySelectorAll('.choice').forEach(function (b) { b.disabled = true; });
+    }
+
+    function tick() {
+        fetch(stateUrl, { headers: { 'X-Requested-With': 'XMLHttpRequest' } })
+            .then(function (r) { return r.json(); })
+            .then(render)
+            .catch(function () { })
+            .finally(function () { setTimeout(tick, 1000); });
+    }
+
+    tick();
+})();
+</script>
+{% endblock js %}

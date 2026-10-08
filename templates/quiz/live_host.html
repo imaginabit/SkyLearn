@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %}{% trans "Partida en vivo" %} | SkyLearn{% endblock title %}
+
+{% block content %}
+<div id="live"
+     data-state-url="{% url 'live_state' code=session.code %}"
+     data-action-url="{% url 'live_action' code=session.code %}">
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <div>
+            <div class="h4 mb-0">{{ session.quiz.title }}</div>
+            <div class="text-muted">{% trans "Código" %}:
+                <span class="h4 text-primary fw-bold" id="code">{{ session.code }}</span>
+            </div>
+        </div>
+        <div class="text-end">
+            <div class="h4 mb-0"><span id="pcount">0</span> <small class="text-muted">{% trans "jugadores" %}</small></div>
+            <div class="text-muted" id="progress"></div>
+        </div>
+    </div>
+
+    <div class="card p-4 mb-3" id="stage">
+        <div id="stage-body" class="text-center py-5">
+            <div class="h3">{% trans "Sala de espera" %}</div>
+            <p class="text-muted mb-0">{% trans "Cuando estén dentro, pulsa Empezar." %}</p>
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <button class="btn btn-primary" data-action="start"><i class="fas fa-play me-1"></i>{% trans "Empezar" %}</button>
+        <button class="btn btn-secondary" data-action="reveal"><i class="fas fa-eye me-1"></i>{% trans "Mostrar respuesta" %}</button>
+        <button class="btn btn-primary" data-action="next"><i class="fas fa-forward me-1"></i>{% trans "Siguiente" %}</button>
+        <button class="btn btn-warning" data-action="ranking"><i class="fas fa-ranking-star me-1"></i>{% trans "Clasificación" %}</button>
+        <button class="btn btn-danger" data-action="end"><i class="fas fa-stop me-1"></i>{% trans "Terminar" %}</button>
+    </div>
+
+    <div class="card p-3">
+        <div class="h6 mb-2">{% trans "Jugadores" %}</div>
+        <ol id="players" class="mb-0"></ol>
+    </div>
+</div>
+
+<form style="display:none">{% csrf_token %}</form>
+{% endblock content %}
+
+{% block js %}
+<script>
+(function () {
+    var root = document.getElementById('live');
+    var stateUrl = root.dataset.stateUrl;
+    var actionUrl = root.dataset.actionUrl;
+    var csrf = document.querySelector('[name=csrfmiddlewaretoken]').value;
+    var stageBody = document.getElementById('stage-body');
+    var players = document.getElementById('players');
+    var pcount = document.getElementById('pcount');
+    var progress = document.getElementById('progress');
+
+    function esc(t) { var d = document.createElement('div'); d.textContent = (t == null ? '' : t); return d.innerHTML; }
+    function letra(i) { return String.fromCharCode(65 + i) + ')'; }
+
+    function render(s) {
+        pcount.textContent = s.count;
+        progress.textContent = s.total ? (Math.min(s.index + 1, s.total) + ' / ' + s.total) : '';
+        var html = '';
+        if (s.state === 'lobby') {
+            html = '<div class="h3">Sala de espera</div><p class="text-muted mb-0">' + s.count + ' jugadores dentro.</p>';
+        } else if (s.state === 'question' && s.question) {
+            html = '<div class="display-4 mb-2">' + s.seconds_left + '</div>';
+            html += '<div class="h3">' + esc(s.question.content) + '</div><div class="row mt-4 justify-content-center">';
+            s.question.choices.forEach(function (c, i) {
+                html += '<div class="col-md-5 mb-2"><div class="border rounded p-3 h5 mb-0">' + letra(i) + ' ' + esc(c.text) + '</div></div>';
+            });
+            html += '</div>';
+        } else if (s.state === 'reveal' && s.question) {
+            html = '<div class="h4">' + esc(s.question.content) + '</div><div class="row mt-4 justify-content-center">';
+            s.question.choices.forEach(function (c, i) {
+                var bien = c.id === s.question.correct_id;
+                var n = (s.question.counts && s.question.counts[c.id]) || 0;
+                html += '<div class="col-md-5 mb-2"><div class="border rounded p-3 ' + (bien ? 'border-success bg-success-subtle' : '') + ' h5 mb-0">'
+                    + letra(i) + ' ' + esc(c.text) + ' <span class="badge bg-dark ms-2">' + n + '</span>'
+                    + (bien ? ' <span class="text-success fw-bold">✓</span>' : '') + '</div></div>';
+            });
+            html += '</div>';
+            if (s.question.explanation) { html += '<p class="text-muted mt-3 mb-0">' + esc(s.question.explanation) + '</p>'; }
+        } else if (s.state === 'ranking' || s.state === 'ended') {
+            html = '<div class="h3 mb-3">Clasificación</div><ol class="h4 text-start d-inline-block">';
+            (s.ranking || []).forEach(function (p) {
+                html += '<li>' + esc(p.nickname) + ' — <strong>' + p.score + '</strong></li>';
+            });
+            html += '</ol>';
+        }
+        stageBody.innerHTML = html;
+
+        if (s.participants) {
+            players.innerHTML = s.participants.map(function (p) {
+                return '<li>' + esc(p.nickname) + ' — <strong>' + p.score + '</strong>'
+                    + (p.answered ? ' <span class="text-success">✓</span>' : '') + '</li>';
+            }).join('');
+        }
+    }
+
+    function tick() {
+        fetch(stateUrl, { headers: { 'X-Requested-With': 'XMLHttpRequest' } })
+            .then(function (r) { return r.json(); })
+            .then(render)
+            .catch(function () { })
+            .finally(function () { setTimeout(tick, 1200); });
+    }
+
+    document.querySelectorAll('button[data-action]').forEach(function (b) {
+        b.addEventListener('click', function () {
+            var fd = new FormData();
+            fd.append('action', b.dataset.action);
+            fetch(actionUrl, { method: 'POST', headers: { 'X-CSRFToken': csrf }, body: fd })
+                .then(function (r) { return r.json(); })
+                .then(function () { fetch(stateUrl).then(function (r) { return r.json(); }).then(render); })
+                .catch(function () { });
+        });
+    });
+
+    tick();
+})();
+</script>
+{% endblock js %}
