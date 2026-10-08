@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %}{% trans "Partida en vivo" %} | SkyLearn{% endblock title %}
+
+{% block content %}
+<nav style="--bs-breadcrumb-divider: '>';">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">{% trans 'Home' %}</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'user_course_list' %}">{% trans 'My Courses' %}</a></li>
+        <li class="breadcrumb-item active" aria-current="page">{% trans 'Partida en vivo' %}</li>
+    </ol>
+</nav>
+
+{% include 'snippets/messages.html' %}
+
+<div class="title-1">{% trans 'Partida en vivo' %}</div>
+<p class="text-muted">{% trans 'Elige el curso de la partida. Solo aparecen los que tienen cuestionarios con preguntas de opción múltiple.' %}</p>
+
+{% if cursos %}
+    <div class="row">
+        {% for curso, quizzes in cursos %}
+        <div class="col-md-6 mb-3">
+            <div class="card p-3 h-100">
+                <h6 class="mb-1">{{ curso.code }}</h6>
+                <p class="small text-muted mb-2">{{ curso.title }}</p>
+                <ul class="small mb-3">
+                    {% for quiz in quizzes %}
+                    <li>{{ quiz.title }}
+                        <span class="text-muted">({{ quiz.get_questions.count }})</span>
+                    </li>
+                    {% endfor %}
+                </ul>
+                <a class="btn btn-success mt-auto" href="{% url 'live_create' curso.slug %}">
+                    <i class="fas fa-bolt me-1"></i>{% trans 'Crear partida' %}
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <p class="text-muted">
+        {% trans 'Ninguno de tus cursos tiene cuestionarios con preguntas de opción múltiple. Carga uno en el curso y vuelve a intentarlo.' %}
+    </p>
+{% endif %}
+
+<p class="mt-3">
+    <a href="{% url 'live_join' %}"><i class="fas fa-right-to-bracket me-1"></i>{% trans 'Entrar en una partida con un código' %}</a>
+</p>
+{% endblock content %}

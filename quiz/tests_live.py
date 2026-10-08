@@ -2,7 +2,7 @@ from django.test import Client, TestCase
 from django.urls import reverse
 
 from accounts.models import User
-from course.models import Course, Program
+from course.models import Course, CourseAllocation, Program
 from quiz.models import (
     Choice,
     LiveParticipant,
@@ -141,3 +141,99 @@ class LiveQuizTests(TestCase):
             reverse("live_answer", args=[sesion.code]), {"choice": self.q1_correcta.id}
         )
         self.assertEqual(r.status_code, 403)
+
+
+class LiveMenuTests(TestCase):
+    """Los enlaces del menu: el alumno entra a la partida, el docente la crea."""
+
+    def setUp(self):
+        self.prof = User.objects.create_user(
+            username="prof", password="x", is_lecturer=True
+        )
+        self.ana = User.objects.create_user(
+            username="ana", password="x", is_student=True
+        )
+        self.programa = Program.objects.create(title="Seguridad Informatica")
+        self.curso = Course.objects.create(
+            title="MF0487_3-C5",
+            code="MF0487_3-C5",
+            program=self.programa,
+            level="Master",
+            semester="Third",
+        )
+        CourseAllocation.objects.get_or_create(lecturer=self.prof)[0].courses.add(
+            self.curso
+        )
+        self.quiz = Quiz.objects.create(
+            course=self.curso, title="Repaso objetiva", category="practice"
+        )
+        pregunta = MCQuestion.objects.create(content="¿Cuánto es 2+2?")
+        pregunta.quiz.add(self.quiz)
+        Choice.objects.create(question=pregunta, choice_text="4", correct=True)
+
+    def _asignar(self, lecturer, curso):
+        """Asigna el curso al docente: `CourseAllocation` usa una M2M."""
+        asignacion, _ = CourseAllocation.objects.get_or_create(lecturer=lecturer)
+        asignacion.courses.add(curso)
+        return asignacion
+
+    def _otro_curso_con_preguntas(self):
+        curso = Course.objects.create(
+            title="MF0487_3-C6",
+            code="MF0487_3-C6",
+            program=self.programa,
+            level="Master",
+            semester="Third",
+        )
+        self._asignar(self.prof, curso)
+        quiz = Quiz.objects.create(course=curso, title="Repaso 2", category="practice")
+        pregunta = MCQuestion.objects.create(content="¿De qué color es el cielo?")
+        pregunta.quiz.add(quiz)
+        Choice.objects.create(question=pregunta, choice_text="Azul", correct=True)
+        return curso
+
+    def _como(self, user):
+        """Cliente ya con la sesion iniciada: `force_login` no devuelve nada."""
+        cliente = Client()
+        cliente.force_login(user)
+        return cliente
+
+    def test_alumno_tiene_el_enlace_a_entrar(self):
+        html = self._como(self.ana).get("/es/").content.decode()
+        self.assertIn(reverse("live_join"), html)
+
+    def test_docente_tiene_el_enlace_a_crear(self):
+        html = self._como(self.prof).get("/es/").content.decode()
+        self.assertIn(reverse("live_create_pick"), html)
+
+    def test_alumno_no_ve_el_enlace_de_crear(self):
+        html = self._como(self.ana).get("/es/").content.decode()
+        self.assertNotIn(reverse("live_create_pick"), html)
+
+    def test_un_solo_curso_entra_directo(self):
+        r = self._como(self.prof).get(reverse("live_create_pick"))
+        self.assertRedirects(
+            r,
+            reverse("live_create", args=[self.curso.slug]),
+            fetch_redirect_response=False,
+        )
+
+    def test_con_varios_cursos_pregunta_cual(self):
+        otro = self._otro_curso_con_preguntas()
+        r = self._como(self.prof).get(reverse("live_create_pick"))
+        self.assertEqual(r.status_code, 200)
+        html = r.content.decode()
+        self.assertIn(reverse("live_create", args=[self.curso.slug]), html)
+        self.assertIn(reverse("live_create", args=[otro.slug]), html)
+
+    def test_sin_cuestionarios_avisa(self):
+        for quiz in Quiz.objects.all():
+            MCQuestion.objects.filter(quiz=quiz).delete()
+        r = self._como(self.prof).get(reverse("live_create_pick"))
+        self.assertEqual(r.status_code, 200)
+        self.assertIn("cuestionarios", r.content.decode())
+
+    def test_el_alumno_no_llega_a_crear(self):
+        r = self._como(self.ana).get(reverse("live_create_pick"))
+        self.assertEqual(r.status_code, 302)
+        self.assertEqual(r.url, "/")

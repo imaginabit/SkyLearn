@@ -21,6 +21,7 @@ urlpatterns = [
         name="mc_create",
     ),
     # Partidas en vivo (al estilo Kahoot)
+    path("live/create/", views.live_create_pick, name="live_create_pick"),
     path("live/create/<slug>/", views.live_create, name="live_create"),
     path("live/join/", views.live_join, name="live_join"),
     path("live/host/<str:code>/", views.live_host, name="live_host"),

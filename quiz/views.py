@@ -386,6 +386,34 @@ def _es_host(request, session):
 
 @login_required
 @lecturer_required
+def live_create_pick(request):
+    """Elige de que curso sale la partida en vivo.
+
+    El enlace del menu apunta aqui y no a `live_create`, que necesita el slug
+    del curso: con un curso por clase no hay forma de decidirlo en la URL.
+    Solo se listan los cursos que tienen algun cuestionario con preguntas de
+    opcion multiple, que es lo unico que se puede jugar. Si hay uno solo, se
+    entra directamente a el.
+    """
+    cursos = Course.objects.distinct()
+    if not request.user.is_superuser:
+        cursos = cursos.filter(allocated_course__lecturer=request.user)
+    con_preguntas = []
+    for curso in cursos.order_by("code"):
+        quizzes = [
+            quiz
+            for quiz in Quiz.objects.filter(course=curso).order_by("title")
+            if MCQuestion.objects.filter(quiz=quiz).exists()
+        ]
+        if quizzes:
+            con_preguntas.append((curso, quizzes))
+    if len(con_preguntas) == 1:
+        return redirect("live_create", slug=con_preguntas[0][0].slug)
+    return render(request, "quiz/live_pick.html", {"cursos": con_preguntas})
+
+
+@login_required
+@lecturer_required
 def live_create(request, slug):
     course = curso_asignado(request, slug)
     quizzes = Quiz.objects.filter(course=course).order_by("title")
