@@ -2,12 +2,19 @@
 {% load i18n %}
 {% block title %}{% trans "Partida en vivo" %} | SkyLearn{% endblock title %}
 
+{% block header %}{% include 'quiz/live_style.html' %}{% endblock header %}
+
+{# Pantalla completa para el proyector: sin barra lateral ni superior. #}
+{% block sidebar %}{% endblock sidebar %}
+{% block topbar %}{% endblock topbar %}
+
 {% block content %}
 <div id="live"
+     class="live-shell"
      data-state-url="{% url 'live_state' code=session.code %}"
      data-action-url="{% url 'live_action' code=session.code %}">
 
-    <div class="d-flex justify-content-between align-items-center mb-3">
+    <div class="live-head d-flex justify-content-between align-items-center">
         <div>
             <div class="h4 mb-0">{{ session.quiz.title }}</div>
             <div class="text-muted">{% trans "Código" %}:
@@ -17,17 +24,23 @@
         <div class="text-end">
             <div class="h4 mb-0"><span id="pcount">0</span> <small class="text-muted">{% trans "jugadores" %}</small></div>
             <div class="text-muted" id="progress"></div>
+            <a class="btn btn-sm btn-outline-secondary mt-1" href="{% url 'quiz_index' session.course.slug %}">
+                <i class="fas fa-arrow-left me-1"></i>{% trans "Salir" %}
+            </a>
         </div>
     </div>
 
-    <div class="card p-4 mb-3" id="stage">
-        <div id="stage-body" class="text-center py-5">
-            <div class="h3">{% trans "Sala de espera" %}</div>
-            <p class="text-muted mb-0">{% trans "Cuando estén dentro, pulsa Empezar." %}</p>
+    <div class="card live-stage" id="stage">
+        <div id="stage-body" class="live-stage-body">
+            <div class="live-cd" id="cd"></div>
+            <div id="qbody">
+                <div class="h3">{% trans "Sala de espera" %}</div>
+                <p class="text-muted mb-0">{% trans "Cuando estén dentro, pulsa Empezar." %}</p>
+            </div>
         </div>
     </div>
 
-    <div class="mb-3">
+    <div class="live-controls">
         <button class="btn btn-primary" data-action="start"><i class="fas fa-play me-1"></i>{% trans "Empezar" %}</button>
         <button class="btn btn-secondary" data-action="reveal"><i class="fas fa-eye me-1"></i>{% trans "Mostrar respuesta" %}</button>
         <button class="btn btn-primary" data-action="next"><i class="fas fa-forward me-1"></i>{% trans "Siguiente" %}</button>
@@ -35,7 +48,7 @@
         <button class="btn btn-danger" data-action="end"><i class="fas fa-stop me-1"></i>{% trans "Terminar" %}</button>
     </div>
 
-    <div class="card p-3">
+    <div class="card p-3 live-players">
         <div class="h6 mb-2">{% trans "Jugadores" %}</div>
         <ol id="players" class="mb-0"></ol>
     </div>
@@ -51,38 +64,57 @@
     var stateUrl = root.dataset.stateUrl;
     var actionUrl = root.dataset.actionUrl;
     var csrf = document.querySelector('[name=csrfmiddlewaretoken]').value;
-    var stageBody = document.getElementById('stage-body');
+    var cd = document.getElementById('cd');
+    var qbody = document.getElementById('qbody');
     var players = document.getElementById('players');
     var pcount = document.getElementById('pcount');
     var progress = document.getElementById('progress');
 
+    // Repinta solo si el HTML ha cambiado. Sin esto, cada consulta (cada
+    // 1,2 s) reescribía el escenario y los botones y la lista se movían.
+    var ultimo = {};
+    function pinta(el, html) {
+        var clave = el.id;
+        if (ultimo[clave] === html) { return false; }
+        ultimo[clave] = html;
+        el.innerHTML = html;
+        return true;
+    }
+
     function esc(t) { var d = document.createElement('div'); d.textContent = (t == null ? '' : t); return d.innerHTML; }
     function letra(i) { return String.fromCharCode(65 + i) + ')'; }
+
+    function opciones(s, mostrando) {
+        var html = '<div class="live-opts">';
+        s.question.choices.forEach(function (c, i) {
+            var n = (s.question.counts && s.question.counts[c.id]) || 0;
+            // La correcta solo se marca cuando el profesor enseña la
+            // respuesta: si no, se la regala al alumnado.
+            var bien = mostrando && c.id === s.question.correct_id;
+            html += '<div class="live-opt' + (bien ? ' ok' : '') + '"><span>' + letra(i) + ' ' + esc(c.text);
+            if (mostrando) { html += ' <span class="n">' + n + '</span>'; }
+            if (bien) { html += ' <span class="ok-mark">&#10003;</span>'; }
+            html += '</span></div>';
+        });
+        return html + '</div>';
+    }
 
     function render(s) {
         pcount.textContent = s.count;
         progress.textContent = s.total ? (Math.min(s.index + 1, s.total) + ' / ' + s.total) : '';
+
+        // La cuenta atrás va en su propio nodo: así el escenario no se
+        // reescribe cada segundo y el texto no baila.
+        cd.textContent = (s.state === 'question') ? s.seconds_left : '';
+
         var html = '';
         if (s.state === 'lobby') {
             html = '<div class="h3">Sala de espera</div><p class="text-muted mb-0">' + s.count + ' jugadores dentro.</p>';
         } else if (s.state === 'question' && s.question) {
-            html = '<div class="display-4 mb-2">' + s.seconds_left + '</div>';
-            html += '<div class="h3">' + esc(s.question.content) + '</div><div class="row mt-4 justify-content-center">';
-            s.question.choices.forEach(function (c, i) {
-                html += '<div class="col-md-5 mb-2"><div class="border rounded p-3 h5 mb-0">' + letra(i) + ' ' + esc(c.text) + '</div></div>';
-            });
-            html += '</div>';
+            html = '<div class="live-q h4">' + esc(s.question.content) + '</div>' + opciones(s, false);
         } else if (s.state === 'reveal' && s.question) {
-            html = '<div class="h4">' + esc(s.question.content) + '</div><div class="row mt-4 justify-content-center">';
-            s.question.choices.forEach(function (c, i) {
-                var bien = c.id === s.question.correct_id;
-                var n = (s.question.counts && s.question.counts[c.id]) || 0;
-                html += '<div class="col-md-5 mb-2"><div class="border rounded p-3 ' + (bien ? 'border-success bg-success-subtle' : '') + ' h5 mb-0">'
-                    + letra(i) + ' ' + esc(c.text) + ' <span class="badge bg-dark ms-2">' + n + '</span>'
-                    + (bien ? ' <span class="text-success fw-bold">✓</span>' : '') + '</div></div>';
-            });
-            html += '</div>';
-            if (s.question.explanation) { html += '<p class="text-muted mt-3 mb-0">' + esc(s.question.explanation) + '</p>'; }
+            html = '<div class="live-q h4">' + esc(s.question.content) + '</div>' + opciones(s, true);
+            if (s.question.explanation) { html += '<p class="live-q text-muted mt-3 mb-0">' + esc(s.question.explanation) + '</p>'; }
         } else if (s.state === 'ranking' || s.state === 'ended') {
             html = '<div class="h3 mb-3">Clasificación</div><ol class="h4 text-start d-inline-block">';
             (s.ranking || []).forEach(function (p) {
@@ -90,13 +122,13 @@
             });
             html += '</ol>';
         }
-        stageBody.innerHTML = html;
+        pinta(qbody, html);
 
         if (s.participants) {
-            players.innerHTML = s.participants.map(function (p) {
+            pinta(players, s.participants.map(function (p) {
                 return '<li>' + esc(p.nickname) + ' — <strong>' + p.score + '</strong>'
                     + (p.answered ? ' <span class="text-success">✓</span>' : '') + '</li>';
-            }).join('');
+            }).join(''));
         }
     }
 

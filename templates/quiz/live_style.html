@@ -1,0 +1,171 @@
+{% comment %}
+Estilos de las partidas en vivo (profesor y alumno). Se incluyen en el
+{% block header %} de live_host.html y de live_play.html.
+
+Arreglan tres cosas:
+- Sin barra lateral ni barra superior: base.html deja 300 px a la izquierda
+  y 65/115 px arriba para ellas, así que hay que quitar esos márgenes.
+- El escenario se queda con la altura sobrante de la pantalla, de modo que
+  los botones y la lista de jugadores no se mueven al cambiar de pregunta.
+- Las opciones son cuadros iguales: mismo ancho (rejilla) y mismo alto
+  (grid-auto-rows: 1fr), con el texto centrado y oscuro sobre fondo claro.
+
+Va aquí, en la plantilla, y no en static/css a propósito: tocar un estático
+obliga a collectstatic en el servidor y, con el manifiesto activo, un
+estático que falta no da un 404 sino que revienta la página con un 500.
+{% endcomment %}
+<style>
+    /* Los márgenes que base.html deja para las barras que aquí no van */
+    #main {
+        padding: 0;
+        transition: none;
+    }
+
+    .live-shell {
+        display: flex;
+        flex-direction: column;
+        gap: .75rem;
+        height: 100vh;
+        height: 100dvh;
+        padding: 1rem;
+    }
+
+    .live-head,
+    .live-controls {
+        flex: 0 0 auto;
+    }
+
+    /* La lista de jugadores cede altura antes que el escenario: si la
+       ventana es pequeña, se recorta ella con su propio scroll y la
+       pregunta y las opciones no se cortan. */
+    .live-players {
+        flex: 0 1 auto;
+        min-height: 0;
+    }
+
+    /* El escenario se come la altura sobrante: lo de abajo no da saltos */
+    .live-stage {
+        flex: 1 1 auto;
+        min-height: 20rem;
+        display: flex;
+    }
+
+    .live-stage-body {
+        flex: 1 1 auto;
+        min-height: 0;
+        width: 100%;
+        overflow: auto;
+        /* Reserva el hueco de la barra de desplazamiento siempre, para que
+           las opciones no se estrechen al entrar en el recuento. */
+        scrollbar-gutter: stable;
+        padding: 1.25rem;
+        text-align: center;
+    }
+
+    /* Alto constante aunque se pinte o se borre la cuenta atrás */
+    .live-cd {
+        min-height: 3.25rem;
+        font-size: 2.75rem;
+        line-height: 1.1;
+        font-weight: 700;
+    }
+
+    /* Todas las opciones con el mismo ancho y el mismo alto */
+    .live-opts {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-auto-rows: 1fr; /* la fila más alta fija el alto de todas */
+        gap: .75rem;
+        margin-top: 1rem;
+    }
+
+    .live-opt {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        min-height: 5.5rem;
+        width: 100%;
+        padding: .75rem 1rem;
+        background: #fff;
+        color: #212529; /* texto oscuro sobre fondo claro, siempre legible */
+        border: 2px solid #6c757d;
+        border-radius: .5rem;
+        font-family: inherit;
+        font-size: 1.25rem;
+        font-weight: 500;
+        line-height: 1.3;
+        white-space: normal;
+        overflow-wrap: break-word;
+    }
+
+    button.live-opt:hover,
+    button.live-opt:focus-visible {
+        background: #eef2f6;
+        border-color: #0a58ca;
+        color: #0a3d91;
+    }
+
+    button.live-opt:disabled {
+        opacity: .55;
+    }
+
+    /* La correcta: mismo tamaño que las demás, solo con más borde */
+    .live-opt.ok {
+        border-color: #198754;
+        border-width: 4px;
+    }
+
+    .live-opt .ok-mark {
+        display: inline-block;
+        margin-left: .5rem;
+        padding: 0 .4rem;
+        border-radius: .25rem;
+        background: #198754;
+        color: #fff;
+        font-weight: 700;
+    }
+
+    .live-opt .n {
+        display: inline-block;
+        margin-left: .5rem;
+        padding: 0 .4rem;
+        border-radius: .25rem;
+        background: #212529;
+        color: #fff;
+        font-size: 1rem;
+    }
+
+    /* La pregunta no a todo el ancho: desde el fondo del aula se lee mejor
+       partida en dos líneas que estirada en una de 1.500 px. */
+    .live-q {
+        max-width: 56rem;
+        margin-inline: auto;
+    }
+
+    /* Texto secundario con más contraste que text-muted */
+    .live-stage-body .text-muted {
+        color: #495057;
+    }
+
+    /* Si la lista de jugadores crece, que no empuje el escenario */
+    .live-players {
+        max-height: 28vh;
+        overflow: auto;
+    }
+
+    @media (max-width: 767.98px) {
+        .live-opts {
+            grid-template-columns: minmax(0, 1fr);
+        }
+
+        .live-opt {
+            min-height: 4.5rem;
+            font-size: 1.15rem;
+        }
+
+        .live-players {
+            max-height: 30vh;
+        }
+    }
+</style>
