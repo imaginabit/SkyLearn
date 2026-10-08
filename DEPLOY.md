@@ -10,7 +10,7 @@ hace con [`deploy.sh`](deploy.sh).
 cd ~/Proyectos/SkyLearn-Git
 # editar...
 git add -A && git commit -m "..."
-git push origin main        # requiere auth de GitHub (helper 'gh')
+git push origin develop     # la rama desplegada es develop, no main
 
 ./deploy.sh --dry-run       # ver que se va a sincronizar
 ./deploy.sh                 # desplegar al servidor
@@ -26,6 +26,21 @@ configurado en este clon.
 2. En el servidor: permisos (`www-data`), `pip install`, `migrate`,
    `compilemessages -l es`, `collectstatic` y `systemctl restart skylearn`.
 3. Al terminar: https://curso.imaginabit.com
+
+## Despliegue desde Windows
+
+En un equipo Windows **sin `rsync` ni `bash`** se usa [`deploy.ps1`](deploy.ps1),
+que hace lo mismo con `tar` + `scp` (paquete temporal en `/tmp` del servidor,
+extracción con `--chown=www-data:www-data`) y luego los mismos pasos remotos:
+
+```powershell
+.\deploy.ps1 -DryRun        # empaqueta y comprueba, sin tocar el servidor
+.\deploy.ps1                # desplegar
+```
+
+Mismos `--exclude` que `deploy.sh` y, además, comprobaciones que abortan si el
+paquete incluyera datos en vivo (`media/`, `db.sqlite3`, `.env`…). Requiere
+`ssh`, `scp` y `tar` (los tres vienen con Windows 10+).
 
 ## Qué NO toca (datos en vivo, protegidos por `--exclude`)
 
@@ -63,8 +78,9 @@ Cron sugerido (diario a las 3:00):
 
 ## Requisitos
 
-- Acceso SSH por alias `rocinante` (ver `~/.ssh/config`).
-- `rsync` y `ssh` en local.
+- Acceso SSH al servidor: alias `rocinante` (equipo Linux) o
+  `debian@imaginabit.com` (Windows).
+- En Linux: `rsync` y `ssh`. En Windows: `ssh`, `scp` y `tar` (`deploy.ps1`).
 - `sudo` sin contraseña en el servidor para el usuario de despliegue.
 
 ## Reglas
