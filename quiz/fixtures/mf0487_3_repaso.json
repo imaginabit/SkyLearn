@@ -24,9 +24,9 @@
   "pk": 1,
   "fields": {
    "question": 1001,
-   "choice_text": "Sistemático, independiente y documentado, para obtener evidencia objetiva y evaluar el cumplimiento de criterios",
-   "choice_text_es": "Sistemático, independiente y documentado, para obtener evidencia objetiva y evaluar el cumplimiento de criterios",
-   "correct": true
+   "choice_text": "Dirigido exclusivamente a detectar sanciones e invasiones",
+   "choice_text_es": "Dirigido exclusivamente a detectar sanciones e invasiones",
+   "correct": false
   }
  },
  {
@@ -34,9 +34,9 @@
   "pk": 2,
   "fields": {
    "question": 1001,
-   "choice_text": "Dirigido exclusivamente a detectar sanciones e invasiones",
-   "choice_text_es": "Dirigido exclusivamente a detectar sanciones e invasiones",
-   "correct": false
+   "choice_text": "Sistemático, independiente y documentado, para obtener evidencia objetiva y evaluar el cumplimiento de criterios",
+   "choice_text_es": "Sistemático, independiente y documentado, para obtener evidencia objetiva y evaluar el cumplimiento de criterios",
+   "correct": true
   }
  },
  {
@@ -144,9 +144,9 @@
   "pk": 9,
   "fields": {
    "question": 1003,
-   "choice_text": "La información a la que accede por su trabajo, incluso una vez concluida la relación",
-   "choice_text_es": "La información a la que accede por su trabajo, incluso una vez concluida la relación",
-   "correct": true
+   "choice_text": "Solo el contenido de los informes hasta su entrega formal",
+   "choice_text_es": "Solo el contenido de los informes hasta su entrega formal",
+   "correct": false
   }
  },
  {
@@ -154,9 +154,9 @@
   "pk": 10,
   "fields": {
    "question": 1003,
-   "choice_text": "Solo el contenido de los informes hasta su entrega formal",
-   "choice_text_es": "Solo el contenido de los informes hasta su entrega formal",
-   "correct": false
+   "choice_text": "La información a la que accede por su trabajo, incluso una vez concluida la relación",
+   "choice_text_es": "La información a la que accede por su trabajo, incluso una vez concluida la relación",
+   "correct": true
   }
  },
  {
@@ -204,9 +204,9 @@
   "pk": 13,
   "fields": {
    "question": 1004,
-   "choice_text": "Verdadero, exacto, objetivo, completo, claro, relevante y verificable",
-   "choice_text_es": "Verdadero, exacto, objetivo, completo, claro, relevante y verificable",
-   "correct": true
+   "choice_text": "Detallado, para que se entienda quién es el responsable",
+   "choice_text_es": "Detallado, para que se entienda quién es el responsable",
+   "correct": false
   }
  },
  {
@@ -214,8 +214,8 @@
   "pk": 14,
   "fields": {
    "question": 1004,
-   "choice_text": "Detallado, para que se entienda quién es el responsable",
-   "choice_text_es": "Detallado, para que se entienda quién es el responsable",
+   "choice_text": "Ya corregido, con la solución aplicada",
+   "choice_text_es": "Ya corregido, con la solución aplicada",
    "correct": false
   }
  },
@@ -224,9 +224,9 @@
   "pk": 15,
   "fields": {
    "question": 1004,
-   "choice_text": "Ya corregido, con la solución aplicada",
-   "choice_text_es": "Ya corregido, con la solución aplicada",
-   "correct": false
+   "choice_text": "Verdadero, exacto, objetivo, completo, claro, relevante y verificable",
+   "choice_text_es": "Verdadero, exacto, objetivo, completo, claro, relevante y verificable",
+   "correct": true
   }
  },
  {
@@ -264,9 +264,9 @@
   "pk": 17,
   "fields": {
    "question": 1005,
-   "choice_text": "No conformidad",
-   "choice_text_es": "No conformidad",
-   "correct": true
+   "choice_text": "Oportunidad de mejora",
+   "choice_text_es": "Oportunidad de mejora",
+   "correct": false
   }
  },
  {
@@ -274,8 +274,8 @@
   "pk": 18,
   "fields": {
    "question": 1005,
-   "choice_text": "Oportunidad de mejora",
-   "choice_text_es": "Oportunidad de mejora",
+   "choice_text": "Observación",
+   "choice_text_es": "Observación",
    "correct": false
   }
  },
@@ -284,9 +284,9 @@
   "pk": 19,
   "fields": {
    "question": 1005,
-   "choice_text": "Observación",
-   "choice_text_es": "Observación",
-   "correct": false
+   "choice_text": "No conformidad",
+   "choice_text_es": "No conformidad",
+   "correct": true
   }
  },
  {
@@ -384,9 +384,9 @@
   "pk": 25,
   "fields": {
    "question": 1007,
-   "choice_text": "La calidad y la veracidad de los datos",
-   "choice_text_es": "La calidad y la veracidad de los datos",
-   "correct": true
+   "choice_text": "La eficacia de los controles internos",
+   "choice_text_es": "La eficacia de los controles internos",
+   "correct": false
   }
  },
  {
@@ -394,9 +394,9 @@
   "pk": 26,
   "fields": {
    "question": 1007,
-   "choice_text": "La eficacia de los controles internos",
-   "choice_text_es": "La eficacia de los controles internos",
-   "correct": false
+   "choice_text": "La calidad y la veracidad de los datos",
+   "choice_text_es": "La calidad y la veracidad de los datos",
+   "correct": true
   }
  },
  {
@@ -504,9 +504,9 @@
   "pk": 33,
   "fields": {
    "question": 1009,
-   "choice_text": "Dispone de la misma información que un atacante externo",
-   "choice_text_es": "Dispone de la misma información que un atacante externo",
-   "correct": true
+   "choice_text": "Tiene todo el conocimiento del sistema auditado",
+   "choice_text_es": "Tiene todo el conocimiento del sistema auditado",
+   "correct": false
   }
  },
  {
@@ -514,9 +514,9 @@
   "pk": 34,
   "fields": {
    "question": 1009,
-   "choice_text": "Tiene todo el conocimiento del sistema auditado",
-   "choice_text_es": "Tiene todo el conocimiento del sistema auditado",
-   "correct": false
+   "choice_text": "Dispone de la misma información que un atacante externo",
+   "choice_text_es": "Dispone de la misma información que un atacante externo",
+   "correct": true
   }
  },
  {
@@ -564,9 +564,9 @@
   "pk": 37,
   "fields": {
    "question": 1010,
-   "choice_text": "Del tipo de análisis realizado y de la información disponible",
-   "choice_text_es": "Del tipo de análisis realizado y de la información disponible",
-   "correct": true
+   "choice_text": "Del número de herramientas empleadas en la auditoría",
+   "choice_text_es": "Del número de herramientas empleadas en la auditoría",
+   "correct": false
   }
  },
  {
@@ -574,8 +574,8 @@
   "pk": 38,
   "fields": {
    "question": 1010,
-   "choice_text": "Del número de herramientas empleadas en la auditoría",
-   "choice_text_es": "Del número de herramientas empleadas en la auditoría",
+   "choice_text": "De la marca de la herramienta utilizada",
+   "choice_text_es": "De la marca de la herramienta utilizada",
    "correct": false
   }
  },
@@ -584,9 +584,9 @@
   "pk": 39,
   "fields": {
    "question": 1010,
-   "choice_text": "De la marca de la herramienta utilizada",
-   "choice_text_es": "De la marca de la herramienta utilizada",
-   "correct": false
+   "choice_text": "Del tipo de análisis realizado y de la información disponible",
+   "choice_text_es": "Del tipo de análisis realizado y de la información disponible",
+   "correct": true
   }
  },
  {
@@ -624,9 +624,9 @@
   "pk": 41,
   "fields": {
    "question": 1011,
-   "choice_text": "Un aviso que no corresponde a un riesgo real",
-   "choice_text_es": "Un aviso que no corresponde a un riesgo real",
-   "correct": true
+   "choice_text": "Una vulnerabilidad real que el auditor no sabe interpretar",
+   "choice_text_es": "Una vulnerabilidad real que el auditor no sabe interpretar",
+   "correct": false
   }
  },
  {
@@ -634,9 +634,9 @@
   "pk": 42,
   "fields": {
    "question": 1011,
-   "choice_text": "Una vulnerabilidad real que el auditor no sabe interpretar",
-   "choice_text_es": "Una vulnerabilidad real que el auditor no sabe interpretar",
-   "correct": false
+   "choice_text": "Un aviso que no corresponde a un riesgo real",
+   "choice_text_es": "Un aviso que no corresponde a un riesgo real",
+   "correct": true
   }
  },
  {
@@ -684,9 +684,9 @@
   "pk": 45,
   "fields": {
    "question": 1012,
-   "choice_text": "Nmap",
-   "choice_text_es": "Nmap",
-   "correct": true
+   "choice_text": "Nessus",
+   "choice_text_es": "Nessus",
+   "correct": false
   }
  },
  {
@@ -694,8 +694,8 @@
   "pk": 46,
   "fields": {
    "question": 1012,
-   "choice_text": "Nessus",
-   "choice_text_es": "Nessus",
+   "choice_text": "John the Ripper",
+   "choice_text_es": "John the Ripper",
    "correct": false
   }
  },
@@ -704,9 +704,9 @@
   "pk": 47,
   "fields": {
    "question": 1012,
-   "choice_text": "John the Ripper",
-   "choice_text_es": "John the Ripper",
-   "correct": false
+   "choice_text": "Nmap",
+   "choice_text_es": "Nmap",
+   "correct": true
   }
  },
  {
@@ -744,9 +744,9 @@
   "pk": 49,
   "fields": {
    "question": 1013,
-   "choice_text": "Vulnerabilidades",
-   "choice_text_es": "Vulnerabilidades",
-   "correct": true
+   "choice_text": "Puertos",
+   "choice_text_es": "Puertos",
+   "correct": false
   }
  },
  {
@@ -754,9 +754,9 @@
   "pk": 50,
   "fields": {
    "question": 1013,
-   "choice_text": "Puertos",
-   "choice_text_es": "Puertos",
-   "correct": false
+   "choice_text": "Vulnerabilidades",
+   "choice_text_es": "Vulnerabilidades",
+   "correct": true
   }
  },
  {
@@ -864,9 +864,9 @@
   "pk": 57,
   "fields": {
    "question": 1015,
-   "choice_text": "Planificación › recogida de información › análisis › evaluación de riesgos › implementación de soluciones › seguimiento y revisión",
-   "choice_text_es": "Planificación › recogida de información › análisis › evaluación de riesgos › implementación de soluciones › seguimiento y revisión",
-   "correct": true
+   "choice_text": "Planificación › análisis › informe › recogida › seguimiento",
+   "choice_text_es": "Planificación › análisis › informe › recogida › seguimiento",
+   "correct": false
   }
  },
  {
@@ -874,9 +874,9 @@
   "pk": 58,
   "fields": {
    "question": 1015,
-   "choice_text": "Planificación › análisis › informe › recogida › seguimiento",
-   "choice_text_es": "Planificación › análisis › informe › recogida › seguimiento",
-   "correct": false
+   "choice_text": "Planificación › recogida de información › análisis › evaluación de riesgos › implementación de soluciones › seguimiento y revisión",
+   "choice_text_es": "Planificación › recogida de información › análisis › evaluación de riesgos › implementación de soluciones › seguimiento y revisión",
+   "correct": true
   }
  },
  {
@@ -924,9 +924,9 @@
   "pk": 61,
   "fields": {
    "question": 1016,
-   "choice_text": "El Reglamento (UE) 2016/679, conocido como RGPD",
-   "choice_text_es": "El Reglamento (UE) 2016/679, conocido como RGPD",
-   "correct": true
+   "choice_text": "La Directiva 95/46/CE",
+   "choice_text_es": "La Directiva 95/46/CE",
+   "correct": false
   }
  },
  {
@@ -934,9 +934,9 @@
   "pk": 62,
   "fields": {
    "question": 1016,
-   "choice_text": "La Directiva 95/46/CE",
-   "choice_text_es": "La Directiva 95/46/CE",
-   "correct": false
+   "choice_text": "El Reglamento (UE) 2016/679, conocido como RGPD",
+   "choice_text_es": "El Reglamento (UE) 2016/679, conocido como RGPD",
+   "correct": true
   }
  },
  {
@@ -984,9 +984,9 @@
   "pk": 65,
   "fields": {
    "question": 1017,
-   "choice_text": "La Ley Orgánica 3/2018, de 5 de diciembre (LOPDGDD)",
-   "choice_text_es": "La Ley Orgánica 3/2018, de 5 de diciembre (LOPDGDD)",
-   "correct": true
+   "choice_text": "La Ley Orgánica 15/1999 (LOPD)",
+   "choice_text_es": "La Ley Orgánica 15/1999 (LOPD)",
+   "correct": false
   }
  },
  {
@@ -994,8 +994,8 @@
   "pk": 66,
   "fields": {
    "question": 1017,
-   "choice_text": "La Ley Orgánica 15/1999 (LOPD)",
-   "choice_text_es": "La Ley Orgánica 15/1999 (LOPD)",
+   "choice_text": "La Ley Orgánica 5/1992 (LORTAD)",
+   "choice_text_es": "La Ley Orgánica 5/1992 (LORTAD)",
    "correct": false
   }
  },
@@ -1004,9 +1004,9 @@
   "pk": 67,
   "fields": {
    "question": 1017,
-   "choice_text": "La Ley Orgánica 5/1992 (LORTAD)",
-   "choice_text_es": "La Ley Orgánica 5/1992 (LORTAD)",
-   "correct": false
+   "choice_text": "La Ley Orgánica 3/2018, de 5 de diciembre (LOPDGDD)",
+   "choice_text_es": "La Ley Orgánica 3/2018, de 5 de diciembre (LOPDGDD)",
+   "correct": true
   }
  },
  {
@@ -1104,9 +1104,9 @@
   "pk": 73,
   "fields": {
    "question": 1019,
-   "choice_text": "El coste de la aplicación, la naturaleza, el alcance y el contexto del tratamiento, y los riesgos para los derechos y libertades de los interesados",
-   "choice_text_es": "El coste de la aplicación, la naturaleza, el alcance y el contexto del tratamiento, y los riesgos para los derechos y libertades de los interesados",
-   "correct": true
+   "choice_text": "El número de empleados de la organización",
+   "choice_text_es": "El número de empleados de la organización",
+   "correct": false
   }
  },
  {
@@ -1114,8 +1114,8 @@
   "pk": 74,
   "fields": {
    "question": 1019,
-   "choice_text": "El número de empleados de la organización",
-   "choice_text_es": "El número de empleados de la organización",
+   "choice_text": "El presupuesto anual del departamento de sistemas",
+   "choice_text_es": "El presupuesto anual del departamento de sistemas",
    "correct": false
   }
  },
@@ -1124,9 +1124,9 @@
   "pk": 75,
   "fields": {
    "question": 1019,
-   "choice_text": "El presupuesto anual del departamento de sistemas",
-   "choice_text_es": "El presupuesto anual del departamento de sistemas",
-   "correct": false
+   "choice_text": "El coste de la aplicación, la naturaleza, el alcance y el contexto del tratamiento, y los riesgos para los derechos y libertades de los interesados",
+   "choice_text_es": "El coste de la aplicación, la naturaleza, el alcance y el contexto del tratamiento, y los riesgos para los derechos y libertades de los interesados",
+   "correct": true
   }
  },
  {
@@ -1164,9 +1164,9 @@
   "pk": 77,
   "fields": {
    "question": 1020,
-   "choice_text": "En las organizaciones que realizan tratamientos de datos a gran escala y en la Administración pública",
-   "choice_text_es": "En las organizaciones que realizan tratamientos de datos a gran escala y en la Administración pública",
-   "correct": true
+   "choice_text": "En todas las empresas, sin excepción",
+   "choice_text_es": "En todas las empresas, sin excepción",
+   "correct": false
   }
  },
  {
@@ -1174,9 +1174,9 @@
   "pk": 78,
   "fields": {
    "question": 1020,
-   "choice_text": "En todas las empresas, sin excepción",
-   "choice_text_es": "En todas las empresas, sin excepción",
-   "correct": false
+   "choice_text": "En las organizaciones que realizan tratamientos de datos a gran escala y en la Administración pública",
+   "choice_text_es": "En las organizaciones que realizan tratamientos de datos a gran escala y en la Administración pública",
+   "correct": true
   }
  },
  {
@@ -1203,10 +1203,10 @@
   "model": "quiz.question",
   "pk": 1021,
   "fields": {
-   "content": "En la normativa vigente, los ficheros con datos personales ya no se clasifican en niveles básico, medio o alto. En su lugar se habla de:",
-   "content_es": "En la normativa vigente, los ficheros con datos personales ya no se clasifican en niveles básico, medio o alto. En su lugar se habla de:",
-   "explanation": "Correcta: A — el nivel adecuado al riesgo del art. 32.2.",
-   "explanation_es": "Correcta: A — el nivel adecuado al riesgo del art. 32.2.",
+   "content": "Según el artículo 32 del RGPD, responsables y encargados deben aplicar:",
+   "content_es": "Según el artículo 32 del RGPD, responsables y encargados deben aplicar:",
+   "explanation": "Correcta: A — medidas técnicas y organizativas apropiadas para garantizar un nivel de seguridad adecuado al riesgo.",
+   "explanation_es": "Correcta: A — medidas técnicas y organizativas apropiadas para garantizar un nivel de seguridad adecuado al riesgo.",
    "quiz": [
     1
    ]
@@ -1224,8 +1224,8 @@
   "pk": 81,
   "fields": {
    "question": 1021,
-   "choice_text": "Nivel adecuado al riesgo determinado según el art. 32.2 del RGPD",
-   "choice_text_es": "Nivel adecuado al riesgo determinado según el art. 32.2 del RGPD",
+   "choice_text": "Medidas técnicas y organizativas apropiadas para garantizar un nivel de seguridad adecuado al riesgo",
+   "choice_text_es": "Medidas técnicas y organizativas apropiadas para garantizar un nivel de seguridad adecuado al riesgo",
    "correct": true
   }
  },
@@ -1284,16 +1284,6 @@
   "pk": 85,
   "fields": {
    "question": 1022,
-   "choice_text": "Ya no es obligatoria, aunque es muy recomendable hacerla cada dos años o ante cambios relevantes",
-   "choice_text_es": "Ya no es obligatoria, aunque es muy recomendable hacerla cada dos años o ante cambios relevantes",
-   "correct": true
-  }
- },
- {
-  "model": "quiz.choice",
-  "pk": 86,
-  "fields": {
-   "question": 1022,
    "choice_text": "Es obligatoria cada dos años",
    "choice_text_es": "Es obligatoria cada dos años",
    "correct": false
@@ -1301,7 +1291,7 @@
  },
  {
   "model": "quiz.choice",
-  "pk": 87,
+  "pk": 86,
   "fields": {
    "question": 1022,
    "choice_text": "Es obligatoria cada cinco años",
@@ -1311,12 +1301,22 @@
  },
  {
   "model": "quiz.choice",
-  "pk": 88,
+  "pk": 87,
   "fields": {
    "question": 1022,
    "choice_text": "Solo es obligatoria en el sector público",
    "choice_text_es": "Solo es obligatoria en el sector público",
    "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 88,
+  "fields": {
+   "question": 1022,
+   "choice_text": "Ya no es obligatoria, aunque es muy recomendable hacerla cada dos años o ante cambios relevantes",
+   "choice_text_es": "Ya no es obligatoria, aunque es muy recomendable hacerla cada dos años o ante cambios relevantes",
+   "correct": true
   }
  },
  {
@@ -1464,16 +1464,6 @@
   "pk": 97,
   "fields": {
    "question": 1025,
-   "choice_text": "Desalentar la acción del atacante",
-   "choice_text_es": "Desalentar la acción del atacante",
-   "correct": true
-  }
- },
- {
-  "model": "quiz.choice",
-  "pk": 98,
-  "fields": {
-   "question": 1025,
    "choice_text": "Reparar el daño una vez ocurrido",
    "choice_text_es": "Reparar el daño una vez ocurrido",
    "correct": false
@@ -1481,7 +1471,7 @@
  },
  {
   "model": "quiz.choice",
-  "pk": 99,
+  "pk": 98,
   "fields": {
    "question": 1025,
    "choice_text": "Reducir la vulnerabilidad de los activos para limitar las posibilidades de entrada",
@@ -1491,12 +1481,22 @@
  },
  {
   "model": "quiz.choice",
-  "pk": 100,
+  "pk": 99,
   "fields": {
    "question": 1025,
    "choice_text": "Detectar que el incidente está ocurriendo",
    "choice_text_es": "Detectar que el incidente está ocurriendo",
    "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 100,
+  "fields": {
+   "question": 1025,
+   "choice_text": "Desalentar la acción del atacante",
+   "choice_text_es": "Desalentar la acción del atacante",
+   "correct": true
   }
  },
  {
@@ -1524,9 +1524,9 @@
   "pk": 101,
   "fields": {
    "question": 1026,
-   "choice_text": "La inherente al sistema por su diseño o configuración",
-   "choice_text_es": "La inherente al sistema por su diseño o configuración",
-   "correct": true
+   "choice_text": "La que puede explotarse realmente por existir determinados controles",
+   "choice_text_es": "La que puede explotarse realmente por existir determinados controles",
+   "correct": false
   }
  },
  {
@@ -1534,9 +1534,9 @@
   "pk": 102,
   "fields": {
    "question": 1026,
-   "choice_text": "La que puede explotarse realmente por existir determinados controles",
-   "choice_text_es": "La que puede explotarse realmente por existir determinados controles",
-   "correct": false
+   "choice_text": "La inherente al sistema por su diseño o configuración",
+   "choice_text_es": "La inherente al sistema por su diseño o configuración",
+   "correct": true
   }
  },
  {
@@ -1584,9 +1584,9 @@
   "pk": 105,
   "fields": {
    "question": 1027,
-   "choice_text": "Con datos históricos y modelos estadísticos",
-   "choice_text_es": "Con datos históricos y modelos estadísticos",
-   "correct": true
+   "choice_text": "Con criterios subjetivos del auditor",
+   "choice_text_es": "Con criterios subjetivos del auditor",
+   "correct": false
   }
  },
  {
@@ -1594,9 +1594,9 @@
   "pk": 106,
   "fields": {
    "question": 1027,
-   "choice_text": "Con criterios subjetivos del auditor",
-   "choice_text_es": "Con criterios subjetivos del auditor",
-   "correct": false
+   "choice_text": "Con datos históricos y modelos estadísticos",
+   "choice_text_es": "Con datos históricos y modelos estadísticos",
+   "correct": true
   }
  },
  {
@@ -1644,9 +1644,9 @@
   "pk": 109,
   "fields": {
    "question": 1028,
-   "choice_text": "Estático y dinámico",
-   "choice_text_es": "Estático y dinámico",
-   "correct": true
+   "choice_text": "En línea y fuera de línea",
+   "choice_text_es": "En línea y fuera de línea",
+   "correct": false
   }
  },
  {
@@ -1654,9 +1654,9 @@
   "pk": 110,
   "fields": {
    "question": 1028,
-   "choice_text": "En línea y fuera de línea",
-   "choice_text_es": "En línea y fuera de línea",
-   "correct": false
+   "choice_text": "Estático y dinámico",
+   "choice_text_es": "Estático y dinámico",
+   "correct": true
   }
  },
  {
@@ -1704,9 +1704,9 @@
   "pk": 113,
   "fields": {
    "question": 1029,
-   "choice_text": "Denegar por defecto todo el tráfico y permitir solo el necesario",
-   "choice_text_es": "Denegar por defecto todo el tráfico y permitir solo el necesario",
-   "correct": true
+   "choice_text": "Permitir todo el tráfico y denegar después",
+   "choice_text_es": "Permitir todo el tráfico y denegar después",
+   "correct": false
   }
  },
  {
@@ -1714,8 +1714,8 @@
   "pk": 114,
   "fields": {
    "question": 1029,
-   "choice_text": "Permitir todo el tráfico y denegar después",
-   "choice_text_es": "Permitir todo el tráfico y denegar después",
+   "choice_text": "Registrar únicamente los accesos denegados",
+   "choice_text_es": "Registrar únicamente los accesos denegados",
    "correct": false
   }
  },
@@ -1724,9 +1724,9 @@
   "pk": 115,
   "fields": {
    "question": 1029,
-   "choice_text": "Registrar únicamente los accesos denegados",
-   "choice_text_es": "Registrar únicamente los accesos denegados",
-   "correct": false
+   "choice_text": "Denegar por defecto todo el tráfico y permitir solo el necesario",
+   "choice_text_es": "Denegar por defecto todo el tráfico y permitir solo el necesario",
+   "correct": true
   }
  },
  {
@@ -1824,9 +1824,9 @@
   "pk": 121,
   "fields": {
    "question": 1031,
-   "choice_text": "Obtener evidencia objetiva y evaluar en qué medida se cumplen los criterios de auditoría",
-   "choice_text_es": "Obtener evidencia objetiva y evaluar en qué medida se cumplen los criterios de auditoría",
-   "correct": true
+   "choice_text": "Localizar al responsable de los incidentes de seguridad",
+   "choice_text_es": "Localizar al responsable de los incidentes de seguridad",
+   "correct": false
   }
  },
  {
@@ -1834,9 +1834,9 @@
   "pk": 122,
   "fields": {
    "question": 1031,
-   "choice_text": "Localizar al responsable de los incidentes de seguridad",
-   "choice_text_es": "Localizar al responsable de los incidentes de seguridad",
-   "correct": false
+   "choice_text": "Obtener evidencia objetiva y evaluar en qué medida se cumplen los criterios de auditoría",
+   "choice_text_es": "Obtener evidencia objetiva y evaluar en qué medida se cumplen los criterios de auditoría",
+   "correct": true
   }
  },
  {
@@ -1884,9 +1884,9 @@
   "pk": 125,
   "fields": {
    "question": 1032,
-   "choice_text": "Observación",
-   "choice_text_es": "Observación",
-   "correct": true
+   "choice_text": "No conformidad",
+   "choice_text_es": "No conformidad",
+   "correct": false
   }
  },
  {
@@ -1894,9 +1894,9 @@
   "pk": 126,
   "fields": {
    "question": 1032,
-   "choice_text": "No conformidad",
-   "choice_text_es": "No conformidad",
-   "correct": false
+   "choice_text": "Observación",
+   "choice_text_es": "Observación",
+   "correct": true
   }
  },
  {
@@ -1944,9 +1944,9 @@
   "pk": 129,
   "fields": {
    "question": 1033,
-   "choice_text": "Una Computer Assisted Audit Technique: una herramienta que automatiza la recogida de evidencia",
-   "choice_text_es": "Una Computer Assisted Audit Technique: una herramienta que automatiza la recogida de evidencia",
-   "correct": true
+   "choice_text": "Un tipo de hallazgo de auditoría",
+   "choice_text_es": "Un tipo de hallazgo de auditoría",
+   "correct": false
   }
  },
  {
@@ -1954,8 +1954,8 @@
   "pk": 130,
   "fields": {
    "question": 1033,
-   "choice_text": "Un tipo de hallazgo de auditoría",
-   "choice_text_es": "Un tipo de hallazgo de auditoría",
+   "choice_text": "Un tipo de prueba sustantiva",
+   "choice_text_es": "Un tipo de prueba sustantiva",
    "correct": false
   }
  },
@@ -1964,9 +1964,9 @@
   "pk": 131,
   "fields": {
    "question": 1033,
-   "choice_text": "Un tipo de prueba sustantiva",
-   "choice_text_es": "Un tipo de prueba sustantiva",
-   "correct": false
+   "choice_text": "Una Computer Assisted Audit Technique: una herramienta que automatiza la recogida de evidencia",
+   "choice_text_es": "Una Computer Assisted Audit Technique: una herramienta que automatiza la recogida de evidencia",
+   "correct": true
   }
  },
  {
@@ -2004,9 +2004,9 @@
   "pk": 133,
   "fields": {
    "question": 1034,
-   "choice_text": "John the Ripper",
-   "choice_text_es": "John the Ripper",
-   "correct": true
+   "choice_text": "Nessus",
+   "choice_text_es": "Nessus",
+   "correct": false
   }
  },
  {
@@ -2014,9 +2014,9 @@
   "pk": 134,
   "fields": {
    "question": 1034,
-   "choice_text": "Nessus",
-   "choice_text_es": "Nessus",
-   "correct": false
+   "choice_text": "John the Ripper",
+   "choice_text_es": "John the Ripper",
+   "correct": true
   }
  },
  {
@@ -2064,9 +2064,9 @@
   "pk": 137,
   "fields": {
    "question": 1035,
-   "choice_text": "Principio de limitación del plazo de conservación",
-   "choice_text_es": "Principio de limitación del plazo de conservación",
-   "correct": true
+   "choice_text": "Principio de exactitud",
+   "choice_text_es": "Principio de exactitud",
+   "correct": false
   }
  },
  {
@@ -2074,8 +2074,8 @@
   "pk": 138,
   "fields": {
    "question": 1035,
-   "choice_text": "Principio de exactitud",
-   "choice_text_es": "Principio de exactitud",
+   "choice_text": "Principio de minimización",
+   "choice_text_es": "Principio de minimización",
    "correct": false
   }
  },
@@ -2084,9 +2084,9 @@
   "pk": 139,
   "fields": {
    "question": 1035,
-   "choice_text": "Principio de minimización",
-   "choice_text_es": "Principio de minimización",
-   "correct": false
+   "choice_text": "Principio de limitación del plazo de conservación",
+   "choice_text_es": "Principio de limitación del plazo de conservación",
+   "correct": true
   }
  },
  {
@@ -2184,9 +2184,9 @@
   "pk": 145,
   "fields": {
    "question": 1037,
-   "choice_text": "Evaluar los riesgos de privacidad desde el inicio de cualquier proyecto",
-   "choice_text_es": "Evaluar los riesgos de privacidad desde el inicio de cualquier proyecto",
-   "correct": true
+   "choice_text": "Aplicar medidas de seguridad una vez terminado el proyecto",
+   "choice_text_es": "Aplicar medidas de seguridad una vez terminado el proyecto",
+   "correct": false
   }
  },
  {
@@ -2194,9 +2194,9 @@
   "pk": 146,
   "fields": {
    "question": 1037,
-   "choice_text": "Aplicar medidas de seguridad una vez terminado el proyecto",
-   "choice_text_es": "Aplicar medidas de seguridad una vez terminado el proyecto",
-   "correct": false
+   "choice_text": "Evaluar los riesgos de privacidad desde el inicio de cualquier proyecto",
+   "choice_text_es": "Evaluar los riesgos de privacidad desde el inicio de cualquier proyecto",
+   "correct": true
   }
  },
  {
@@ -2244,9 +2244,9 @@
   "pk": 149,
   "fields": {
    "question": 1038,
-   "choice_text": "La que queda después de aplicar las medidas de seguridad",
-   "choice_text_es": "La que queda después de aplicar las medidas de seguridad",
-   "correct": true
+   "choice_text": "La inherente al sistema por su diseño",
+   "choice_text_es": "La inherente al sistema por su diseño",
+   "correct": false
   }
  },
  {
@@ -2254,8 +2254,8 @@
   "pk": 150,
   "fields": {
    "question": 1038,
-   "choice_text": "La inherente al sistema por su diseño",
-   "choice_text_es": "La inherente al sistema por su diseño",
+   "choice_text": "La que se explota realmente",
+   "choice_text_es": "La que se explota realmente",
    "correct": false
   }
  },
@@ -2264,9 +2264,9 @@
   "pk": 151,
   "fields": {
    "question": 1038,
-   "choice_text": "La que se explota realmente",
-   "choice_text_es": "La que se explota realmente",
-   "correct": false
+   "choice_text": "La que queda después de aplicar las medidas de seguridad",
+   "choice_text_es": "La que queda después de aplicar las medidas de seguridad",
+   "correct": true
   }
  },
  {
@@ -2304,9 +2304,9 @@
   "pk": 153,
   "fields": {
    "question": 1039,
-   "choice_text": "La cabecera de los paquetes, con las direcciones y los puertos",
-   "choice_text_es": "La cabecera de los paquetes, con las direcciones y los puertos",
-   "correct": true
+   "choice_text": "El contenido de los mensajes",
+   "choice_text_es": "El contenido de los mensajes",
+   "correct": false
   }
  },
  {
@@ -2314,9 +2314,9 @@
   "pk": 154,
   "fields": {
    "question": 1039,
-   "choice_text": "El contenido de los mensajes",
-   "choice_text_es": "El contenido de los mensajes",
-   "correct": false
+   "choice_text": "La cabecera de los paquetes, con las direcciones y los puertos",
+   "choice_text_es": "La cabecera de los paquetes, con las direcciones y los puertos",
+   "correct": true
   }
  },
  {
@@ -2364,9 +2364,9 @@
   "pk": 157,
   "fields": {
    "question": 1040,
-   "choice_text": "El par activo-amenaza susceptible de materializarse",
-   "choice_text_es": "El par activo-amenaza susceptible de materializarse",
-   "correct": true
+   "choice_text": "Cualquier amenaza que pueda afectar a la organización",
+   "choice_text_es": "Cualquier amenaza que pueda afectar a la organización",
+   "correct": false
   }
  },
  {
@@ -2374,9 +2374,9 @@
   "pk": 158,
   "fields": {
    "question": 1040,
-   "choice_text": "Cualquier amenaza que pueda afectar a la organización",
-   "choice_text_es": "Cualquier amenaza que pueda afectar a la organización",
-   "correct": false
+   "choice_text": "El par activo-amenaza susceptible de materializarse",
+   "choice_text_es": "El par activo-amenaza susceptible de materializarse",
+   "correct": true
   }
  },
  {

@@ -143,6 +143,104 @@ class LiveQuizTests(TestCase):
         self.assertEqual(r.status_code, 403)
 
 
+class LiveShuffleTests(TestCase):
+    """Las opciones se barajan en cada partida y no se mueven dentro de ella."""
+
+    def setUp(self):
+        self.prof = User.objects.create_user(
+            username="prof", password="x", is_lecturer=True, is_superuser=True
+        )
+        self.ana = User.objects.create_user(
+            username="ana", password="x", is_student=True
+        )
+        self.programa = Program.objects.create(title="Seguridad Informatica")
+        self.curso = Course.objects.create(
+            title="MF0487_3-C5",
+            code="MF0487_3-C5",
+            program=self.programa,
+            level="Master",
+            semester="Third",
+        )
+        self.quiz = Quiz.objects.create(
+            course=self.curso, title="Repaso objetiva", category="practice"
+        )
+        self.pregunta = MCQuestion.objects.create(content="¿Cuánto es 2+2?")
+        self.pregunta.quiz.add(self.quiz)
+        # Las cuatro opciones en el orden en que las guarda el banco
+        Choice.objects.create(question=self.pregunta, choice_text="4", correct=True)
+        Choice.objects.create(question=self.pregunta, choice_text="5", correct=False)
+        Choice.objects.create(question=self.pregunta, choice_text="6", correct=False)
+        Choice.objects.create(question=self.pregunta, choice_text="7", correct=False)
+
+    def _partida(self, code):
+        sesion = LiveSession.objects.create(
+            course=self.curso,
+            quiz=self.quiz,
+            host=self.prof,
+            question_ids=str(self.pregunta.id),
+            state="question",
+            time_limit=20,
+            code=code,
+        )
+        LiveParticipant.objects.create(session=sesion, user=self.ana, nickname="Ana")
+        return sesion
+
+    def _opciones(self, sesion, como_docente):
+        cliente = Client()
+        cliente.force_login(self.prof if como_docente else self.ana)
+        estado = cliente.get(reverse("live_state", args=[sesion.code])).json()
+        return estado["question"]["choices"]
+
+    def _letra_correcta(self, sesion, como_docente=False):
+        """La letra que le toca a la buena, segun el orden que le llega."""
+        opciones = self._opciones(sesion, como_docente)
+        textos = [opcion["text"] for opcion in opciones]
+        return "ABCD"[textos.index("4")]
+
+    def test_el_alumno_no_coge_siempre_la_primera(self):
+        # Con dos partidas solo hay una de cuatro de que coincidan, asi que se
+        # prueban varias: si el barajado no funciona, salen todas con la misma
+        # letra y el conjunto tendria un unico elemento.
+        letras = {
+            self._letra_correcta(self._partida(f"COD{i:03d}")) for i in range(12)
+        }
+        self.assertGreater(len(letras), 1, "todas las partidas han salido igual")
+        self.assertLessEqual(len(letras), 4)
+
+    def test_dentro_de_la_partida_no_se_mueve(self):
+        sesion = self._partida("CCC333")
+        letra = self._letra_correcta(sesion)
+        for _ in range(5):
+            self.assertEqual(self._letra_correcta(sesion), letra)
+
+    def test_docente_y_alumno_ven_lo_mismo(self):
+        sesion = self._partida("DDD444")
+        self.assertEqual(
+            self._letra_correcta(sesion, como_docente=True),
+            self._letra_correcta(sesion, como_docente=False),
+        )
+
+    def test_al_revelar_sigue_siendo_la_misma(self):
+        # El Marcador sale del mismo array de opciones, asi que al revealing
+        # tiene que seguir siendo la que el alumno vio al responder.
+        sesion = self._partida("EEE555")
+        letra = self._letra_correcta(sesion)
+        prof = Client()
+        prof.force_login(self.prof)
+        prof.post(reverse("live_action", args=[sesion.code]), {"action": "reveal"})
+        opciones = self._opciones(sesion, como_docente=True)
+        textos = [opcion["text"] for opcion in opciones]
+        self.assertEqual("ABCD"[textos.index("4")], letra)
+
+    def test_el_recuento_trae_una_entrada_por_opcion(self):
+        sesion = self._partida("FFF666")
+        prof = Client()
+        prof.force_login(self.prof)
+        prof.post(reverse("live_action", args=[sesion.code]), {"action": "reveal"})
+        estado = prof.get(reverse("live_state", args=[sesion.code])).json()
+        self.assertEqual(len(estado["question"]["counts"]), 4)
+
+
 class LiveMenuTests(TestCase):
     """Los enlaces del menu: el alumno entra a la partida, el docente la crea."""
 

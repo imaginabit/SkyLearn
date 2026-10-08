@@ -380,6 +380,23 @@ def _preguntas_mc(quiz):
     return preguntas
 
 
+def _opciones_barajadas(session, pregunta):
+    """Las opciones en un orden distinto en cada partida.
+
+    La semilla sale del codigo de la partida y de la pregunta. Asi, dentro de
+    la misma partida el orden no cambia nunca (el docente, el alumnado y el
+    recuento ven las mismas letras, que es lo que hace falta para que el
+    recuento cuadre) pero de una partida a otra sale distinta, que es lo que
+    evita aprender de memoria «la buena es la A».
+
+    Ojo: `get_choices()` con `choice_order='random'` baraja en cada consulta, y
+    aqui se consulta cada 1,2 s: las opciones se moverian solas en pantalla.
+    """
+    opciones = list(pregunta.get_choices())
+    random.Random(f"{session.code}-{pregunta.id}").shuffle(opciones)
+    return opciones
+
+
 def _es_host(request, session):
     return request.user.is_superuser or session.host_id == request.user.id
 
@@ -517,7 +534,7 @@ def live_state(request, code):
 
     pregunta = session.current_question
     if pregunta and session.state in ("question", "reveal"):
-        choices = list(pregunta.get_choices())
+        choices = _opciones_barajadas(session, pregunta)
         data["question"] = {
             "id": pregunta.id,
             "content": pregunta.content,
