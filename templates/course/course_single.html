@@ -148,6 +148,9 @@
                 {% if submission_form.file.errors %}
                 <div class="text-danger small">{{ submission_form.file.errors }}</div>
                 {% endif %}
+                <div class="form-text">
+                    {% trans "Cada actividad admite unos formatos concretos, que verás al elegirla (por defecto, solo PDF)." %}
+                </div>
             </div>
             <button class="btn btn-sm btn-primary" type="submit">
                 <i class="fas fa-upload me-1"></i>{% trans "Enviar mi entrega" %}
@@ -256,13 +259,13 @@
                             <td>{{ forloop.counter }}</td>
                             <td>
                                 <a href="{{ file.file.url }}" title="{{ file }}" class="d-flex align-items-center">
-                                    <i class="fas fa-file-{{ file.get_extension_short }} me-1"></i>
+                                    <i class="fas fa-file-{{ file.get_extension_short }} me-1" title="{{ file.get_program_name }}"></i>
                                     {{ file.title|title }}
                                 </a>
                                 {% for archivo in file.archivos.all %}
                                 <a href="{{ archivo.file.url }}" title="{{ archivo.nombre }}"
                                     class="d-flex align-items-center small text-muted ps-3">
-                                    <i class="fas fa-file-{{ archivo.get_extension_short }} me-1"></i>
+                                    <i class="fas fa-file-{{ archivo.get_extension_short }} me-1" title="{{ archivo.get_program_name }}"></i>
                                     {{ archivo.nombre }}
                                 </a>
                                 {% endfor %}

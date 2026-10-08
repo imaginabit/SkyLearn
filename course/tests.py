@@ -427,6 +427,136 @@ class ArchivosAdicionalesTests(TestCase):
         self.assertTrue(UploadFile.objects.filter(pk=archivo.pk).exists())
 
 
+class FormatosDeEntregaTests(TestCase):
+    """Cada actividad decide en que formatos puede entregar el alumno.
+
+    Por defecto, solo PDF; el docente puede marcar tambien ODT, DOCX, ZIP...
+    El alumno ve los formatos admitidos al elegir la actividad, y el .odt tiene
+    su propio icono y su aviso de LibreOffice: no es el formato pobre.
+    """
+
+    def setUp(self):
+        self.program = Program.objects.create(title="Programa de prueba")
+        self.curso = Course.objects.create(
+            title="Curso de prueba",
+            code="MIO-1",
+            program=self.program,
+            level="Bachelor",
+            year=1,
+            semester="First",
+        )
+        self.actividad = Upload.objects.create(
+            title="Actividad 1",
+            course=self.curso,
+            file="actividad.pdf",
+            is_activity=True,
+        )
+        alumno = User.objects.create_user(
+            username="tmp-alumno-formatos", password="password", is_student=True
+        )
+        self.student = Student.objects.create(
+            student=alumno, level="Bachelor", program=self.program
+        )
+        TakenCourse.objects.create(student=self.student, course=self.curso)
+        self.client.force_login(self.student.student)
+        self.url_curso = reverse("course_detail", kwargs={"slug": self.curso.slug})
+
+    def _entrega(self, actividad, nombre):
+        with tempfile.TemporaryDirectory() as media:
+            with self.settings(MEDIA_ROOT=media):
+                return self.client.post(
+                    self.url_curso,
+                    {
+                        "document": actividad.pk,
+                        "file": SimpleUploadedFile(nombre, b"%PDF-1.4"),
+                    },
+                )
+
+    def test_por_defecto_la_actividad_solo_admite_pdf(self):
+        self.assertEqual(self.actividad.get_extensiones_permitidas(), ["pdf"])
+        self.assertEqual(self.actividad.formatos_entrega(), "PDF")
+
+    def test_el_alumno_no_entrega_un_formato_que_la_actividad_no_admite(self):
+        response = self._entrega(self.actividad, "trabajo.odt")
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(Submission.objects.count(), 0)
+
+    def test_el_alumno_entrega_en_los_formatos_admitidos(self):
+        self.actividad.extensiones_permitidas = "pdf,odt"
+        self.actividad.save()
+
+        response = self._entrega(self.actividad, "trabajo.odt")
+
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(Submission.objects.count(), 1)
+
+    def test_el_alumno_ve_los_formatos_de_cada_actividad(self):
+        self.actividad.extensiones_permitidas = "pdf,odt"
+        self.actividad.save()
+
+        html = self.client.get(self.url_curso).content.decode()
+
+        self.assertIn("Actividad 1 (PDF, ODT)", html)
+        self.assertIn("Cada actividad admite unos formatos concretos", html)
+
+    def test_el_formulario_del_docente_guarda_los_formatos_marcados(self):
+        docente = User.objects.create_user(
+            username="tmp-docente-formatos", password="password", is_lecturer=True
+        )
+        docente = User.objects.get(pk=docente.pk)
+        asignacion = CourseAllocation.objects.create(lecturer=docente)
+        asignacion.courses.set([self.curso])
+        self.client.force_login(docente)
+
+        with tempfile.TemporaryDirectory() as media:
+            with self.settings(MEDIA_ROOT=media):
+                response = self.client.post(
+                    reverse("upload_file_view", kwargs={"slug": self.curso.slug}),
+                    {
+                        "title": "Actividad en dos formatos",
+                        "file": SimpleUploadedFile("guia.docx", b"PK\x03\x04"),
+                        "is_activity": "on",
+                        "extensiones_permitidas": ["pdf", "odt"],
+                    },
+                )
+
+        self.assertEqual(response.status_code, 302)
+        upload = Upload.objects.get(title="Actividad en dos formatos")
+        self.assertEqual(upload.extensiones_permitidas, "pdf,odt")
+
+    def test_sin_marcar_ningun_formato_queda_en_pdf(self):
+        docente = User.objects.create_user(
+            username="tmp-docente-sin-formatos", password="password", is_lecturer=True
+        )
+        docente = User.objects.get(pk=docente.pk)
+        asignacion = CourseAllocation.objects.create(lecturer=docente)
+        asignacion.courses.set([self.curso])
+        self.client.force_login(docente)
+
+        with tempfile.TemporaryDirectory() as media:
+            with self.settings(MEDIA_ROOT=media):
+                self.client.post(
+                    reverse("upload_file_view", kwargs={"slug": self.curso.slug}),
+                    {
+                        "title": "Actividad sin formatos marcados",
+                        "file": SimpleUploadedFile("guia.docx", b"PK\x03\x04"),
+                        "is_activity": "on",
+                    },
+                )
+
+        upload = Upload.objects.get(title="Actividad sin formatos marcados")
+        self.assertEqual(upload.extensiones_permitidas, "pdf")
+
+    def test_los_ficheros_odt_tienen_icono_y_aviso_de_libreoffice(self):
+        UploadFile.objects.create(upload=self.actividad, file="course_files/guia.odt")
+
+        html = self.client.get(self.url_curso).content.decode()
+
+        self.assertIn("fa-file-lines", html)
+        self.assertIn('title="LibreOffice Writer"', html)
+
+
 class DeckDownloadTests(TestCase):
     """La presentacion se descarga como adjunto y no se abre en el navegador."""
 

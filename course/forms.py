@@ -3,11 +3,14 @@ from accounts.models import User
 from .models import (
     Course,
     CourseAllocation,
+    EXTENSIONES_ENTREGA,
+    EXTENSION_ENTREGA_POR_DEFECTO,
     Program,
     Submission,
     Upload,
     UploadFile,
     UploadVideo,
+    extension,
 )
 
 
@@ -111,6 +114,16 @@ class UploadFormFile(forms.ModelForm):
             "descargar todos."
         ),
     )
+    extensiones_permitidas = forms.MultipleChoiceField(
+        required=False,
+        label="Formatos que puede entregar el alumno",
+        choices=[(e, e.upper()) for e in EXTENSIONES_ENTREGA],
+        widget=forms.CheckboxSelectMultiple(attrs={"class": "form-check-input"}),
+        help_text=(
+            "Solo para actividades: los formatos que se aceptan en la entrega "
+            "del alumno. Si no marcas ninguno, solo se admite PDF."
+        ),
+    )
 
     class Meta:
         model = Upload
@@ -119,6 +132,7 @@ class UploadFormFile(forms.ModelForm):
             "file",
             "is_activity",
             "is_evaluable",
+            "extensiones_permitidas",
         )
 
     def __init__(self, *args, **kwargs):
@@ -127,6 +141,18 @@ class UploadFormFile(forms.ModelForm):
         self.fields["file"].widget.attrs.update({"class": "form-control"})
         self.fields["is_activity"].widget.attrs.update({"class": "form-check-input"})
         self.fields["is_evaluable"].widget.attrs.update({"class": "form-check-input"})
+        # El campo del modelo guarda "pdf,odt"; el formulario trabaja con una
+        # lista, asi que el initial hay que darlo ya troceado.
+        if self.instance.pk:
+            self.initial["extensiones_permitidas"] = (
+                self.instance.get_extensiones_permitidas()
+            )
+
+    def clean_extensiones_permitidas(self):
+        elegidas = self.cleaned_data["extensiones_permitidas"]
+        if not elegidas:
+            elegidas = [EXTENSION_ENTREGA_POR_DEFECTO]
+        return ",".join(elegidas)
 
     def clean_archivos(self):
         """Que no repita los mismos nombres, que es lo que pasa si se sube dos
@@ -171,8 +197,26 @@ class SubmissionForm(forms.ModelForm):
             self.fields["document"].queryset = Upload.objects.filter(
                 course=course, is_activity=True
             ).order_by("upload_time")
+        # El alumno tiene que ver, al elegir la actividad, en que formato puede
+        # entregarla: la etiqueta lleva los formatos admitidos.
+        self.fields["document"].label_from_instance = (
+            lambda actividad: f"{actividad.title} ({actividad.formatos_entrega()})"
+        )
         self.fields["document"].widget.attrs.update({"class": "form-select"})
         self.fields["file"].widget.attrs.update({"class": "form-control"})
+
+    def clean(self):
+        """El fichero tiene que ser de uno de los formatos de esa actividad."""
+        cleaned_data = super().clean()
+        actividad = cleaned_data.get("document")
+        fichero = cleaned_data.get("file")
+        if actividad and fichero:
+            if extension(fichero.name) not in actividad.get_extensiones_permitidas():
+                self.add_error(
+                    "file",
+                    f"Esta actividad solo admite: {actividad.formatos_entrega()}.",
+                )
+        return cleaned_data
 
 
 class SubmissionGradeForm(forms.ModelForm):

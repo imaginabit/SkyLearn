@@ -37,6 +37,7 @@ EXTENSIONES = [
 ICONOS = {
     "doc": "word",
     "docx": "word",
+    "odt": "lines",
     "pdf": "pdf",
     "xls": "excel",
     "xlsx": "excel",
@@ -47,10 +48,53 @@ ICONOS = {
     "7zip": "archive",
 }
 
+# Que programa abre cada formato. El .odt es de LibreOffice, no de Word, y se
+# avisa en el `title` del icono para que no parezca el formato pobre.
+PROGRAMAS = {
+    "doc": "Microsoft Word",
+    "docx": "Microsoft Word",
+    "odt": "LibreOffice Writer",
+    "pdf": "PDF",
+    "xls": "Microsoft Excel",
+    "xlsx": "Microsoft Excel",
+    "ppt": "Microsoft PowerPoint",
+    "pptx": "Microsoft PowerPoint",
+    "zip": "ZIP",
+    "rar": "RAR",
+    "7zip": "7-Zip",
+}
+
+# Formatos que el alumno puede entregar en una actividad (`Submission.file`).
+EXTENSIONES_ENTREGA = [
+    "pdf",
+    "docx",
+    "doc",
+    "odt",
+    "zip",
+    "rar",
+    "7zip",
+    "png",
+    "jpg",
+    "jpeg",
+]
+
+# Por defecto una actividad solo admite PDF.
+EXTENSION_ENTREGA_POR_DEFECTO = "pdf"
+
 
 def extension_short(nombre):
     """El nombre del icono de Font Awesome para un fichero, por su extensión."""
     return ICONOS.get(nombre.rsplit(".", 1)[-1].lower(), "file")
+
+
+def programa(nombre):
+    """El programa que abre el fichero, por su extensión ('' si no se sabe)."""
+    return PROGRAMAS.get(nombre.rsplit(".", 1)[-1].lower(), "")
+
+
+def extension(nombre):
+    """La extensión del fichero, en minúsculas y sin el punto."""
+    return nombre.rsplit(".", 1)[-1].lower()
 
 
 class ProgramManager(models.Manager):
@@ -184,12 +228,41 @@ class Upload(models.Model):
         verbose_name=_("Actividad evaluable"),
         help_text=_("Solo las actividades evaluables cuentan para la nota final."),
     )
+    extensiones_permitidas = models.CharField(
+        max_length=100,
+        default=EXTENSION_ENTREGA_POR_DEFECTO,
+        verbose_name=_("Formatos que puede entregar el alumno"),
+        help_text=_(
+            "Solo para actividades: extensiones separadas por comas. "
+            "Por defecto, solo pdf."
+        ),
+    )
 
     def __str__(self):
         return f"{self.title}"
 
     def get_extension_short(self):
         return extension_short(self.file.name)
+
+    def get_program_name(self):
+        return programa(self.file.name)
+
+    def get_extensiones_permitidas(self):
+        """Los formatos que se aceptan en la entrega de esta actividad.
+
+        Se guardan separados por comas; si el campo quedara vacio, se admite
+        solo PDF, que es el comportamiento por defecto.
+        """
+        elegidas = [
+            e.strip().lower().lstrip(".")
+            for e in self.extensiones_permitidas.split(",")
+            if e.strip()
+        ]
+        return elegidas or [EXTENSION_ENTREGA_POR_DEFECTO]
+
+    def formatos_entrega(self):
+        """Los formatos admitidos, separados por comas, para la pantalla."""
+        return ", ".join(e.upper() for e in self.get_extensiones_permitidas())
 
 
 class UploadFile(models.Model):
@@ -228,6 +301,9 @@ class UploadFile(models.Model):
 
     def get_extension_short(self):
         return extension_short(self.file.name)
+
+    def get_program_name(self):
+        return programa(self.file.name)
 
 
 @receiver(post_save, sender=Upload)
@@ -352,22 +428,7 @@ class Submission(models.Model):
     file = models.FileField(
         upload_to="submissions/",
         help_text=_("Valid Files: pdf, docx, doc, odt, zip, rar, 7zip, png, jpg"),
-        validators=[
-            FileExtensionValidator(
-                [
-                    "pdf",
-                    "docx",
-                    "doc",
-                    "odt",
-                    "zip",
-                    "rar",
-                    "7zip",
-                    "png",
-                    "jpg",
-                    "jpeg",
-                ]
-            )
-        ],
+        validators=[FileExtensionValidator(EXTENSIONES_ENTREGA)],
     )
     uploaded_at = models.DateTimeField(auto_now=True)
     mark = models.DecimalField(
