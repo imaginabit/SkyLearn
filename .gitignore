@@ -147,6 +147,9 @@ media/registration_form/*
 media/result_sheet/*
 !media/result_sheet/README.txt
 
+# Datos locales del servidor (no se versionan)
+.server.local.md
+
 # Custom
 dump.rdb
 *.DS_Store
