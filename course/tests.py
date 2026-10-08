@@ -472,6 +472,31 @@ class FormatosDeEntregaTests(TestCase):
                     },
                 )
 
+    def _docente(self, username):
+        docente = User.objects.create_user(
+            username=username, password="password", is_lecturer=True
+        )
+        # el signal renombra la cuenta al crearla: hay que releerla
+        docente = User.objects.get(pk=docente.pk)
+        asignacion = CourseAllocation.objects.create(lecturer=docente)
+        asignacion.courses.set([self.curso])
+        self.client.force_login(docente)
+        return docente
+
+    def _sube_actividad(self, titulo, extensiones=None):
+        datos = {
+            "title": titulo,
+            "file": SimpleUploadedFile("guia.docx", b"PK\x03\x04"),
+            "is_activity": "on",
+        }
+        if extensiones:
+            datos["extensiones_permitidas"] = extensiones
+        with tempfile.TemporaryDirectory() as media:
+            with self.settings(MEDIA_ROOT=media):
+                return self.client.post(
+                    reverse("upload_file_view", kwargs={"slug": self.curso.slug}), datos
+                )
+
     def test_por_defecto_la_actividad_solo_admite_pdf(self):
         self.assertEqual(self.actividad.get_extensiones_permitidas(), ["pdf"])
         self.assertEqual(self.actividad.formatos_entrega(), "PDF")
@@ -500,50 +525,29 @@ class FormatosDeEntregaTests(TestCase):
         self.assertIn("Actividad 1 (PDF, ODT)", html)
         self.assertIn("Cada actividad admite unos formatos concretos", html)
 
-    def test_el_formulario_del_docente_guarda_los_formatos_marcados(self):
-        docente = User.objects.create_user(
-            username="tmp-docente-formatos", password="password", is_lecturer=True
-        )
-        docente = User.objects.get(pk=docente.pk)
-        asignacion = CourseAllocation.objects.create(lecturer=docente)
-        asignacion.courses.set([self.curso])
-        self.client.force_login(docente)
+    def test_el_formulario_del_docente_ofrece_los_formatos(self):
+        self._docente("tmp-docente-widget")
 
-        with tempfile.TemporaryDirectory() as media:
-            with self.settings(MEDIA_ROOT=media):
-                response = self.client.post(
-                    reverse("upload_file_view", kwargs={"slug": self.curso.slug}),
-                    {
-                        "title": "Actividad en dos formatos",
-                        "file": SimpleUploadedFile("guia.docx", b"PK\x03\x04"),
-                        "is_activity": "on",
-                        "extensiones_permitidas": ["pdf", "odt"],
-                    },
-                )
+        html = self.client.get(
+            reverse("upload_file_view", kwargs={"slug": self.curso.slug})
+        ).content.decode()
+
+        for formato in ("PDF", "ODT", "DOCX", "ZIP"):
+            self.assertIn(formato, html)
+
+    def test_el_formulario_del_docente_guarda_los_formatos_marcados(self):
+        self._docente("tmp-docente-formatos")
+
+        response = self._sube_actividad("Actividad en dos formatos", ["pdf", "odt"])
 
         self.assertEqual(response.status_code, 302)
         upload = Upload.objects.get(title="Actividad en dos formatos")
         self.assertEqual(upload.extensiones_permitidas, "pdf,odt")
 
     def test_sin_marcar_ningun_formato_queda_en_pdf(self):
-        docente = User.objects.create_user(
-            username="tmp-docente-sin-formatos", password="password", is_lecturer=True
-        )
-        docente = User.objects.get(pk=docente.pk)
-        asignacion = CourseAllocation.objects.create(lecturer=docente)
-        asignacion.courses.set([self.curso])
-        self.client.force_login(docente)
+        self._docente("tmp-docente-sin-formatos")
 
-        with tempfile.TemporaryDirectory() as media:
-            with self.settings(MEDIA_ROOT=media):
-                self.client.post(
-                    reverse("upload_file_view", kwargs={"slug": self.curso.slug}),
-                    {
-                        "title": "Actividad sin formatos marcados",
-                        "file": SimpleUploadedFile("guia.docx", b"PK\x03\x04"),
-                        "is_activity": "on",
-                    },
-                )
+        self._sube_actividad("Actividad sin formatos marcados")
 
         upload = Upload.objects.get(title="Actividad sin formatos marcados")
         self.assertEqual(upload.extensiones_permitidas, "pdf")
