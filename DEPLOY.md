@@ -31,7 +31,8 @@ configurado en este clon.
 
 En un equipo Windows **sin `rsync` ni `bash`** se usa [`deploy.ps1`](deploy.ps1),
 que hace lo mismo con `tar` + `scp` (paquete temporal en `/tmp` del servidor,
-extracción con `--chown=www-data:www-data`) y luego los mismos pasos remotos:
+extracción con `sudo tar` y `chown -R` a `www-data`) y luego los mismos pasos
+remotos:
 
 ```powershell
 .\deploy.ps1 -DryRun        # empaqueta y comprueba, sin tocar el servidor
