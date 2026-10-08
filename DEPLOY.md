@@ -40,8 +40,15 @@ remotos:
 ```
 
 Mismos `--exclude` que `deploy.sh` y, además, comprobaciones que abortan si el
-paquete incluyera datos en vivo (`media/`, `db.sqlite3`, `.env`…). Requiere
-`ssh`, `scp` y `tar` (los tres vienen con Windows 10+).
+paquete incluyera datos en vivo (`media/`, `db.sqlite3`, `.env`…) o si el
+paquete llevara CRLF. Requiere `ssh`, `scp` y `tar` (los tres vienen con
+Windows 10+).
+
+> Ojo con los finales de línea: `git archive` en Windows convierte a CRLF por
+> `core.autocrlf`, así que `deploy.ps1` lo llama con `core.autocrlf=false` y
+> `core.eol=lf` para subir exactamente lo que hay guardado en git (LF), como un
+> clon en Linux. Empaqueta **HEAD**, no el working tree: si hay cambios sin
+> commitear, aborta (`-AllowDirty` lo salta, desplegando igualmente HEAD).
 
 ## Qué NO toca (datos en vivo, protegidos por `--exclude`)
 
