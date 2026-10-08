@@ -57,7 +57,14 @@ if ($dirty -and -not $AllowDirty) {
 
 if (Test-Path $archive) { Remove-Item $archive -Force }
 
-$archiveArgs = @("-C", $root, "archive", "--format=tar.gz", "-o", $archive, "HEAD", "--", ".")
+$archiveArgs = @(
+  "-C", $root,
+  # Hay que forzar LF: en Windows `git archive` tambien convierte a CRLF por
+  # core.autocrlf, y el servidor (Linux) espera lo que hay guardado en git.
+  "-c", "core.autocrlf=false",
+  "-c", "core.eol=lf",
+  "archive", "--format=tar.gz", "-o", $archive, "HEAD", "--", "."
+)
 foreach ($e in $excludePaths) { $archiveArgs += ":(exclude)$e" }
 & git @archiveArgs
 if ($LASTEXITCODE -ne 0) { throw "git archive ha fallado ($LASTEXITCODE)" }
@@ -65,6 +72,22 @@ if ($LASTEXITCODE -ne 0) { throw "git archive ha fallado ($LASTEXITCODE)" }
 $items = & tar -tzf $archive
 $size = "{0:N1} MB" -f ((Get-Item $archive).Length / 1MB)
 Write-Host ">> Paquete: $($items.Count) entradas, $size"
+
+# Comprobacion de fin de linea: si el paquete llevara CRLF, el servidor se
+# queda con los ficheros de texto en CRLF (ya paso una vez).
+$probe = Join-Path $env:TEMP "skylearn-eol-probe"
+Remove-Item -Recurse -Force $probe -ErrorAction SilentlyContinue
+New-Item -ItemType Directory -Force $probe | Out-Null
+Push-Location $probe
+& tar -xf $archive manage.py
+Pop-Location
+$bytes = [IO.File]::ReadAllBytes((Join-Path $probe "manage.py"))
+Remove-Item -Recurse -Force $probe
+if ($bytes -contains 13) {
+  Write-Host ">> ABORTADO: el paquete lleva CRLF (manage.py); se subiria mal a Linux." -ForegroundColor Red
+  Remove-Item $archive -Force
+  exit 1
+}
 
 # Comprobaciones: nada de datos en vivo, y presentes las piezas clave.
 $forbidden = $items | Where-Object { $_ -match "^(\.env$|\.git/|media/|staticfiles/|venv/|db\.sqlite3|__pycache__)" }
