@@ -561,6 +561,135 @@ class FormatosDeEntregaTests(TestCase):
         self.assertIn('title="LibreOffice Writer"', html)
 
 
+class OcultarEntregasCorregidasTests(TestCase):
+    """El check del curso esconde al docente las entregas ya corregidas.
+
+    Solo las de las actividades NO evaluables: las evaluables cuentan para la
+    nota final y se ven siempre, tenga el check puesto o no.
+    """
+
+    def setUp(self):
+        self.program = Program.objects.create(title="Programa de prueba")
+        self.curso = Course.objects.create(
+            title="Curso con entregas",
+            code="MIO-3",
+            program=self.program,
+            level="Bachelor",
+            year=1,
+            semester="First",
+        )
+        self.docente = User.objects.create_user(
+            username="tmp-docente-ojo", password="password", is_lecturer=True
+        )
+        # el signal renombra la cuenta al crearla: hay que releerla
+        self.docente = User.objects.get(pk=self.docente.pk)
+        self.no_evaluable = Upload.objects.create(
+            title="Actividad de practica",
+            course=self.curso,
+            file="actividad.pdf",
+            is_activity=True,
+            is_evaluable=False,
+        )
+        self.evaluable = Upload.objects.create(
+            title="Actividad evaluable",
+            course=self.curso,
+            file="actividad.pdf",
+            is_activity=True,
+            is_evaluable=True,
+        )
+        alumno_uno = User.objects.create_user(
+            username="tmp-alumno-uno", password="password", is_student=True
+        )
+        alumno_dos = User.objects.create_user(
+            username="tmp-alumno-dos", password="password", is_student=True
+        )
+        self.corregida = Submission.objects.create(
+            course=self.curso,
+            document=self.no_evaluable,
+            student=alumno_uno,
+            file="submissions/uno.pdf",
+            mark=8,
+        )
+        self.pendiente = Submission.objects.create(
+            course=self.curso,
+            document=self.no_evaluable,
+            student=alumno_dos,
+            file="submissions/dos.pdf",
+        )
+        self.evaluable_corregida = Submission.objects.create(
+            course=self.curso,
+            document=self.evaluable,
+            student=alumno_uno,
+            file="submissions/tres.pdf",
+            mark=9,
+        )
+        self.url_curso = reverse("course_detail", kwargs={"slug": self.curso.slug})
+        self.url_check = reverse(
+            "course_ocultar_corregidas", kwargs={"slug": self.curso.slug}
+        )
+
+    def test_sin_el_check_se_ven_todas_las_entregas(self):
+        self.client.force_login(self.docente)
+
+        html = self.client.get(self.url_curso).content.decode()
+
+        for fichero in ("uno.pdf", "dos.pdf", "tres.pdf"):
+            self.assertIn(fichero, html)
+
+    def test_con_el_check_se_oculta_la_no_evaluable_corregida(self):
+        self.docente.ocultar_entregas_corregidas = True
+        self.docente.save()
+        self.client.force_login(self.docente)
+
+        html = self.client.get(self.url_curso).content.decode()
+
+        self.assertNotIn("uno.pdf", html)
+        self.assertIn("dos.pdf", html)
+        # la evaluable ya corregida sigue a la vista: cuenta para la nota final
+        self.assertIn("tres.pdf", html)
+        self.assertIn(
+            "Ocultando las entregas ya corregidas de actividades no evaluables: 1",
+            html,
+        )
+
+    def test_el_check_del_curso_se_guarda(self):
+        self.client.force_login(self.docente)
+
+        self.client.post(self.url_check, {"ocultar": "on"})
+        self.assertTrue(User.objects.get(pk=self.docente.pk).ocultar_entregas_corregidas)
+
+        self.client.post(self.url_check, {})
+        self.assertFalse(
+            User.objects.get(pk=self.docente.pk).ocultar_entregas_corregidas
+        )
+
+    def test_el_check_se_ve_en_la_pagina_del_curso(self):
+        self.client.force_login(self.docente)
+
+        html = self.client.get(self.url_curso).content.decode()
+
+        self.assertIn('name="ocultar"', html)
+        self.assertIn("Ocultar las entregas ya corregidas", html)
+
+    def test_el_check_no_lo_cambia_un_alumno(self):
+        alumno = User.objects.create_user(
+            username="tmp-alumno-check", password="password", is_student=True
+        )
+        self.client.force_login(alumno)
+
+        response = self.client.post(self.url_check, {"ocultar": "on"})
+
+        self.assertEqual(response.status_code, 302)
+        self.assertFalse(
+            User.objects.get(pk=alumno.pk).ocultar_entregas_corregidas
+        )
+
+    def test_el_check_solo_se_cambia_por_post(self):
+        self.client.force_login(self.docente)
+
+        self.assertEqual(self.client.get(self.url_check).status_code, 405)
+
+
 class DeckDownloadTests(TestCase):
     """La presentacion se descarga como adjunto y no se abre en el navegador."""
 

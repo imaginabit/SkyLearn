@@ -27,14 +27,6 @@
 <!-- <p><b>{% trans "Start" %}:</b> {{ sitting.start }}</p>
 <p><b>{% trans "End" %}:</b> {{ sitting.end }}</p> -->
 
-{% if ocultar_corregidas %}
-<p class="text-muted small">
-	<i class="fas fa-eye-slash me-1"></i>
-	{% trans "Ocultando las preguntas ya corregidas" %}{% if ocultas %} ({{ ocultas }}){% endif %}.
-	{% trans "El check esta en la pagina del curso." %}
-</p>
-{% endif %}
-
 <table class="table table-bordered table-striped">
 
   <thead>
@@ -72,16 +64,6 @@
 	  </td>
 	</tr>
 
-{% empty %}
-	<tr>
-	  <td colspan="4" class="text-muted">
-		{% if ocultar_corregidas %}
-		  {% trans "No queda ninguna pregunta por revisar." %}
-		{% else %}
-		  {% trans "Este examen no tiene preguntas." %}
-		{% endif %}
-	  </td>
-	</tr>
 {% endfor %}
 
   </tbody>

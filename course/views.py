@@ -168,12 +168,22 @@ def course_single(request, slug):
 
     my_submissions = None
     submissions = None
+    entregas_ocultas = 0
     if is_editor:
         submissions = (
             Submission.objects.filter(course=course)
             .select_related("student", "document")
             .order_by("document__upload_time", "student__username")
         )
+        # Con el check del curso puesto, al docente no se le muestran las
+        # entregas ya corregidas de las actividades NO evaluables: solo le queda
+        # lo pendiente. Las evaluables se ven siempre.
+        if request.user.ocultar_entregas_corregidas:
+            visibles = submissions.exclude(
+                document__is_evaluable=False, mark__isnull=False
+            )
+            entregas_ocultas = submissions.count() - visibles.count()
+            submissions = visibles
     else:
         my_submissions = (
             Submission.objects.filter(course=course, student=request.user)
@@ -195,6 +205,7 @@ def course_single(request, slug):
             "submission_form": form,
             "my_submissions": my_submissions,
             "submissions": submissions,
+            "entregas_ocultas": entregas_ocultas,
         },
     )
 
@@ -203,18 +214,21 @@ def course_single(request, slug):
 @login_required
 @lecturer_required
 def course_ocultar_corregidas(request, slug):
-    """El docente decide si al corregir quiere ver tambien las preguntas correctas.
+    """El docente decide si en la tabla de entregas quiere ver las ya corregidas.
 
     Es una preferencia de la cuenta (vale para todos sus cursos) y se cambia con
     el check de la pagina del curso.
     """
     course = get_object_or_404(Course, slug=slug)
-    request.user.ocultar_preguntas_corregidas = request.POST.get("ocultar") == "on"
-    request.user.save(update_fields=["ocultar_preguntas_corregidas"])
-    if request.user.ocultar_preguntas_corregidas:
-        messages.success(request, "Al corregir se ocultaran las preguntas ya correctas.")
+    request.user.ocultar_entregas_corregidas = request.POST.get("ocultar") == "on"
+    request.user.save(update_fields=["ocultar_entregas_corregidas"])
+    if request.user.ocultar_entregas_corregidas:
+        messages.success(
+            request,
+            "Se ocultaran las entregas ya corregidas de las actividades no evaluables.",
+        )
     else:
-        messages.success(request, "Al corregir se veran tambien las preguntas correctas.")
+        messages.success(request, "Se veran todas las entregas.")
     return redirect("course_detail", slug=course.slug)
 
 

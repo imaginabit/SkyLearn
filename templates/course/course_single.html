@@ -42,11 +42,11 @@
                 {% csrf_token %}
                 <div class="form-check m-0">
                     <input class="form-check-input" type="checkbox" name="ocultar" id="ocultar-corregidas"
-                        {% if request.user.ocultar_preguntas_corregidas %}checked{% endif %}
-                        title="{% trans 'Al corregir los examenes, no mostrar las preguntas cuya respuesta ya esta bien' %}"
+                        {% if request.user.ocultar_entregas_corregidas %}checked{% endif %}
+                        title="{% trans 'En la tabla de entregas, no mostrar las ya corregidas de las actividades no evaluables' %}"
                         onchange="this.form.submit()">
                     <label class="form-check-label small" for="ocultar-corregidas">
-                        {% trans "Ocultar las preguntas ya corregidas" %}
+                        {% trans "Ocultar las entregas ya corregidas" %}
                     </label>
                 </div>
                 <noscript>
@@ -86,6 +86,12 @@
 <div class="container mt-3">
     {% if request.user.is_superuser or request.user.is_lecturer %}
     <p class="form-title m-0">{% trans "Entregas de los alumnos" %}</p>
+    {% if entregas_ocultas %}
+    <p class="text-muted small m-0">
+        <i class="fas fa-eye-slash me-1"></i>
+        {% trans "Ocultando las entregas ya corregidas de actividades no evaluables:" %} {{ entregas_ocultas }}
+    </p>
+    {% endif %}
     <div class="table-responsive">
         <table class="table table-shadow table-light table-striped m-0">
             <thead>
@@ -122,7 +128,13 @@
                     </td>
                 </tr>
                 {% empty %}
-                <tr><td colspan="7" class="text-muted">{% trans "Todavia no ha entregado nadie." %}</td></tr>
+                <tr><td colspan="7" class="text-muted">
+                    {% if entregas_ocultas %}
+                    {% trans "No queda ninguna entrega pendiente de corregir." %}
+                    {% else %}
+                    {% trans "Todavia no ha entregado nadie." %}
+                    {% endif %}
+                </td></tr>
                 {% endfor %}
             </tbody>
         </table>
