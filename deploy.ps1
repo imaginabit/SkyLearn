@@ -49,9 +49,9 @@ Write-Host ">> Destino: ${Remote}:${Dest} $(if ($DryRun) { '[dry-run]' })"
 
 $dirty = @(git -C $root status --porcelain)
 if ($dirty -and -not $AllowDirty) {
-  Write-Host ">> ABORTADO: hay cambios sin commitear y se desplegaria $commit:" -ForegroundColor Red
+  Write-Host ">> ABORTADO: hay cambios sin commitear y se desplegaria ${commit}:" -ForegroundColor Red
   $dirty | Select-Object -First 10 | ForEach-Object { Write-Host "   $_" }
-  Write-Host "   Commitea (y push) o usa -AllowDirty si de verdad quieres desplegar $commit." -ForegroundColor Red
+  Write-Host "   Commitea (y push) o usa -AllowDirty si de verdad quieres desplegar ${commit}." -ForegroundColor Red
   exit 1
 }
 
