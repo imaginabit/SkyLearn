@@ -1,5 +1,5 @@
 from modeltranslation.translator import register, TranslationOptions
-from .models import Quiz, Question, Choice, MCQuestion
+from .models import EssayQuestion, Quiz, Question, Choice, MCQuestion
 
 
 @register(Quiz)
@@ -28,4 +28,13 @@ class ChoiceTranslationOptions(TranslationOptions):
 
 @register(MCQuestion)
 class MCQuestionTranslationOptions(TranslationOptions):
+    pass
+
+
+# Sin campos propios: se registra solo para que `loaddata` acepte los
+# `content_es` / `explanation_es` que hereda de Question. Sin esto, cargar un
+# fixture con preguntas de desarrollo peta con
+# «EssayQuestion() got an unexpected keyword argument 'content_es'».
+@register(EssayQuestion)
+class EssayQuestionTranslationOptions(TranslationOptions):
     pass
