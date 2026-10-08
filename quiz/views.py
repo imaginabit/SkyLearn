@@ -41,6 +41,12 @@ from .models import (
     Quiz,
     Sitting,
 )
+from result.models import TakenCourse
+
+# Cada cuanto se refresca `last_seen` de cada participante. El estado de la
+# partida se consulta cada 1,2 s, asi que refrescarlo en cada consulta son unas
+# doce escrituras por segundo con 15 alumnos, sobre un SQLite.
+SEGUNDOS_VISTA = 10
 
 
 # ########################################################
@@ -401,6 +407,34 @@ def _es_host(request, session):
     return request.user.is_superuser or session.host_id == request.user.id
 
 
+def _puede_entrar(request, session):
+    """Solo entra quien está matriculado en el curso, o quien la organiza.
+
+    El código de la partida son seis caracteres: sin esta comprobación, cualquier
+    cuenta con sesión iniciada que lo acertara se colaba en el juego y en el
+    ranking. Se deja fuera a quien organiza la partida, que puede estar probando
+    la pantalla, y a los superusuarios.
+    """
+    if _es_host(request, session):
+        return True
+    return TakenCourse.objects.filter(
+        student__student=request.user, course=session.course
+    ).exists()
+
+
+def _anota_vista(participante):
+    """Deja constancia de que el alumno sigue mirando la partida.
+
+    El estado se consulta cada 1,2 s y con 15 alumnos eso son unas doce
+    escrituras por segundo sobre un SQLite. Como `last_seen` solo sirve para ver
+    quién sigue dentro, se refresca cada `SEGUNDOS_VISTA` en lugar de en cada
+    consulta.
+    """
+    if (now() - participante.last_seen).total_seconds() < SEGUNDOS_VISTA:
+        return
+    LiveParticipant.objects.filter(pk=participante.pk).update(last_seen=now())
+
+
 @login_required
 @lecturer_required
 def live_create_pick(request):
@@ -480,6 +514,11 @@ def live_join(request):
         session = LiveSession.objects.filter(code=code).first()
         if not session:
             error = _("Ese código no existe. Comprueba que lo has copiado bien.")
+        elif not _puede_entrar(request, session):
+            error = _(
+                "No estás matriculado en este curso, así que no puedes entrar en "
+                "esta partida. Pídeselo a quien la organiza."
+            )
         elif not nickname:
             error = _("Escribe un apodo para el ranking.")
         else:
@@ -498,6 +537,8 @@ def live_join(request):
 @login_required
 def live_play(request, code):
     session = get_object_or_404(LiveSession, code=code)
+    if not _puede_entrar(request, session):
+        return redirect(f"{reverse('live_join')}?code={session.code}")
     participante = LiveParticipant.objects.filter(
         session=session, user=request.user
     ).first()
@@ -516,11 +557,13 @@ def live_state(request, code):
     host = _es_host(request, session)
     participante = None
     if not host:
+        if not _puede_entrar(request, session):
+            return JsonResponse({"error": "no entras en esta partida"}, status=403)
         participante = LiveParticipant.objects.filter(
             session=session, user=request.user
         ).first()
         if participante:
-            LiveParticipant.objects.filter(pk=participante.pk).update(last_seen=now())
+            _anota_vista(participante)
 
     data = {
         "state": session.state,

@@ -1,7 +1,9 @@
+from datetime import timedelta
+
 from django.test import Client, TestCase
 from django.urls import reverse
 
-from accounts.models import User
+from accounts.models import Student, User
 from course.models import Course, CourseAllocation, Program
 from quiz.models import (
     Choice,
@@ -10,6 +12,8 @@ from quiz.models import (
     MCQuestion,
     Quiz,
 )
+from quiz.views import SEGUNDOS_VISTA
+from result.models import TakenCourse
 
 
 class LiveQuizTests(TestCase):
@@ -50,6 +54,12 @@ class LiveQuizTests(TestCase):
             question=self.q2, choice_text="Azul", correct=True
         )
         Choice.objects.create(question=self.q2, choice_text="Verde", correct=False)
+        # Para entrar a una partida hay que estar matriculado en su curso
+        for alumno in (self.ana, self.luis):
+            ficha = Student.objects.create(
+                student=alumno, level="Master", program=self.programa
+            )
+            TakenCourse.objects.create(student=ficha, course=self.curso)
 
     def test_flujo_completo(self):
         prof = Client()
@@ -143,6 +153,129 @@ class LiveQuizTests(TestCase):
         self.assertEqual(r.status_code, 403)
 
 
+class LiveAccesoTests(TestCase):
+    """Solo entra quien está matriculado, y `last_seen` no se escribe cada vez.
+
+    El código son seis caracteres: sin mirar la matrícula, cualquier cuenta con
+    sesión iniciada que lo acertara se colaba en el juego. Y como el estado se
+    consulta cada 1,2 s, refrescar `last_seen` en cada consulta eran unas doce
+    escrituras por segundo con 15 alumnos sobre un SQLite.
+    """
+
+    def setUp(self):
+        self.prof = User.objects.create_user(
+            username="prof", password="x", is_lecturer=True
+        )
+        self.matriculado = User.objects.create_user(
+            username="ana", password="x", is_student=True
+        )
+        self.ajeno = User.objects.create_user(
+            username="forastero", password="x", is_student=True
+        )
+        self.programa = Program.objects.create(title="Seguridad Informatica")
+        self.curso = Course.objects.create(
+            title="MF0487_3-C5",
+            code="MF0487_3-C5",
+            program=self.programa,
+            level="Master",
+            semester="Third",
+        )
+        asignacion = CourseAllocation.objects.get_or_create(lecturer=self.prof)[0]
+        asignacion.courses.add(self.curso)
+        self.quiz = Quiz.objects.create(
+            course=self.curso, title="Repaso objetiva", category="practice"
+        )
+        self.pregunta = MCQuestion.objects.create(content="¿Cuánto es 2+2?")
+        self.pregunta.quiz.add(self.quiz)
+        Choice.objects.create(
+            question=self.pregunta, choice_text="4", correct=True
+        )
+        ficha = Student.objects.create(
+            student=self.matriculado, level="Master", program=self.programa
+        )
+        TakenCourse.objects.create(student=ficha, course=self.curso)
+        self.sesion = self._partida()
+
+    def _partida(self):
+        cliente = Client()
+        cliente.force_login(self.prof)
+        cliente.post(
+            reverse("live_create", args=[self.curso.slug]),
+            {"quiz": self.quiz.id, "cuantas": 0, "time_limit": 20},
+        )
+        sesion = LiveSession.objects.get()
+        cliente.post(reverse("live_action", args=[sesion.code]), {"action": "start"})
+        return sesion
+
+    def _como(self, user):
+        cliente = Client()
+        cliente.force_login(user)
+        return cliente
+
+    def test_el_matriculado_entra(self):
+        r = self._como(self.matriculado).post(
+            reverse("live_join"), {"code": self.sesion.code, "nickname": "Ana"}
+        )
+
+        self.assertEqual(r.status_code, 302)
+        self.assertEqual(LiveParticipant.objects.count(), 1)
+
+    def test_quien_no_esta_matriculado_no_entra(self):
+        r = self._como(self.ajeno).post(
+            reverse("live_join"), {"code": self.sesion.code, "nickname": "Colado"}
+        )
+
+        self.assertEqual(r.status_code, 200)
+        self.assertIn("No estás matriculado", r.content.decode())
+        self.assertEqual(LiveParticipant.objects.count(), 0)
+
+    def test_quien_no_esta_matriculado_no_consulta_el_estado(self):
+        r = self._como(self.ajeno).get(reverse("live_state", args=[self.sesion.code]))
+
+        self.assertEqual(r.status_code, 403)
+
+    def test_quien_no_esta_matriculado_no_llega_a_jugar(self):
+        r = self._como(self.ajeno).get(reverse("live_play", args=[self.sesion.code]))
+
+        self.assertEqual(r.status_code, 302)
+        self.assertIn(self.sesion.code, r.url)
+
+    def test_quien_organiza_no_necesita_matricula(self):
+        # el docente puede abrir la pantalla aunque no esté matriculado
+        self._como(self.matriculado).post(
+            reverse("live_join"), {"code": self.sesion.code, "nickname": "Ana"}
+        )
+
+        r = self._como(self.prof).get(reverse("live_state", args=[self.sesion.code]))
+
+        self.assertEqual(r.status_code, 200)
+
+    def test_last_seen_no_se_escribe_en_cada_consulta(self):
+        self._como(self.matriculado).post(
+            reverse("live_join"), {"code": self.sesion.code, "nickname": "Ana"}
+        )
+        url = reverse("live_state", args=[self.sesion.code])
+        cliente = self._como(self.matriculado)
+
+        cliente.get(url)
+        uno = LiveParticipant.objects.get(session=self.sesion, user=self.matriculado)
+        primera = uno.last_seen
+        for _ in range(5):
+            cliente.get(url)
+        uno.refresh_from_db()
+        segunda = uno.last_seen
+        self.assertEqual(primera, segunda, "last_seen se escribe en cada consulta")
+
+        # pasado el intervalo, sí se refresca
+        LiveParticipant.objects.filter(pk=uno.pk).update(
+            last_seen=primera - timedelta(seconds=SEGUNDOS_VISTA + 1)
+        )
+        cliente.get(url)
+        uno.refresh_from_db()
+
+        self.assertGreater(uno.last_seen, segunda)
+
+
 class LiveShuffleTests(TestCase):
     """Las opciones se barajan en cada partida y no se mueven dentro de ella."""
 
@@ -171,6 +304,10 @@ class LiveShuffleTests(TestCase):
         Choice.objects.create(question=self.pregunta, choice_text="5", correct=False)
         Choice.objects.create(question=self.pregunta, choice_text="6", correct=False)
         Choice.objects.create(question=self.pregunta, choice_text="7", correct=False)
+        ficha = Student.objects.create(
+            student=self.ana, level="Master", program=self.programa
+        )
+        TakenCourse.objects.create(student=ficha, course=self.curso)
 
     def _partida(self, code):
         sesion = LiveSession.objects.create(
