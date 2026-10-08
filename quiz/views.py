@@ -221,7 +221,17 @@ class QuizMarkingDetail(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["questions"] = self.object.get_questions(with_answers=True)
+        questions = self.object.get_questions(with_answers=True)
+        # Si el docente ha marcado el check del curso, se le ocultan las
+        # preguntas cuya respuesta ya esta bien: solo quiere ver lo que le queda
+        # por revisar.
+        ocultar = self.request.user.ocultar_preguntas_corregidas
+        if ocultar:
+            incorrectas = self.object.get_incorrect_questions
+            context["ocultas"] = sum(1 for q in questions if q.id not in incorrectas)
+            questions = [q for q in questions if q.id in incorrectas]
+        context["questions"] = questions
+        context["ocultar_corregidas"] = ocultar
         return context
 
 

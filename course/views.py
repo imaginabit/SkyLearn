@@ -199,6 +199,25 @@ def course_single(request, slug):
     )
 
 
+@require_POST
+@login_required
+@lecturer_required
+def course_ocultar_corregidas(request, slug):
+    """El docente decide si al corregir quiere ver tambien las preguntas correctas.
+
+    Es una preferencia de la cuenta (vale para todos sus cursos) y se cambia con
+    el check de la pagina del curso.
+    """
+    course = get_object_or_404(Course, slug=slug)
+    request.user.ocultar_preguntas_corregidas = request.POST.get("ocultar") == "on"
+    request.user.save(update_fields=["ocultar_preguntas_corregidas"])
+    if request.user.ocultar_preguntas_corregidas:
+        messages.success(request, "Al corregir se ocultaran las preguntas ya correctas.")
+    else:
+        messages.success(request, "Al corregir se veran tambien las preguntas correctas.")
+    return redirect("course_detail", slug=course.slug)
+
+
 @login_required
 def submission_download(request, slug, pk):
     course = get_object_or_404(Course, slug=slug)

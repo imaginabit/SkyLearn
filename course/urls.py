@@ -11,6 +11,11 @@ urlpatterns = [
     path("<int:pk>/delete/", views.program_delete, name="program_delete"),
     # Course urls
     path("course/<slug>/detail/", views.course_single, name="course_detail"),
+    path(
+        "course/<slug>/ocultar-corregidas/",
+        views.course_ocultar_corregidas,
+        name="course_ocultar_corregidas",
+    ),
     path("course/<slug>/deck/download/", views.deck_download, name="deck_download"),
     path(
         "course/<slug>/submission/<int:pk>/download/",

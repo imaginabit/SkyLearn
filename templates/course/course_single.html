@@ -36,6 +36,24 @@
             {% endif %}
         </div>
         <div class="ms-auto">
+            {% if request.user.is_superuser or request.user.is_lecturer %}
+            <form action="{% url 'course_ocultar_corregidas' course.slug %}" method="post"
+                class="d-inline-flex align-items-center me-3">
+                {% csrf_token %}
+                <div class="form-check m-0">
+                    <input class="form-check-input" type="checkbox" name="ocultar" id="ocultar-corregidas"
+                        {% if request.user.ocultar_preguntas_corregidas %}checked{% endif %}
+                        title="{% trans 'Al corregir los examenes, no mostrar las preguntas cuya respuesta ya esta bien' %}"
+                        onchange="this.form.submit()">
+                    <label class="form-check-label small" for="ocultar-corregidas">
+                        {% trans "Ocultar las preguntas ya corregidas" %}
+                    </label>
+                </div>
+                <noscript>
+                    <button class="btn btn-sm btn-secondary ms-2" type="submit">{% trans "Guardar" %}</button>
+                </noscript>
+            </form>
+            {% endif %}
             <a class="btn btn-sm btn-warning" href="{% url 'quiz_index' course.slug %}"><i class="fas fa-list"></i>
                 {% trans 'Take a Quiz' %}
             </a>

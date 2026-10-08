@@ -79,6 +79,14 @@ class User(AbstractUser):
         upload_to="profile_pictures/%y/%m/%d/", default="default.png", null=True
     )
     email = models.EmailField(blank=True, null=True)
+    ocultar_preguntas_corregidas = models.BooleanField(
+        default=False,
+        verbose_name=_("Ocultar las preguntas ya corregidas"),
+        help_text=_(
+            "Solo para docentes: al corregir un examen no mostrar las preguntas "
+            "cuya respuesta ya esta bien, y dejar solo las que hay que revisar."
+        ),
+    )
 
     username_validator = ASCIIUsernameValidator()
 
