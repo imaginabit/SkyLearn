@@ -86,12 +86,20 @@
 <div class="container mt-3">
     {% if request.user.is_superuser or request.user.is_lecturer %}
     <p class="form-title m-0">{% trans "Entregas de los alumnos" %}</p>
-    {% if entregas_ocultas %}
-    <p class="text-muted small m-0">
-        <i class="fas fa-eye-slash me-1"></i>
-        {% trans "Ocultando las entregas ya corregidas de actividades no evaluables:" %} {{ entregas_ocultas }}
+    <p class="text-muted small mb-2">
+        <i class="fas fa-inbox me-1"></i>
+        {% blocktrans with visibles=entregas_visibles total=entregas_totales %}{{ visibles }} de {{ total }} entregas visibles{% endblocktrans %}
+        <span class="ms-2"><i class="fas fa-check me-1"></i>{% trans "calificadas" %} {{ entregas_calificadas }}</span>
+        <span class="ms-2"><i class="fas fa-hourglass-half me-1"></i>{% trans "sin calificar" %} {{ entregas_sin_calificar }}</span>
+        {% if entregas_ocultas %}
+        <a class="ms-2" href="{% url 'course_ocultar_corregidas' course.slug %}"
+            onclick="document.getElementById('ver-todas').submit(); return false;">
+            {% trans "Ver las ya corregidas" %}</a>
+        <form action="{% url 'course_ocultar_corregidas' course.slug %}" method="post" id="ver-todas" class="d-none">
+            {% csrf_token %}
+        </form>
+        {% endif %}
     </p>
-    {% endif %}
     <div class="table-responsive">
         <table class="table table-shadow table-light table-striped m-0">
             <thead>

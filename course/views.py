@@ -2,7 +2,7 @@ from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
-from django.db.models import Sum
+from django.db.models import Count, Q, Sum
 from django.http import FileResponse, Http404
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
@@ -169,21 +169,32 @@ def course_single(request, slug):
     my_submissions = None
     submissions = None
     entregas_ocultas = 0
+    entregas_totales = 0
+    entregas_visibles = 0
+    entregas_calificadas = 0
+    entregas_sin_calificar = 0
     if is_editor:
         submissions = (
             Submission.objects.filter(course=course)
             .select_related("student", "document")
             .order_by("document__upload_time", "student__username")
         )
+        entregas_totales = submissions.count()
+        # Reparto sobre TODAS las entregas del curso, no solo sobre las visibles:
+        # es la medida del trabajo que queda, y no debe cambiar al marcar el check.
+        entregas_calificadas = submissions.aggregate(
+            n=Count("pk", filter=Q(mark__isnull=False))
+        )["n"]
         # Con el check del curso puesto, al docente no se le muestran las
         # entregas ya corregidas de las actividades NO evaluables: solo le queda
         # lo pendiente. Las evaluables se ven siempre.
         if request.user.ocultar_entregas_corregidas:
-            visibles = submissions.exclude(
+            submissions = submissions.exclude(
                 document__is_evaluable=False, mark__isnull=False
             )
-            entregas_ocultas = submissions.count() - visibles.count()
-            submissions = visibles
+        entregas_visibles = submissions.count()
+        entregas_ocultas = entregas_totales - entregas_visibles
+        entregas_sin_calificar = entregas_totales - entregas_calificadas
     else:
         my_submissions = (
             Submission.objects.filter(course=course, student=request.user)
@@ -206,6 +217,10 @@ def course_single(request, slug):
             "my_submissions": my_submissions,
             "submissions": submissions,
             "entregas_ocultas": entregas_ocultas,
+            "entregas_totales": entregas_totales,
+            "entregas_visibles": entregas_visibles,
+            "entregas_calificadas": entregas_calificadas,
+            "entregas_sin_calificar": entregas_sin_calificar,
         },
     )
 

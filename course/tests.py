@@ -647,10 +647,7 @@ class OcultarEntregasCorregidasTests(TestCase):
         self.assertIn("dos.pdf", html)
         # la evaluable ya corregida sigue a la vista: cuenta para la nota final
         self.assertIn("tres.pdf", html)
-        self.assertIn(
-            "Ocultando las entregas ya corregidas de actividades no evaluables: 1",
-            html,
-        )
+        self.assertIn("Ver las ya corregidas", html)
 
     def test_el_check_del_curso_se_guarda(self):
         self.client.force_login(self.docente)
@@ -670,6 +667,47 @@ class OcultarEntregasCorregidasTests(TestCase):
 
         self.assertIn('name="ocultar"', html)
         self.assertIn("Ocultar las entregas ya corregidas", html)
+
+    def test_cuenta_las_entregas_totales_y_visibles(self):
+        """Sin el check, todas las entregas del curso se ven."""
+        self.client.force_login(self.docente)
+
+        html = self.client.get(self.url_curso).content.decode()
+
+        self.assertIn("3 de 3 entregas visibles", html)
+
+    def test_cuenta_cuando_hay_ocultas(self):
+        self.docente.ocultar_entregas_corregidas = True
+        self.docente.save()
+        self.client.force_login(self.docente)
+
+        html = self.client.get(self.url_curso).content.decode()
+
+        # se ocultan la no evaluable ya corregida y la evaluable se sigue viendo
+        self.assertIn("2 de 3 entregas visibles", html)
+
+    def test_cuenta_calificadas_y_sin_calificar(self):
+        """El reparto por estado de corrección va sobre todas las entregas."""
+        self.docente.ocultar_entregas_corregidas = True
+        self.docente.save()
+        self.client.force_login(self.docente)
+
+        html = self.client.get(self.url_curso).content.decode()
+
+        # de las 3 hay 2 corregidas (una no evaluable y la evaluable) y 1 sin nota
+        plano = " ".join(html.split())
+        self.assertIn("calificadas 2", plano)
+        self.assertIn("sin calificar 1", plano)
+
+    def test_ofrece_ver_las_ya_corregidas(self):
+        """Con todo oculto hay forma de volver a verlas sin el checkbox."""
+        self.docente.ocultar_entregas_corregidas = True
+        self.docente.save()
+        self.client.force_login(self.docente)
+
+        html = self.client.get(self.url_curso).content.decode()
+
+        self.assertIn("Ver las ya corregidas", html)
 
     def test_el_check_no_lo_cambia_un_alumno(self):
         alumno = User.objects.create_user(
