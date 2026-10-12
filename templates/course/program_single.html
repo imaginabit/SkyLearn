@@ -124,4 +124,54 @@
 </div>
 {% endif %}
 
+{% if request.user.is_superuser or request.user.is_lecturer %}
+<section class="container mt-5" aria-labelledby="seguimiento-title">
+    <h2 class="form-title" id="seguimiento-title">Seguimiento de actividades</h2>
+    <p class="text-muted small">Una fila por alumno y curso. La media usa solo las actividades que ya tienen nota; las pendientes no cuentan todavía.</p>
+    {% for report in activity_reports %}
+    <h3 class="h5 mt-4">{{ report.course.code }} · {{ report.course.title }}</h3>
+    <div class="table-responsive mb-4">
+        <table class="table table-light table-striped table-bordered align-middle">
+            <thead>
+                <tr>
+                    <th scope="col">Alumno</th>
+                    {% for activity in report.activities %}
+                    <th scope="col">{{ activity.title }}</th>
+                    {% endfor %}
+                    <th scope="col">Media</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in report.rows %}
+                <tr>
+                    <th scope="row">{{ row.student.get_full_name|default:row.student.username }}</th>
+                    {% for submission in row.cells %}
+                    <td>
+                        {% if submission %}
+                            {% if submission.mark is not None %}
+                            <span class="badge bg-success">{{ submission.mark|floatformat:"-2" }}/10</span>
+                            {% else %}
+                            <span class="badge bg-warning text-dark">Entregada · sin calificar</span>
+                            {% endif %}
+                        {% else %}
+                        <span class="text-muted">Pendiente</span>
+                        {% endif %}
+                    </td>
+                    {% endfor %}
+                    <td>
+                        {% if row.average is not None %}{{ row.average|floatformat:"-2" }}/10{% else %}<span class="text-muted">—</span>{% endif %}
+                    </td>
+                </tr>
+                {% empty %}
+                <tr><td colspan="{{ report.activities|length|add:2 }}" class="text-muted">No hay alumnos matriculados en este curso.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% empty %}
+    <p class="text-muted">No hay actividades con entrega en los cursos de este programa que tengas asignados.</p>
+    {% endfor %}
+</section>
+{% endif %}
+
 {% endblock content %}

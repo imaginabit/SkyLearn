@@ -74,11 +74,85 @@ def program_add(request):
 @login_required
 def program_detail(request, pk):
     program = get_object_or_404(Program, pk=pk)
-    courses = Course.objects.filter(program_id=pk).order_by("-year")
+    all_courses = Course.objects.filter(program_id=pk).order_by("-year")
+    courses = all_courses
     credits = courses.aggregate(total_credits=Sum("credit"))
     paginator = Paginator(courses, 10)
     page = request.GET.get("page")
     courses = paginator.get_page(page)
+
+    activity_reports = []
+    if request.user.is_superuser or request.user.is_lecturer:
+        report_courses = all_courses
+        if not request.user.is_superuser:
+            report_courses = report_courses.filter(
+                allocated_course__lecturer=request.user
+            ).distinct()
+
+        activities = list(
+            Upload.objects.filter(course__in=report_courses, is_activity=True)
+            .select_related("course")
+            .order_by("course__code", "upload_time", "pk")
+        )
+        enrollments = list(
+            TakenCourse.objects.filter(course__in=report_courses)
+            .select_related("student__student", "course")
+            .order_by(
+                "course__code",
+                "student__student__last_name",
+                "student__student__first_name",
+            )
+        )
+        submissions = Submission.objects.filter(
+            course__in=report_courses, document__is_activity=True
+        ).select_related("document")
+        submissions_by_key = {
+            (
+                submission.student_id,
+                submission.course_id,
+                submission.document_id,
+            ): submission
+            for submission in submissions
+        }
+
+        activities_by_course = {}
+        for activity in activities:
+            activities_by_course.setdefault(activity.course_id, []).append(activity)
+
+        enrollments_by_course = {}
+        for enrollment in enrollments:
+            enrollments_by_course.setdefault(enrollment.course_id, []).append(
+                enrollment
+            )
+
+        for course in report_courses:
+            course_activities = activities_by_course.get(course.pk, [])
+            if not course_activities:
+                continue
+
+            rows = []
+            for enrollment in enrollments_by_course.get(course.pk, []):
+                user_id = enrollment.student.student_id
+                cells = [
+                    submissions_by_key.get((user_id, course.pk, activity.pk))
+                    for activity in course_activities
+                ]
+                grades = [
+                    submission.mark
+                    for submission in cells
+                    if submission and submission.mark is not None
+                ]
+                rows.append(
+                    {
+                        "student": enrollment.student.student,
+                        "cells": cells,
+                        "average": sum(grades) / len(grades) if grades else None,
+                    }
+                )
+            activity_reports.append(
+                {"course": course, "activities": course_activities, "rows": rows}
+            )
+
     return render(
         request,
         "course/program_single.html",
@@ -87,6 +161,7 @@ def program_detail(request, pk):
             "program": program,
             "courses": courses,
             "credits": credits,
+            "activity_reports": activity_reports,
         },
     )
 

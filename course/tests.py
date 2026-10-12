@@ -1,5 +1,6 @@
 import os
 import tempfile
+from decimal import Decimal
 
 from django.conf import settings
 from django.contrib.auth import get_user_model
@@ -807,3 +808,133 @@ class DeckDownloadTests(TestCase):
 
                 self.assertIn(reverse("deck_download", kwargs={"slug": self.curso.slug}), html)
                 self.assertIn("Descargar HTML", html)
+
+
+class ProgramActivityProgressTests(TestCase):
+    """El seguimiento resume entregas por curso, actividad y alumno."""
+
+    def setUp(self):
+        self.program = Program.objects.create(title="Programa con seguimiento")
+        self.curso = Course.objects.create(
+            title="Clase uno",
+            code="MIO-1",
+            program=self.program,
+            level="Bachelor",
+            year=1,
+            semester="First",
+        )
+        self.otro_curso = Course.objects.create(
+            title="Clase dos",
+            code="MIO-2",
+            program=self.program,
+            level="Bachelor",
+            year=1,
+            semester="First",
+        )
+        self.docente = User.objects.create_user(
+            username="seguimiento-docente", password="password", is_lecturer=True
+        )
+        asignacion = CourseAllocation.objects.create(lecturer=self.docente)
+        asignacion.courses.set([self.curso])
+
+        self.alumno = User.objects.create_user(
+            username="seguimiento-alumno",
+            password="password",
+            is_student=True,
+            first_name="Ana",
+            last_name="Alumna",
+        )
+        self.alumno_sin_entrega = User.objects.create_user(
+            username="seguimiento-sin-entrega",
+            password="password",
+            is_student=True,
+            first_name="Beto",
+            last_name="Alumno",
+        )
+        self.ficha = Student.objects.create(
+            student=self.alumno, program=self.program, level="Bachelor"
+        )
+        self.ficha_sin_entrega = Student.objects.create(
+            student=self.alumno_sin_entrega, program=self.program, level="Bachelor"
+        )
+        TakenCourse.objects.create(student=self.ficha, course=self.curso)
+        TakenCourse.objects.create(student=self.ficha_sin_entrega, course=self.curso)
+        TakenCourse.objects.create(student=self.ficha, course=self.otro_curso)
+
+        self.actividad_calificada = Upload.objects.create(
+            title="Actividad calificada",
+            course=self.curso,
+            file="actividad-uno.pdf",
+            is_activity=True,
+            is_evaluable=True,
+        )
+        self.actividad_pendiente = Upload.objects.create(
+            title="Actividad pendiente",
+            course=self.curso,
+            file="actividad-dos.pdf",
+            is_activity=True,
+        )
+        self.actividad_no_entrega = Upload.objects.create(
+            title="Actividad de otra clase",
+            course=self.otro_curso,
+            file="actividad-otra.pdf",
+            is_activity=True,
+        )
+        self.no_es_actividad = Upload.objects.create(
+            title="Material de consulta",
+            course=self.curso,
+            file="guia.pdf",
+            is_activity=False,
+        )
+        Submission.objects.create(
+            course=self.curso,
+            document=self.actividad_calificada,
+            student=self.alumno,
+            file="submissions/calificada.pdf",
+            mark=Decimal("8.50"),
+        )
+        Submission.objects.create(
+            course=self.curso,
+            document=self.actividad_pendiente,
+            student=self.alumno,
+            file="submissions/pendiente.pdf",
+        )
+
+    def test_muestra_entrega_pendiente_nota_y_media(self):
+        self.client.force_login(self.docente)
+
+        html = self.client.get(
+            reverse("program_detail", kwargs={"pk": self.program.pk})
+        ).content.decode()
+
+        self.assertIn("Seguimiento de actividades", html)
+        self.assertIn("Actividad calificada", html)
+        self.assertIn("Actividad pendiente", html)
+        self.assertIn("8,50/10", html)
+        self.assertIn("Entregada · sin calificar", html)
+        self.assertIn("Pendiente", html)
+        self.assertIn("8,50/10", html)  # media: solo cuenta la nota ya puesta
+        self.assertNotIn("Actividad de otra clase", html)  # docente no asignado ahí
+        self.assertNotIn("Material de consulta", html)  # no admite entrega
+
+    def test_admin_ve_todos_los_cursos_del_programa(self):
+        admin = User.objects.create_superuser(
+            username="seguimiento-admin", email="admin@example.com", password="password"
+        )
+        self.client.force_login(admin)
+
+        html = self.client.get(
+            reverse("program_detail", kwargs={"pk": self.program.pk})
+        ).content.decode()
+
+        self.assertIn("Actividad de otra clase", html)
+
+    def test_alumno_no_ve_la_tabla_de_seguimiento_del_programa(self):
+        self.client.force_login(self.alumno)
+
+        html = self.client.get(
+            reverse("program_detail", kwargs={"pk": self.program.pk})
+        ).content.decode()
+
+        self.assertNotIn("Seguimiento de actividades", html)
+        self.assertNotIn("Actividad calificada", html)
