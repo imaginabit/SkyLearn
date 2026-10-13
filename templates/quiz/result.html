@@ -114,9 +114,9 @@
     <ul>
       <li>{% trans "Review the questions below and try the quiz again in the future"%}.</li>
       <li>
-        {% trans "The result of this quiz will be stored in your progress section" %} 
-        <a class="text-primary" href="{% url 'quiz_progress' %}">Here</a> 
-        {% trans "so you can review and monitor your progression" %}.
+        {% blocktrans %}The result of this quiz will be stored in your progress section{% endblocktrans %}
+        <a class="text-primary" href="{% url 'quiz_progress' %}">{% trans "here" %}</a>
+        {% blocktrans %}so you can review and monitor your progression{% endblocktrans %}.
       </li>
     </ul>
 

@@ -1932,6 +1932,10 @@ msgstr ""
 "Revisa las preguntas a continuación e intenta el cuestionario de nuevo más "
 "adelante"
 
+#: templates/quiz/result.html:117
+msgid "here"
+msgstr "aquí"
+
 #: templates/result.html:119
 msgid "The result of this quiz will be stored in your progress section"
 msgstr ""
