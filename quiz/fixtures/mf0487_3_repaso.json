@@ -5,8 +5,8 @@
   "fields": {
    "content": "La auditoría informática es un proceso:",
    "content_es": "La auditoría informática es un proceso:",
-   "explanation": "Correcta: B — sistemático, independiente y documentado, para obtener evidencia objetiva y evaluar el cumplimiento de criterios. A) reducirla a \"sanciones e invasiones\" es confundirla con una inspección. C) no es un trámite exclusivo del sector público. D) una prueba es una parte de la auditoría, no la auditoría entera.",
-   "explanation_es": "Correcta: B — sistemático, independiente y documentado, para obtener evidencia objetiva y evaluar el cumplimiento de criterios. A) reducirla a \"sanciones e invasiones\" es confundirla con una inspección. C) no es un trámite exclusivo del sector público. D) una prueba es una parte de la auditoría, no la auditoría entera.",
+   "explanation": "Correcta: B — sistemático, independiente y documentado, con evidencia objetiva. D) reducirla a \"sanciones e invasiones\" es confundirla con una inspección. C) no es un trámite exclusivo del sector público. A) una prueba es una parte de la auditoría, no la auditoría entera.",
+   "explanation_es": "Correcta: B — sistemático, independiente y documentado, con evidencia objetiva. D) reducirla a \"sanciones e invasiones\" es confundirla con una inspección. C) no es un trámite exclusivo del sector público. A) una prueba es una parte de la auditoría, no la auditoría entera.",
    "quiz": [
     1
    ]
@@ -24,8 +24,8 @@
   "pk": 1,
   "fields": {
    "question": 1001,
-   "choice_text": "Dirigido exclusivamente a detectar sanciones e invasiones",
-   "choice_text_es": "Dirigido exclusivamente a detectar sanciones e invasiones",
+   "choice_text": "Un tipo concreto de prueba, como la sustantiva o la de cumplimiento",
+   "choice_text_es": "Un tipo concreto de prueba, como la sustantiva o la de cumplimiento",
    "correct": false
   }
  },
@@ -34,8 +34,8 @@
   "pk": 2,
   "fields": {
    "question": 1001,
-   "choice_text": "Sistemático, independiente y documentado, para obtener evidencia objetiva y evaluar el cumplimiento de criterios",
-   "choice_text_es": "Sistemático, independiente y documentado, para obtener evidencia objetiva y evaluar el cumplimiento de criterios",
+   "choice_text": "Sistemático, independiente y documentado, con evidencia objetiva",
+   "choice_text_es": "Sistemático, independiente y documentado, con evidencia objetiva",
    "correct": true
   }
  },
@@ -44,8 +44,8 @@
   "pk": 3,
   "fields": {
    "question": 1001,
-   "choice_text": "Obligatorio únicamente en entidades del sector público",
-   "choice_text_es": "Obligatorio únicamente en entidades del sector público",
+   "choice_text": "Obligatorio únicamente en las entidades del sector público",
+   "choice_text_es": "Obligatorio únicamente en las entidades del sector público",
    "correct": false
   }
  },
@@ -54,8 +54,8 @@
   "pk": 4,
   "fields": {
    "question": 1001,
-   "choice_text": "Un tipo de prueba de cumplimiento",
-   "choice_text_es": "Un tipo de prueba de cumplimiento",
+   "choice_text": "Dirigido exclusivamente a detectar sanciones e invasiones de seguridad",
+   "choice_text_es": "Dirigido exclusivamente a detectar sanciones e invasiones de seguridad",
    "correct": false
   }
  },
@@ -65,8 +65,8 @@
   "fields": {
    "content": "La independencia del auditor respecto del área auditada es:",
    "content_es": "La independencia del auditor respecto del área auditada es:",
-   "explanation": "Correcta: A — un principio del código deontológico. B) es exigible también en auditorías internas. C) no es una causa de incumplimiento de plazos. D) no se limita a las auditorías externas.",
-   "explanation_es": "Correcta: A — un principio del código deontológico. B) es exigible también en auditorías internas. C) no es una causa de incumplimiento de plazos. D) no se limita a las auditorías externas.",
+   "explanation": "Correcta: A — un principio del código deontológico. B) es exigible también en auditorías internas. D) no es una causa de incumplimiento de plazos. C) no se limita a las auditorías externas.",
+   "explanation_es": "Correcta: A — un principio del código deontológico. B) es exigible también en auditorías internas. D) no es una causa de incumplimiento de plazos. C) no se limita a las auditorías externas.",
    "quiz": [
     1
    ]
@@ -104,8 +104,8 @@
   "pk": 7,
   "fields": {
    "question": 1002,
-   "choice_text": "La causa principal del incumplimiento de los plazos de auditoría",
-   "choice_text_es": "La causa principal del incumplimiento de los plazos de auditoría",
+   "choice_text": "Un requisito que solo aplica a las auditorías externas",
+   "choice_text_es": "Un requisito que solo aplica a las auditorías externas",
    "correct": false
   }
  },
@@ -114,8 +114,8 @@
   "pk": 8,
   "fields": {
    "question": 1002,
-   "choice_text": "Un requisito que solo aplica a las auditorías externas",
-   "choice_text_es": "Un requisito que solo aplica a las auditorías externas",
+   "choice_text": "La causa principal del incumplimiento de los plazos de auditoría",
+   "choice_text_es": "La causa principal del incumplimiento de los plazos de auditoría",
    "correct": false
   }
  },
@@ -125,8 +125,8 @@
   "fields": {
    "content": "El secreto profesional del auditor implica que debe mantener confidencial:",
    "content_es": "El secreto profesional del auditor implica que debe mantener confidencial:",
-   "explanation": "Correcta: B — la información a la que accede, incluso tras concluir la relación. A) el secreto profesional no se limita al informe ni caduca con su entrega: el «solo» y el «hasta su entrega» la hacen falsa. C) es más amplio que los datos personales. D) los precios no son el objeto del secreto.",
-   "explanation_es": "Correcta: B — la información a la que accede, incluso tras concluir la relación. A) el secreto profesional no se limita al informe ni caduca con su entrega: el «solo» y el «hasta su entrega» la hacen falsa. C) es más amplio que los datos personales. D) los precios no son el objeto del secreto.",
+   "explanation": "Correcta: D — toda la información a la que accede, también tras concluir la relación. A) el secreto profesional no se limita al informe ni caduca con su entrega: el «solo» y el «hasta su entrega» la hacen falsa. C) es más amplio que los datos personales. B) los precios no son el objeto del secreto.",
+   "explanation_es": "Correcta: D — toda la información a la que accede, también tras concluir la relación. A) el secreto profesional no se limita al informe ni caduca con su entrega: el «solo» y el «hasta su entrega» la hacen falsa. C) es más amplio que los datos personales. B) los precios no son el objeto del secreto.",
    "quiz": [
     1
    ]
@@ -154,9 +154,9 @@
   "pk": 10,
   "fields": {
    "question": 1003,
-   "choice_text": "La información a la que accede por su trabajo, incluso una vez concluida la relación",
-   "choice_text_es": "La información a la que accede por su trabajo, incluso una vez concluida la relación",
-   "correct": true
+   "choice_text": "Los precios, las tarifas y los costes de los servicios que audita",
+   "choice_text_es": "Los precios, las tarifas y los costes de los servicios que audita",
+   "correct": false
   }
  },
  {
@@ -174,9 +174,9 @@
   "pk": 12,
   "fields": {
    "question": 1003,
-   "choice_text": "Los precios de los servicios que audita",
-   "choice_text_es": "Los precios de los servicios que audita",
-   "correct": false
+   "choice_text": "Toda la información a la que accede, también tras concluir la relación",
+   "choice_text_es": "Toda la información a la que accede, también tras concluir la relación",
+   "correct": true
   }
  },
  {
@@ -185,8 +185,8 @@
   "fields": {
    "content": "Un hallazgo de auditoría apto para un informe debe ser:",
    "content_es": "Un hallazgo de auditoría apto para un informe debe ser:",
-   "explanation": "Correcta: C — verdadero, exacto, objetivo, completo, claro, relevante y verificable. A) señalar responsables no es un requisito. B) puede estar sin corregir. D) debe ser claro, no técnico.",
-   "explanation_es": "Correcta: C — verdadero, exacto, objetivo, completo, claro, relevante y verificable. A) señalar responsables no es un requisito. B) puede estar sin corregir. D) debe ser claro, no técnico.",
+   "explanation": "Correcta: B — verdadero, exacto, objetivo, completo, claro, relevante y verificable. C) señalar responsables no es un requisito. D) puede estar sin corregir. A) debe ser claro, no técnico.",
+   "explanation_es": "Correcta: B — verdadero, exacto, objetivo, completo, claro, relevante y verificable. C) señalar responsables no es un requisito. D) puede estar sin corregir. A) debe ser claro, no técnico.",
    "quiz": [
     1
    ]
@@ -204,24 +204,14 @@
   "pk": 13,
   "fields": {
    "question": 1004,
-   "choice_text": "Detallado, para que se entienda quién es el responsable",
-   "choice_text_es": "Detallado, para que se entienda quién es el responsable",
+   "choice_text": "Redactado en lenguaje técnico especializado y comprensible",
+   "choice_text_es": "Redactado en lenguaje técnico especializado y comprensible",
    "correct": false
   }
  },
  {
   "model": "quiz.choice",
   "pk": 14,
-  "fields": {
-   "question": 1004,
-   "choice_text": "Ya corregido, con la solución aplicada",
-   "choice_text_es": "Ya corregido, con la solución aplicada",
-   "correct": false
-  }
- },
- {
-  "model": "quiz.choice",
-  "pk": 15,
   "fields": {
    "question": 1004,
    "choice_text": "Verdadero, exacto, objetivo, completo, claro, relevante y verificable",
@@ -231,11 +221,21 @@
  },
  {
   "model": "quiz.choice",
+  "pk": 15,
+  "fields": {
+   "question": 1004,
+   "choice_text": "Detallado, para que se entienda quién es el responsable",
+   "choice_text_es": "Detallado, para que se entienda quién es el responsable",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
   "pk": 16,
   "fields": {
    "question": 1004,
-   "choice_text": "Redactado en lenguaje técnico especializado",
-   "choice_text_es": "Redactado en lenguaje técnico especializado",
+   "choice_text": "Ya corregido, con la solución aplicada y comprobada",
+   "choice_text_es": "Ya corregido, con la solución aplicada y comprobada",
    "correct": false
   }
  },
@@ -245,8 +245,8 @@
   "fields": {
    "content": "Un hallazgo que incumple un requisito legal se clasifica como:",
    "content_es": "Un hallazgo que incumple un requisito legal se clasifica como:",
-   "explanation": "Correcta: C — no conformidad. A) la oportunidad de mejora no implica incumplimiento. B) la observación es un incumplimiento menor. D) \"recomendación\" no es una categoría.",
-   "explanation_es": "Correcta: C — no conformidad. A) la oportunidad de mejora no implica incumplimiento. B) la observación es un incumplimiento menor. D) \"recomendación\" no es una categoría.",
+   "explanation": "Correcta: A — no conformidad. C) la oportunidad de mejora no implica incumplimiento. D) la observación es un incumplimiento menor. B) \"recomendación\" no es una categoría.",
+   "explanation_es": "Correcta: A — no conformidad. C) la oportunidad de mejora no implica incumplimiento. D) la observación es un incumplimiento menor. B) \"recomendación\" no es una categoría.",
    "quiz": [
     1
    ]
@@ -264,9 +264,9 @@
   "pk": 17,
   "fields": {
    "question": 1005,
-   "choice_text": "Oportunidad de mejora",
-   "choice_text_es": "Oportunidad de mejora",
-   "correct": false
+   "choice_text": "No conformidad",
+   "choice_text_es": "No conformidad",
+   "correct": true
   }
  },
  {
@@ -274,8 +274,8 @@
   "pk": 18,
   "fields": {
    "question": 1005,
-   "choice_text": "Observación",
-   "choice_text_es": "Observación",
+   "choice_text": "Recomendación",
+   "choice_text_es": "Recomendación",
    "correct": false
   }
  },
@@ -284,9 +284,9 @@
   "pk": 19,
   "fields": {
    "question": 1005,
-   "choice_text": "No conformidad",
-   "choice_text_es": "No conformidad",
-   "correct": true
+   "choice_text": "Oportunidad de mejora",
+   "choice_text_es": "Oportunidad de mejora",
+   "correct": false
   }
  },
  {
@@ -294,8 +294,8 @@
   "pk": 20,
   "fields": {
    "question": 1005,
-   "choice_text": "Recomendación",
-   "choice_text_es": "Recomendación",
+   "choice_text": "Observación",
+   "choice_text_es": "Observación",
    "correct": false
   }
  },
@@ -305,8 +305,8 @@
   "fields": {
    "content": "La auditoría interna y la externa se diferencian en:",
    "content_es": "La auditoría interna y la externa se diferencian en:",
-   "explanation": "Correcta: A — quién la realiza y su dependencia de la organización. B) el coste no es el criterio. C) la interna también evalúa riesgos. D) ambas se documentan.",
-   "explanation_es": "Correcta: A — quién la realiza y su dependencia de la organización. B) el coste no es el criterio. C) la interna también evalúa riesgos. D) ambas se documentan.",
+   "explanation": "Correcta: B — en quién la realiza y su dependencia de la organización auditada. D) el coste no es el criterio. A) la interna también evalúa riesgos. C) ambas se documentan.",
+   "explanation_es": "Correcta: B — en quién la realiza y su dependencia de la organización auditada. D) el coste no es el criterio. A) la interna también evalúa riesgos. C) ambas se documentan.",
    "quiz": [
     1
    ]
@@ -324,9 +324,9 @@
   "pk": 21,
   "fields": {
    "question": 1006,
-   "choice_text": "En quién la realiza y su dependencia respecto de la organización auditada",
-   "choice_text_es": "En quién la realiza y su dependencia respecto de la organización auditada",
-   "correct": true
+   "choice_text": "En que la interna no puede evaluar los riesgos de la organización",
+   "choice_text_es": "En que la interna no puede evaluar los riesgos de la organización",
+   "correct": false
   }
  },
  {
@@ -334,9 +334,9 @@
   "pk": 22,
   "fields": {
    "question": 1006,
-   "choice_text": "En que la externa siempre es más cara",
-   "choice_text_es": "En que la externa siempre es más cara",
-   "correct": false
+   "choice_text": "En quién la realiza y su dependencia de la organización auditada",
+   "choice_text_es": "En quién la realiza y su dependencia de la organización auditada",
+   "correct": true
   }
  },
  {
@@ -344,8 +344,8 @@
   "pk": 23,
   "fields": {
    "question": 1006,
-   "choice_text": "En que la interna no puede evaluar riesgos",
-   "choice_text_es": "En que la interna no puede evaluar riesgos",
+   "choice_text": "En que la externa no puede documentarse ni justificar sus conclusiones",
+   "choice_text_es": "En que la externa no puede documentarse ni justificar sus conclusiones",
    "correct": false
   }
  },
@@ -354,8 +354,8 @@
   "pk": 24,
   "fields": {
    "question": 1006,
-   "choice_text": "En que la externa no puede documentarse",
-   "choice_text_es": "En que la externa no puede documentarse",
+   "choice_text": "En que la auditoría externa siempre es más cara que la interna",
+   "choice_text_es": "En que la auditoría externa siempre es más cara que la interna",
    "correct": false
   }
  },
@@ -365,8 +365,8 @@
   "fields": {
    "content": "Una prueba sustantiva tiene por objeto evaluar:",
    "content_es": "Una prueba sustantiva tiene por objeto evaluar:",
-   "explanation": "Correcta: B — la calidad y veracidad de los datos. D) el coste no es objeto de la prueba.",
-   "explanation_es": "Correcta: B — la calidad y veracidad de los datos. D) el coste no es objeto de la prueba.",
+   "explanation": "Correcta: A — la calidad y la veracidad de los datos. C) el coste no es objeto de la prueba.",
+   "explanation_es": "Correcta: A — la calidad y la veracidad de los datos. C) el coste no es objeto de la prueba.",
    "quiz": [
     1
    ]
@@ -384,16 +384,6 @@
   "pk": 25,
   "fields": {
    "question": 1007,
-   "choice_text": "La eficacia de los controles internos",
-   "choice_text_es": "La eficacia de los controles internos",
-   "correct": false
-  }
- },
- {
-  "model": "quiz.choice",
-  "pk": 26,
-  "fields": {
-   "question": 1007,
    "choice_text": "La calidad y la veracidad de los datos",
    "choice_text_es": "La calidad y la veracidad de los datos",
    "correct": true
@@ -401,11 +391,21 @@
  },
  {
   "model": "quiz.choice",
+  "pk": 26,
+  "fields": {
+   "question": 1007,
+   "choice_text": "La eficacia de los controles internos",
+   "choice_text_es": "La eficacia de los controles internos",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
   "pk": 27,
   "fields": {
    "question": 1007,
-   "choice_text": "El cumplimiento de las políticas internas",
-   "choice_text_es": "El cumplimiento de las políticas internas",
+   "choice_text": "El coste de implantación del sistema",
+   "choice_text_es": "El coste de implantación del sistema",
    "correct": false
   }
  },
@@ -414,8 +414,8 @@
   "pk": 28,
   "fields": {
    "question": 1007,
-   "choice_text": "El coste de implantación del sistema",
-   "choice_text_es": "El coste de implantación del sistema",
+   "choice_text": "El cumplimiento de las políticas internas",
+   "choice_text_es": "El cumplimiento de las políticas internas",
    "correct": false
   }
  },
@@ -425,8 +425,8 @@
   "fields": {
    "content": "El muestreo estadístico se fundamenta en:",
    "content_es": "El muestreo estadístico se fundamenta en:",
-   "explanation": "Correcta: A — técnicas matemáticas de tamaño, confianza y margen de error. B) el criterio subjetivo es el no estadístico. C) no analiza toda la población. D) un software CAAT es una herramienta, no el fundamento.",
-   "explanation_es": "Correcta: A — técnicas matemáticas de tamaño, confianza y margen de error. B) el criterio subjetivo es el no estadístico. C) no analiza toda la población. D) un software CAAT es una herramienta, no el fundamento.",
+   "explanation": "Correcta: A — técnicas matemáticas de tamaño de muestra, confianza y error. B) el criterio subjetivo es el no estadístico. D) no analiza toda la población. C) un software CAAT es una herramienta, no el fundamento.",
+   "explanation_es": "Correcta: A — técnicas matemáticas de tamaño de muestra, confianza y error. B) el criterio subjetivo es el no estadístico. D) no analiza toda la población. C) un software CAAT es una herramienta, no el fundamento.",
    "quiz": [
     1
    ]
@@ -444,8 +444,8 @@
   "pk": 29,
   "fields": {
    "question": 1008,
-   "choice_text": "Técnicas matemáticas de tamaño de muestra, confianza y margen de error",
-   "choice_text_es": "Técnicas matemáticas de tamaño de muestra, confianza y margen de error",
+   "choice_text": "Técnicas matemáticas de tamaño de muestra, confianza y error",
+   "choice_text_es": "Técnicas matemáticas de tamaño de muestra, confianza y error",
    "correct": true
   }
  },
@@ -464,8 +464,8 @@
   "pk": 31,
   "fields": {
    "question": 1008,
-   "choice_text": "Un cálculo íntegro sobre la población completa",
-   "choice_text_es": "Un cálculo íntegro sobre la población completa",
+   "choice_text": "El uso de un software de CAAT que haga el cálculo",
+   "choice_text_es": "El uso de un software de CAAT que haga el cálculo",
    "correct": false
   }
  },
@@ -474,8 +474,8 @@
   "pk": 32,
   "fields": {
    "question": 1008,
-   "choice_text": "Un software de CAAT",
-   "choice_text_es": "Un software de CAAT",
+   "choice_text": "Un cálculo íntegro sobre la población completa, sin muestreo",
+   "choice_text_es": "Un cálculo íntegro sobre la población completa, sin muestreo",
    "correct": false
   }
  },
@@ -485,8 +485,8 @@
   "fields": {
    "content": "En el análisis de caja negra, el auditor:",
    "content_es": "En el análisis de caja negra, el auditor:",
-   "explanation": "Correcta: B — dispone de la misma información que un atacante externo. D) el depurador es del análisis local.",
-   "explanation_es": "Correcta: B — dispone de la misma información que un atacante externo. D) el depurador es del análisis local.",
+   "explanation": "Correcta: B — dispone de la misma información que un atacante externo. A) el depurador es del análisis local.",
+   "explanation_es": "Correcta: B — dispone de la misma información que un atacante externo. A) el depurador es del análisis local.",
    "quiz": [
     1
    ]
@@ -504,8 +504,8 @@
   "pk": 33,
   "fields": {
    "question": 1009,
-   "choice_text": "Tiene todo el conocimiento del sistema auditado",
-   "choice_text_es": "Tiene todo el conocimiento del sistema auditado",
+   "choice_text": "Emplea un depurador para seguir la ejecución del programa",
+   "choice_text_es": "Emplea un depurador para seguir la ejecución del programa",
    "correct": false
   }
  },
@@ -534,8 +534,8 @@
   "pk": 36,
   "fields": {
    "question": 1009,
-   "choice_text": "Emplea un depurador para seguir la ejecución del programa",
-   "choice_text_es": "Emplea un depurador para seguir la ejecución del programa",
+   "choice_text": "Tiene todo el conocimiento del sistema auditado",
+   "choice_text_es": "Tiene todo el conocimiento del sistema auditado",
    "correct": false
   }
  },
@@ -545,8 +545,8 @@
   "fields": {
    "content": "La fiabilidad de una técnica de análisis de vulnerabilidades depende principalmente de:",
    "content_es": "La fiabilidad de una técnica de análisis de vulnerabilidades depende principalmente de:",
-   "explanation": "Correcta: C — del tipo de análisis y de la información disponible. A) el número de herramientas no la determina. B) la marca no es el factor. D) los permisos influyen, pero no la definen.",
-   "explanation_es": "Correcta: C — del tipo de análisis y de la información disponible. A) el número de herramientas no la determina. B) la marca no es el factor. D) los permisos influyen, pero no la definen.",
+   "explanation": "Correcta: C — del tipo de análisis realizado y de la información disponible. D) el número de herramientas no la determina. B) la marca no es el factor. A) los permisos influyen, pero no la definen.",
+   "explanation_es": "Correcta: C — del tipo de análisis realizado y de la información disponible. D) el número de herramientas no la determina. B) la marca no es el factor. A) los permisos influyen, pero no la definen.",
    "quiz": [
     1
    ]
@@ -564,8 +564,8 @@
   "pk": 37,
   "fields": {
    "question": 1010,
-   "choice_text": "Del número de herramientas empleadas en la auditoría",
-   "choice_text_es": "Del número de herramientas empleadas en la auditoría",
+   "choice_text": "De ejecutarla con permisos de administrador",
+   "choice_text_es": "De ejecutarla con permisos de administrador",
    "correct": false
   }
  },
@@ -594,8 +594,8 @@
   "pk": 40,
   "fields": {
    "question": 1010,
-   "choice_text": "De ejecutarla con permisos de administrador",
-   "choice_text_es": "De ejecutarla con permisos de administrador",
+   "choice_text": "Del número de herramientas empleadas en la auditoría",
+   "choice_text_es": "Del número de herramientas empleadas en la auditoría",
    "correct": false
   }
  },
@@ -605,8 +605,8 @@
   "fields": {
    "content": "Un falso positivo en un escáner de vulnerabilidades es:",
    "content_es": "Un falso positivo en un escáner de vulnerabilidades es:",
-   "explanation": "Correcta: B — un aviso que no corresponde a un riesgo real. A) una vulnerabilidad mal interpretada no es un falso positivo. C) no es un fallo del sistema escaneado. D) no es un ataque fallido.",
-   "explanation_es": "Correcta: B — un aviso que no corresponde a un riesgo real. A) una vulnerabilidad mal interpretada no es un falso positivo. C) no es un fallo del sistema escaneado. D) no es un ataque fallido.",
+   "explanation": "Correcta: D — un aviso que no corresponde a un riesgo real. A) una vulnerabilidad mal interpretada no es un falso positivo. C) no es un fallo del sistema escaneado. B) no es un ataque fallido.",
+   "explanation_es": "Correcta: D — un aviso que no corresponde a un riesgo real. A) una vulnerabilidad mal interpretada no es un falso positivo. C) no es un fallo del sistema escaneado. B) no es un ataque fallido.",
    "quiz": [
     1
    ]
@@ -634,9 +634,9 @@
   "pk": 42,
   "fields": {
    "question": 1011,
-   "choice_text": "Un aviso que no corresponde a un riesgo real",
-   "choice_text_es": "Un aviso que no corresponde a un riesgo real",
-   "correct": true
+   "choice_text": "Un ataque que no ha tenido éxito",
+   "choice_text_es": "Un ataque que no ha tenido éxito",
+   "correct": false
   }
  },
  {
@@ -654,9 +654,9 @@
   "pk": 44,
   "fields": {
    "question": 1011,
-   "choice_text": "Un ataque que no ha tenido éxito",
-   "choice_text_es": "Un ataque que no ha tenido éxito",
-   "correct": false
+   "choice_text": "Un aviso que no corresponde a un riesgo real",
+   "choice_text_es": "Un aviso que no corresponde a un riesgo real",
+   "correct": true
   }
  },
  {
@@ -665,8 +665,8 @@
   "fields": {
    "content": "Para descubrir puertos y servicios de un host se utiliza:",
    "content_es": "Para descubrir puertos y servicios de un host se utiliza:",
-   "explanation": "Correcta: C — Nmap. A) Nessus analiza vulnerabilidades. B) John descifra contraseñas. D) Acunetix analiza la web.",
-   "explanation_es": "Correcta: C — Nmap. A) Nessus analiza vulnerabilidades. B) John descifra contraseñas. D) Acunetix analiza la web.",
+   "explanation": "Correcta: D — nmap. C) Nessus analiza vulnerabilidades. A) John descifra contraseñas. B) Acunetix analiza la web.",
+   "explanation_es": "Correcta: D — nmap. C) Nessus analiza vulnerabilidades. A) John descifra contraseñas. B) Acunetix analiza la web.",
    "quiz": [
     1
    ]
@@ -684,8 +684,8 @@
   "pk": 45,
   "fields": {
    "question": 1012,
-   "choice_text": "Nessus",
-   "choice_text_es": "Nessus",
+   "choice_text": "John the Ripper",
+   "choice_text_es": "John the Ripper",
    "correct": false
   }
  },
@@ -694,8 +694,8 @@
   "pk": 46,
   "fields": {
    "question": 1012,
-   "choice_text": "John the Ripper",
-   "choice_text_es": "John the Ripper",
+   "choice_text": "Acunetix",
+   "choice_text_es": "Acunetix",
    "correct": false
   }
  },
@@ -704,9 +704,9 @@
   "pk": 47,
   "fields": {
    "question": 1012,
-   "choice_text": "Nmap",
-   "choice_text_es": "Nmap",
-   "correct": true
+   "choice_text": "Nessus",
+   "choice_text_es": "Nessus",
+   "correct": false
   }
  },
  {
@@ -714,9 +714,9 @@
   "pk": 48,
   "fields": {
    "question": 1012,
-   "choice_text": "Acunetix",
-   "choice_text_es": "Acunetix",
-   "correct": false
+   "choice_text": "Nmap",
+   "choice_text_es": "Nmap",
+   "correct": true
   }
  },
  {
@@ -725,8 +725,8 @@
   "fields": {
    "content": "Nessus es un escáner de:",
    "content_es": "Nessus es un escáner de:",
-   "explanation": "Correcta: B — vulnerabilidades. A) el de puertos es Nmap. C) el de contraseñas es John. D) el de directorios es Dirb.",
-   "explanation_es": "Correcta: B — vulnerabilidades. A) el de puertos es Nmap. C) el de contraseñas es John. D) el de directorios es Dirb.",
+   "explanation": "Correcta: C — vulnerabilidades. D) el de puertos es Nmap. A) el de contraseñas es John. B) el de directorios es Dirb.",
+   "explanation_es": "Correcta: C — vulnerabilidades. D) el de puertos es Nmap. A) el de contraseñas es John. B) el de directorios es Dirb.",
    "quiz": [
     1
    ]
@@ -744,14 +744,24 @@
   "pk": 49,
   "fields": {
    "question": 1013,
-   "choice_text": "Puertos",
-   "choice_text_es": "Puertos",
+   "choice_text": "Contraseñas",
+   "choice_text_es": "Contraseñas",
    "correct": false
   }
  },
  {
   "model": "quiz.choice",
   "pk": 50,
+  "fields": {
+   "question": 1013,
+   "choice_text": "Directorios web",
+   "choice_text_es": "Directorios web",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 51,
   "fields": {
    "question": 1013,
    "choice_text": "Vulnerabilidades",
@@ -761,21 +771,11 @@
  },
  {
   "model": "quiz.choice",
-  "pk": 51,
-  "fields": {
-   "question": 1013,
-   "choice_text": "Contraseñas",
-   "choice_text_es": "Contraseñas",
-   "correct": false
-  }
- },
- {
-  "model": "quiz.choice",
   "pk": 52,
   "fields": {
    "question": 1013,
-   "choice_text": "Directorios web",
-   "choice_text_es": "Directorios web",
+   "choice_text": "Puertos",
+   "choice_text_es": "Puertos",
    "correct": false
   }
  },
@@ -785,8 +785,8 @@
   "fields": {
    "content": "Los criterios de selección de una herramienta de auditoría dependen de:",
    "content_es": "Los criterios de selección de una herramienta de auditoría dependen de:",
-   "explanation": "Correcta: A — del tipo de servidor o red y de los requisitos de seguridad.",
-   "explanation_es": "Correcta: A — del tipo de servidor o red y de los requisitos de seguridad.",
+   "explanation": "Correcta: B — del tipo de servidor o red y de los requisitos de seguridad.",
+   "explanation_es": "Correcta: B — del tipo de servidor o red y de los requisitos de seguridad.",
    "quiz": [
     1
    ]
@@ -804,9 +804,9 @@
   "pk": 53,
   "fields": {
    "question": 1014,
-   "choice_text": "Del tipo de servidor o red y de los requisitos de seguridad",
-   "choice_text_es": "Del tipo de servidor o red y de los requisitos de seguridad",
-   "correct": true
+   "choice_text": "Del presupuesto disponible para el proyecto",
+   "choice_text_es": "Del presupuesto disponible para el proyecto",
+   "correct": false
   }
  },
  {
@@ -814,9 +814,9 @@
   "pk": 54,
   "fields": {
    "question": 1014,
-   "choice_text": "De la marca de la herramienta",
-   "choice_text_es": "De la marca de la herramienta",
-   "correct": false
+   "choice_text": "Del tipo de servidor o red y de los requisitos de seguridad",
+   "choice_text_es": "Del tipo de servidor o red y de los requisitos de seguridad",
+   "correct": true
   }
  },
  {
@@ -824,8 +824,8 @@
   "pk": 55,
   "fields": {
    "question": 1014,
-   "choice_text": "Del presupuesto disponible",
-   "choice_text_es": "Del presupuesto disponible",
+   "choice_text": "De la antigüedad del sistema instalado en la organización",
+   "choice_text_es": "De la antigüedad del sistema instalado en la organización",
    "correct": false
   }
  },
@@ -834,8 +834,8 @@
   "pk": 56,
   "fields": {
    "question": 1014,
-   "choice_text": "De la antigüedad del sistema instalado",
-   "choice_text_es": "De la antigüedad del sistema instalado",
+   "choice_text": "De la marca o del fabricante de la herramienta",
+   "choice_text_es": "De la marca o del fabricante de la herramienta",
    "correct": false
   }
  },
@@ -845,8 +845,8 @@
   "fields": {
    "content": "Las fases de la auditoría de sistemas de información son, en orden:",
    "content_es": "Las fases de la auditoría de sistemas de información son, en orden:",
-   "explanation": "Correcta: B — planificación › recogida › análisis › evaluación de riesgos › implementación de soluciones › seguimiento y revisión.",
-   "explanation_es": "Correcta: B — planificación › recogida › análisis › evaluación de riesgos › implementación de soluciones › seguimiento y revisión.",
+   "explanation": "Correcta: B — planificación › recogida › análisis › riesgos › implementación › seguimiento.",
+   "explanation_es": "Correcta: B — planificación › recogida › análisis › riesgos › implementación › seguimiento.",
    "quiz": [
     1
    ]
@@ -864,8 +864,8 @@
   "pk": 57,
   "fields": {
    "question": 1015,
-   "choice_text": "Planificación › análisis › informe › recogida › seguimiento",
-   "choice_text_es": "Planificación › análisis › informe › recogida › seguimiento",
+   "choice_text": "Análisis › planificación › recogida › informe final",
+   "choice_text_es": "Análisis › planificación › recogida › informe final",
    "correct": false
   }
  },
@@ -874,8 +874,8 @@
   "pk": 58,
   "fields": {
    "question": 1015,
-   "choice_text": "Planificación › recogida de información › análisis › evaluación de riesgos › implementación de soluciones › seguimiento y revisión",
-   "choice_text_es": "Planificación › recogida de información › análisis › evaluación de riesgos › implementación de soluciones › seguimiento y revisión",
+   "choice_text": "Planificación › recogida › análisis › riesgos › implementación › seguimiento",
+   "choice_text_es": "Planificación › recogida › análisis › riesgos › implementación › seguimiento",
    "correct": true
   }
  },
@@ -884,8 +884,8 @@
   "pk": 59,
   "fields": {
    "question": 1015,
-   "choice_text": "Recogida › planificación › informe › análisis",
-   "choice_text_es": "Recogida › planificación › informe › análisis",
+   "choice_text": "Recogida › planificación › informe › análisis de resultados",
+   "choice_text_es": "Recogida › planificación › informe › análisis de resultados",
    "correct": false
   }
  },
@@ -894,8 +894,8 @@
   "pk": 60,
   "fields": {
    "question": 1015,
-   "choice_text": "Análisis › planificación › recogida › informe",
-   "choice_text_es": "Análisis › planificación › recogida › informe",
+   "choice_text": "Planificación › análisis › informe › recogida › seguimiento",
+   "choice_text_es": "Planificación › análisis › informe › recogida › seguimiento",
    "correct": false
   }
  },
@@ -905,8 +905,8 @@
   "fields": {
    "content": "El marco normativo europeo vigente en materia de protección de datos es:",
    "content_es": "El marco normativo europeo vigente en materia de protección de datos es:",
-   "explanation": "Correcta: B — el Reglamento (UE) 2016/679 (RGPD). A) la Directiva 95/46/CE quedó derogada. C) la LO 3/2018 es nacional. D) el RD 1720/2007 desarrollaba la LOPD.",
-   "explanation_es": "Correcta: B — el Reglamento (UE) 2016/679 (RGPD). A) la Directiva 95/46/CE quedó derogada. C) la LO 3/2018 es nacional. D) el RD 1720/2007 desarrollaba la LOPD.",
+   "explanation": "Correcta: C — el Reglamento (UE) 2016/679, conocido como RGPD. D) la Directiva 95/46/CE quedó derogada. A) la LO 3/2018 es nacional. B) el RD 1720/2007 desarrollaba la LOPD.",
+   "explanation_es": "Correcta: C — el Reglamento (UE) 2016/679, conocido como RGPD. D) la Directiva 95/46/CE quedó derogada. A) la LO 3/2018 es nacional. B) el RD 1720/2007 desarrollaba la LOPD.",
    "quiz": [
     1
    ]
@@ -924,14 +924,24 @@
   "pk": 61,
   "fields": {
    "question": 1016,
-   "choice_text": "La Directiva 95/46/CE",
-   "choice_text_es": "La Directiva 95/46/CE",
+   "choice_text": "La Ley Orgánica 3/2018, de protección de datos",
+   "choice_text_es": "La Ley Orgánica 3/2018, de protección de datos",
    "correct": false
   }
  },
  {
   "model": "quiz.choice",
   "pk": 62,
+  "fields": {
+   "question": 1016,
+   "choice_text": "El Real Decreto 1720/2007, de desarrollo normativo",
+   "choice_text_es": "El Real Decreto 1720/2007, de desarrollo normativo",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 63,
   "fields": {
    "question": 1016,
    "choice_text": "El Reglamento (UE) 2016/679, conocido como RGPD",
@@ -941,21 +951,11 @@
  },
  {
   "model": "quiz.choice",
-  "pk": 63,
-  "fields": {
-   "question": 1016,
-   "choice_text": "La Ley Orgánica 3/2018",
-   "choice_text_es": "La Ley Orgánica 3/2018",
-   "correct": false
-  }
- },
- {
-  "model": "quiz.choice",
   "pk": 64,
   "fields": {
    "question": 1016,
-   "choice_text": "El Real Decreto 1720/2007",
-   "choice_text_es": "El Real Decreto 1720/2007",
+   "choice_text": "La Directiva 95/46/CE, de la Unión Europea",
+   "choice_text_es": "La Directiva 95/46/CE, de la Unión Europea",
    "correct": false
   }
  },
@@ -965,8 +965,8 @@
   "fields": {
    "content": "La normativa española que implementa el RGPD en el orden interno es:",
    "content_es": "La normativa española que implementa el RGPD en el orden interno es:",
-   "explanation": "Correcta: C — la LO 3/2018 (LOPDGDD). D) el RD 1720/2007 desarrolla la LOPD.",
-   "explanation_es": "Correcta: C — la LO 3/2018 (LOPDGDD). D) el RD 1720/2007 desarrolla la LOPD.",
+   "explanation": "Correcta: B — la Ley Orgánica 3/2018, de 5 de diciembre (LOPDGDD). A) el RD 1720/2007 desarrolla la LOPD.",
+   "explanation_es": "Correcta: B — la Ley Orgánica 3/2018, de 5 de diciembre (LOPDGDD). A) el RD 1720/2007 desarrolla la LOPD.",
    "quiz": [
     1
    ]
@@ -984,24 +984,14 @@
   "pk": 65,
   "fields": {
    "question": 1017,
-   "choice_text": "La Ley Orgánica 15/1999 (LOPD)",
-   "choice_text_es": "La Ley Orgánica 15/1999 (LOPD)",
+   "choice_text": "El Real Decreto 1720/2007, de desarrollo normativo",
+   "choice_text_es": "El Real Decreto 1720/2007, de desarrollo normativo",
    "correct": false
   }
  },
  {
   "model": "quiz.choice",
   "pk": 66,
-  "fields": {
-   "question": 1017,
-   "choice_text": "La Ley Orgánica 5/1992 (LORTAD)",
-   "choice_text_es": "La Ley Orgánica 5/1992 (LORTAD)",
-   "correct": false
-  }
- },
- {
-  "model": "quiz.choice",
-  "pk": 67,
   "fields": {
    "question": 1017,
    "choice_text": "La Ley Orgánica 3/2018, de 5 de diciembre (LOPDGDD)",
@@ -1011,11 +1001,21 @@
  },
  {
   "model": "quiz.choice",
+  "pk": 67,
+  "fields": {
+   "question": 1017,
+   "choice_text": "La Ley Orgánica 15/1999, de protección de datos (LOPD)",
+   "choice_text_es": "La Ley Orgánica 15/1999, de protección de datos (LOPD)",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
   "pk": 68,
   "fields": {
    "question": 1017,
-   "choice_text": "El Real Decreto 1720/2007",
-   "choice_text_es": "El Real Decreto 1720/2007",
+   "choice_text": "La Ley Orgánica 5/1992, de regulación del tratamiento (LORTAD)",
+   "choice_text_es": "La Ley Orgánica 5/1992, de regulación del tratamiento (LORTAD)",
    "correct": false
   }
  },
@@ -1025,8 +1025,8 @@
   "fields": {
    "content": "El principio según el cual el responsable debe demostrar que cumple los demás principios se denomina:",
    "content_es": "El principio según el cual el responsable debe demostrar que cumple los demás principios se denomina:",
-   "explanation": "Correcta: A — responsabilidad proactiva.",
-   "explanation_es": "Correcta: A — responsabilidad proactiva.",
+   "explanation": "Correcta: D — responsabilidad proactiva.",
+   "explanation_es": "Correcta: D — responsabilidad proactiva.",
    "quiz": [
     1
    ]
@@ -1044,16 +1044,6 @@
   "pk": 69,
   "fields": {
    "question": 1018,
-   "choice_text": "Responsabilidad proactiva",
-   "choice_text_es": "Responsabilidad proactiva",
-   "correct": true
-  }
- },
- {
-  "model": "quiz.choice",
-  "pk": 70,
-  "fields": {
-   "question": 1018,
    "choice_text": "Licitud y legalidad",
    "choice_text_es": "Licitud y legalidad",
    "correct": false
@@ -1061,7 +1051,7 @@
  },
  {
   "model": "quiz.choice",
-  "pk": 71,
+  "pk": 70,
   "fields": {
    "question": 1018,
    "choice_text": "Exactitud de los datos",
@@ -1071,7 +1061,7 @@
  },
  {
   "model": "quiz.choice",
-  "pk": 72,
+  "pk": 71,
   "fields": {
    "question": 1018,
    "choice_text": "Transparencia",
@@ -1080,13 +1070,23 @@
   }
  },
  {
+  "model": "quiz.choice",
+  "pk": 72,
+  "fields": {
+   "question": 1018,
+   "choice_text": "Responsabilidad proactiva",
+   "choice_text_es": "Responsabilidad proactiva",
+   "correct": true
+  }
+ },
+ {
   "model": "quiz.question",
   "pk": 1019,
   "fields": {
    "content": "El art. 32.2 del RGPD establece que el nivel de seguridad adecuado se determina en función de:",
    "content_es": "El art. 32.2 del RGPD establece que el nivel de seguridad adecuado se determina en función de:",
-   "explanation": "Correcta: C — el coste, la naturaleza, el alcance y el contexto del tratamiento, y los riesgos para los derechos y libertades.",
-   "explanation_es": "Correcta: C — el coste, la naturaleza, el alcance y el contexto del tratamiento, y los riesgos para los derechos y libertades.",
+   "explanation": "Correcta: A — el coste, la naturaleza, el contexto y los riesgos para los interesados.",
+   "explanation_es": "Correcta: A — el coste, la naturaleza, el contexto y los riesgos para los interesados.",
    "quiz": [
     1
    ]
@@ -1104,9 +1104,9 @@
   "pk": 73,
   "fields": {
    "question": 1019,
-   "choice_text": "El número de empleados de la organización",
-   "choice_text_es": "El número de empleados de la organización",
-   "correct": false
+   "choice_text": "El coste, la naturaleza, el contexto y los riesgos para los interesados",
+   "choice_text_es": "El coste, la naturaleza, el contexto y los riesgos para los interesados",
+   "correct": true
   }
  },
  {
@@ -1114,8 +1114,8 @@
   "pk": 74,
   "fields": {
    "question": 1019,
-   "choice_text": "El presupuesto anual del departamento de sistemas",
-   "choice_text_es": "El presupuesto anual del departamento de sistemas",
+   "choice_text": "La antigüedad y el fabricante del sistema de información",
+   "choice_text_es": "La antigüedad y el fabricante del sistema de información",
    "correct": false
   }
  },
@@ -1124,9 +1124,9 @@
   "pk": 75,
   "fields": {
    "question": 1019,
-   "choice_text": "El coste de la aplicación, la naturaleza, el alcance y el contexto del tratamiento, y los riesgos para los derechos y libertades de los interesados",
-   "choice_text_es": "El coste de la aplicación, la naturaleza, el alcance y el contexto del tratamiento, y los riesgos para los derechos y libertades de los interesados",
-   "correct": true
+   "choice_text": "El número de empleados y el tamaño de la organización",
+   "choice_text_es": "El número de empleados y el tamaño de la organización",
+   "correct": false
   }
  },
  {
@@ -1134,8 +1134,8 @@
   "pk": 76,
   "fields": {
    "question": 1019,
-   "choice_text": "La antigüedad del sistema de información instalado",
-   "choice_text_es": "La antigüedad del sistema de información instalado",
+   "choice_text": "El presupuesto anual asignado al departamento de sistemas",
+   "choice_text_es": "El presupuesto anual asignado al departamento de sistemas",
    "correct": false
   }
  },
@@ -1145,8 +1145,8 @@
   "fields": {
    "content": "La figura del Delegado de Protección de Datos (DPD) es obligatoria:",
    "content_es": "La figura del Delegado de Protección de Datos (DPD) es obligatoria:",
-   "explanation": "Correcta: B — en tratamientos a gran escala y en la Administración pública. A) no en todas las empresas. C) no es voluntario donde la ley lo exige. D) no solo en el sector público.",
-   "explanation_es": "Correcta: B — en tratamientos a gran escala y en la Administración pública. A) no en todas las empresas. C) no es voluntario donde la ley lo exige. D) no solo en el sector público.",
+   "explanation": "Correcta: C — en organizaciones con datos a gran escala y en la Administración pública. D) no en todas las empresas. A) no es voluntario donde la ley lo exige. B) no solo en el sector público.",
+   "explanation_es": "Correcta: C — en organizaciones con datos a gran escala y en la Administración pública. D) no en todas las empresas. A) no es voluntario donde la ley lo exige. B) no solo en el sector público.",
    "quiz": [
     1
    ]
@@ -1164,8 +1164,8 @@
   "pk": 77,
   "fields": {
    "question": 1020,
-   "choice_text": "En todas las empresas, sin excepción",
-   "choice_text_es": "En todas las empresas, sin excepción",
+   "choice_text": "Voluntariamente en el sector privado, por decisión propia",
+   "choice_text_es": "Voluntariamente en el sector privado, por decisión propia",
    "correct": false
   }
  },
@@ -1174,9 +1174,9 @@
   "pk": 78,
   "fields": {
    "question": 1020,
-   "choice_text": "En las organizaciones que realizan tratamientos de datos a gran escala y en la Administración pública",
-   "choice_text_es": "En las organizaciones que realizan tratamientos de datos a gran escala y en la Administración pública",
-   "correct": true
+   "choice_text": "Exclusivamente en el sector público y en la Administración",
+   "choice_text_es": "Exclusivamente en el sector público y en la Administración",
+   "correct": false
   }
  },
  {
@@ -1184,9 +1184,9 @@
   "pk": 79,
   "fields": {
    "question": 1020,
-   "choice_text": "Voluntariamente en el sector privado",
-   "choice_text_es": "Voluntariamente en el sector privado",
-   "correct": false
+   "choice_text": "En organizaciones con datos a gran escala y en la Administración pública",
+   "choice_text_es": "En organizaciones con datos a gran escala y en la Administración pública",
+   "correct": true
   }
  },
  {
@@ -1194,8 +1194,8 @@
   "pk": 80,
   "fields": {
    "question": 1020,
-   "choice_text": "Exclusivamente en el sector público",
-   "choice_text_es": "Exclusivamente en el sector público",
+   "choice_text": "En todas las empresas y entidades, sin excepción alguna",
+   "choice_text_es": "En todas las empresas y entidades, sin excepción alguna",
    "correct": false
   }
  },
@@ -1205,8 +1205,8 @@
   "fields": {
    "content": "Según el artículo 32 del RGPD, responsables y encargados deben aplicar:",
    "content_es": "Según el artículo 32 del RGPD, responsables y encargados deben aplicar:",
-   "explanation": "Correcta: A — medidas técnicas y organizativas apropiadas para garantizar un nivel de seguridad adecuado al riesgo.",
-   "explanation_es": "Correcta: A — medidas técnicas y organizativas apropiadas para garantizar un nivel de seguridad adecuado al riesgo.",
+   "explanation": "Correcta: D — medidas técnicas y organizativas apropiadas al riesgo.",
+   "explanation_es": "Correcta: D — medidas técnicas y organizativas apropiadas al riesgo.",
    "quiz": [
     1
    ]
@@ -1224,9 +1224,9 @@
   "pk": 81,
   "fields": {
    "question": 1021,
-   "choice_text": "Medidas técnicas y organizativas apropiadas para garantizar un nivel de seguridad adecuado al riesgo",
-   "choice_text_es": "Medidas técnicas y organizativas apropiadas para garantizar un nivel de seguridad adecuado al riesgo",
-   "correct": true
+   "choice_text": "Nivel alto, por tratarse de datos personales protegidos",
+   "choice_text_es": "Nivel alto, por tratarse de datos personales protegidos",
+   "correct": false
   }
  },
  {
@@ -1234,8 +1234,8 @@
   "pk": 82,
   "fields": {
    "question": 1021,
-   "choice_text": "Nivel alto, por tratarse de datos personales",
-   "choice_text_es": "Nivel alto, por tratarse de datos personales",
+   "choice_text": "Nivel básico, por ser el más permisivo y el más barato",
+   "choice_text_es": "Nivel básico, por ser el más permisivo y el más barato",
    "correct": false
   }
  },
@@ -1244,8 +1244,8 @@
   "pk": 83,
   "fields": {
    "question": 1021,
-   "choice_text": "Nivel básico, por ser el más permisivo",
-   "choice_text_es": "Nivel básico, por ser el más permisivo",
+   "choice_text": "Nivel medio, por ser el intermedio entre los otros",
+   "choice_text_es": "Nivel medio, por ser el intermedio entre los otros",
    "correct": false
   }
  },
@@ -1254,9 +1254,9 @@
   "pk": 84,
   "fields": {
    "question": 1021,
-   "choice_text": "Nivel medio, por ser el intermedio",
-   "choice_text_es": "Nivel medio, por ser el intermedio",
-   "correct": false
+   "choice_text": "Medidas técnicas y organizativas apropiadas al riesgo",
+   "choice_text_es": "Medidas técnicas y organizativas apropiadas al riesgo",
+   "correct": true
   }
  },
  {
@@ -1265,8 +1265,8 @@
   "fields": {
    "content": "Con la normativa vigente, una auditoría bienal de los ficheros con datos personales:",
    "content_es": "Con la normativa vigente, una auditoría bienal de los ficheros con datos personales:",
-   "explanation": "Correcta: D — ya no es obligatoria, aunque es muy recomendable. C) no se limita al sector público.",
-   "explanation_es": "Correcta: D — ya no es obligatoria, aunque es muy recomendable. C) no se limita al sector público.",
+   "explanation": "Correcta: B — ya no es obligatoria, aunque es recomendable cada dos años. D) no se limita al sector público.",
+   "explanation_es": "Correcta: B — ya no es obligatoria, aunque es recomendable cada dos años. D) no se limita al sector público.",
    "quiz": [
     1
    ]
@@ -1284,8 +1284,8 @@
   "pk": 85,
   "fields": {
    "question": 1022,
-   "choice_text": "Es obligatoria cada dos años",
-   "choice_text_es": "Es obligatoria cada dos años",
+   "choice_text": "Es obligatoria cada cinco años, por ley",
+   "choice_text_es": "Es obligatoria cada cinco años, por ley",
    "correct": false
   }
  },
@@ -1294,9 +1294,9 @@
   "pk": 86,
   "fields": {
    "question": 1022,
-   "choice_text": "Es obligatoria cada cinco años",
-   "choice_text_es": "Es obligatoria cada cinco años",
-   "correct": false
+   "choice_text": "Ya no es obligatoria, aunque es recomendable cada dos años",
+   "choice_text_es": "Ya no es obligatoria, aunque es recomendable cada dos años",
+   "correct": true
   }
  },
  {
@@ -1304,8 +1304,8 @@
   "pk": 87,
   "fields": {
    "question": 1022,
-   "choice_text": "Solo es obligatoria en el sector público",
-   "choice_text_es": "Solo es obligatoria en el sector público",
+   "choice_text": "Es obligatoria cada dos años en todo caso",
+   "choice_text_es": "Es obligatoria cada dos años en todo caso",
    "correct": false
   }
  },
@@ -1314,9 +1314,9 @@
   "pk": 88,
   "fields": {
    "question": 1022,
-   "choice_text": "Ya no es obligatoria, aunque es muy recomendable hacerla cada dos años o ante cambios relevantes",
-   "choice_text_es": "Ya no es obligatoria, aunque es muy recomendable hacerla cada dos años o ante cambios relevantes",
-   "correct": true
+   "choice_text": "Solo es obligatoria en el sector público y en el privado",
+   "choice_text_es": "Solo es obligatoria en el sector público y en el privado",
+   "correct": false
   }
  },
  {
@@ -1325,8 +1325,8 @@
   "fields": {
    "content": "La figura del Registro de Actividades de Tratamiento viene regulada por el:",
    "content_es": "La figura del Registro de Actividades de Tratamiento viene regulada por el:",
-   "explanation": "Correcta: A — el artículo 30 del RGPD. B) el art. 32 son las medidas de seguridad. C) la LOPDGDD lo amplía, pero no es el precepto base. D) el art. 197 del Código Penal es otra cosa.",
-   "explanation_es": "Correcta: A — el artículo 30 del RGPD. B) el art. 32 son las medidas de seguridad. C) la LOPDGDD lo amplía, pero no es el precepto base. D) el art. 197 del Código Penal es otra cosa.",
+   "explanation": "Correcta: C — artículo 30 del RGPD. A) el art. 32 son las medidas de seguridad. D) la LOPDGDD lo amplía, pero no es el precepto base. B) el art. 197 del Código Penal es otra cosa.",
+   "explanation_es": "Correcta: C — artículo 30 del RGPD. A) el art. 32 son las medidas de seguridad. D) la LOPDGDD lo amplía, pero no es el precepto base. B) el art. 197 del Código Penal es otra cosa.",
    "quiz": [
     1
    ]
@@ -1344,9 +1344,9 @@
   "pk": 89,
   "fields": {
    "question": 1023,
-   "choice_text": "Artículo 30 del RGPD",
-   "choice_text_es": "Artículo 30 del RGPD",
-   "correct": true
+   "choice_text": "Artículo 32 del RGPD",
+   "choice_text_es": "Artículo 32 del RGPD",
+   "correct": false
   }
  },
  {
@@ -1354,8 +1354,8 @@
   "pk": 90,
   "fields": {
    "question": 1023,
-   "choice_text": "Artículo 32 del RGPD",
-   "choice_text_es": "Artículo 32 del RGPD",
+   "choice_text": "Artículo 197 del Código Penal",
+   "choice_text_es": "Artículo 197 del Código Penal",
    "correct": false
   }
  },
@@ -1364,9 +1364,9 @@
   "pk": 91,
   "fields": {
    "question": 1023,
-   "choice_text": "Artículo 39 de la LOPDGDD",
-   "choice_text_es": "Artículo 39 de la LOPDGDD",
-   "correct": false
+   "choice_text": "Artículo 30 del RGPD",
+   "choice_text_es": "Artículo 30 del RGPD",
+   "correct": true
   }
  },
  {
@@ -1374,8 +1374,8 @@
   "pk": 92,
   "fields": {
    "question": 1023,
-   "choice_text": "Artículo 197 del Código Penal",
-   "choice_text_es": "Artículo 197 del Código Penal",
+   "choice_text": "Artículo 39 de la LOPDGDD",
+   "choice_text_es": "Artículo 39 de la LOPDGDD",
    "correct": false
   }
  },
@@ -1385,8 +1385,8 @@
   "fields": {
    "content": "Los elementos del modelo de relaciones del análisis de riesgos son:",
    "content_es": "Los elementos del modelo de relaciones del análisis de riesgos son:",
-   "explanation": "Correcta: A — activo, amenaza, vulnerabilidad, impacto y contramedida.",
-   "explanation_es": "Correcta: A — activo, amenaza, vulnerabilidad, impacto y contramedida.",
+   "explanation": "Correcta: C — activo, amenaza, vulnerabilidad, impacto y contramedida.",
+   "explanation_es": "Correcta: C — activo, amenaza, vulnerabilidad, impacto y contramedida.",
    "quiz": [
     1
    ]
@@ -1404,9 +1404,9 @@
   "pk": 93,
   "fields": {
    "question": 1024,
-   "choice_text": "Activo, amenaza, vulnerabilidad, impacto y contramedida",
-   "choice_text_es": "Activo, amenaza, vulnerabilidad, impacto y contramedida",
-   "correct": true
+   "choice_text": "Amenaza, malware, cortafuegos, usuario y contraseña",
+   "choice_text_es": "Amenaza, malware, cortafuegos, usuario y contraseña",
+   "correct": false
   }
  },
  {
@@ -1414,8 +1414,8 @@
   "pk": 94,
   "fields": {
    "question": 1024,
-   "choice_text": "Amenaza, malware, cortafuegos, usuario y contraseña",
-   "choice_text_es": "Amenaza, malware, cortafuegos, usuario y contraseña",
+   "choice_text": "Vulnerabilidad, parche, antivirus, copia de seguridad y auditor",
+   "choice_text_es": "Vulnerabilidad, parche, antivirus, copia de seguridad y auditor",
    "correct": false
   }
  },
@@ -1424,9 +1424,9 @@
   "pk": 95,
   "fields": {
    "question": 1024,
-   "choice_text": "Activo, atacante, herramienta, impacto y seguro",
-   "choice_text_es": "Activo, atacante, herramienta, impacto y seguro",
-   "correct": false
+   "choice_text": "Activo, amenaza, vulnerabilidad, impacto y contramedida",
+   "choice_text_es": "Activo, amenaza, vulnerabilidad, impacto y contramedida",
+   "correct": true
   }
  },
  {
@@ -1434,8 +1434,8 @@
   "pk": 96,
   "fields": {
    "question": 1024,
-   "choice_text": "Vulnerabilidad, parche, antivirus, copia de seguridad y auditor",
-   "choice_text_es": "Vulnerabilidad, parche, antivirus, copia de seguridad y auditor",
+   "choice_text": "Activo, atacante, herramienta, impacto y seguro",
+   "choice_text_es": "Activo, atacante, herramienta, impacto y seguro",
    "correct": false
   }
  },
@@ -1445,8 +1445,8 @@
   "fields": {
    "content": "Los controles disuasorios tienen como finalidad:",
    "content_es": "Los controles disuasorios tienen como finalidad:",
-   "explanation": "Correcta: D — desalientan la acción del atacante (reducen la probabilidad). A) reparar el daño es el correctivo. B) reducir la vulnerabilidad de los activos es el preventivo: es literalmente la definición del manual. C) detectarlo es el detector.",
-   "explanation_es": "Correcta: D — desalientan la acción del atacante (reducen la probabilidad). A) reparar el daño es el correctivo. B) reducir la vulnerabilidad de los activos es el preventivo: es literalmente la definición del manual. C) detectarlo es el detector.",
+   "explanation": "Correcta: A — desalentar la acción del atacante. D) reparar el daño es el correctivo. C) reducir la vulnerabilidad de los activos es el preventivo: es literalmente la definición del manual. B) detectarlo es el detector.",
+   "explanation_es": "Correcta: A — desalentar la acción del atacante. D) reparar el daño es el correctivo. C) reducir la vulnerabilidad de los activos es el preventivo: es literalmente la definición del manual. B) detectarlo es el detector.",
    "quiz": [
     1
    ]
@@ -1464,24 +1464,14 @@
   "pk": 97,
   "fields": {
    "question": 1025,
-   "choice_text": "Reparar el daño una vez ocurrido",
-   "choice_text_es": "Reparar el daño una vez ocurrido",
-   "correct": false
+   "choice_text": "Desalentar la acción del atacante",
+   "choice_text_es": "Desalentar la acción del atacante",
+   "correct": true
   }
  },
  {
   "model": "quiz.choice",
   "pk": 98,
-  "fields": {
-   "question": 1025,
-   "choice_text": "Reducir la vulnerabilidad de los activos para limitar las posibilidades de entrada",
-   "choice_text_es": "Reducir la vulnerabilidad de los activos para limitar las posibilidades de entrada",
-   "correct": false
-  }
- },
- {
-  "model": "quiz.choice",
-  "pk": 99,
   "fields": {
    "question": 1025,
    "choice_text": "Detectar que el incidente está ocurriendo",
@@ -1491,12 +1481,22 @@
  },
  {
   "model": "quiz.choice",
+  "pk": 99,
+  "fields": {
+   "question": 1025,
+   "choice_text": "Reducir la vulnerabilidad de los activos para limitar las posibilidades de entrada",
+   "choice_text_es": "Reducir la vulnerabilidad de los activos para limitar las posibilidades de entrada",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
   "pk": 100,
   "fields": {
    "question": 1025,
-   "choice_text": "Desalentar la acción del atacante",
-   "choice_text_es": "Desalentar la acción del atacante",
-   "correct": true
+   "choice_text": "Reparar el daño una vez ocurrido",
+   "choice_text_es": "Reparar el daño una vez ocurrido",
+   "correct": false
   }
  },
  {
@@ -1505,8 +1505,8 @@
   "fields": {
    "content": "La vulnerabilidad intrínseca es:",
    "content_es": "La vulnerabilidad intrínseca es:",
-   "explanation": "Correcta: B — la inherente al sistema por su diseño o configuración. A) la explotable de verdad es la efectiva. C) la que queda tras las medidas es la residual. D) \"no descubierta\" no la define.",
-   "explanation_es": "Correcta: B — la inherente al sistema por su diseño o configuración. A) la explotable de verdad es la efectiva. C) la que queda tras las medidas es la residual. D) \"no descubierta\" no la define.",
+   "explanation": "Correcta: A — la inherente al sistema por su diseño o configuración. B) la explotable de verdad es la efectiva. D) la que queda tras las medidas es la residual. C) \"no descubierta\" no la define.",
+   "explanation_es": "Correcta: A — la inherente al sistema por su diseño o configuración. B) la explotable de verdad es la efectiva. D) la que queda tras las medidas es la residual. C) \"no descubierta\" no la define.",
    "quiz": [
     1
    ]
@@ -1524,16 +1524,6 @@
   "pk": 101,
   "fields": {
    "question": 1026,
-   "choice_text": "La que puede explotarse realmente por existir determinados controles",
-   "choice_text_es": "La que puede explotarse realmente por existir determinados controles",
-   "correct": false
-  }
- },
- {
-  "model": "quiz.choice",
-  "pk": 102,
-  "fields": {
-   "question": 1026,
    "choice_text": "La inherente al sistema por su diseño o configuración",
    "choice_text_es": "La inherente al sistema por su diseño o configuración",
    "correct": true
@@ -1541,11 +1531,21 @@
  },
  {
   "model": "quiz.choice",
+  "pk": 102,
+  "fields": {
+   "question": 1026,
+   "choice_text": "La que puede explotarse realmente por existir determinados controles",
+   "choice_text_es": "La que puede explotarse realmente por existir determinados controles",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
   "pk": 103,
   "fields": {
    "question": 1026,
-   "choice_text": "La que queda tras aplicar las medidas de seguridad",
-   "choice_text_es": "La que queda tras aplicar las medidas de seguridad",
+   "choice_text": "La que no ha sido descubierta por el auditor",
+   "choice_text_es": "La que no ha sido descubierta por el auditor",
    "correct": false
   }
  },
@@ -1554,8 +1554,8 @@
   "pk": 104,
   "fields": {
    "question": 1026,
-   "choice_text": "La que no ha sido descubierta por el auditor",
-   "choice_text_es": "La que no ha sido descubierta por el auditor",
+   "choice_text": "La que queda tras aplicar las medidas de seguridad",
+   "choice_text_es": "La que queda tras aplicar las medidas de seguridad",
    "correct": false
   }
  },
@@ -1565,8 +1565,8 @@
   "fields": {
    "content": "En un análisis de riesgo cuantitativo, la probabilidad se calcula:",
    "content_es": "En un análisis de riesgo cuantitativo, la probabilidad se calcula:",
-   "explanation": "Correcta: B — con datos históricos y modelos estadísticos. D) el coste no calcula la probabilidad.",
-   "explanation_es": "Correcta: B — con datos históricos y modelos estadísticos. D) el coste no calcula la probabilidad.",
+   "explanation": "Correcta: B — con datos históricos y modelos estadísticos. A) el coste no calcula la probabilidad.",
+   "explanation_es": "Correcta: B — con datos históricos y modelos estadísticos. A) el coste no calcula la probabilidad.",
    "quiz": [
     1
    ]
@@ -1584,8 +1584,8 @@
   "pk": 105,
   "fields": {
    "question": 1027,
-   "choice_text": "Con criterios subjetivos del auditor",
-   "choice_text_es": "Con criterios subjetivos del auditor",
+   "choice_text": "Con el coste de la medida de seguridad",
+   "choice_text_es": "Con el coste de la medida de seguridad",
    "correct": false
   }
  },
@@ -1614,8 +1614,8 @@
   "pk": 108,
   "fields": {
    "question": 1027,
-   "choice_text": "Con el coste de la medida de seguridad",
-   "choice_text_es": "Con el coste de la medida de seguridad",
+   "choice_text": "Con criterios subjetivos del auditor",
+   "choice_text_es": "Con criterios subjetivos del auditor",
    "correct": false
   }
  },
@@ -1625,8 +1625,8 @@
   "fields": {
    "content": "¿Qué dos tipos de análisis de vulnerabilidades se distinguen según se analice el código sin ejecutarlo o el sistema en funcionamiento?",
    "content_es": "¿Qué dos tipos de análisis de vulnerabilidades se distinguen según se analice el código sin ejecutarlo o el sistema en funcionamiento?",
-   "explanation": "Correcta: B — estático y dinámico.",
-   "explanation_es": "Correcta: B — estático y dinámico.",
+   "explanation": "Correcta: D — estático y dinámico.",
+   "explanation_es": "Correcta: D — estático y dinámico.",
    "quiz": [
     1
    ]
@@ -1654,9 +1654,9 @@
   "pk": 110,
   "fields": {
    "question": 1028,
-   "choice_text": "Estático y dinámico",
-   "choice_text_es": "Estático y dinámico",
-   "correct": true
+   "choice_text": "Interior y exterior",
+   "choice_text_es": "Interior y exterior",
+   "correct": false
   }
  },
  {
@@ -1674,9 +1674,9 @@
   "pk": 112,
   "fields": {
    "question": 1028,
-   "choice_text": "Interior y exterior",
-   "choice_text_es": "Interior y exterior",
-   "correct": false
+   "choice_text": "Estático y dinámico",
+   "choice_text_es": "Estático y dinámico",
+   "correct": true
   }
  },
  {
@@ -1685,8 +1685,8 @@
   "fields": {
    "content": "Entre los principios generales de un cortafuegos de red se incluye:",
    "content_es": "Entre los principios generales de un cortafuegos de red se incluye:",
-   "explanation": "Correcta: C — denegar por defecto y permitir solo lo necesario. A) permitir todo es lo contrario. B) se registra lo permitido y lo denegado. D) no se limita a la red local.",
-   "explanation_es": "Correcta: C — denegar por defecto y permitir solo lo necesario. A) permitir todo es lo contrario. B) se registra lo permitido y lo denegado. D) no se limita a la red local.",
+   "explanation": "Correcta: A — denegar por defecto todo el tráfico y permitir solo el necesario. C) permitir todo es lo contrario. D) se registra lo permitido y lo denegado. B) no se limita a la red local.",
+   "explanation_es": "Correcta: A — denegar por defecto todo el tráfico y permitir solo el necesario. C) permitir todo es lo contrario. D) se registra lo permitido y lo denegado. B) no se limita a la red local.",
    "quiz": [
     1
    ]
@@ -1704,9 +1704,9 @@
   "pk": 113,
   "fields": {
    "question": 1029,
-   "choice_text": "Permitir todo el tráfico y denegar después",
-   "choice_text_es": "Permitir todo el tráfico y denegar después",
-   "correct": false
+   "choice_text": "Denegar por defecto todo el tráfico y permitir solo el necesario",
+   "choice_text_es": "Denegar por defecto todo el tráfico y permitir solo el necesario",
+   "correct": true
   }
  },
  {
@@ -1714,8 +1714,8 @@
   "pk": 114,
   "fields": {
    "question": 1029,
-   "choice_text": "Registrar únicamente los accesos denegados",
-   "choice_text_es": "Registrar únicamente los accesos denegados",
+   "choice_text": "Aplicar las reglas únicamente en la red local",
+   "choice_text_es": "Aplicar las reglas únicamente en la red local",
    "correct": false
   }
  },
@@ -1724,9 +1724,9 @@
   "pk": 115,
   "fields": {
    "question": 1029,
-   "choice_text": "Denegar por defecto todo el tráfico y permitir solo el necesario",
-   "choice_text_es": "Denegar por defecto todo el tráfico y permitir solo el necesario",
-   "correct": true
+   "choice_text": "Permitir todo el tráfico y denegar después",
+   "choice_text_es": "Permitir todo el tráfico y denegar después",
+   "correct": false
   }
  },
  {
@@ -1734,8 +1734,8 @@
   "pk": 116,
   "fields": {
    "question": 1029,
-   "choice_text": "Aplicar las reglas únicamente en la red local",
-   "choice_text_es": "Aplicar las reglas únicamente en la red local",
+   "choice_text": "Registrar únicamente los accesos denegados",
+   "choice_text_es": "Registrar únicamente los accesos denegados",
    "correct": false
   }
  },
@@ -1745,8 +1745,8 @@
   "fields": {
    "content": "Las alternativas de gestión de un riesgo no aceptable son:",
    "content_es": "Las alternativas de gestión de un riesgo no aceptable son:",
-   "explanation": "Correcta: A — evitar, reducir, transferir o aceptar. B) ignorarlo no es una alternativa.",
-   "explanation_es": "Correcta: A — evitar, reducir, transferir o aceptar. B) ignorarlo no es una alternativa.",
+   "explanation": "Correcta: C — evitar, reducir, transferir o aceptar. A) ignorarlo no es una alternativa.",
+   "explanation_es": "Correcta: C — evitar, reducir, transferir o aceptar. A) ignorarlo no es una alternativa.",
    "quiz": [
     1
    ]
@@ -1764,9 +1764,9 @@
   "pk": 117,
   "fields": {
    "question": 1030,
-   "choice_text": "Evitar, reducir, transferir o aceptar",
-   "choice_text_es": "Evitar, reducir, transferir o aceptar",
-   "correct": true
+   "choice_text": "Ignorarlo hasta que ocurra",
+   "choice_text_es": "Ignorarlo hasta que ocurra",
+   "correct": false
   }
  },
  {
@@ -1774,8 +1774,8 @@
   "pk": 118,
   "fields": {
    "question": 1030,
-   "choice_text": "Ignorarlo hasta que ocurra",
-   "choice_text_es": "Ignorarlo hasta que ocurra",
+   "choice_text": "Únicamente la contratación de un seguro",
+   "choice_text_es": "Únicamente la contratación de un seguro",
    "correct": false
   }
  },
@@ -1784,9 +1784,9 @@
   "pk": 119,
   "fields": {
    "question": 1030,
-   "choice_text": "Únicamente la aceptación documentada",
-   "choice_text_es": "Únicamente la aceptación documentada",
-   "correct": false
+   "choice_text": "Evitar, reducir, transferir o aceptar",
+   "choice_text_es": "Evitar, reducir, transferir o aceptar",
+   "correct": true
   }
  },
  {
@@ -1794,8 +1794,8 @@
   "pk": 120,
   "fields": {
    "question": 1030,
-   "choice_text": "Únicamente la contratación de un seguro",
-   "choice_text_es": "Únicamente la contratación de un seguro",
+   "choice_text": "Únicamente la aceptación documentada",
+   "choice_text_es": "Únicamente la aceptación documentada",
    "correct": false
   }
  },
@@ -1805,8 +1805,8 @@
   "fields": {
    "content": "El propósito principal de la auditoría de sistemas de información es:",
    "content_es": "El propósito principal de la auditoría de sistemas de información es:",
-   "explanation": "Correcta: B. La auditoría obtiene evidencia objetiva y evalúa en qué medida se cumplen los criterios de auditoría. Localizar responsables es inspección, comprobar que todo funciona es mantenimiento, y certificar el cumplimiento de una norma no es el objetivo de una auditoría interna. Manual cap. 1 §1-§2, p. 12 y 22.",
-   "explanation_es": "Correcta: B. La auditoría obtiene evidencia objetiva y evalúa en qué medida se cumplen los criterios de auditoría. Localizar responsables es inspección, comprobar que todo funciona es mantenimiento, y certificar el cumplimiento de una norma no es el objetivo de una auditoría interna. Manual cap. 1 §1-§2, p. 12 y 22.",
+   "explanation": "Correcta: C. La auditoría obtiene evidencia objetiva y evalúa en qué medida se cumplen los criterios de auditoría. Localizar responsables es inspección, comprobar que todo funciona es mantenimiento, y certificar el cumplimiento de una norma no es el objetivo de una auditoría interna. Manual cap. 1 §1-§2, p. 12 y 22.",
+   "explanation_es": "Correcta: C. La auditoría obtiene evidencia objetiva y evalúa en qué medida se cumplen los criterios de auditoría. Localizar responsables es inspección, comprobar que todo funciona es mantenimiento, y certificar el cumplimiento de una norma no es el objetivo de una auditoría interna. Manual cap. 1 §1-§2, p. 12 y 22.",
    "quiz": [
     1
    ]
@@ -1824,8 +1824,8 @@
   "pk": 121,
   "fields": {
    "question": 1031,
-   "choice_text": "Localizar al responsable de los incidentes de seguridad",
-   "choice_text_es": "Localizar al responsable de los incidentes de seguridad",
+   "choice_text": "Comprobar que todos los equipos de la organización funcionan correctamente",
+   "choice_text_es": "Comprobar que todos los equipos de la organización funcionan correctamente",
    "correct": false
   }
  },
@@ -1834,9 +1834,9 @@
   "pk": 122,
   "fields": {
    "question": 1031,
-   "choice_text": "Obtener evidencia objetiva y evaluar en qué medida se cumplen los criterios de auditoría",
-   "choice_text_es": "Obtener evidencia objetiva y evaluar en qué medida se cumplen los criterios de auditoría",
-   "correct": true
+   "choice_text": "Certificar que la empresa cumple la normativa aplicable",
+   "choice_text_es": "Certificar que la empresa cumple la normativa aplicable",
+   "correct": false
   }
  },
  {
@@ -1844,9 +1844,9 @@
   "pk": 123,
   "fields": {
    "question": 1031,
-   "choice_text": "Comprobar que todos los equipos de la organización funcionan correctamente",
-   "choice_text_es": "Comprobar que todos los equipos de la organización funcionan correctamente",
-   "correct": false
+   "choice_text": "Obtener evidencia objetiva y evaluar el cumplimiento de criterios",
+   "choice_text_es": "Obtener evidencia objetiva y evaluar el cumplimiento de criterios",
+   "correct": true
   }
  },
  {
@@ -1854,8 +1854,8 @@
   "pk": 124,
   "fields": {
    "question": 1031,
-   "choice_text": "Certificar que la empresa cumple la normativa",
-   "choice_text_es": "Certificar que la empresa cumple la normativa",
+   "choice_text": "Localizar al responsable de los incidentes de seguridad",
+   "choice_text_es": "Localizar al responsable de los incidentes de seguridad",
    "correct": false
   }
  },
@@ -1865,8 +1865,8 @@
   "fields": {
    "content": "Un hallazgo que describe una situación mejorable pero que no incumple ningún requisito se clasifica como:",
    "content_es": "Un hallazgo que describe una situación mejorable pero que no incumple ningún requisito se clasifica como:",
-   "explanation": "Correcta: B. Una situación mejorable que no incumple ningún requisito es una observación; la no conformidad es un incumplimiento, y el riesgo residual y la incidencia de seguridad no son categorías de hallazgo. Manual cap. 1 §9, p. 44-45.",
-   "explanation_es": "Correcta: B. Una situación mejorable que no incumple ningún requisito es una observación; la no conformidad es un incumplimiento, y el riesgo residual y la incidencia de seguridad no son categorías de hallazgo. Manual cap. 1 §9, p. 44-45.",
+   "explanation": "Correcta: D. Una situación mejorable que no incumple ningún requisito es una observación; la no conformidad es un incumplimiento, y el riesgo residual y la incidencia de seguridad no son categorías de hallazgo. Manual cap. 1 §9, p. 44-45.",
+   "explanation_es": "Correcta: D. Una situación mejorable que no incumple ningún requisito es una observación; la no conformidad es un incumplimiento, y el riesgo residual y la incidencia de seguridad no son categorías de hallazgo. Manual cap. 1 §9, p. 44-45.",
    "quiz": [
     1
    ]
@@ -1894,9 +1894,9 @@
   "pk": 126,
   "fields": {
    "question": 1032,
-   "choice_text": "Observación",
-   "choice_text_es": "Observación",
-   "correct": true
+   "choice_text": "Riesgo residual",
+   "choice_text_es": "Riesgo residual",
+   "correct": false
   }
  },
  {
@@ -1914,9 +1914,9 @@
   "pk": 128,
   "fields": {
    "question": 1032,
-   "choice_text": "Riesgo residual",
-   "choice_text_es": "Riesgo residual",
-   "correct": false
+   "choice_text": "Observación",
+   "choice_text_es": "Observación",
+   "correct": true
   }
  },
  {
@@ -1925,8 +1925,8 @@
   "fields": {
    "content": "Un CAAT es:",
    "content_es": "Un CAAT es:",
-   "explanation": "Correcta: C. CAAT es una Computer Assisted Audit Technique: una herramienta que automatiza la recogida de evidencia. No es un tipo de hallazgo ni una metodología de análisis de riesgo. Manual cap. 1 §6.2, p. 37-40.",
-   "explanation_es": "Correcta: C. CAAT es una Computer Assisted Audit Technique: una herramienta que automatiza la recogida de evidencia. No es un tipo de hallazgo ni una metodología de análisis de riesgo. Manual cap. 1 §6.2, p. 37-40.",
+   "explanation": "Correcta: A. CAAT es una Computer Assisted Audit Technique: una herramienta que automatiza la recogida de evidencia. No es un tipo de hallazgo ni una metodología de análisis de riesgo. Manual cap. 1 §6.2, p. 37-40.",
+   "explanation_es": "Correcta: A. CAAT es una Computer Assisted Audit Technique: una herramienta que automatiza la recogida de evidencia. No es un tipo de hallazgo ni una metodología de análisis de riesgo. Manual cap. 1 §6.2, p. 37-40.",
    "quiz": [
     1
    ]
@@ -1944,9 +1944,9 @@
   "pk": 129,
   "fields": {
    "question": 1033,
-   "choice_text": "Un tipo de hallazgo de auditoría",
-   "choice_text_es": "Un tipo de hallazgo de auditoría",
-   "correct": false
+   "choice_text": "Una Computer Assisted Audit Technique: una herramienta de recogida automática",
+   "choice_text_es": "Una Computer Assisted Audit Technique: una herramienta de recogida automática",
+   "correct": true
   }
  },
  {
@@ -1954,8 +1954,8 @@
   "pk": 130,
   "fields": {
    "question": 1033,
-   "choice_text": "Un tipo de prueba sustantiva",
-   "choice_text_es": "Un tipo de prueba sustantiva",
+   "choice_text": "Una metodología de análisis y valoración del riesgo",
+   "choice_text_es": "Una metodología de análisis y valoración del riesgo",
    "correct": false
   }
  },
@@ -1964,9 +1964,9 @@
   "pk": 131,
   "fields": {
    "question": 1033,
-   "choice_text": "Una Computer Assisted Audit Technique: una herramienta que automatiza la recogida de evidencia",
-   "choice_text_es": "Una Computer Assisted Audit Technique: una herramienta que automatiza la recogida de evidencia",
-   "correct": true
+   "choice_text": "Un tipo de hallazgo que puede aparecer en un informe",
+   "choice_text_es": "Un tipo de hallazgo que puede aparecer en un informe",
+   "correct": false
   }
  },
  {
@@ -1974,8 +1974,8 @@
   "pk": 132,
   "fields": {
    "question": 1033,
-   "choice_text": "Una metodología de análisis de riesgo",
-   "choice_text_es": "Una metodología de análisis de riesgo",
+   "choice_text": "Un tipo concreto de prueba, como la sustantiva",
+   "choice_text_es": "Un tipo concreto de prueba, como la sustantiva",
    "correct": false
   }
  },
@@ -1985,8 +1985,8 @@
   "fields": {
    "content": "Para descifrar contraseñas mediante ataque de diccionario se utiliza:",
    "content_es": "Para descifrar contraseñas mediante ataque de diccionario se utiliza:",
-   "explanation": "Correcta: B. John the Ripper descifra contraseñas por ataque de diccionario y luego de fuerza bruta. Nessus busca vulnerabilidades, Wireshark captura tráfico y Crypt cifra. Manual cap. 4 §7.1, p. 206-208.",
-   "explanation_es": "Correcta: B. John the Ripper descifra contraseñas por ataque de diccionario y luego de fuerza bruta. Nessus busca vulnerabilidades, Wireshark captura tráfico y Crypt cifra. Manual cap. 4 §7.1, p. 206-208.",
+   "explanation": "Correcta: C. John the Ripper descifra contraseñas por ataque de diccionario y luego de fuerza bruta. Nessus busca vulnerabilidades, Wireshark captura tráfico y Crypt cifra. Manual cap. 4 §7.1, p. 206-208.",
+   "explanation_es": "Correcta: C. John the Ripper descifra contraseñas por ataque de diccionario y luego de fuerza bruta. Nessus busca vulnerabilidades, Wireshark captura tráfico y Crypt cifra. Manual cap. 4 §7.1, p. 206-208.",
    "quiz": [
     1
    ]
@@ -2004,14 +2004,24 @@
   "pk": 133,
   "fields": {
    "question": 1034,
-   "choice_text": "Nessus",
-   "choice_text_es": "Nessus",
+   "choice_text": "Wireshark",
+   "choice_text_es": "Wireshark",
    "correct": false
   }
  },
  {
   "model": "quiz.choice",
   "pk": 134,
+  "fields": {
+   "question": 1034,
+   "choice_text": "Crypt",
+   "choice_text_es": "Crypt",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 135,
   "fields": {
    "question": 1034,
    "choice_text": "John the Ripper",
@@ -2021,21 +2031,11 @@
  },
  {
   "model": "quiz.choice",
-  "pk": 135,
-  "fields": {
-   "question": 1034,
-   "choice_text": "Wireshark",
-   "choice_text_es": "Wireshark",
-   "correct": false
-  }
- },
- {
-  "model": "quiz.choice",
   "pk": 136,
   "fields": {
    "question": 1034,
-   "choice_text": "Crypt",
-   "choice_text_es": "Crypt",
+   "choice_text": "Nessus",
+   "choice_text_es": "Nessus",
    "correct": false
   }
  },
@@ -2045,8 +2045,8 @@
   "fields": {
    "content": "El principio que obliga a eliminar los datos cuando se alcanza la finalidad para la que se recogieron se denomina:",
    "content_es": "El principio que obliga a eliminar los datos cuando se alcanza la finalidad para la que se recogieron se denomina:",
-   "explanation": "Correcta: C. Es el principio de limitación del plazo de conservación: los datos se guardan el tiempo necesario y luego se borran. La exactitud es que estén al día, la minimización que no se pidan de más, y la licitud que exista base legal. Manual cap. 2 §2.2, p. 61-62.",
-   "explanation_es": "Correcta: C. Es el principio de limitación del plazo de conservación: los datos se guardan el tiempo necesario y luego se borran. La exactitud es que estén al día, la minimización que no se pidan de más, y la licitud que exista base legal. Manual cap. 2 §2.2, p. 61-62.",
+   "explanation": "Correcta: A. Es el principio de limitación del plazo de conservación: los datos se guardan el tiempo necesario y luego se borran. La exactitud es que estén al día, la minimización que no se pidan de más, y la licitud que exista base legal. Manual cap. 2 §2.2, p. 61-62.",
+   "explanation_es": "Correcta: A. Es el principio de limitación del plazo de conservación: los datos se guardan el tiempo necesario y luego se borran. La exactitud es que estén al día, la minimización que no se pidan de más, y la licitud que exista base legal. Manual cap. 2 §2.2, p. 61-62.",
    "quiz": [
     1
    ]
@@ -2064,9 +2064,9 @@
   "pk": 137,
   "fields": {
    "question": 1035,
-   "choice_text": "Principio de exactitud",
-   "choice_text_es": "Principio de exactitud",
-   "correct": false
+   "choice_text": "Principio de limitación del plazo de conservación",
+   "choice_text_es": "Principio de limitación del plazo de conservación",
+   "correct": true
   }
  },
  {
@@ -2074,8 +2074,8 @@
   "pk": 138,
   "fields": {
    "question": 1035,
-   "choice_text": "Principio de minimización",
-   "choice_text_es": "Principio de minimización",
+   "choice_text": "Principio de licitud del tratamiento",
+   "choice_text_es": "Principio de licitud del tratamiento",
    "correct": false
   }
  },
@@ -2084,9 +2084,9 @@
   "pk": 139,
   "fields": {
    "question": 1035,
-   "choice_text": "Principio de limitación del plazo de conservación",
-   "choice_text_es": "Principio de limitación del plazo de conservación",
-   "correct": true
+   "choice_text": "Principio de exactitud de los datos",
+   "choice_text_es": "Principio de exactitud de los datos",
+   "correct": false
   }
  },
  {
@@ -2094,8 +2094,8 @@
   "pk": 140,
   "fields": {
    "question": 1035,
-   "choice_text": "Principio de licitud",
-   "choice_text_es": "Principio de licitud",
+   "choice_text": "Principio de minimización de datos",
+   "choice_text_es": "Principio de minimización de datos",
    "correct": false
   }
  },
@@ -2105,8 +2105,8 @@
   "fields": {
    "content": "El principio según el cual los datos no pueden tratarse después para una finalidad distinta de aquella para la que se recogieron se denomina:",
    "content_es": "El principio según el cual los datos no pueden tratarse después para una finalidad distinta de aquella para la que se recogieron se denomina:",
-   "explanation": "Correcta: A. Es el principio de limitación de la finalidad: los datos recogidos para un fin no se reutilizan para otro sin una base compatible. Manual cap. 2 §2.2, p. 60.",
-   "explanation_es": "Correcta: A. Es el principio de limitación de la finalidad: los datos recogidos para un fin no se reutilizan para otro sin una base compatible. Manual cap. 2 §2.2, p. 60.",
+   "explanation": "Correcta: D. Es el principio de limitación de la finalidad: los datos recogidos para un fin no se reutilizan para otro sin una base compatible. Manual cap. 2 §2.2, p. 60.",
+   "explanation_es": "Correcta: D. Es el principio de limitación de la finalidad: los datos recogidos para un fin no se reutilizan para otro sin una base compatible. Manual cap. 2 §2.2, p. 60.",
    "quiz": [
     1
    ]
@@ -2124,16 +2124,6 @@
   "pk": 141,
   "fields": {
    "question": 1036,
-   "choice_text": "Principio de limitación de la finalidad",
-   "choice_text_es": "Principio de limitación de la finalidad",
-   "correct": true
-  }
- },
- {
-  "model": "quiz.choice",
-  "pk": 142,
-  "fields": {
-   "question": 1036,
    "choice_text": "Principio de transparencia",
    "choice_text_es": "Principio de transparencia",
    "correct": false
@@ -2141,7 +2131,7 @@
  },
  {
   "model": "quiz.choice",
-  "pk": 143,
+  "pk": 142,
   "fields": {
    "question": 1036,
    "choice_text": "Principio de responsabilidad proactiva",
@@ -2151,7 +2141,7 @@
  },
  {
   "model": "quiz.choice",
-  "pk": 144,
+  "pk": 143,
   "fields": {
    "question": 1036,
    "choice_text": "Principio de integridad y confidencialidad",
@@ -2160,13 +2150,23 @@
   }
  },
  {
+  "model": "quiz.choice",
+  "pk": 144,
+  "fields": {
+   "question": 1036,
+   "choice_text": "Principio de limitación de la finalidad",
+   "choice_text_es": "Principio de limitación de la finalidad",
+   "correct": true
+  }
+ },
+ {
   "model": "quiz.question",
   "pk": 1037,
   "fields": {
    "content": "La privacidad desde el diseño y por defecto consiste en:",
    "content_es": "La privacidad desde el diseño y por defecto consiste en:",
-   "explanation": "Correcta: B. La privacidad desde el diseño y por defecto obliga a verificar y mitigar los riesgos de privacidad desde el inicio del proyecto, no a añadir seguridad al final. Cifrar en reposo o limitar el acceso son medidas concretas, pero no son el principio. Manual cap. 2 §3, p. 66.",
-   "explanation_es": "Correcta: B. La privacidad desde el diseño y por defecto obliga a verificar y mitigar los riesgos de privacidad desde el inicio del proyecto, no a añadir seguridad al final. Cifrar en reposo o limitar el acceso son medidas concretas, pero no son el principio. Manual cap. 2 §3, p. 66.",
+   "explanation": "Correcta: C. La privacidad desde el diseño y por defecto obliga a verificar y mitigar los riesgos de privacidad desde el inicio del proyecto, no a añadir seguridad al final. Cifrar en reposo o limitar el acceso son medidas concretas, pero no son el principio. Manual cap. 2 §3, p. 66.",
+   "explanation_es": "Correcta: C. La privacidad desde el diseño y por defecto obliga a verificar y mitigar los riesgos de privacidad desde el inicio del proyecto, no a añadir seguridad al final. Cifrar en reposo o limitar el acceso son medidas concretas, pero no son el principio. Manual cap. 2 §3, p. 66.",
    "quiz": [
     1
    ]
@@ -2184,8 +2184,8 @@
   "pk": 145,
   "fields": {
    "question": 1037,
-   "choice_text": "Aplicar medidas de seguridad una vez terminado el proyecto",
-   "choice_text_es": "Aplicar medidas de seguridad una vez terminado el proyecto",
+   "choice_text": "Cifrar los datos en reposo, en tránsito y en uso",
+   "choice_text_es": "Cifrar los datos en reposo, en tránsito y en uso",
    "correct": false
   }
  },
@@ -2194,9 +2194,9 @@
   "pk": 146,
   "fields": {
    "question": 1037,
-   "choice_text": "Evaluar los riesgos de privacidad desde el inicio de cualquier proyecto",
-   "choice_text_es": "Evaluar los riesgos de privacidad desde el inicio de cualquier proyecto",
-   "correct": true
+   "choice_text": "Limitar el acceso a los servidores y a las bases de datos",
+   "choice_text_es": "Limitar el acceso a los servidores y a las bases de datos",
+   "correct": false
   }
  },
  {
@@ -2204,9 +2204,9 @@
   "pk": 147,
   "fields": {
    "question": 1037,
-   "choice_text": "Cifrar los datos en reposo",
-   "choice_text_es": "Cifrar los datos en reposo",
-   "correct": false
+   "choice_text": "Evaluar los riesgos de privacidad desde el inicio del proyecto",
+   "choice_text_es": "Evaluar los riesgos de privacidad desde el inicio del proyecto",
+   "correct": true
   }
  },
  {
@@ -2214,8 +2214,8 @@
   "pk": 148,
   "fields": {
    "question": 1037,
-   "choice_text": "Limitar el acceso a los servidores de la aplicación",
-   "choice_text_es": "Limitar el acceso a los servidores de la aplicación",
+   "choice_text": "Aplicar medidas de seguridad una vez terminado el proyecto",
+   "choice_text_es": "Aplicar medidas de seguridad una vez terminado el proyecto",
    "correct": false
   }
  },
@@ -2225,8 +2225,8 @@
   "fields": {
    "content": "La vulnerabilidad residual es:",
    "content_es": "La vulnerabilidad residual es:",
-   "explanation": "Correcta: C. La vulnerabilidad residual es la que queda tras aplicar las salvaguardas decididas en el análisis de riesgos. La inherente al diseño es la intrínseca. Manual cap. 3 §8, p. 129.",
-   "explanation_es": "Correcta: C. La vulnerabilidad residual es la que queda tras aplicar las salvaguardas decididas en el análisis de riesgos. La inherente al diseño es la intrínseca. Manual cap. 3 §8, p. 129.",
+   "explanation": "Correcta: D. La vulnerabilidad residual es la que queda tras aplicar las salvaguardas decididas en el análisis de riesgos. La inherente al diseño es la intrínseca. Manual cap. 3 §8, p. 129.",
+   "explanation_es": "Correcta: D. La vulnerabilidad residual es la que queda tras aplicar las salvaguardas decididas en el análisis de riesgos. La inherente al diseño es la intrínseca. Manual cap. 3 §8, p. 129.",
    "quiz": [
     1
    ]
@@ -2244,8 +2244,8 @@
   "pk": 149,
   "fields": {
    "question": 1038,
-   "choice_text": "La inherente al sistema por su diseño",
-   "choice_text_es": "La inherente al sistema por su diseño",
+   "choice_text": "La que realmente se explota en la práctica",
+   "choice_text_es": "La que realmente se explota en la práctica",
    "correct": false
   }
  },
@@ -2254,8 +2254,8 @@
   "pk": 150,
   "fields": {
    "question": 1038,
-   "choice_text": "La que se explota realmente",
-   "choice_text_es": "La que se explota realmente",
+   "choice_text": "La que solo puede explotarse de forma teórica",
+   "choice_text_es": "La que solo puede explotarse de forma teórica",
    "correct": false
   }
  },
@@ -2264,9 +2264,9 @@
   "pk": 151,
   "fields": {
    "question": 1038,
-   "choice_text": "La que queda después de aplicar las medidas de seguridad",
-   "choice_text_es": "La que queda después de aplicar las medidas de seguridad",
-   "correct": true
+   "choice_text": "La inherente al sistema por su diseño o configuración",
+   "choice_text_es": "La inherente al sistema por su diseño o configuración",
+   "correct": false
   }
  },
  {
@@ -2274,9 +2274,9 @@
   "pk": 152,
   "fields": {
    "question": 1038,
-   "choice_text": "La que solo puede explotarse teóricamente",
-   "choice_text_es": "La que solo puede explotarse teóricamente",
-   "correct": false
+   "choice_text": "La que queda tras aplicar las medidas de seguridad",
+   "choice_text_es": "La que queda tras aplicar las medidas de seguridad",
+   "correct": true
   }
  },
  {
@@ -2304,8 +2304,8 @@
   "pk": 153,
   "fields": {
    "question": 1039,
-   "choice_text": "El contenido de los mensajes",
-   "choice_text_es": "El contenido de los mensajes",
+   "choice_text": "El tipo de archivo que se está transmitiendo",
+   "choice_text_es": "El tipo de archivo que se está transmitiendo",
    "correct": false
   }
  },
@@ -2314,8 +2314,8 @@
   "pk": 154,
   "fields": {
    "question": 1039,
-   "choice_text": "La cabecera de los paquetes, con las direcciones y los puertos",
-   "choice_text_es": "La cabecera de los paquetes, con las direcciones y los puertos",
+   "choice_text": "La cabecera de los paquetes, con direcciones y puertos",
+   "choice_text_es": "La cabecera de los paquetes, con direcciones y puertos",
    "correct": true
   }
  },
@@ -2324,8 +2324,8 @@
   "pk": 155,
   "fields": {
    "question": 1039,
-   "choice_text": "El comportamiento del usuario",
-   "choice_text_es": "El comportamiento del usuario",
+   "choice_text": "El comportamiento previo del usuario de la red",
+   "choice_text_es": "El comportamiento previo del usuario de la red",
    "correct": false
   }
  },
@@ -2334,8 +2334,8 @@
   "pk": 156,
   "fields": {
    "question": 1039,
-   "choice_text": "El tipo de archivo transmitido",
-   "choice_text_es": "El tipo de archivo transmitido",
+   "choice_text": "El contenido y el tipo de los mensajes",
+   "choice_text_es": "El contenido y el tipo de los mensajes",
    "correct": false
   }
  },
@@ -2345,8 +2345,8 @@
   "fields": {
    "content": "Un escenario de riesgo se define como:",
    "content_es": "Un escenario de riesgo se define como:",
-   "explanation": "Correcta: B. El manual define los escenarios de riesgo como los pares activo-amenaza susceptibles de materializarse. Manual cap. 3 §7, p. 138.",
-   "explanation_es": "Correcta: B. El manual define los escenarios de riesgo como los pares activo-amenaza susceptibles de materializarse. Manual cap. 3 §7, p. 138.",
+   "explanation": "Correcta: D. El manual define los escenarios de riesgo como los pares activo-amenaza susceptibles de materializarse. Manual cap. 3 §7, p. 138.",
+   "explanation_es": "Correcta: D. El manual define los escenarios de riesgo como los pares activo-amenaza susceptibles de materializarse. Manual cap. 3 §7, p. 138.",
    "quiz": [
     1
    ]
@@ -2374,9 +2374,9 @@
   "pk": 158,
   "fields": {
    "question": 1040,
-   "choice_text": "El par activo-amenaza susceptible de materializarse",
-   "choice_text_es": "El par activo-amenaza susceptible de materializarse",
-   "correct": true
+   "choice_text": "La lista de todas las medidas de seguridad implantadas",
+   "choice_text_es": "La lista de todas las medidas de seguridad implantadas",
+   "correct": false
   }
  },
  {
@@ -2394,9 +2394,9 @@
   "pk": 160,
   "fields": {
    "question": 1040,
-   "choice_text": "La lista de todas las medidas de seguridad implantadas",
-   "choice_text_es": "La lista de todas las medidas de seguridad implantadas",
-   "correct": false
+   "choice_text": "El par activo-amenaza susceptible de materializarse",
+   "choice_text_es": "El par activo-amenaza susceptible de materializarse",
+   "correct": true
   }
  },
  {
@@ -2895,8 +2895,8 @@
   "fields": {
    "content": "La auditoría informática es un proceso:",
    "content_es": "La auditoría informática es un proceso:",
-   "explanation": "Correcta: B — sistemático, independiente y documentado, para obtener evidencia objetiva y evaluar el cumplimiento de criterios. A) reducirla a \"sanciones e invasiones\" es confundirla con una inspección. C) no es un trámite exclusivo del sector público. D) una prueba es una parte de la auditoría, no la auditoría entera.",
-   "explanation_es": "Correcta: B — sistemático, independiente y documentado, para obtener evidencia objetiva y evaluar el cumplimiento de criterios. A) reducirla a \"sanciones e invasiones\" es confundirla con una inspección. C) no es un trámite exclusivo del sector público. D) una prueba es una parte de la auditoría, no la auditoría entera.",
+   "explanation": "Correcta: B — sistemático, independiente y documentado, con evidencia objetiva. D) reducirla a \"sanciones e invasiones\" es confundirla con una inspección. C) no es un trámite exclusivo del sector público. A) una prueba es una parte de la auditoría, no la auditoría entera.",
+   "explanation_es": "Correcta: B — sistemático, independiente y documentado, con evidencia objetiva. D) reducirla a \"sanciones e invasiones\" es confundirla con una inspección. C) no es un trámite exclusivo del sector público. A) una prueba es una parte de la auditoría, no la auditoría entera.",
    "quiz": [
     3
    ]
@@ -2914,8 +2914,8 @@
   "pk": 1001,
   "fields": {
    "question": 2001,
-   "choice_text": "Dirigido exclusivamente a detectar sanciones e invasiones",
-   "choice_text_es": "Dirigido exclusivamente a detectar sanciones e invasiones",
+   "choice_text": "Un tipo concreto de prueba, como la sustantiva o la de cumplimiento",
+   "choice_text_es": "Un tipo concreto de prueba, como la sustantiva o la de cumplimiento",
    "correct": false
   }
  },
@@ -2924,8 +2924,8 @@
   "pk": 1002,
   "fields": {
    "question": 2001,
-   "choice_text": "Sistemático, independiente y documentado, para obtener evidencia objetiva y evaluar el cumplimiento de criterios",
-   "choice_text_es": "Sistemático, independiente y documentado, para obtener evidencia objetiva y evaluar el cumplimiento de criterios",
+   "choice_text": "Sistemático, independiente y documentado, con evidencia objetiva",
+   "choice_text_es": "Sistemático, independiente y documentado, con evidencia objetiva",
    "correct": true
   }
  },
@@ -2934,8 +2934,8 @@
   "pk": 1003,
   "fields": {
    "question": 2001,
-   "choice_text": "Obligatorio únicamente en entidades del sector público",
-   "choice_text_es": "Obligatorio únicamente en entidades del sector público",
+   "choice_text": "Obligatorio únicamente en las entidades del sector público",
+   "choice_text_es": "Obligatorio únicamente en las entidades del sector público",
    "correct": false
   }
  },
@@ -2944,8 +2944,8 @@
   "pk": 1004,
   "fields": {
    "question": 2001,
-   "choice_text": "Un tipo de prueba de cumplimiento",
-   "choice_text_es": "Un tipo de prueba de cumplimiento",
+   "choice_text": "Dirigido exclusivamente a detectar sanciones e invasiones de seguridad",
+   "choice_text_es": "Dirigido exclusivamente a detectar sanciones e invasiones de seguridad",
    "correct": false
   }
  },
@@ -2955,8 +2955,8 @@
   "fields": {
    "content": "La independencia del auditor respecto del área auditada es:",
    "content_es": "La independencia del auditor respecto del área auditada es:",
-   "explanation": "Correcta: A — un principio del código deontológico. B) es exigible también en auditorías internas. C) no es una causa de incumplimiento de plazos. D) no se limita a las auditorías externas.",
-   "explanation_es": "Correcta: A — un principio del código deontológico. B) es exigible también en auditorías internas. C) no es una causa de incumplimiento de plazos. D) no se limita a las auditorías externas.",
+   "explanation": "Correcta: A — un principio del código deontológico. B) es exigible también en auditorías internas. D) no es una causa de incumplimiento de plazos. C) no se limita a las auditorías externas.",
+   "explanation_es": "Correcta: A — un principio del código deontológico. B) es exigible también en auditorías internas. D) no es una causa de incumplimiento de plazos. C) no se limita a las auditorías externas.",
    "quiz": [
     3
    ]
@@ -2994,8 +2994,8 @@
   "pk": 1007,
   "fields": {
    "question": 2002,
-   "choice_text": "La causa principal del incumplimiento de los plazos de auditoría",
-   "choice_text_es": "La causa principal del incumplimiento de los plazos de auditoría",
+   "choice_text": "Un requisito que solo aplica a las auditorías externas",
+   "choice_text_es": "Un requisito que solo aplica a las auditorías externas",
    "correct": false
   }
  },
@@ -3004,8 +3004,8 @@
   "pk": 1008,
   "fields": {
    "question": 2002,
-   "choice_text": "Un requisito que solo aplica a las auditorías externas",
-   "choice_text_es": "Un requisito que solo aplica a las auditorías externas",
+   "choice_text": "La causa principal del incumplimiento de los plazos de auditoría",
+   "choice_text_es": "La causa principal del incumplimiento de los plazos de auditoría",
    "correct": false
   }
  },
@@ -3015,8 +3015,8 @@
   "fields": {
    "content": "El secreto profesional del auditor implica que debe mantener confidencial:",
    "content_es": "El secreto profesional del auditor implica que debe mantener confidencial:",
-   "explanation": "Correcta: B — la información a la que accede, incluso tras concluir la relación. A) el secreto profesional no se limita al informe ni caduca con su entrega: el «solo» y el «hasta su entrega» la hacen falsa. C) es más amplio que los datos personales. D) los precios no son el objeto del secreto.",
-   "explanation_es": "Correcta: B — la información a la que accede, incluso tras concluir la relación. A) el secreto profesional no se limita al informe ni caduca con su entrega: el «solo» y el «hasta su entrega» la hacen falsa. C) es más amplio que los datos personales. D) los precios no son el objeto del secreto.",
+   "explanation": "Correcta: D — toda la información a la que accede, también tras concluir la relación. A) el secreto profesional no se limita al informe ni caduca con su entrega: el «solo» y el «hasta su entrega» la hacen falsa. C) es más amplio que los datos personales. B) los precios no son el objeto del secreto.",
+   "explanation_es": "Correcta: D — toda la información a la que accede, también tras concluir la relación. A) el secreto profesional no se limita al informe ni caduca con su entrega: el «solo» y el «hasta su entrega» la hacen falsa. C) es más amplio que los datos personales. B) los precios no son el objeto del secreto.",
    "quiz": [
     3
    ]
@@ -3044,9 +3044,9 @@
   "pk": 1010,
   "fields": {
    "question": 2003,
-   "choice_text": "La información a la que accede por su trabajo, incluso una vez concluida la relación",
-   "choice_text_es": "La información a la que accede por su trabajo, incluso una vez concluida la relación",
-   "correct": true
+   "choice_text": "Los precios, las tarifas y los costes de los servicios que audita",
+   "choice_text_es": "Los precios, las tarifas y los costes de los servicios que audita",
+   "correct": false
   }
  },
  {
@@ -3064,9 +3064,9 @@
   "pk": 1012,
   "fields": {
    "question": 2003,
-   "choice_text": "Los precios de los servicios que audita",
-   "choice_text_es": "Los precios de los servicios que audita",
-   "correct": false
+   "choice_text": "Toda la información a la que accede, también tras concluir la relación",
+   "choice_text_es": "Toda la información a la que accede, también tras concluir la relación",
+   "correct": true
   }
  },
  {
@@ -3075,8 +3075,8 @@
   "fields": {
    "content": "Un hallazgo de auditoría apto para un informe debe ser:",
    "content_es": "Un hallazgo de auditoría apto para un informe debe ser:",
-   "explanation": "Correcta: C — verdadero, exacto, objetivo, completo, claro, relevante y verificable. A) señalar responsables no es un requisito. B) puede estar sin corregir. D) debe ser claro, no técnico.",
-   "explanation_es": "Correcta: C — verdadero, exacto, objetivo, completo, claro, relevante y verificable. A) señalar responsables no es un requisito. B) puede estar sin corregir. D) debe ser claro, no técnico.",
+   "explanation": "Correcta: B — verdadero, exacto, objetivo, completo, claro, relevante y verificable. C) señalar responsables no es un requisito. D) puede estar sin corregir. A) debe ser claro, no técnico.",
+   "explanation_es": "Correcta: B — verdadero, exacto, objetivo, completo, claro, relevante y verificable. C) señalar responsables no es un requisito. D) puede estar sin corregir. A) debe ser claro, no técnico.",
    "quiz": [
     3
    ]
@@ -3094,24 +3094,14 @@
   "pk": 1013,
   "fields": {
    "question": 2004,
-   "choice_text": "Detallado, para que se entienda quién es el responsable",
-   "choice_text_es": "Detallado, para que se entienda quién es el responsable",
+   "choice_text": "Redactado en lenguaje técnico especializado y comprensible",
+   "choice_text_es": "Redactado en lenguaje técnico especializado y comprensible",
    "correct": false
   }
  },
  {
   "model": "quiz.choice",
   "pk": 1014,
-  "fields": {
-   "question": 2004,
-   "choice_text": "Ya corregido, con la solución aplicada",
-   "choice_text_es": "Ya corregido, con la solución aplicada",
-   "correct": false
-  }
- },
- {
-  "model": "quiz.choice",
-  "pk": 1015,
   "fields": {
    "question": 2004,
    "choice_text": "Verdadero, exacto, objetivo, completo, claro, relevante y verificable",
@@ -3121,11 +3111,21 @@
  },
  {
   "model": "quiz.choice",
+  "pk": 1015,
+  "fields": {
+   "question": 2004,
+   "choice_text": "Detallado, para que se entienda quién es el responsable",
+   "choice_text_es": "Detallado, para que se entienda quién es el responsable",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
   "pk": 1016,
   "fields": {
    "question": 2004,
-   "choice_text": "Redactado en lenguaje técnico especializado",
-   "choice_text_es": "Redactado en lenguaje técnico especializado",
+   "choice_text": "Ya corregido, con la solución aplicada y comprobada",
+   "choice_text_es": "Ya corregido, con la solución aplicada y comprobada",
    "correct": false
   }
  },
@@ -3135,8 +3135,8 @@
   "fields": {
    "content": "Un hallazgo que incumple un requisito legal se clasifica como:",
    "content_es": "Un hallazgo que incumple un requisito legal se clasifica como:",
-   "explanation": "Correcta: C — no conformidad. A) la oportunidad de mejora no implica incumplimiento. B) la observación es un incumplimiento menor. D) \"recomendación\" no es una categoría.",
-   "explanation_es": "Correcta: C — no conformidad. A) la oportunidad de mejora no implica incumplimiento. B) la observación es un incumplimiento menor. D) \"recomendación\" no es una categoría.",
+   "explanation": "Correcta: A — no conformidad. C) la oportunidad de mejora no implica incumplimiento. D) la observación es un incumplimiento menor. B) \"recomendación\" no es una categoría.",
+   "explanation_es": "Correcta: A — no conformidad. C) la oportunidad de mejora no implica incumplimiento. D) la observación es un incumplimiento menor. B) \"recomendación\" no es una categoría.",
    "quiz": [
     3
    ]
@@ -3154,9 +3154,9 @@
   "pk": 1017,
   "fields": {
    "question": 2005,
-   "choice_text": "Oportunidad de mejora",
-   "choice_text_es": "Oportunidad de mejora",
-   "correct": false
+   "choice_text": "No conformidad",
+   "choice_text_es": "No conformidad",
+   "correct": true
   }
  },
  {
@@ -3164,8 +3164,8 @@
   "pk": 1018,
   "fields": {
    "question": 2005,
-   "choice_text": "Observación",
-   "choice_text_es": "Observación",
+   "choice_text": "Recomendación",
+   "choice_text_es": "Recomendación",
    "correct": false
   }
  },
@@ -3174,9 +3174,9 @@
   "pk": 1019,
   "fields": {
    "question": 2005,
-   "choice_text": "No conformidad",
-   "choice_text_es": "No conformidad",
-   "correct": true
+   "choice_text": "Oportunidad de mejora",
+   "choice_text_es": "Oportunidad de mejora",
+   "correct": false
   }
  },
  {
@@ -3184,8 +3184,8 @@
   "pk": 1020,
   "fields": {
    "question": 2005,
-   "choice_text": "Recomendación",
-   "choice_text_es": "Recomendación",
+   "choice_text": "Observación",
+   "choice_text_es": "Observación",
    "correct": false
   }
  },
@@ -3195,8 +3195,8 @@
   "fields": {
    "content": "La auditoría interna y la externa se diferencian en:",
    "content_es": "La auditoría interna y la externa se diferencian en:",
-   "explanation": "Correcta: A — quién la realiza y su dependencia de la organización. B) el coste no es el criterio. C) la interna también evalúa riesgos. D) ambas se documentan.",
-   "explanation_es": "Correcta: A — quién la realiza y su dependencia de la organización. B) el coste no es el criterio. C) la interna también evalúa riesgos. D) ambas se documentan.",
+   "explanation": "Correcta: B — en quién la realiza y su dependencia de la organización auditada. D) el coste no es el criterio. A) la interna también evalúa riesgos. C) ambas se documentan.",
+   "explanation_es": "Correcta: B — en quién la realiza y su dependencia de la organización auditada. D) el coste no es el criterio. A) la interna también evalúa riesgos. C) ambas se documentan.",
    "quiz": [
     3
    ]
@@ -3214,9 +3214,9 @@
   "pk": 1021,
   "fields": {
    "question": 2006,
-   "choice_text": "En quién la realiza y su dependencia respecto de la organización auditada",
-   "choice_text_es": "En quién la realiza y su dependencia respecto de la organización auditada",
-   "correct": true
+   "choice_text": "En que la interna no puede evaluar los riesgos de la organización",
+   "choice_text_es": "En que la interna no puede evaluar los riesgos de la organización",
+   "correct": false
   }
  },
  {
@@ -3224,9 +3224,9 @@
   "pk": 1022,
   "fields": {
    "question": 2006,
-   "choice_text": "En que la externa siempre es más cara",
-   "choice_text_es": "En que la externa siempre es más cara",
-   "correct": false
+   "choice_text": "En quién la realiza y su dependencia de la organización auditada",
+   "choice_text_es": "En quién la realiza y su dependencia de la organización auditada",
+   "correct": true
   }
  },
  {
@@ -3234,8 +3234,8 @@
   "pk": 1023,
   "fields": {
    "question": 2006,
-   "choice_text": "En que la interna no puede evaluar riesgos",
-   "choice_text_es": "En que la interna no puede evaluar riesgos",
+   "choice_text": "En que la externa no puede documentarse ni justificar sus conclusiones",
+   "choice_text_es": "En que la externa no puede documentarse ni justificar sus conclusiones",
    "correct": false
   }
  },
@@ -3244,8 +3244,8 @@
   "pk": 1024,
   "fields": {
    "question": 2006,
-   "choice_text": "En que la externa no puede documentarse",
-   "choice_text_es": "En que la externa no puede documentarse",
+   "choice_text": "En que la auditoría externa siempre es más cara que la interna",
+   "choice_text_es": "En que la auditoría externa siempre es más cara que la interna",
    "correct": false
   }
  },
@@ -3255,8 +3255,8 @@
   "fields": {
    "content": "Una prueba sustantiva tiene por objeto evaluar:",
    "content_es": "Una prueba sustantiva tiene por objeto evaluar:",
-   "explanation": "Correcta: B — la calidad y veracidad de los datos. D) el coste no es objeto de la prueba.",
-   "explanation_es": "Correcta: B — la calidad y veracidad de los datos. D) el coste no es objeto de la prueba.",
+   "explanation": "Correcta: A — la calidad y la veracidad de los datos. C) el coste no es objeto de la prueba.",
+   "explanation_es": "Correcta: A — la calidad y la veracidad de los datos. C) el coste no es objeto de la prueba.",
    "quiz": [
     3
    ]
@@ -3274,16 +3274,6 @@
   "pk": 1025,
   "fields": {
    "question": 2007,
-   "choice_text": "La eficacia de los controles internos",
-   "choice_text_es": "La eficacia de los controles internos",
-   "correct": false
-  }
- },
- {
-  "model": "quiz.choice",
-  "pk": 1026,
-  "fields": {
-   "question": 2007,
    "choice_text": "La calidad y la veracidad de los datos",
    "choice_text_es": "La calidad y la veracidad de los datos",
    "correct": true
@@ -3291,11 +3281,21 @@
  },
  {
   "model": "quiz.choice",
+  "pk": 1026,
+  "fields": {
+   "question": 2007,
+   "choice_text": "La eficacia de los controles internos",
+   "choice_text_es": "La eficacia de los controles internos",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
   "pk": 1027,
   "fields": {
    "question": 2007,
-   "choice_text": "El cumplimiento de las políticas internas",
-   "choice_text_es": "El cumplimiento de las políticas internas",
+   "choice_text": "El coste de implantación del sistema",
+   "choice_text_es": "El coste de implantación del sistema",
    "correct": false
   }
  },
@@ -3304,8 +3304,8 @@
   "pk": 1028,
   "fields": {
    "question": 2007,
-   "choice_text": "El coste de implantación del sistema",
-   "choice_text_es": "El coste de implantación del sistema",
+   "choice_text": "El cumplimiento de las políticas internas",
+   "choice_text_es": "El cumplimiento de las políticas internas",
    "correct": false
   }
  },
@@ -3315,8 +3315,8 @@
   "fields": {
    "content": "El muestreo estadístico se fundamenta en:",
    "content_es": "El muestreo estadístico se fundamenta en:",
-   "explanation": "Correcta: A — técnicas matemáticas de tamaño, confianza y margen de error. B) el criterio subjetivo es el no estadístico. C) no analiza toda la población. D) un software CAAT es una herramienta, no el fundamento.",
-   "explanation_es": "Correcta: A — técnicas matemáticas de tamaño, confianza y margen de error. B) el criterio subjetivo es el no estadístico. C) no analiza toda la población. D) un software CAAT es una herramienta, no el fundamento.",
+   "explanation": "Correcta: A — técnicas matemáticas de tamaño de muestra, confianza y error. B) el criterio subjetivo es el no estadístico. D) no analiza toda la población. C) un software CAAT es una herramienta, no el fundamento.",
+   "explanation_es": "Correcta: A — técnicas matemáticas de tamaño de muestra, confianza y error. B) el criterio subjetivo es el no estadístico. D) no analiza toda la población. C) un software CAAT es una herramienta, no el fundamento.",
    "quiz": [
     3
    ]
@@ -3334,8 +3334,8 @@
   "pk": 1029,
   "fields": {
    "question": 2008,
-   "choice_text": "Técnicas matemáticas de tamaño de muestra, confianza y margen de error",
-   "choice_text_es": "Técnicas matemáticas de tamaño de muestra, confianza y margen de error",
+   "choice_text": "Técnicas matemáticas de tamaño de muestra, confianza y error",
+   "choice_text_es": "Técnicas matemáticas de tamaño de muestra, confianza y error",
    "correct": true
   }
  },
@@ -3354,8 +3354,8 @@
   "pk": 1031,
   "fields": {
    "question": 2008,
-   "choice_text": "Un cálculo íntegro sobre la población completa",
-   "choice_text_es": "Un cálculo íntegro sobre la población completa",
+   "choice_text": "El uso de un software de CAAT que haga el cálculo",
+   "choice_text_es": "El uso de un software de CAAT que haga el cálculo",
    "correct": false
   }
  },
@@ -3364,8 +3364,8 @@
   "pk": 1032,
   "fields": {
    "question": 2008,
-   "choice_text": "Un software de CAAT",
-   "choice_text_es": "Un software de CAAT",
+   "choice_text": "Un cálculo íntegro sobre la población completa, sin muestreo",
+   "choice_text_es": "Un cálculo íntegro sobre la población completa, sin muestreo",
    "correct": false
   }
  },
@@ -3375,8 +3375,8 @@
   "fields": {
    "content": "En el análisis de caja negra, el auditor:",
    "content_es": "En el análisis de caja negra, el auditor:",
-   "explanation": "Correcta: B — dispone de la misma información que un atacante externo. D) el depurador es del análisis local.",
-   "explanation_es": "Correcta: B — dispone de la misma información que un atacante externo. D) el depurador es del análisis local.",
+   "explanation": "Correcta: B — dispone de la misma información que un atacante externo. A) el depurador es del análisis local.",
+   "explanation_es": "Correcta: B — dispone de la misma información que un atacante externo. A) el depurador es del análisis local.",
    "quiz": [
     3
    ]
@@ -3394,8 +3394,8 @@
   "pk": 1033,
   "fields": {
    "question": 2009,
-   "choice_text": "Tiene todo el conocimiento del sistema auditado",
-   "choice_text_es": "Tiene todo el conocimiento del sistema auditado",
+   "choice_text": "Emplea un depurador para seguir la ejecución del programa",
+   "choice_text_es": "Emplea un depurador para seguir la ejecución del programa",
    "correct": false
   }
  },
@@ -3424,8 +3424,8 @@
   "pk": 1036,
   "fields": {
    "question": 2009,
-   "choice_text": "Emplea un depurador para seguir la ejecución del programa",
-   "choice_text_es": "Emplea un depurador para seguir la ejecución del programa",
+   "choice_text": "Tiene todo el conocimiento del sistema auditado",
+   "choice_text_es": "Tiene todo el conocimiento del sistema auditado",
    "correct": false
   }
  },
@@ -3435,8 +3435,8 @@
   "fields": {
    "content": "La fiabilidad de una técnica de análisis de vulnerabilidades depende principalmente de:",
    "content_es": "La fiabilidad de una técnica de análisis de vulnerabilidades depende principalmente de:",
-   "explanation": "Correcta: C — del tipo de análisis y de la información disponible. A) el número de herramientas no la determina. B) la marca no es el factor. D) los permisos influyen, pero no la definen.",
-   "explanation_es": "Correcta: C — del tipo de análisis y de la información disponible. A) el número de herramientas no la determina. B) la marca no es el factor. D) los permisos influyen, pero no la definen.",
+   "explanation": "Correcta: C — del tipo de análisis realizado y de la información disponible. D) el número de herramientas no la determina. B) la marca no es el factor. A) los permisos influyen, pero no la definen.",
+   "explanation_es": "Correcta: C — del tipo de análisis realizado y de la información disponible. D) el número de herramientas no la determina. B) la marca no es el factor. A) los permisos influyen, pero no la definen.",
    "quiz": [
     3
    ]
@@ -3454,8 +3454,8 @@
   "pk": 1037,
   "fields": {
    "question": 2010,
-   "choice_text": "Del número de herramientas empleadas en la auditoría",
-   "choice_text_es": "Del número de herramientas empleadas en la auditoría",
+   "choice_text": "De ejecutarla con permisos de administrador",
+   "choice_text_es": "De ejecutarla con permisos de administrador",
    "correct": false
   }
  },
@@ -3484,8 +3484,8 @@
   "pk": 1040,
   "fields": {
    "question": 2010,
-   "choice_text": "De ejecutarla con permisos de administrador",
-   "choice_text_es": "De ejecutarla con permisos de administrador",
+   "choice_text": "Del número de herramientas empleadas en la auditoría",
+   "choice_text_es": "Del número de herramientas empleadas en la auditoría",
    "correct": false
   }
  },
@@ -3495,8 +3495,8 @@
   "fields": {
    "content": "Un falso positivo en un escáner de vulnerabilidades es:",
    "content_es": "Un falso positivo en un escáner de vulnerabilidades es:",
-   "explanation": "Correcta: B — un aviso que no corresponde a un riesgo real. A) una vulnerabilidad mal interpretada no es un falso positivo. C) no es un fallo del sistema escaneado. D) no es un ataque fallido.",
-   "explanation_es": "Correcta: B — un aviso que no corresponde a un riesgo real. A) una vulnerabilidad mal interpretada no es un falso positivo. C) no es un fallo del sistema escaneado. D) no es un ataque fallido.",
+   "explanation": "Correcta: D — un aviso que no corresponde a un riesgo real. A) una vulnerabilidad mal interpretada no es un falso positivo. C) no es un fallo del sistema escaneado. B) no es un ataque fallido.",
+   "explanation_es": "Correcta: D — un aviso que no corresponde a un riesgo real. A) una vulnerabilidad mal interpretada no es un falso positivo. C) no es un fallo del sistema escaneado. B) no es un ataque fallido.",
    "quiz": [
     3
    ]
@@ -3524,9 +3524,9 @@
   "pk": 1042,
   "fields": {
    "question": 2011,
-   "choice_text": "Un aviso que no corresponde a un riesgo real",
-   "choice_text_es": "Un aviso que no corresponde a un riesgo real",
-   "correct": true
+   "choice_text": "Un ataque que no ha tenido éxito",
+   "choice_text_es": "Un ataque que no ha tenido éxito",
+   "correct": false
   }
  },
  {
@@ -3544,9 +3544,9 @@
   "pk": 1044,
   "fields": {
    "question": 2011,
-   "choice_text": "Un ataque que no ha tenido éxito",
-   "choice_text_es": "Un ataque que no ha tenido éxito",
-   "correct": false
+   "choice_text": "Un aviso que no corresponde a un riesgo real",
+   "choice_text_es": "Un aviso que no corresponde a un riesgo real",
+   "correct": true
   }
  },
  {
@@ -3555,8 +3555,8 @@
   "fields": {
    "content": "Para descubrir puertos y servicios de un host se utiliza:",
    "content_es": "Para descubrir puertos y servicios de un host se utiliza:",
-   "explanation": "Correcta: C — Nmap. A) Nessus analiza vulnerabilidades. B) John descifra contraseñas. D) Acunetix analiza la web.",
-   "explanation_es": "Correcta: C — Nmap. A) Nessus analiza vulnerabilidades. B) John descifra contraseñas. D) Acunetix analiza la web.",
+   "explanation": "Correcta: D — nmap. C) Nessus analiza vulnerabilidades. A) John descifra contraseñas. B) Acunetix analiza la web.",
+   "explanation_es": "Correcta: D — nmap. C) Nessus analiza vulnerabilidades. A) John descifra contraseñas. B) Acunetix analiza la web.",
    "quiz": [
     3
    ]
@@ -3574,8 +3574,8 @@
   "pk": 1045,
   "fields": {
    "question": 2012,
-   "choice_text": "Nessus",
-   "choice_text_es": "Nessus",
+   "choice_text": "John the Ripper",
+   "choice_text_es": "John the Ripper",
    "correct": false
   }
  },
@@ -3584,8 +3584,8 @@
   "pk": 1046,
   "fields": {
    "question": 2012,
-   "choice_text": "John the Ripper",
-   "choice_text_es": "John the Ripper",
+   "choice_text": "Acunetix",
+   "choice_text_es": "Acunetix",
    "correct": false
   }
  },
@@ -3594,9 +3594,9 @@
   "pk": 1047,
   "fields": {
    "question": 2012,
-   "choice_text": "Nmap",
-   "choice_text_es": "Nmap",
-   "correct": true
+   "choice_text": "Nessus",
+   "choice_text_es": "Nessus",
+   "correct": false
   }
  },
  {
@@ -3604,9 +3604,9 @@
   "pk": 1048,
   "fields": {
    "question": 2012,
-   "choice_text": "Acunetix",
-   "choice_text_es": "Acunetix",
-   "correct": false
+   "choice_text": "Nmap",
+   "choice_text_es": "Nmap",
+   "correct": true
   }
  },
  {
@@ -3615,8 +3615,8 @@
   "fields": {
    "content": "Nessus es un escáner de:",
    "content_es": "Nessus es un escáner de:",
-   "explanation": "Correcta: B — vulnerabilidades. A) el de puertos es Nmap. C) el de contraseñas es John. D) el de directorios es Dirb.",
-   "explanation_es": "Correcta: B — vulnerabilidades. A) el de puertos es Nmap. C) el de contraseñas es John. D) el de directorios es Dirb.",
+   "explanation": "Correcta: C — vulnerabilidades. D) el de puertos es Nmap. A) el de contraseñas es John. B) el de directorios es Dirb.",
+   "explanation_es": "Correcta: C — vulnerabilidades. D) el de puertos es Nmap. A) el de contraseñas es John. B) el de directorios es Dirb.",
    "quiz": [
     3
    ]
@@ -3634,14 +3634,24 @@
   "pk": 1049,
   "fields": {
    "question": 2013,
-   "choice_text": "Puertos",
-   "choice_text_es": "Puertos",
+   "choice_text": "Contraseñas",
+   "choice_text_es": "Contraseñas",
    "correct": false
   }
  },
  {
   "model": "quiz.choice",
   "pk": 1050,
+  "fields": {
+   "question": 2013,
+   "choice_text": "Directorios web",
+   "choice_text_es": "Directorios web",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 1051,
   "fields": {
    "question": 2013,
    "choice_text": "Vulnerabilidades",
@@ -3651,21 +3661,11 @@
  },
  {
   "model": "quiz.choice",
-  "pk": 1051,
-  "fields": {
-   "question": 2013,
-   "choice_text": "Contraseñas",
-   "choice_text_es": "Contraseñas",
-   "correct": false
-  }
- },
- {
-  "model": "quiz.choice",
   "pk": 1052,
   "fields": {
    "question": 2013,
-   "choice_text": "Directorios web",
-   "choice_text_es": "Directorios web",
+   "choice_text": "Puertos",
+   "choice_text_es": "Puertos",
    "correct": false
   }
  },
@@ -3675,8 +3675,8 @@
   "fields": {
    "content": "Los criterios de selección de una herramienta de auditoría dependen de:",
    "content_es": "Los criterios de selección de una herramienta de auditoría dependen de:",
-   "explanation": "Correcta: A — del tipo de servidor o red y de los requisitos de seguridad.",
-   "explanation_es": "Correcta: A — del tipo de servidor o red y de los requisitos de seguridad.",
+   "explanation": "Correcta: B — del tipo de servidor o red y de los requisitos de seguridad.",
+   "explanation_es": "Correcta: B — del tipo de servidor o red y de los requisitos de seguridad.",
    "quiz": [
     3
    ]
@@ -3694,9 +3694,9 @@
   "pk": 1053,
   "fields": {
    "question": 2014,
-   "choice_text": "Del tipo de servidor o red y de los requisitos de seguridad",
-   "choice_text_es": "Del tipo de servidor o red y de los requisitos de seguridad",
-   "correct": true
+   "choice_text": "Del presupuesto disponible para el proyecto",
+   "choice_text_es": "Del presupuesto disponible para el proyecto",
+   "correct": false
   }
  },
  {
@@ -3704,9 +3704,9 @@
   "pk": 1054,
   "fields": {
    "question": 2014,
-   "choice_text": "De la marca de la herramienta",
-   "choice_text_es": "De la marca de la herramienta",
-   "correct": false
+   "choice_text": "Del tipo de servidor o red y de los requisitos de seguridad",
+   "choice_text_es": "Del tipo de servidor o red y de los requisitos de seguridad",
+   "correct": true
   }
  },
  {
@@ -3714,8 +3714,8 @@
   "pk": 1055,
   "fields": {
    "question": 2014,
-   "choice_text": "Del presupuesto disponible",
-   "choice_text_es": "Del presupuesto disponible",
+   "choice_text": "De la antigüedad del sistema instalado en la organización",
+   "choice_text_es": "De la antigüedad del sistema instalado en la organización",
    "correct": false
   }
  },
@@ -3724,8 +3724,8 @@
   "pk": 1056,
   "fields": {
    "question": 2014,
-   "choice_text": "De la antigüedad del sistema instalado",
-   "choice_text_es": "De la antigüedad del sistema instalado",
+   "choice_text": "De la marca o del fabricante de la herramienta",
+   "choice_text_es": "De la marca o del fabricante de la herramienta",
    "correct": false
   }
  },
@@ -3735,8 +3735,8 @@
   "fields": {
    "content": "Las fases de la auditoría de sistemas de información son, en orden:",
    "content_es": "Las fases de la auditoría de sistemas de información son, en orden:",
-   "explanation": "Correcta: B — planificación › recogida › análisis › evaluación de riesgos › implementación de soluciones › seguimiento y revisión.",
-   "explanation_es": "Correcta: B — planificación › recogida › análisis › evaluación de riesgos › implementación de soluciones › seguimiento y revisión.",
+   "explanation": "Correcta: B — planificación › recogida › análisis › riesgos › implementación › seguimiento.",
+   "explanation_es": "Correcta: B — planificación › recogida › análisis › riesgos › implementación › seguimiento.",
    "quiz": [
     3
    ]
@@ -3754,8 +3754,8 @@
   "pk": 1057,
   "fields": {
    "question": 2015,
-   "choice_text": "Planificación › análisis › informe › recogida › seguimiento",
-   "choice_text_es": "Planificación › análisis › informe › recogida › seguimiento",
+   "choice_text": "Análisis › planificación › recogida › informe final",
+   "choice_text_es": "Análisis › planificación › recogida › informe final",
    "correct": false
   }
  },
@@ -3764,8 +3764,8 @@
   "pk": 1058,
   "fields": {
    "question": 2015,
-   "choice_text": "Planificación › recogida de información › análisis › evaluación de riesgos › implementación de soluciones › seguimiento y revisión",
-   "choice_text_es": "Planificación › recogida de información › análisis › evaluación de riesgos › implementación de soluciones › seguimiento y revisión",
+   "choice_text": "Planificación › recogida › análisis › riesgos › implementación › seguimiento",
+   "choice_text_es": "Planificación › recogida › análisis › riesgos › implementación › seguimiento",
    "correct": true
   }
  },
@@ -3774,8 +3774,8 @@
   "pk": 1059,
   "fields": {
    "question": 2015,
-   "choice_text": "Recogida › planificación › informe › análisis",
-   "choice_text_es": "Recogida › planificación › informe › análisis",
+   "choice_text": "Recogida › planificación › informe › análisis de resultados",
+   "choice_text_es": "Recogida › planificación › informe › análisis de resultados",
    "correct": false
   }
  },
@@ -3784,8 +3784,8 @@
   "pk": 1060,
   "fields": {
    "question": 2015,
-   "choice_text": "Análisis › planificación › recogida › informe",
-   "choice_text_es": "Análisis › planificación › recogida › informe",
+   "choice_text": "Planificación › análisis › informe › recogida › seguimiento",
+   "choice_text_es": "Planificación › análisis › informe › recogida › seguimiento",
    "correct": false
   }
  },
@@ -3795,8 +3795,8 @@
   "fields": {
    "content": "El marco normativo europeo vigente en materia de protección de datos es:",
    "content_es": "El marco normativo europeo vigente en materia de protección de datos es:",
-   "explanation": "Correcta: B — el Reglamento (UE) 2016/679 (RGPD). A) la Directiva 95/46/CE quedó derogada. C) la LO 3/2018 es nacional. D) el RD 1720/2007 desarrollaba la LOPD.",
-   "explanation_es": "Correcta: B — el Reglamento (UE) 2016/679 (RGPD). A) la Directiva 95/46/CE quedó derogada. C) la LO 3/2018 es nacional. D) el RD 1720/2007 desarrollaba la LOPD.",
+   "explanation": "Correcta: C — el Reglamento (UE) 2016/679, conocido como RGPD. D) la Directiva 95/46/CE quedó derogada. A) la LO 3/2018 es nacional. B) el RD 1720/2007 desarrollaba la LOPD.",
+   "explanation_es": "Correcta: C — el Reglamento (UE) 2016/679, conocido como RGPD. D) la Directiva 95/46/CE quedó derogada. A) la LO 3/2018 es nacional. B) el RD 1720/2007 desarrollaba la LOPD.",
    "quiz": [
     3
    ]
@@ -3814,14 +3814,24 @@
   "pk": 1061,
   "fields": {
    "question": 2016,
-   "choice_text": "La Directiva 95/46/CE",
-   "choice_text_es": "La Directiva 95/46/CE",
+   "choice_text": "La Ley Orgánica 3/2018, de protección de datos",
+   "choice_text_es": "La Ley Orgánica 3/2018, de protección de datos",
    "correct": false
   }
  },
  {
   "model": "quiz.choice",
   "pk": 1062,
+  "fields": {
+   "question": 2016,
+   "choice_text": "El Real Decreto 1720/2007, de desarrollo normativo",
+   "choice_text_es": "El Real Decreto 1720/2007, de desarrollo normativo",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 1063,
   "fields": {
    "question": 2016,
    "choice_text": "El Reglamento (UE) 2016/679, conocido como RGPD",
@@ -3831,21 +3841,11 @@
  },
  {
   "model": "quiz.choice",
-  "pk": 1063,
-  "fields": {
-   "question": 2016,
-   "choice_text": "La Ley Orgánica 3/2018",
-   "choice_text_es": "La Ley Orgánica 3/2018",
-   "correct": false
-  }
- },
- {
-  "model": "quiz.choice",
   "pk": 1064,
   "fields": {
    "question": 2016,
-   "choice_text": "El Real Decreto 1720/2007",
-   "choice_text_es": "El Real Decreto 1720/2007",
+   "choice_text": "La Directiva 95/46/CE, de la Unión Europea",
+   "choice_text_es": "La Directiva 95/46/CE, de la Unión Europea",
    "correct": false
   }
  },
@@ -3855,8 +3855,8 @@
   "fields": {
    "content": "La normativa española que implementa el RGPD en el orden interno es:",
    "content_es": "La normativa española que implementa el RGPD en el orden interno es:",
-   "explanation": "Correcta: C — la LO 3/2018 (LOPDGDD). D) el RD 1720/2007 desarrolla la LOPD.",
-   "explanation_es": "Correcta: C — la LO 3/2018 (LOPDGDD). D) el RD 1720/2007 desarrolla la LOPD.",
+   "explanation": "Correcta: B — la Ley Orgánica 3/2018, de 5 de diciembre (LOPDGDD). A) el RD 1720/2007 desarrolla la LOPD.",
+   "explanation_es": "Correcta: B — la Ley Orgánica 3/2018, de 5 de diciembre (LOPDGDD). A) el RD 1720/2007 desarrolla la LOPD.",
    "quiz": [
     3
    ]
@@ -3874,24 +3874,14 @@
   "pk": 1065,
   "fields": {
    "question": 2017,
-   "choice_text": "La Ley Orgánica 15/1999 (LOPD)",
-   "choice_text_es": "La Ley Orgánica 15/1999 (LOPD)",
+   "choice_text": "El Real Decreto 1720/2007, de desarrollo normativo",
+   "choice_text_es": "El Real Decreto 1720/2007, de desarrollo normativo",
    "correct": false
   }
  },
  {
   "model": "quiz.choice",
   "pk": 1066,
-  "fields": {
-   "question": 2017,
-   "choice_text": "La Ley Orgánica 5/1992 (LORTAD)",
-   "choice_text_es": "La Ley Orgánica 5/1992 (LORTAD)",
-   "correct": false
-  }
- },
- {
-  "model": "quiz.choice",
-  "pk": 1067,
   "fields": {
    "question": 2017,
    "choice_text": "La Ley Orgánica 3/2018, de 5 de diciembre (LOPDGDD)",
@@ -3901,11 +3891,21 @@
  },
  {
   "model": "quiz.choice",
+  "pk": 1067,
+  "fields": {
+   "question": 2017,
+   "choice_text": "La Ley Orgánica 15/1999, de protección de datos (LOPD)",
+   "choice_text_es": "La Ley Orgánica 15/1999, de protección de datos (LOPD)",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
   "pk": 1068,
   "fields": {
    "question": 2017,
-   "choice_text": "El Real Decreto 1720/2007",
-   "choice_text_es": "El Real Decreto 1720/2007",
+   "choice_text": "La Ley Orgánica 5/1992, de regulación del tratamiento (LORTAD)",
+   "choice_text_es": "La Ley Orgánica 5/1992, de regulación del tratamiento (LORTAD)",
    "correct": false
   }
  },
@@ -3915,8 +3915,8 @@
   "fields": {
    "content": "El principio según el cual el responsable debe demostrar que cumple los demás principios se denomina:",
    "content_es": "El principio según el cual el responsable debe demostrar que cumple los demás principios se denomina:",
-   "explanation": "Correcta: A — responsabilidad proactiva.",
-   "explanation_es": "Correcta: A — responsabilidad proactiva.",
+   "explanation": "Correcta: D — responsabilidad proactiva.",
+   "explanation_es": "Correcta: D — responsabilidad proactiva.",
    "quiz": [
     3
    ]
@@ -3934,16 +3934,6 @@
   "pk": 1069,
   "fields": {
    "question": 2018,
-   "choice_text": "Responsabilidad proactiva",
-   "choice_text_es": "Responsabilidad proactiva",
-   "correct": true
-  }
- },
- {
-  "model": "quiz.choice",
-  "pk": 1070,
-  "fields": {
-   "question": 2018,
    "choice_text": "Licitud y legalidad",
    "choice_text_es": "Licitud y legalidad",
    "correct": false
@@ -3951,7 +3941,7 @@
  },
  {
   "model": "quiz.choice",
-  "pk": 1071,
+  "pk": 1070,
   "fields": {
    "question": 2018,
    "choice_text": "Exactitud de los datos",
@@ -3961,7 +3951,7 @@
  },
  {
   "model": "quiz.choice",
-  "pk": 1072,
+  "pk": 1071,
   "fields": {
    "question": 2018,
    "choice_text": "Transparencia",
@@ -3970,13 +3960,23 @@
   }
  },
  {
+  "model": "quiz.choice",
+  "pk": 1072,
+  "fields": {
+   "question": 2018,
+   "choice_text": "Responsabilidad proactiva",
+   "choice_text_es": "Responsabilidad proactiva",
+   "correct": true
+  }
+ },
+ {
   "model": "quiz.question",
   "pk": 2019,
   "fields": {
    "content": "El art. 32.2 del RGPD establece que el nivel de seguridad adecuado se determina en función de:",
    "content_es": "El art. 32.2 del RGPD establece que el nivel de seguridad adecuado se determina en función de:",
-   "explanation": "Correcta: C — el coste, la naturaleza, el alcance y el contexto del tratamiento, y los riesgos para los derechos y libertades.",
-   "explanation_es": "Correcta: C — el coste, la naturaleza, el alcance y el contexto del tratamiento, y los riesgos para los derechos y libertades.",
+   "explanation": "Correcta: A — el coste, la naturaleza, el contexto y los riesgos para los interesados.",
+   "explanation_es": "Correcta: A — el coste, la naturaleza, el contexto y los riesgos para los interesados.",
    "quiz": [
     3
    ]
@@ -3994,9 +3994,9 @@
   "pk": 1073,
   "fields": {
    "question": 2019,
-   "choice_text": "El número de empleados de la organización",
-   "choice_text_es": "El número de empleados de la organización",
-   "correct": false
+   "choice_text": "El coste, la naturaleza, el contexto y los riesgos para los interesados",
+   "choice_text_es": "El coste, la naturaleza, el contexto y los riesgos para los interesados",
+   "correct": true
   }
  },
  {
@@ -4004,8 +4004,8 @@
   "pk": 1074,
   "fields": {
    "question": 2019,
-   "choice_text": "El presupuesto anual del departamento de sistemas",
-   "choice_text_es": "El presupuesto anual del departamento de sistemas",
+   "choice_text": "La antigüedad y el fabricante del sistema de información",
+   "choice_text_es": "La antigüedad y el fabricante del sistema de información",
    "correct": false
   }
  },
@@ -4014,9 +4014,9 @@
   "pk": 1075,
   "fields": {
    "question": 2019,
-   "choice_text": "El coste de la aplicación, la naturaleza, el alcance y el contexto del tratamiento, y los riesgos para los derechos y libertades de los interesados",
-   "choice_text_es": "El coste de la aplicación, la naturaleza, el alcance y el contexto del tratamiento, y los riesgos para los derechos y libertades de los interesados",
-   "correct": true
+   "choice_text": "El número de empleados y el tamaño de la organización",
+   "choice_text_es": "El número de empleados y el tamaño de la organización",
+   "correct": false
   }
  },
  {
@@ -4024,8 +4024,8 @@
   "pk": 1076,
   "fields": {
    "question": 2019,
-   "choice_text": "La antigüedad del sistema de información instalado",
-   "choice_text_es": "La antigüedad del sistema de información instalado",
+   "choice_text": "El presupuesto anual asignado al departamento de sistemas",
+   "choice_text_es": "El presupuesto anual asignado al departamento de sistemas",
    "correct": false
   }
  },
@@ -4035,8 +4035,8 @@
   "fields": {
    "content": "La figura del Delegado de Protección de Datos (DPD) es obligatoria:",
    "content_es": "La figura del Delegado de Protección de Datos (DPD) es obligatoria:",
-   "explanation": "Correcta: B — en tratamientos a gran escala y en la Administración pública. A) no en todas las empresas. C) no es voluntario donde la ley lo exige. D) no solo en el sector público.",
-   "explanation_es": "Correcta: B — en tratamientos a gran escala y en la Administración pública. A) no en todas las empresas. C) no es voluntario donde la ley lo exige. D) no solo en el sector público.",
+   "explanation": "Correcta: C — en organizaciones con datos a gran escala y en la Administración pública. D) no en todas las empresas. A) no es voluntario donde la ley lo exige. B) no solo en el sector público.",
+   "explanation_es": "Correcta: C — en organizaciones con datos a gran escala y en la Administración pública. D) no en todas las empresas. A) no es voluntario donde la ley lo exige. B) no solo en el sector público.",
    "quiz": [
     3
    ]
@@ -4054,8 +4054,8 @@
   "pk": 1077,
   "fields": {
    "question": 2020,
-   "choice_text": "En todas las empresas, sin excepción",
-   "choice_text_es": "En todas las empresas, sin excepción",
+   "choice_text": "Voluntariamente en el sector privado, por decisión propia",
+   "choice_text_es": "Voluntariamente en el sector privado, por decisión propia",
    "correct": false
   }
  },
@@ -4064,9 +4064,9 @@
   "pk": 1078,
   "fields": {
    "question": 2020,
-   "choice_text": "En las organizaciones que realizan tratamientos de datos a gran escala y en la Administración pública",
-   "choice_text_es": "En las organizaciones que realizan tratamientos de datos a gran escala y en la Administración pública",
-   "correct": true
+   "choice_text": "Exclusivamente en el sector público y en la Administración",
+   "choice_text_es": "Exclusivamente en el sector público y en la Administración",
+   "correct": false
   }
  },
  {
@@ -4074,9 +4074,9 @@
   "pk": 1079,
   "fields": {
    "question": 2020,
-   "choice_text": "Voluntariamente en el sector privado",
-   "choice_text_es": "Voluntariamente en el sector privado",
-   "correct": false
+   "choice_text": "En organizaciones con datos a gran escala y en la Administración pública",
+   "choice_text_es": "En organizaciones con datos a gran escala y en la Administración pública",
+   "correct": true
   }
  },
  {
@@ -4084,8 +4084,8 @@
   "pk": 1080,
   "fields": {
    "question": 2020,
-   "choice_text": "Exclusivamente en el sector público",
-   "choice_text_es": "Exclusivamente en el sector público",
+   "choice_text": "En todas las empresas y entidades, sin excepción alguna",
+   "choice_text_es": "En todas las empresas y entidades, sin excepción alguna",
    "correct": false
   }
  },
@@ -4095,8 +4095,8 @@
   "fields": {
    "content": "Según el artículo 32 del RGPD, responsables y encargados deben aplicar:",
    "content_es": "Según el artículo 32 del RGPD, responsables y encargados deben aplicar:",
-   "explanation": "Correcta: A — medidas técnicas y organizativas apropiadas para garantizar un nivel de seguridad adecuado al riesgo.",
-   "explanation_es": "Correcta: A — medidas técnicas y organizativas apropiadas para garantizar un nivel de seguridad adecuado al riesgo.",
+   "explanation": "Correcta: D — medidas técnicas y organizativas apropiadas al riesgo.",
+   "explanation_es": "Correcta: D — medidas técnicas y organizativas apropiadas al riesgo.",
    "quiz": [
     3
    ]
@@ -4114,9 +4114,9 @@
   "pk": 1081,
   "fields": {
    "question": 2021,
-   "choice_text": "Medidas técnicas y organizativas apropiadas para garantizar un nivel de seguridad adecuado al riesgo",
-   "choice_text_es": "Medidas técnicas y organizativas apropiadas para garantizar un nivel de seguridad adecuado al riesgo",
-   "correct": true
+   "choice_text": "Nivel alto, por tratarse de datos personales protegidos",
+   "choice_text_es": "Nivel alto, por tratarse de datos personales protegidos",
+   "correct": false
   }
  },
  {
@@ -4124,8 +4124,8 @@
   "pk": 1082,
   "fields": {
    "question": 2021,
-   "choice_text": "Nivel alto, por tratarse de datos personales",
-   "choice_text_es": "Nivel alto, por tratarse de datos personales",
+   "choice_text": "Nivel básico, por ser el más permisivo y el más barato",
+   "choice_text_es": "Nivel básico, por ser el más permisivo y el más barato",
    "correct": false
   }
  },
@@ -4134,8 +4134,8 @@
   "pk": 1083,
   "fields": {
    "question": 2021,
-   "choice_text": "Nivel básico, por ser el más permisivo",
-   "choice_text_es": "Nivel básico, por ser el más permisivo",
+   "choice_text": "Nivel medio, por ser el intermedio entre los otros",
+   "choice_text_es": "Nivel medio, por ser el intermedio entre los otros",
    "correct": false
   }
  },
@@ -4144,9 +4144,9 @@
   "pk": 1084,
   "fields": {
    "question": 2021,
-   "choice_text": "Nivel medio, por ser el intermedio",
-   "choice_text_es": "Nivel medio, por ser el intermedio",
-   "correct": false
+   "choice_text": "Medidas técnicas y organizativas apropiadas al riesgo",
+   "choice_text_es": "Medidas técnicas y organizativas apropiadas al riesgo",
+   "correct": true
   }
  },
  {
@@ -4155,8 +4155,8 @@
   "fields": {
    "content": "Con la normativa vigente, una auditoría bienal de los ficheros con datos personales:",
    "content_es": "Con la normativa vigente, una auditoría bienal de los ficheros con datos personales:",
-   "explanation": "Correcta: D — ya no es obligatoria, aunque es muy recomendable. C) no se limita al sector público.",
-   "explanation_es": "Correcta: D — ya no es obligatoria, aunque es muy recomendable. C) no se limita al sector público.",
+   "explanation": "Correcta: B — ya no es obligatoria, aunque es recomendable cada dos años. D) no se limita al sector público.",
+   "explanation_es": "Correcta: B — ya no es obligatoria, aunque es recomendable cada dos años. D) no se limita al sector público.",
    "quiz": [
     3
    ]
@@ -4174,8 +4174,8 @@
   "pk": 1085,
   "fields": {
    "question": 2022,
-   "choice_text": "Es obligatoria cada dos años",
-   "choice_text_es": "Es obligatoria cada dos años",
+   "choice_text": "Es obligatoria cada cinco años, por ley",
+   "choice_text_es": "Es obligatoria cada cinco años, por ley",
    "correct": false
   }
  },
@@ -4184,9 +4184,9 @@
   "pk": 1086,
   "fields": {
    "question": 2022,
-   "choice_text": "Es obligatoria cada cinco años",
-   "choice_text_es": "Es obligatoria cada cinco años",
-   "correct": false
+   "choice_text": "Ya no es obligatoria, aunque es recomendable cada dos años",
+   "choice_text_es": "Ya no es obligatoria, aunque es recomendable cada dos años",
+   "correct": true
   }
  },
  {
@@ -4194,8 +4194,8 @@
   "pk": 1087,
   "fields": {
    "question": 2022,
-   "choice_text": "Solo es obligatoria en el sector público",
-   "choice_text_es": "Solo es obligatoria en el sector público",
+   "choice_text": "Es obligatoria cada dos años en todo caso",
+   "choice_text_es": "Es obligatoria cada dos años en todo caso",
    "correct": false
   }
  },
@@ -4204,9 +4204,9 @@
   "pk": 1088,
   "fields": {
    "question": 2022,
-   "choice_text": "Ya no es obligatoria, aunque es muy recomendable hacerla cada dos años o ante cambios relevantes",
-   "choice_text_es": "Ya no es obligatoria, aunque es muy recomendable hacerla cada dos años o ante cambios relevantes",
-   "correct": true
+   "choice_text": "Solo es obligatoria en el sector público y en el privado",
+   "choice_text_es": "Solo es obligatoria en el sector público y en el privado",
+   "correct": false
   }
  },
  {
@@ -4215,8 +4215,8 @@
   "fields": {
    "content": "La figura del Registro de Actividades de Tratamiento viene regulada por el:",
    "content_es": "La figura del Registro de Actividades de Tratamiento viene regulada por el:",
-   "explanation": "Correcta: A — el artículo 30 del RGPD. B) el art. 32 son las medidas de seguridad. C) la LOPDGDD lo amplía, pero no es el precepto base. D) el art. 197 del Código Penal es otra cosa.",
-   "explanation_es": "Correcta: A — el artículo 30 del RGPD. B) el art. 32 son las medidas de seguridad. C) la LOPDGDD lo amplía, pero no es el precepto base. D) el art. 197 del Código Penal es otra cosa.",
+   "explanation": "Correcta: C — artículo 30 del RGPD. A) el art. 32 son las medidas de seguridad. D) la LOPDGDD lo amplía, pero no es el precepto base. B) el art. 197 del Código Penal es otra cosa.",
+   "explanation_es": "Correcta: C — artículo 30 del RGPD. A) el art. 32 son las medidas de seguridad. D) la LOPDGDD lo amplía, pero no es el precepto base. B) el art. 197 del Código Penal es otra cosa.",
    "quiz": [
     3
    ]
@@ -4234,9 +4234,9 @@
   "pk": 1089,
   "fields": {
    "question": 2023,
-   "choice_text": "Artículo 30 del RGPD",
-   "choice_text_es": "Artículo 30 del RGPD",
-   "correct": true
+   "choice_text": "Artículo 32 del RGPD",
+   "choice_text_es": "Artículo 32 del RGPD",
+   "correct": false
   }
  },
  {
@@ -4244,8 +4244,8 @@
   "pk": 1090,
   "fields": {
    "question": 2023,
-   "choice_text": "Artículo 32 del RGPD",
-   "choice_text_es": "Artículo 32 del RGPD",
+   "choice_text": "Artículo 197 del Código Penal",
+   "choice_text_es": "Artículo 197 del Código Penal",
    "correct": false
   }
  },
@@ -4254,9 +4254,9 @@
   "pk": 1091,
   "fields": {
    "question": 2023,
-   "choice_text": "Artículo 39 de la LOPDGDD",
-   "choice_text_es": "Artículo 39 de la LOPDGDD",
-   "correct": false
+   "choice_text": "Artículo 30 del RGPD",
+   "choice_text_es": "Artículo 30 del RGPD",
+   "correct": true
   }
  },
  {
@@ -4264,8 +4264,8 @@
   "pk": 1092,
   "fields": {
    "question": 2023,
-   "choice_text": "Artículo 197 del Código Penal",
-   "choice_text_es": "Artículo 197 del Código Penal",
+   "choice_text": "Artículo 39 de la LOPDGDD",
+   "choice_text_es": "Artículo 39 de la LOPDGDD",
    "correct": false
   }
  },
@@ -4275,8 +4275,8 @@
   "fields": {
    "content": "Los elementos del modelo de relaciones del análisis de riesgos son:",
    "content_es": "Los elementos del modelo de relaciones del análisis de riesgos son:",
-   "explanation": "Correcta: A — activo, amenaza, vulnerabilidad, impacto y contramedida.",
-   "explanation_es": "Correcta: A — activo, amenaza, vulnerabilidad, impacto y contramedida.",
+   "explanation": "Correcta: C — activo, amenaza, vulnerabilidad, impacto y contramedida.",
+   "explanation_es": "Correcta: C — activo, amenaza, vulnerabilidad, impacto y contramedida.",
    "quiz": [
     3
    ]
@@ -4294,9 +4294,9 @@
   "pk": 1093,
   "fields": {
    "question": 2024,
-   "choice_text": "Activo, amenaza, vulnerabilidad, impacto y contramedida",
-   "choice_text_es": "Activo, amenaza, vulnerabilidad, impacto y contramedida",
-   "correct": true
+   "choice_text": "Amenaza, malware, cortafuegos, usuario y contraseña",
+   "choice_text_es": "Amenaza, malware, cortafuegos, usuario y contraseña",
+   "correct": false
   }
  },
  {
@@ -4304,8 +4304,8 @@
   "pk": 1094,
   "fields": {
    "question": 2024,
-   "choice_text": "Amenaza, malware, cortafuegos, usuario y contraseña",
-   "choice_text_es": "Amenaza, malware, cortafuegos, usuario y contraseña",
+   "choice_text": "Vulnerabilidad, parche, antivirus, copia de seguridad y auditor",
+   "choice_text_es": "Vulnerabilidad, parche, antivirus, copia de seguridad y auditor",
    "correct": false
   }
  },
@@ -4314,9 +4314,9 @@
   "pk": 1095,
   "fields": {
    "question": 2024,
-   "choice_text": "Activo, atacante, herramienta, impacto y seguro",
-   "choice_text_es": "Activo, atacante, herramienta, impacto y seguro",
-   "correct": false
+   "choice_text": "Activo, amenaza, vulnerabilidad, impacto y contramedida",
+   "choice_text_es": "Activo, amenaza, vulnerabilidad, impacto y contramedida",
+   "correct": true
   }
  },
  {
@@ -4324,8 +4324,8 @@
   "pk": 1096,
   "fields": {
    "question": 2024,
-   "choice_text": "Vulnerabilidad, parche, antivirus, copia de seguridad y auditor",
-   "choice_text_es": "Vulnerabilidad, parche, antivirus, copia de seguridad y auditor",
+   "choice_text": "Activo, atacante, herramienta, impacto y seguro",
+   "choice_text_es": "Activo, atacante, herramienta, impacto y seguro",
    "correct": false
   }
  },
@@ -4335,8 +4335,8 @@
   "fields": {
    "content": "Los controles disuasorios tienen como finalidad:",
    "content_es": "Los controles disuasorios tienen como finalidad:",
-   "explanation": "Correcta: D — desalientan la acción del atacante (reducen la probabilidad). A) reparar el daño es el correctivo. B) reducir la vulnerabilidad de los activos es el preventivo: es literalmente la definición del manual. C) detectarlo es el detector.",
-   "explanation_es": "Correcta: D — desalientan la acción del atacante (reducen la probabilidad). A) reparar el daño es el correctivo. B) reducir la vulnerabilidad de los activos es el preventivo: es literalmente la definición del manual. C) detectarlo es el detector.",
+   "explanation": "Correcta: A — desalentar la acción del atacante. D) reparar el daño es el correctivo. C) reducir la vulnerabilidad de los activos es el preventivo: es literalmente la definición del manual. B) detectarlo es el detector.",
+   "explanation_es": "Correcta: A — desalentar la acción del atacante. D) reparar el daño es el correctivo. C) reducir la vulnerabilidad de los activos es el preventivo: es literalmente la definición del manual. B) detectarlo es el detector.",
    "quiz": [
     3
    ]
@@ -4354,24 +4354,14 @@
   "pk": 1097,
   "fields": {
    "question": 2025,
-   "choice_text": "Reparar el daño una vez ocurrido",
-   "choice_text_es": "Reparar el daño una vez ocurrido",
-   "correct": false
+   "choice_text": "Desalentar la acción del atacante",
+   "choice_text_es": "Desalentar la acción del atacante",
+   "correct": true
   }
  },
  {
   "model": "quiz.choice",
   "pk": 1098,
-  "fields": {
-   "question": 2025,
-   "choice_text": "Reducir la vulnerabilidad de los activos para limitar las posibilidades de entrada",
-   "choice_text_es": "Reducir la vulnerabilidad de los activos para limitar las posibilidades de entrada",
-   "correct": false
-  }
- },
- {
-  "model": "quiz.choice",
-  "pk": 1099,
   "fields": {
    "question": 2025,
    "choice_text": "Detectar que el incidente está ocurriendo",
@@ -4381,12 +4371,22 @@
  },
  {
   "model": "quiz.choice",
+  "pk": 1099,
+  "fields": {
+   "question": 2025,
+   "choice_text": "Reducir la vulnerabilidad de los activos para limitar las posibilidades de entrada",
+   "choice_text_es": "Reducir la vulnerabilidad de los activos para limitar las posibilidades de entrada",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
   "pk": 1100,
   "fields": {
    "question": 2025,
-   "choice_text": "Desalentar la acción del atacante",
-   "choice_text_es": "Desalentar la acción del atacante",
-   "correct": true
+   "choice_text": "Reparar el daño una vez ocurrido",
+   "choice_text_es": "Reparar el daño una vez ocurrido",
+   "correct": false
   }
  },
  {
@@ -4395,8 +4395,8 @@
   "fields": {
    "content": "La vulnerabilidad intrínseca es:",
    "content_es": "La vulnerabilidad intrínseca es:",
-   "explanation": "Correcta: B — la inherente al sistema por su diseño o configuración. A) la explotable de verdad es la efectiva. C) la que queda tras las medidas es la residual. D) \"no descubierta\" no la define.",
-   "explanation_es": "Correcta: B — la inherente al sistema por su diseño o configuración. A) la explotable de verdad es la efectiva. C) la que queda tras las medidas es la residual. D) \"no descubierta\" no la define.",
+   "explanation": "Correcta: A — la inherente al sistema por su diseño o configuración. B) la explotable de verdad es la efectiva. D) la que queda tras las medidas es la residual. C) \"no descubierta\" no la define.",
+   "explanation_es": "Correcta: A — la inherente al sistema por su diseño o configuración. B) la explotable de verdad es la efectiva. D) la que queda tras las medidas es la residual. C) \"no descubierta\" no la define.",
    "quiz": [
     3
    ]
@@ -4414,16 +4414,6 @@
   "pk": 1101,
   "fields": {
    "question": 2026,
-   "choice_text": "La que puede explotarse realmente por existir determinados controles",
-   "choice_text_es": "La que puede explotarse realmente por existir determinados controles",
-   "correct": false
-  }
- },
- {
-  "model": "quiz.choice",
-  "pk": 1102,
-  "fields": {
-   "question": 2026,
    "choice_text": "La inherente al sistema por su diseño o configuración",
    "choice_text_es": "La inherente al sistema por su diseño o configuración",
    "correct": true
@@ -4431,11 +4421,21 @@
  },
  {
   "model": "quiz.choice",
+  "pk": 1102,
+  "fields": {
+   "question": 2026,
+   "choice_text": "La que puede explotarse realmente por existir determinados controles",
+   "choice_text_es": "La que puede explotarse realmente por existir determinados controles",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
   "pk": 1103,
   "fields": {
    "question": 2026,
-   "choice_text": "La que queda tras aplicar las medidas de seguridad",
-   "choice_text_es": "La que queda tras aplicar las medidas de seguridad",
+   "choice_text": "La que no ha sido descubierta por el auditor",
+   "choice_text_es": "La que no ha sido descubierta por el auditor",
    "correct": false
   }
  },
@@ -4444,8 +4444,8 @@
   "pk": 1104,
   "fields": {
    "question": 2026,
-   "choice_text": "La que no ha sido descubierta por el auditor",
-   "choice_text_es": "La que no ha sido descubierta por el auditor",
+   "choice_text": "La que queda tras aplicar las medidas de seguridad",
+   "choice_text_es": "La que queda tras aplicar las medidas de seguridad",
    "correct": false
   }
  },
@@ -4455,8 +4455,8 @@
   "fields": {
    "content": "En un análisis de riesgo cuantitativo, la probabilidad se calcula:",
    "content_es": "En un análisis de riesgo cuantitativo, la probabilidad se calcula:",
-   "explanation": "Correcta: B — con datos históricos y modelos estadísticos. D) el coste no calcula la probabilidad.",
-   "explanation_es": "Correcta: B — con datos históricos y modelos estadísticos. D) el coste no calcula la probabilidad.",
+   "explanation": "Correcta: B — con datos históricos y modelos estadísticos. A) el coste no calcula la probabilidad.",
+   "explanation_es": "Correcta: B — con datos históricos y modelos estadísticos. A) el coste no calcula la probabilidad.",
    "quiz": [
     3
    ]
@@ -4474,8 +4474,8 @@
   "pk": 1105,
   "fields": {
    "question": 2027,
-   "choice_text": "Con criterios subjetivos del auditor",
-   "choice_text_es": "Con criterios subjetivos del auditor",
+   "choice_text": "Con el coste de la medida de seguridad",
+   "choice_text_es": "Con el coste de la medida de seguridad",
    "correct": false
   }
  },
@@ -4504,8 +4504,8 @@
   "pk": 1108,
   "fields": {
    "question": 2027,
-   "choice_text": "Con el coste de la medida de seguridad",
-   "choice_text_es": "Con el coste de la medida de seguridad",
+   "choice_text": "Con criterios subjetivos del auditor",
+   "choice_text_es": "Con criterios subjetivos del auditor",
    "correct": false
   }
  },
@@ -4515,8 +4515,8 @@
   "fields": {
    "content": "¿Qué dos tipos de análisis de vulnerabilidades se distinguen según se analice el código sin ejecutarlo o el sistema en funcionamiento?",
    "content_es": "¿Qué dos tipos de análisis de vulnerabilidades se distinguen según se analice el código sin ejecutarlo o el sistema en funcionamiento?",
-   "explanation": "Correcta: B — estático y dinámico.",
-   "explanation_es": "Correcta: B — estático y dinámico.",
+   "explanation": "Correcta: D — estático y dinámico.",
+   "explanation_es": "Correcta: D — estático y dinámico.",
    "quiz": [
     3
    ]
@@ -4544,9 +4544,9 @@
   "pk": 1110,
   "fields": {
    "question": 2028,
-   "choice_text": "Estático y dinámico",
-   "choice_text_es": "Estático y dinámico",
-   "correct": true
+   "choice_text": "Interior y exterior",
+   "choice_text_es": "Interior y exterior",
+   "correct": false
   }
  },
  {
@@ -4564,9 +4564,9 @@
   "pk": 1112,
   "fields": {
    "question": 2028,
-   "choice_text": "Interior y exterior",
-   "choice_text_es": "Interior y exterior",
-   "correct": false
+   "choice_text": "Estático y dinámico",
+   "choice_text_es": "Estático y dinámico",
+   "correct": true
   }
  },
  {
@@ -4575,8 +4575,8 @@
   "fields": {
    "content": "Entre los principios generales de un cortafuegos de red se incluye:",
    "content_es": "Entre los principios generales de un cortafuegos de red se incluye:",
-   "explanation": "Correcta: C — denegar por defecto y permitir solo lo necesario. A) permitir todo es lo contrario. B) se registra lo permitido y lo denegado. D) no se limita a la red local.",
-   "explanation_es": "Correcta: C — denegar por defecto y permitir solo lo necesario. A) permitir todo es lo contrario. B) se registra lo permitido y lo denegado. D) no se limita a la red local.",
+   "explanation": "Correcta: A — denegar por defecto todo el tráfico y permitir solo el necesario. C) permitir todo es lo contrario. D) se registra lo permitido y lo denegado. B) no se limita a la red local.",
+   "explanation_es": "Correcta: A — denegar por defecto todo el tráfico y permitir solo el necesario. C) permitir todo es lo contrario. D) se registra lo permitido y lo denegado. B) no se limita a la red local.",
    "quiz": [
     3
    ]
@@ -4594,9 +4594,9 @@
   "pk": 1113,
   "fields": {
    "question": 2029,
-   "choice_text": "Permitir todo el tráfico y denegar después",
-   "choice_text_es": "Permitir todo el tráfico y denegar después",
-   "correct": false
+   "choice_text": "Denegar por defecto todo el tráfico y permitir solo el necesario",
+   "choice_text_es": "Denegar por defecto todo el tráfico y permitir solo el necesario",
+   "correct": true
   }
  },
  {
@@ -4604,8 +4604,8 @@
   "pk": 1114,
   "fields": {
    "question": 2029,
-   "choice_text": "Registrar únicamente los accesos denegados",
-   "choice_text_es": "Registrar únicamente los accesos denegados",
+   "choice_text": "Aplicar las reglas únicamente en la red local",
+   "choice_text_es": "Aplicar las reglas únicamente en la red local",
    "correct": false
   }
  },
@@ -4614,9 +4614,9 @@
   "pk": 1115,
   "fields": {
    "question": 2029,
-   "choice_text": "Denegar por defecto todo el tráfico y permitir solo el necesario",
-   "choice_text_es": "Denegar por defecto todo el tráfico y permitir solo el necesario",
-   "correct": true
+   "choice_text": "Permitir todo el tráfico y denegar después",
+   "choice_text_es": "Permitir todo el tráfico y denegar después",
+   "correct": false
   }
  },
  {
@@ -4624,8 +4624,8 @@
   "pk": 1116,
   "fields": {
    "question": 2029,
-   "choice_text": "Aplicar las reglas únicamente en la red local",
-   "choice_text_es": "Aplicar las reglas únicamente en la red local",
+   "choice_text": "Registrar únicamente los accesos denegados",
+   "choice_text_es": "Registrar únicamente los accesos denegados",
    "correct": false
   }
  },
@@ -4635,8 +4635,8 @@
   "fields": {
    "content": "Las alternativas de gestión de un riesgo no aceptable son:",
    "content_es": "Las alternativas de gestión de un riesgo no aceptable son:",
-   "explanation": "Correcta: A — evitar, reducir, transferir o aceptar. B) ignorarlo no es una alternativa.",
-   "explanation_es": "Correcta: A — evitar, reducir, transferir o aceptar. B) ignorarlo no es una alternativa.",
+   "explanation": "Correcta: C — evitar, reducir, transferir o aceptar. A) ignorarlo no es una alternativa.",
+   "explanation_es": "Correcta: C — evitar, reducir, transferir o aceptar. A) ignorarlo no es una alternativa.",
    "quiz": [
     3
    ]
@@ -4654,9 +4654,9 @@
   "pk": 1117,
   "fields": {
    "question": 2030,
-   "choice_text": "Evitar, reducir, transferir o aceptar",
-   "choice_text_es": "Evitar, reducir, transferir o aceptar",
-   "correct": true
+   "choice_text": "Ignorarlo hasta que ocurra",
+   "choice_text_es": "Ignorarlo hasta que ocurra",
+   "correct": false
   }
  },
  {
@@ -4664,8 +4664,8 @@
   "pk": 1118,
   "fields": {
    "question": 2030,
-   "choice_text": "Ignorarlo hasta que ocurra",
-   "choice_text_es": "Ignorarlo hasta que ocurra",
+   "choice_text": "Únicamente la contratación de un seguro",
+   "choice_text_es": "Únicamente la contratación de un seguro",
    "correct": false
   }
  },
@@ -4674,9 +4674,9 @@
   "pk": 1119,
   "fields": {
    "question": 2030,
-   "choice_text": "Únicamente la aceptación documentada",
-   "choice_text_es": "Únicamente la aceptación documentada",
-   "correct": false
+   "choice_text": "Evitar, reducir, transferir o aceptar",
+   "choice_text_es": "Evitar, reducir, transferir o aceptar",
+   "correct": true
   }
  },
  {
@@ -4684,8 +4684,8 @@
   "pk": 1120,
   "fields": {
    "question": 2030,
-   "choice_text": "Únicamente la contratación de un seguro",
-   "choice_text_es": "Únicamente la contratación de un seguro",
+   "choice_text": "Únicamente la aceptación documentada",
+   "choice_text_es": "Únicamente la aceptación documentada",
    "correct": false
   }
  },
@@ -4695,8 +4695,8 @@
   "fields": {
    "content": "El propósito principal de la auditoría de sistemas de información es:",
    "content_es": "El propósito principal de la auditoría de sistemas de información es:",
-   "explanation": "Correcta: B. La auditoría obtiene evidencia objetiva y evalúa en qué medida se cumplen los criterios de auditoría. Localizar responsables es inspección, comprobar que todo funciona es mantenimiento, y certificar el cumplimiento de una norma no es el objetivo de una auditoría interna. Manual cap. 1 §1-§2, p. 12 y 22.",
-   "explanation_es": "Correcta: B. La auditoría obtiene evidencia objetiva y evalúa en qué medida se cumplen los criterios de auditoría. Localizar responsables es inspección, comprobar que todo funciona es mantenimiento, y certificar el cumplimiento de una norma no es el objetivo de una auditoría interna. Manual cap. 1 §1-§2, p. 12 y 22.",
+   "explanation": "Correcta: C. La auditoría obtiene evidencia objetiva y evalúa en qué medida se cumplen los criterios de auditoría. Localizar responsables es inspección, comprobar que todo funciona es mantenimiento, y certificar el cumplimiento de una norma no es el objetivo de una auditoría interna. Manual cap. 1 §1-§2, p. 12 y 22.",
+   "explanation_es": "Correcta: C. La auditoría obtiene evidencia objetiva y evalúa en qué medida se cumplen los criterios de auditoría. Localizar responsables es inspección, comprobar que todo funciona es mantenimiento, y certificar el cumplimiento de una norma no es el objetivo de una auditoría interna. Manual cap. 1 §1-§2, p. 12 y 22.",
    "quiz": [
     3
    ]
@@ -4714,8 +4714,8 @@
   "pk": 1121,
   "fields": {
    "question": 2031,
-   "choice_text": "Localizar al responsable de los incidentes de seguridad",
-   "choice_text_es": "Localizar al responsable de los incidentes de seguridad",
+   "choice_text": "Comprobar que todos los equipos de la organización funcionan correctamente",
+   "choice_text_es": "Comprobar que todos los equipos de la organización funcionan correctamente",
    "correct": false
   }
  },
@@ -4724,9 +4724,9 @@
   "pk": 1122,
   "fields": {
    "question": 2031,
-   "choice_text": "Obtener evidencia objetiva y evaluar en qué medida se cumplen los criterios de auditoría",
-   "choice_text_es": "Obtener evidencia objetiva y evaluar en qué medida se cumplen los criterios de auditoría",
-   "correct": true
+   "choice_text": "Certificar que la empresa cumple la normativa aplicable",
+   "choice_text_es": "Certificar que la empresa cumple la normativa aplicable",
+   "correct": false
   }
  },
  {
@@ -4734,9 +4734,9 @@
   "pk": 1123,
   "fields": {
    "question": 2031,
-   "choice_text": "Comprobar que todos los equipos de la organización funcionan correctamente",
-   "choice_text_es": "Comprobar que todos los equipos de la organización funcionan correctamente",
-   "correct": false
+   "choice_text": "Obtener evidencia objetiva y evaluar el cumplimiento de criterios",
+   "choice_text_es": "Obtener evidencia objetiva y evaluar el cumplimiento de criterios",
+   "correct": true
   }
  },
  {
@@ -4744,8 +4744,8 @@
   "pk": 1124,
   "fields": {
    "question": 2031,
-   "choice_text": "Certificar que la empresa cumple la normativa",
-   "choice_text_es": "Certificar que la empresa cumple la normativa",
+   "choice_text": "Localizar al responsable de los incidentes de seguridad",
+   "choice_text_es": "Localizar al responsable de los incidentes de seguridad",
    "correct": false
   }
  },
@@ -4755,8 +4755,8 @@
   "fields": {
    "content": "Un hallazgo que describe una situación mejorable pero que no incumple ningún requisito se clasifica como:",
    "content_es": "Un hallazgo que describe una situación mejorable pero que no incumple ningún requisito se clasifica como:",
-   "explanation": "Correcta: B. Una situación mejorable que no incumple ningún requisito es una observación; la no conformidad es un incumplimiento, y el riesgo residual y la incidencia de seguridad no son categorías de hallazgo. Manual cap. 1 §9, p. 44-45.",
-   "explanation_es": "Correcta: B. Una situación mejorable que no incumple ningún requisito es una observación; la no conformidad es un incumplimiento, y el riesgo residual y la incidencia de seguridad no son categorías de hallazgo. Manual cap. 1 §9, p. 44-45.",
+   "explanation": "Correcta: D. Una situación mejorable que no incumple ningún requisito es una observación; la no conformidad es un incumplimiento, y el riesgo residual y la incidencia de seguridad no son categorías de hallazgo. Manual cap. 1 §9, p. 44-45.",
+   "explanation_es": "Correcta: D. Una situación mejorable que no incumple ningún requisito es una observación; la no conformidad es un incumplimiento, y el riesgo residual y la incidencia de seguridad no son categorías de hallazgo. Manual cap. 1 §9, p. 44-45.",
    "quiz": [
     3
    ]
@@ -4784,9 +4784,9 @@
   "pk": 1126,
   "fields": {
    "question": 2032,
-   "choice_text": "Observación",
-   "choice_text_es": "Observación",
-   "correct": true
+   "choice_text": "Riesgo residual",
+   "choice_text_es": "Riesgo residual",
+   "correct": false
   }
  },
  {
@@ -4804,9 +4804,9 @@
   "pk": 1128,
   "fields": {
    "question": 2032,
-   "choice_text": "Riesgo residual",
-   "choice_text_es": "Riesgo residual",
-   "correct": false
+   "choice_text": "Observación",
+   "choice_text_es": "Observación",
+   "correct": true
   }
  },
  {
@@ -4815,8 +4815,8 @@
   "fields": {
    "content": "Un CAAT es:",
    "content_es": "Un CAAT es:",
-   "explanation": "Correcta: C. CAAT es una Computer Assisted Audit Technique: una herramienta que automatiza la recogida de evidencia. No es un tipo de hallazgo ni una metodología de análisis de riesgo. Manual cap. 1 §6.2, p. 37-40.",
-   "explanation_es": "Correcta: C. CAAT es una Computer Assisted Audit Technique: una herramienta que automatiza la recogida de evidencia. No es un tipo de hallazgo ni una metodología de análisis de riesgo. Manual cap. 1 §6.2, p. 37-40.",
+   "explanation": "Correcta: A. CAAT es una Computer Assisted Audit Technique: una herramienta que automatiza la recogida de evidencia. No es un tipo de hallazgo ni una metodología de análisis de riesgo. Manual cap. 1 §6.2, p. 37-40.",
+   "explanation_es": "Correcta: A. CAAT es una Computer Assisted Audit Technique: una herramienta que automatiza la recogida de evidencia. No es un tipo de hallazgo ni una metodología de análisis de riesgo. Manual cap. 1 §6.2, p. 37-40.",
    "quiz": [
     3
    ]
@@ -4834,9 +4834,9 @@
   "pk": 1129,
   "fields": {
    "question": 2033,
-   "choice_text": "Un tipo de hallazgo de auditoría",
-   "choice_text_es": "Un tipo de hallazgo de auditoría",
-   "correct": false
+   "choice_text": "Una Computer Assisted Audit Technique: una herramienta de recogida automática",
+   "choice_text_es": "Una Computer Assisted Audit Technique: una herramienta de recogida automática",
+   "correct": true
   }
  },
  {
@@ -4844,8 +4844,8 @@
   "pk": 1130,
   "fields": {
    "question": 2033,
-   "choice_text": "Un tipo de prueba sustantiva",
-   "choice_text_es": "Un tipo de prueba sustantiva",
+   "choice_text": "Una metodología de análisis y valoración del riesgo",
+   "choice_text_es": "Una metodología de análisis y valoración del riesgo",
    "correct": false
   }
  },
@@ -4854,9 +4854,9 @@
   "pk": 1131,
   "fields": {
    "question": 2033,
-   "choice_text": "Una Computer Assisted Audit Technique: una herramienta que automatiza la recogida de evidencia",
-   "choice_text_es": "Una Computer Assisted Audit Technique: una herramienta que automatiza la recogida de evidencia",
-   "correct": true
+   "choice_text": "Un tipo de hallazgo que puede aparecer en un informe",
+   "choice_text_es": "Un tipo de hallazgo que puede aparecer en un informe",
+   "correct": false
   }
  },
  {
@@ -4864,8 +4864,8 @@
   "pk": 1132,
   "fields": {
    "question": 2033,
-   "choice_text": "Una metodología de análisis de riesgo",
-   "choice_text_es": "Una metodología de análisis de riesgo",
+   "choice_text": "Un tipo concreto de prueba, como la sustantiva",
+   "choice_text_es": "Un tipo concreto de prueba, como la sustantiva",
    "correct": false
   }
  },
@@ -4875,8 +4875,8 @@
   "fields": {
    "content": "Para descifrar contraseñas mediante ataque de diccionario se utiliza:",
    "content_es": "Para descifrar contraseñas mediante ataque de diccionario se utiliza:",
-   "explanation": "Correcta: B. John the Ripper descifra contraseñas por ataque de diccionario y luego de fuerza bruta. Nessus busca vulnerabilidades, Wireshark captura tráfico y Crypt cifra. Manual cap. 4 §7.1, p. 206-208.",
-   "explanation_es": "Correcta: B. John the Ripper descifra contraseñas por ataque de diccionario y luego de fuerza bruta. Nessus busca vulnerabilidades, Wireshark captura tráfico y Crypt cifra. Manual cap. 4 §7.1, p. 206-208.",
+   "explanation": "Correcta: C. John the Ripper descifra contraseñas por ataque de diccionario y luego de fuerza bruta. Nessus busca vulnerabilidades, Wireshark captura tráfico y Crypt cifra. Manual cap. 4 §7.1, p. 206-208.",
+   "explanation_es": "Correcta: C. John the Ripper descifra contraseñas por ataque de diccionario y luego de fuerza bruta. Nessus busca vulnerabilidades, Wireshark captura tráfico y Crypt cifra. Manual cap. 4 §7.1, p. 206-208.",
    "quiz": [
     3
    ]
@@ -4894,14 +4894,24 @@
   "pk": 1133,
   "fields": {
    "question": 2034,
-   "choice_text": "Nessus",
-   "choice_text_es": "Nessus",
+   "choice_text": "Wireshark",
+   "choice_text_es": "Wireshark",
    "correct": false
   }
  },
  {
   "model": "quiz.choice",
   "pk": 1134,
+  "fields": {
+   "question": 2034,
+   "choice_text": "Crypt",
+   "choice_text_es": "Crypt",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 1135,
   "fields": {
    "question": 2034,
    "choice_text": "John the Ripper",
@@ -4911,21 +4921,11 @@
  },
  {
   "model": "quiz.choice",
-  "pk": 1135,
-  "fields": {
-   "question": 2034,
-   "choice_text": "Wireshark",
-   "choice_text_es": "Wireshark",
-   "correct": false
-  }
- },
- {
-  "model": "quiz.choice",
   "pk": 1136,
   "fields": {
    "question": 2034,
-   "choice_text": "Crypt",
-   "choice_text_es": "Crypt",
+   "choice_text": "Nessus",
+   "choice_text_es": "Nessus",
    "correct": false
   }
  },
@@ -4935,8 +4935,8 @@
   "fields": {
    "content": "El principio que obliga a eliminar los datos cuando se alcanza la finalidad para la que se recogieron se denomina:",
    "content_es": "El principio que obliga a eliminar los datos cuando se alcanza la finalidad para la que se recogieron se denomina:",
-   "explanation": "Correcta: C. Es el principio de limitación del plazo de conservación: los datos se guardan el tiempo necesario y luego se borran. La exactitud es que estén al día, la minimización que no se pidan de más, y la licitud que exista base legal. Manual cap. 2 §2.2, p. 61-62.",
-   "explanation_es": "Correcta: C. Es el principio de limitación del plazo de conservación: los datos se guardan el tiempo necesario y luego se borran. La exactitud es que estén al día, la minimización que no se pidan de más, y la licitud que exista base legal. Manual cap. 2 §2.2, p. 61-62.",
+   "explanation": "Correcta: A. Es el principio de limitación del plazo de conservación: los datos se guardan el tiempo necesario y luego se borran. La exactitud es que estén al día, la minimización que no se pidan de más, y la licitud que exista base legal. Manual cap. 2 §2.2, p. 61-62.",
+   "explanation_es": "Correcta: A. Es el principio de limitación del plazo de conservación: los datos se guardan el tiempo necesario y luego se borran. La exactitud es que estén al día, la minimización que no se pidan de más, y la licitud que exista base legal. Manual cap. 2 §2.2, p. 61-62.",
    "quiz": [
     3
    ]
@@ -4954,9 +4954,9 @@
   "pk": 1137,
   "fields": {
    "question": 2035,
-   "choice_text": "Principio de exactitud",
-   "choice_text_es": "Principio de exactitud",
-   "correct": false
+   "choice_text": "Principio de limitación del plazo de conservación",
+   "choice_text_es": "Principio de limitación del plazo de conservación",
+   "correct": true
   }
  },
  {
@@ -4964,8 +4964,8 @@
   "pk": 1138,
   "fields": {
    "question": 2035,
-   "choice_text": "Principio de minimización",
-   "choice_text_es": "Principio de minimización",
+   "choice_text": "Principio de licitud del tratamiento",
+   "choice_text_es": "Principio de licitud del tratamiento",
    "correct": false
   }
  },
@@ -4974,9 +4974,9 @@
   "pk": 1139,
   "fields": {
    "question": 2035,
-   "choice_text": "Principio de limitación del plazo de conservación",
-   "choice_text_es": "Principio de limitación del plazo de conservación",
-   "correct": true
+   "choice_text": "Principio de exactitud de los datos",
+   "choice_text_es": "Principio de exactitud de los datos",
+   "correct": false
   }
  },
  {
@@ -4984,8 +4984,8 @@
   "pk": 1140,
   "fields": {
    "question": 2035,
-   "choice_text": "Principio de licitud",
-   "choice_text_es": "Principio de licitud",
+   "choice_text": "Principio de minimización de datos",
+   "choice_text_es": "Principio de minimización de datos",
    "correct": false
   }
  },
@@ -4995,8 +4995,8 @@
   "fields": {
    "content": "El principio según el cual los datos no pueden tratarse después para una finalidad distinta de aquella para la que se recogieron se denomina:",
    "content_es": "El principio según el cual los datos no pueden tratarse después para una finalidad distinta de aquella para la que se recogieron se denomina:",
-   "explanation": "Correcta: A. Es el principio de limitación de la finalidad: los datos recogidos para un fin no se reutilizan para otro sin una base compatible. Manual cap. 2 §2.2, p. 60.",
-   "explanation_es": "Correcta: A. Es el principio de limitación de la finalidad: los datos recogidos para un fin no se reutilizan para otro sin una base compatible. Manual cap. 2 §2.2, p. 60.",
+   "explanation": "Correcta: D. Es el principio de limitación de la finalidad: los datos recogidos para un fin no se reutilizan para otro sin una base compatible. Manual cap. 2 §2.2, p. 60.",
+   "explanation_es": "Correcta: D. Es el principio de limitación de la finalidad: los datos recogidos para un fin no se reutilizan para otro sin una base compatible. Manual cap. 2 §2.2, p. 60.",
    "quiz": [
     3
    ]
@@ -5014,16 +5014,6 @@
   "pk": 1141,
   "fields": {
    "question": 2036,
-   "choice_text": "Principio de limitación de la finalidad",
-   "choice_text_es": "Principio de limitación de la finalidad",
-   "correct": true
-  }
- },
- {
-  "model": "quiz.choice",
-  "pk": 1142,
-  "fields": {
-   "question": 2036,
    "choice_text": "Principio de transparencia",
    "choice_text_es": "Principio de transparencia",
    "correct": false
@@ -5031,7 +5021,7 @@
  },
  {
   "model": "quiz.choice",
-  "pk": 1143,
+  "pk": 1142,
   "fields": {
    "question": 2036,
    "choice_text": "Principio de responsabilidad proactiva",
@@ -5041,7 +5031,7 @@
  },
  {
   "model": "quiz.choice",
-  "pk": 1144,
+  "pk": 1143,
   "fields": {
    "question": 2036,
    "choice_text": "Principio de integridad y confidencialidad",
@@ -5050,13 +5040,23 @@
   }
  },
  {
+  "model": "quiz.choice",
+  "pk": 1144,
+  "fields": {
+   "question": 2036,
+   "choice_text": "Principio de limitación de la finalidad",
+   "choice_text_es": "Principio de limitación de la finalidad",
+   "correct": true
+  }
+ },
+ {
   "model": "quiz.question",
   "pk": 2037,
   "fields": {
    "content": "La privacidad desde el diseño y por defecto consiste en:",
    "content_es": "La privacidad desde el diseño y por defecto consiste en:",
-   "explanation": "Correcta: B. La privacidad desde el diseño y por defecto obliga a verificar y mitigar los riesgos de privacidad desde el inicio del proyecto, no a añadir seguridad al final. Cifrar en reposo o limitar el acceso son medidas concretas, pero no son el principio. Manual cap. 2 §3, p. 66.",
-   "explanation_es": "Correcta: B. La privacidad desde el diseño y por defecto obliga a verificar y mitigar los riesgos de privacidad desde el inicio del proyecto, no a añadir seguridad al final. Cifrar en reposo o limitar el acceso son medidas concretas, pero no son el principio. Manual cap. 2 §3, p. 66.",
+   "explanation": "Correcta: C. La privacidad desde el diseño y por defecto obliga a verificar y mitigar los riesgos de privacidad desde el inicio del proyecto, no a añadir seguridad al final. Cifrar en reposo o limitar el acceso son medidas concretas, pero no son el principio. Manual cap. 2 §3, p. 66.",
+   "explanation_es": "Correcta: C. La privacidad desde el diseño y por defecto obliga a verificar y mitigar los riesgos de privacidad desde el inicio del proyecto, no a añadir seguridad al final. Cifrar en reposo o limitar el acceso son medidas concretas, pero no son el principio. Manual cap. 2 §3, p. 66.",
    "quiz": [
     3
    ]
@@ -5074,8 +5074,8 @@
   "pk": 1145,
   "fields": {
    "question": 2037,
-   "choice_text": "Aplicar medidas de seguridad una vez terminado el proyecto",
-   "choice_text_es": "Aplicar medidas de seguridad una vez terminado el proyecto",
+   "choice_text": "Cifrar los datos en reposo, en tránsito y en uso",
+   "choice_text_es": "Cifrar los datos en reposo, en tránsito y en uso",
    "correct": false
   }
  },
@@ -5084,9 +5084,9 @@
   "pk": 1146,
   "fields": {
    "question": 2037,
-   "choice_text": "Evaluar los riesgos de privacidad desde el inicio de cualquier proyecto",
-   "choice_text_es": "Evaluar los riesgos de privacidad desde el inicio de cualquier proyecto",
-   "correct": true
+   "choice_text": "Limitar el acceso a los servidores y a las bases de datos",
+   "choice_text_es": "Limitar el acceso a los servidores y a las bases de datos",
+   "correct": false
   }
  },
  {
@@ -5094,9 +5094,9 @@
   "pk": 1147,
   "fields": {
    "question": 2037,
-   "choice_text": "Cifrar los datos en reposo",
-   "choice_text_es": "Cifrar los datos en reposo",
-   "correct": false
+   "choice_text": "Evaluar los riesgos de privacidad desde el inicio del proyecto",
+   "choice_text_es": "Evaluar los riesgos de privacidad desde el inicio del proyecto",
+   "correct": true
   }
  },
  {
@@ -5104,8 +5104,8 @@
   "pk": 1148,
   "fields": {
    "question": 2037,
-   "choice_text": "Limitar el acceso a los servidores de la aplicación",
-   "choice_text_es": "Limitar el acceso a los servidores de la aplicación",
+   "choice_text": "Aplicar medidas de seguridad una vez terminado el proyecto",
+   "choice_text_es": "Aplicar medidas de seguridad una vez terminado el proyecto",
    "correct": false
   }
  },
@@ -5115,8 +5115,8 @@
   "fields": {
    "content": "La vulnerabilidad residual es:",
    "content_es": "La vulnerabilidad residual es:",
-   "explanation": "Correcta: C. La vulnerabilidad residual es la que queda tras aplicar las salvaguardas decididas en el análisis de riesgos. La inherente al diseño es la intrínseca. Manual cap. 3 §8, p. 129.",
-   "explanation_es": "Correcta: C. La vulnerabilidad residual es la que queda tras aplicar las salvaguardas decididas en el análisis de riesgos. La inherente al diseño es la intrínseca. Manual cap. 3 §8, p. 129.",
+   "explanation": "Correcta: D. La vulnerabilidad residual es la que queda tras aplicar las salvaguardas decididas en el análisis de riesgos. La inherente al diseño es la intrínseca. Manual cap. 3 §8, p. 129.",
+   "explanation_es": "Correcta: D. La vulnerabilidad residual es la que queda tras aplicar las salvaguardas decididas en el análisis de riesgos. La inherente al diseño es la intrínseca. Manual cap. 3 §8, p. 129.",
    "quiz": [
     3
    ]
@@ -5134,8 +5134,8 @@
   "pk": 1149,
   "fields": {
    "question": 2038,
-   "choice_text": "La inherente al sistema por su diseño",
-   "choice_text_es": "La inherente al sistema por su diseño",
+   "choice_text": "La que realmente se explota en la práctica",
+   "choice_text_es": "La que realmente se explota en la práctica",
    "correct": false
   }
  },
@@ -5144,8 +5144,8 @@
   "pk": 1150,
   "fields": {
    "question": 2038,
-   "choice_text": "La que se explota realmente",
-   "choice_text_es": "La que se explota realmente",
+   "choice_text": "La que solo puede explotarse de forma teórica",
+   "choice_text_es": "La que solo puede explotarse de forma teórica",
    "correct": false
   }
  },
@@ -5154,9 +5154,9 @@
   "pk": 1151,
   "fields": {
    "question": 2038,
-   "choice_text": "La que queda después de aplicar las medidas de seguridad",
-   "choice_text_es": "La que queda después de aplicar las medidas de seguridad",
-   "correct": true
+   "choice_text": "La inherente al sistema por su diseño o configuración",
+   "choice_text_es": "La inherente al sistema por su diseño o configuración",
+   "correct": false
   }
  },
  {
@@ -5164,9 +5164,9 @@
   "pk": 1152,
   "fields": {
    "question": 2038,
-   "choice_text": "La que solo puede explotarse teóricamente",
-   "choice_text_es": "La que solo puede explotarse teóricamente",
-   "correct": false
+   "choice_text": "La que queda tras aplicar las medidas de seguridad",
+   "choice_text_es": "La que queda tras aplicar las medidas de seguridad",
+   "correct": true
   }
  },
  {
@@ -5194,8 +5194,8 @@
   "pk": 1153,
   "fields": {
    "question": 2039,
-   "choice_text": "El contenido de los mensajes",
-   "choice_text_es": "El contenido de los mensajes",
+   "choice_text": "El tipo de archivo que se está transmitiendo",
+   "choice_text_es": "El tipo de archivo que se está transmitiendo",
    "correct": false
   }
  },
@@ -5204,8 +5204,8 @@
   "pk": 1154,
   "fields": {
    "question": 2039,
-   "choice_text": "La cabecera de los paquetes, con las direcciones y los puertos",
-   "choice_text_es": "La cabecera de los paquetes, con las direcciones y los puertos",
+   "choice_text": "La cabecera de los paquetes, con direcciones y puertos",
+   "choice_text_es": "La cabecera de los paquetes, con direcciones y puertos",
    "correct": true
   }
  },
@@ -5214,8 +5214,8 @@
   "pk": 1155,
   "fields": {
    "question": 2039,
-   "choice_text": "El comportamiento del usuario",
-   "choice_text_es": "El comportamiento del usuario",
+   "choice_text": "El comportamiento previo del usuario de la red",
+   "choice_text_es": "El comportamiento previo del usuario de la red",
    "correct": false
   }
  },
@@ -5224,8 +5224,8 @@
   "pk": 1156,
   "fields": {
    "question": 2039,
-   "choice_text": "El tipo de archivo transmitido",
-   "choice_text_es": "El tipo de archivo transmitido",
+   "choice_text": "El contenido y el tipo de los mensajes",
+   "choice_text_es": "El contenido y el tipo de los mensajes",
    "correct": false
   }
  },
@@ -5235,8 +5235,8 @@
   "fields": {
    "content": "Un escenario de riesgo se define como:",
    "content_es": "Un escenario de riesgo se define como:",
-   "explanation": "Correcta: B. El manual define los escenarios de riesgo como los pares activo-amenaza susceptibles de materializarse. Manual cap. 3 §7, p. 138.",
-   "explanation_es": "Correcta: B. El manual define los escenarios de riesgo como los pares activo-amenaza susceptibles de materializarse. Manual cap. 3 §7, p. 138.",
+   "explanation": "Correcta: D. El manual define los escenarios de riesgo como los pares activo-amenaza susceptibles de materializarse. Manual cap. 3 §7, p. 138.",
+   "explanation_es": "Correcta: D. El manual define los escenarios de riesgo como los pares activo-amenaza susceptibles de materializarse. Manual cap. 3 §7, p. 138.",
    "quiz": [
     3
    ]
@@ -5264,9 +5264,9 @@
   "pk": 1158,
   "fields": {
    "question": 2040,
-   "choice_text": "El par activo-amenaza susceptible de materializarse",
-   "choice_text_es": "El par activo-amenaza susceptible de materializarse",
-   "correct": true
+   "choice_text": "La lista de todas las medidas de seguridad implantadas",
+   "choice_text_es": "La lista de todas las medidas de seguridad implantadas",
+   "correct": false
   }
  },
  {
@@ -5284,9 +5284,9 @@
   "pk": 1160,
   "fields": {
    "question": 2040,
-   "choice_text": "La lista de todas las medidas de seguridad implantadas",
-   "choice_text_es": "La lista de todas las medidas de seguridad implantadas",
-   "correct": false
+   "choice_text": "El par activo-amenaza susceptible de materializarse",
+   "choice_text_es": "El par activo-amenaza susceptible de materializarse",
+   "correct": true
   }
  },
  {
