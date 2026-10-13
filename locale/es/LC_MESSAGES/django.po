@@ -1658,6 +1658,14 @@ msgstr "Instrucciones del cuestionario"
 msgid "Understood"
 msgstr "Entendido"
 
+#: templates/question.html:112
+msgid ""
+"You can't go back to the previous question after you submit it, \n"
+"\t\t\t\tso double check your answer before proceeding to the next one!"
+msgstr ""
+"No puedes volver a la pregunta anterior una vez la envías, \n"
+"\t\t\t\tasí que revisa tu respuesta antes de pasar a la siguiente."
+
 #: templates/question.html:125
 msgid "of"
 msgstr "de"
