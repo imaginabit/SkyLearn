@@ -35,9 +35,9 @@
     <div class="card bg-white p-3">
         <p class="muted"><small>{% trans "The previous question" %}:</small></p>
         <p>{{ previous.previous_question }}</p>
-        <p class="mb-0">Your answer was
+        <p class="mb-0">{% trans "Your answer was" %}
         <strong>
-            {{ previous.previous_outcome|yesno:"correct,incorrect" }}
+            {% if previous.previous_outcome %}{% trans "correct" %}{% else %}{% trans "incorrect" %}{% endif %}
         </strong>
         </p>
 

@@ -246,7 +246,7 @@ msgstr ""
 
 #: quiz/models.py:31
 msgid "Practice Quiz"
-msgstr ""
+msgstr "Cuestionario de repaso"
 
 #: quiz/models.py:53
 msgid "Title"
@@ -1758,6 +1758,10 @@ msgstr "Completado"
 #: templates/quiz/sitting_detail.html:35
 msgid "User answer"
 msgstr "Respuesta del usuario"
+
+#: templates/quiz/question.html:39 templates/quiz/result.html:40
+msgid "correct"
+msgstr "correcta"
 
 #: templates/quiz/sitting_detail.html:54
 msgid "incorrect"
