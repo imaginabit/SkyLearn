@@ -3,9 +3,67 @@ from django.test import TestCase
 from django.urls import reverse
 
 from course.models import Course, CourseAllocation, Program
-from quiz.models import Quiz
+from quiz.models import EssayQuestion, Quiz, Sitting
 
 User = get_user_model()
+
+
+class QuizDesarrolloTests(TestCase):
+    """Contestar una pregunta de desarrollo no puede reventar la vista.
+
+    `QuizTake.form_valid_user` pedia `get_choices()`, que solo existe en
+    MCQuestion: al enviar un texto salia un AttributeError y la pantalla se
+    quedaba colgada. Ademas, contestarlas las metia en la lista de
+    incorrectas, porque `check_if_correct` devuelve False siempre.
+    """
+
+    def setUp(self):
+        self.program = Program.objects.create(title="Programa de prueba")
+        self.curso = Course.objects.create(
+            title="Curso con desarrollo",
+            code="MIO-2",
+            program=self.program,
+            level="Bachelor",
+            year=1,
+            semester="First",
+        )
+        self.alumno = User.objects.create_user(
+            username="tmp-alumno-2", password="password"
+        )
+        self.pregunta = EssayQuestion.objects.create(content="Explica que es un CAAT")
+        self.quiz = Quiz.objects.create(
+            course=self.curso,
+            title="Repaso desarrollo",
+            category="practice",
+            single_attempt=False,
+            answers_at_end=False,
+            exam_paper=True,
+        )
+        self.quiz.question_set.add(self.pregunta)
+        self.url = reverse(
+            "quiz_take", kwargs={"slug": self.quiz.slug, "pk": self.curso.pk}
+        )
+        self.client.force_login(self.alumno)
+
+    def test_contestar_una_pregunta_de_desarrollo_no_falla(self):
+        response = self.client.post(
+            self.url,
+            {"question_id": self.pregunta.id, "answers": "Un auditor de sistemas."},
+        )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Un auditor de sistemas.")
+
+    def test_el_texto_queda_guardado_para_corregirlo_a_mano(self):
+        self.client.post(
+            self.url,
+            {"question_id": self.pregunta.id, "answers": "Un auditor de sistemas."},
+        )
+
+        sitting = Sitting.objects.get(user=self.alumno, quiz=self.quiz, complete=True)
+        self.assertEqual(sitting.get_current_score, 0)
+        self.assertEqual(sitting.get_incorrect_questions, [])
+        self.assertIn(str(self.pregunta.id), sitting.user_answers)
 
 
 class QuizDeleteAuthorizationTests(TestCase):

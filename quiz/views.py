@@ -299,21 +299,31 @@ class QuizTake(FormView):
     def form_valid_user(self, form):
         progress, _ = Progress.objects.get_or_create(user=self.request.user)
         guess = form.cleaned_data["answers"]
-        is_correct = self.question.check_if_correct(guess)
 
-        if is_correct:
-            self.sitting.add_to_score(1)
-            progress.update_score(self.question, 1, 1)
-        else:
-            self.sitting.add_incorrect_question(self.question)
-            progress.update_score(self.question, 0, 1)
+        # Las de desarrollo se corrigen a mano: ni puntuan ni cuentan como
+        # falladas. `check_if_correct` devuelve siempre False, así que antes
+        # acababan en la lista de incorrectas por el simple hecho de contestarlas.
+        es_desarrollo = isinstance(self.question, EssayQuestion)
+        is_correct = None if es_desarrollo else self.question.check_if_correct(guess)
+
+        if not es_desarrollo:
+            if is_correct:
+                self.sitting.add_to_score(1)
+                progress.update_score(self.question, 1, 1)
+            else:
+                self.sitting.add_incorrect_question(self.question)
+                progress.update_score(self.question, 0, 1)
 
         if not self.quiz.answers_at_end:
             self.previous = {
                 "previous_answer": guess,
                 "previous_outcome": is_correct,
                 "previous_question": self.question,
-                "answers": self.question.get_choices(),
+                # `get_choices()` solo existe en MCQuestion: en las de desarrollo
+                # lo que se muestra es lo que acaba de escribir el alumno.
+                "answers": [str(guess)]
+                if es_desarrollo
+                else list(self.question.get_choices()),
                 "question_type": {self.question.__class__.__name__: True},
             }
         else:

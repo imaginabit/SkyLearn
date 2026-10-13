@@ -28,6 +28,15 @@
 	<p class="muted"><small>{% trans "The previous question" %}:</small></p>
 	<p>{{ previous.previous_question }}</p>
 
+	{% if previous.question_type.EssayQuestion %}
+		<div class="alert alert-info">
+		  <p class="mb-0"><small>
+			{% trans "Your answer was" %} </small>
+			<strong>{{ previous.previous_answer }}</strong>
+			<small>{% trans "(corrected by hand)" %}</small>
+		  </p>
+		</div>
+	{% else %}
 	{% if previous.previous_outcome %}
 		<div class="alert alert-success">
 	{% else %}
@@ -41,9 +50,10 @@
 		</p>
 
 		</div>
+	{% endif %}
 		
         {% load i18n %}
-        {% if previous.answers %}
+        {% if previous.answers and not previous.question_type.EssayQuestion %}
           <table class="table table-striped table-bordered">
             <tbody>
               {% for answer in previous.answers %}
