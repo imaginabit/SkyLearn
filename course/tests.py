@@ -352,9 +352,27 @@ class ArchivosAdicionalesTests(TestCase):
         self._sube(archivos=["actividad.odt"])
 
         html = self.url_curso_html
+        upload = Upload.objects.get()
+        adicional = UploadFile.objects.get()
 
-        self.assertIn(f"{MEDIA_URL}course_files/actividad.odt", html)
-        self.assertIn(f"{MEDIA_URL}course_files/guia", html)
+        self.assertIn(
+            reverse(
+                "upload_file_download",
+                kwargs={"slug": self.curso.slug, "file_id": upload.pk},
+            ),
+            html,
+        )
+        self.assertIn(
+            reverse(
+                "upload_archivo_download",
+                kwargs={
+                    "slug": self.curso.slug,
+                    "file_id": upload.pk,
+                    "archivo_id": adicional.pk,
+                },
+            ),
+            html,
+        )
 
     def test_editar_suma_ficheros_sin_tocar_el_principal(self):
         self._sube(archivos=[])
@@ -808,6 +826,150 @@ class DeckDownloadTests(TestCase):
 
                 self.assertIn(reverse("deck_download", kwargs={"slug": self.curso.slug}), html)
                 self.assertIn("Descargar HTML", html)
+
+
+class MaterialDownloadTests(TestCase):
+    """Cada alumno baja el material con su id en el nombre: E2_ugr-2026-1.odt.
+
+    Es para las actividades evaluables: al devolver el ejercicio se sabe de
+    quien es sin mirar el contenido. El prefijo sale del titulo de la actividad.
+    """
+
+    def setUp(self):
+        self.program = Program.objects.create(title="Programa de prueba")
+        self.curso = Course.objects.create(
+            title="Curso de prueba",
+            code="MIO-1",
+            program=self.program,
+            level="Bachelor",
+            year=1,
+            semester="First",
+        )
+        self.alumno = User.objects.create_user(
+            username="tmp-alumno-e2", password="password", is_student=True
+        )
+        self.alumno = User.objects.get(pk=self.alumno.pk)
+
+    def _url(self, upload):
+        return reverse(
+            "upload_file_download",
+            kwargs={"slug": self.curso.slug, "file_id": upload.pk},
+        )
+
+    def _sube(self, titulo="Actividad evaluable E2", nombre="enunciado.odt"):
+        """Crea la actividad; el fichero se guarda en MEDIA_ROOT al crearla."""
+        return Upload.objects.create(
+            title=titulo,
+            course=self.curso,
+            file=SimpleUploadedFile(nombre, b"contenido"),
+            is_activity=True,
+            is_evaluable=True,
+        )
+
+    def test_el_nombre_lleva_el_codigo_y_el_usuario(self):
+        with tempfile.TemporaryDirectory() as media:
+            with self.settings(MEDIA_ROOT=media):
+                upload = self._sube()
+                self.client.force_login(self.alumno)
+
+                response = self.client.get(self._url(upload))
+
+                self.assertEqual(response.status_code, 200)
+                self.assertIn("attachment", response["Content-Disposition"])
+                disposition = response["Content-Disposition"]
+                self.assertIn("E2_", disposition)
+                self.assertIn(self.alumno.username, disposition)
+                self.assertIn(".odt", disposition)
+                response.close()
+
+    def test_cada_usuario_baja_con_su_nombre(self):
+        with tempfile.TemporaryDirectory() as media:
+            with self.settings(MEDIA_ROOT=media):
+                upload = self._sube()
+                otro = User.objects.create_user(
+                    username="tmp-alumno-otro", password="password", is_student=True
+                )
+                otro = User.objects.get(pk=otro.pk)
+
+                self.client.force_login(self.alumno)
+                primera = self.client.get(self._url(upload))
+                self.assertIn(self.alumno.username, primera["Content-Disposition"])
+                primera.close()
+                self.client.force_login(otro)
+                segunda = self.client.get(self._url(upload))
+                self.assertIn(otro.username, segunda["Content-Disposition"])
+                segunda.close()
+
+    def test_fichero_adicional_tambien_lleva_el_usuario(self):
+        with tempfile.TemporaryDirectory() as media:
+            with self.settings(MEDIA_ROOT=media):
+                upload = self._sube()
+                adicional = UploadFile.objects.create(
+                    upload=upload,
+                    file=SimpleUploadedFile("enunciado.docx", b"contenido docx"),
+                )
+                self.client.force_login(self.alumno)
+                url = reverse(
+                    "upload_archivo_download",
+                    kwargs={
+                        "slug": self.curso.slug,
+                        "file_id": upload.pk,
+                        "archivo_id": adicional.pk,
+                    },
+                )
+
+                response = self.client.get(url)
+
+                self.assertEqual(response.status_code, 200)
+                self.assertIn("attachment", response["Content-Disposition"])
+                self.assertIn("E2_", response["Content-Disposition"])
+                self.assertIn(self.alumno.username, response["Content-Disposition"])
+                self.assertIn(".docx", response["Content-Disposition"])
+                self.assertEqual(b"".join(response.streaming_content), b"contenido docx")
+                response.close()
+
+    def test_sin_codigo_usa_el_titulo(self):
+        """Una actividad sin E1/E2 se renombra con su titulo en minusculas."""
+        with tempfile.TemporaryDirectory() as media:
+            with self.settings(MEDIA_ROOT=media):
+                upload = self._sube(titulo="Practica de cortafuegos")
+                self.client.force_login(self.alumno)
+
+                response = self.client.get(self._url(upload))
+
+                self.assertIn("practica-de-cortafuegos", response["Content-Disposition"])
+                response.close()
+
+    def test_exige_sesion_iniciada(self):
+        with tempfile.TemporaryDirectory() as media:
+            with self.settings(MEDIA_ROOT=media):
+                upload = self._sube()
+
+                self.assertEqual(self.client.get(self._url(upload)).status_code, 302)
+
+    def test_un_fichero_de_otro_curso_da_404(self):
+        """Un `file_id` de otro curso no se descarga desde este."""
+        with tempfile.TemporaryDirectory() as media:
+            with self.settings(MEDIA_ROOT=media):
+                otro_curso = Course.objects.create(
+                    title="Otro curso",
+                    code="MIO-9",
+                    program=self.program,
+                    level="Bachelor",
+                    year=1,
+                    semester="First",
+                )
+                upload = Upload.objects.create(
+                    title="Actividad evaluable E2",
+                    course=otro_curso,
+                    file=SimpleUploadedFile("ajeno.odt", b"contenido"),
+                    is_activity=True,
+                )
+                self.client.force_login(self.alumno)
+
+                response = self.client.get(self._url(upload))
+
+                self.assertEqual(response.status_code, 404)
 
 
 class ProgramActivityProgressTests(TestCase):

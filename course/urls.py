@@ -18,6 +18,16 @@ urlpatterns = [
     ),
     path("course/<slug>/deck/download/", views.deck_download, name="deck_download"),
     path(
+        "course/<slug>/documentations/<int:file_id>/download/",
+        views.upload_file_download,
+        name="upload_file_download",
+    ),
+    path(
+        "course/<slug>/documentations/<int:file_id>/archivo/<int:archivo_id>/download/",
+        views.upload_file_download,
+        name="upload_archivo_download",
+    ),
+    path(
         "course/<slug>/submission/<int:pk>/download/",
         views.submission_download,
         name="submission_download",

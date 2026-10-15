@@ -1,3 +1,6 @@
+import os
+import re
+
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -7,6 +10,7 @@ from django.http import FileResponse, Http404
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
 from django.utils.decorators import method_decorator
+from django.utils.text import slugify
 from django.views.decorators.http import require_POST
 from django.views.generic import CreateView
 from django_filters.views import FilterView
@@ -354,6 +358,39 @@ def deck_download(request, slug):
         deck.file.open("rb"),
         as_attachment=True,
         filename=deck.file.name.rsplit("/", 1)[-1],
+    )
+
+
+@login_required
+def upload_file_download(request, slug, file_id, archivo_id=None):
+    """Descarga un fichero del curso con el usuario en el nombre local.
+
+    La URL directa del fichero la sirve el servidor de ficheros, asi que ahi no
+    hay forma de renombrar la descarga. Al pasar por Django se puede, y asi cada
+    usuario se baja su propia copia: al devolverla se sabe de quien es sin mirar
+    el contenido. Acepta tanto el fichero principal de Upload como uno adicional
+    de UploadFile.
+
+    El prefijo sale del titulo: si hay un codigo de actividad (E1, E2...) se
+    usa ese, y si no, el titulo en minusculas y con guiones.
+    """
+    course = get_object_or_404(Course, slug=slug)
+    upload = get_object_or_404(Upload, pk=file_id, course=course)
+    fichero = upload.file
+    if archivo_id is not None:
+        adicional = get_object_or_404(UploadFile, pk=archivo_id, upload=upload)
+        fichero = adicional.file
+
+    codigo = re.search(r"\bE\d+\b", upload.title)
+    if codigo:
+        prefijo = codigo.group(0)
+    else:
+        prefijo = slugify(upload.title)[:40].strip("-") or "material"
+    extension = os.path.splitext(fichero.name)[1]
+    return FileResponse(
+        fichero.open("rb"),
+        as_attachment=True,
+        filename=f"{prefijo}_{request.user.username}{extension}",
     )
 
 

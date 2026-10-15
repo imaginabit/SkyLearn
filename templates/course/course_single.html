@@ -296,12 +296,13 @@
                         <tr>
                             <td>{{ forloop.counter }}</td>
                             <td>
-                                <a href="{{ file.file.url }}" title="{{ file }}" class="d-flex align-items-center">
+                                {% url 'upload_file_download' slug=course.slug file_id=file.pk as enlace %}
+                                <a href="{{ enlace }}" title="{{ file }}" class="d-flex align-items-center">
                                     <i class="fas fa-file-{{ file.get_extension_short }} me-1" title="{{ file.get_program_name }}"></i>
                                     {{ file.title|title }}
                                 </a>
                                 {% for archivo in file.archivos.all %}
-                                <a href="{{ archivo.file.url }}" title="{{ archivo.nombre }}"
+                                <a href="{% url 'upload_archivo_download' slug=course.slug file_id=file.pk archivo_id=archivo.pk %}" title="{{ archivo.nombre }}"
                                     class="d-flex align-items-center small text-muted ps-3">
                                     <i class="fas fa-file-{{ archivo.get_extension_short }} me-1" title="{{ archivo.get_program_name }}"></i>
                                     {{ archivo.nombre }}
@@ -312,7 +313,7 @@
                             <td>{{ file.updated_date|date }}</td>
                             <th>
                                 <div>
-                                    <a class="download-btn" href="{{ file.file.url }}" title="Download to your device">
+                                    <a class="download-btn" href="{% url 'upload_file_download' slug=course.slug file_id=file.pk %}" title="Download to your device">
                                         <i class="fas fa-download me-1"></i>{% trans 'Download' %}</a>
                                 </div>
                             </th>
