@@ -101,8 +101,8 @@ urlpatterns = [
         views.handle_video_delete,
         name="upload_video_delete",
     ),
-    # course registration
+    # course registration. El alumno se matricula, pero no se da de baja: quitarlo
+    # de un curso es cosa del administrador, desde el panel.
     path("course/registration/", views.course_registration, name="course_registration"),
-    path("course/drop/", views.course_drop, name="course_drop"),
     path("my_courses/", views.user_course_list, name="user_course_list"),
 ]

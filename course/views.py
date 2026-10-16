@@ -782,21 +782,6 @@ def course_registration(request):
         return render(request, "course/course_registration.html", context)
 
 
-@require_POST
-@login_required
-@student_required
-def course_drop(request):
-    if request.method == "POST":
-        student = get_object_or_404(Student, student__pk=request.user.id)
-        course_ids = request.POST.getlist("course_ids")
-        print("course_ids", course_ids)
-        for course_id in course_ids:
-            course = get_object_or_404(Course, pk=course_id)
-            TakenCourse.objects.filter(student=student, course=course).delete()
-        messages.success(request, "Courses dropped successfully!")
-        return redirect("course_registration")
-
-
 # ########################################################
 # User Course List View
 # ########################################################

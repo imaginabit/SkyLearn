@@ -26,7 +26,11 @@ MEDIA_URL = settings.MEDIA_URL
 
 
 class CourseDropTests(TestCase):
-    """Desapuntar es un POST: antes un GET devolvia None y Django petaba."""
+    """El alumno se matricula, pero no se da de baja.
+
+    Quitar a alguien de un curso es cosa del administrador, desde el panel: la
+    vista `course_drop` y su ruta ya no existen.
+    """
 
     def setUp(self):
         self.program = Program.objects.create(title="Programa de prueba")
@@ -49,24 +53,30 @@ class CourseDropTests(TestCase):
         self.enrollment = TakenCourse.objects.create(
             student=self.student, course=self.course
         )
-        self.url = reverse("course_drop")
+        # La ruta se compone a mano: el nombre `course_drop` ya no existe.
+        self.url = reverse("course_registration").replace("registration", "drop")
 
-    def test_get_is_rejected(self):
+    def test_la_ruta_de_baja_no_existe(self):
         self.client.login(username="alumno", password="password")
 
-        self.assertEqual(self.client.get(self.url).status_code, 405)
+        for metodo in (self.client.get, self.client.post):
+            with self.subTest(metodo=metodo.__name__):
+                self.assertEqual(metodo(self.url).status_code, 404)
 
-    def test_post_drops_the_enrollment(self):
-        self.client.login(username="alumno", password="password")
-
-        response = self.client.post(self.url, {"course_ids": [self.course.pk]})
-
-        self.assertEqual(response.status_code, 302)
-        self.assertFalse(
+        self.assertTrue(
             TakenCourse.objects.filter(
                 student=self.student, course=self.course
             ).exists()
         )
+
+    def test_la_pagina_no_ofrece_darse_de_baja(self):
+        self.client.login(username="alumno", password="password")
+
+        response = self.client.get(reverse("course_registration"))
+
+        self.assertEqual(response.status_code, 200)
+        self.assertNotContains(response, "course/drop/")
+        self.assertNotContains(response, 'name="course_ids"')
 
 
 class MaterialDeCursoAuthorizationTests(TestCase):

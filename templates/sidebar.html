@@ -108,7 +108,7 @@
 				<a href="{% url 'ass_results' %}"><i class="fa fa-list-ol"></i> {% trans 'Assesment Results' %}</a>
 			</li>
 			<li class="{% if request.path == cr %}active{% endif %}">
-				<a href="{% url 'course_registration' %}"><i class="fas fa-plus"></i>{% trans 'Add' %} &amp; {% trans 'Drop Course' %}</a>
+				<a href="{% url 'course_registration' %}"><i class="fas fa-plus"></i>{% trans 'Add Course' %}</a>
 			</li>
 			<li class="{% if request.path == lj %}active{% endif %}">
 				<a href="{% url 'live_join' %}"><i class="fas fa-right-to-bracket"></i>{% trans 'Entrar en una partida' %}</a>

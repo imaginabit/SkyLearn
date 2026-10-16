@@ -14,7 +14,7 @@
     </ol>
 </nav>
 
-<p class="title-1">{% trans 'Course Add' %} &amp; {% trans 'Drop' %}</p>
+<p class="title-1">{% trans 'Add Course' %}</p>
 
 {% include 'snippets/messages.html' %}
 
@@ -183,77 +183,63 @@
 {% if not no_course_is_registered %}
 
 <div class="col-md-12 p-0 bg-white">
-    <p class="form-title"><b>{% trans 'Course Drop' %}</b></p>
+    {# El alumno no se da de baja: solo lo hace el administrador, desde el panel. #}
+    <p class="form-title"><b>{% trans 'Taken Courses:' %}</b></p>
     <div class="container">
         <p class="fw-bold">{{ student.level }}</p>
-        <form action="{% url 'course_drop' %}" method="POST">
-            {% csrf_token %}
-            <div class="d-flex justify-content-between mb-4">
-                <button type="submit" class="btn btn-primary">
-                    <i class="fa fa-times"></i> {% trans 'Drop Selected' %}
-                </button>
+        <div class="table-responsive p-0 px-2 mt-2">
+            <div class="table-shadow">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>{% trans 'Course Code' %}</th>
+                            <th>{% trans 'Course Title' %}</th>
+                            <th>{% trans 'Cr.Hr(s)' %}</th>
+                            <th>{% trans 'Year' %}</th>
+                            <th>{% trans 'Classification' %}</th>
+                            <th>{% trans 'Elective Group' %}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for course in registered_courses %}
+                        <tr>
+                            <td>{{ course.code }}</td>
+                            <td>{{ course.title }}</td>
+                            <td>{{ course.credit }}</td>
+                            <td>{{ course.year }}</td>
+                            {% if course.is_elective %}
+                            <td>{% trans 'Elective' %}</td>
+                            {% else %}
+                            <td>{% trans 'Core' %}</td>
+                            {% endif %}
+                            <th>-</th>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <span class="text-danger">
+                                    {% trans 'No Course.' %}
+                                </span>
+                            </td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        {% endfor %}
+                        <tr>
+                            <th></th>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td><b>{% trans 'Total credit(s):' %}</b> {{ total_registered_credit }} </td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-
-            <div class="table-responsive p-0 px-2 mt-2">
-                <div class="table-shadow">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>{% trans 'Mark' %}</th>
-                                <th>{% trans 'Course Code' %}</th>
-                                <th>{% trans 'Course Title' %}</th>
-                                <th>{% trans 'Cr.Hr(s)' %}</th>
-                                <th>{% trans 'Year' %}</th>
-                                <th>{% trans 'Classification' %}</th>
-                                <th>{% trans 'Elective Group' %}</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for course in registered_courses %}
-                            <tr>
-                                <th scope="row">
-                                    <input name="course_ids" value="{{ course.id }}" type="checkbox">
-                                </th>
-                                <td>{{ course.code }}</td>
-                                <td>{{ course.title }}</td>
-                                <td>{{ course.credit }}</td>
-                                <td>{{ course.year }}</td>
-                                {% if course.is_elective %}
-                                <td>{% trans 'Elective' %}</td>
-                                {% else %}
-                                <td>{% trans 'Core' %}</td>
-                                {% endif %}
-                                <th>-</th>
-                            </tr>
-                            {% empty %}
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td>
-                                    <span class="text-danger">
-                                        {% trans 'No Course.' %}
-                                    </span>
-                                </td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            {% endfor %}
-                            <tr>
-                                <th></th>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td><b>{% trans 'Total credit(s):' %}</b> {{ total_registered_credit }} </td>
-                                <td></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </form>
+        </div>
     </div>
 </div>
 
