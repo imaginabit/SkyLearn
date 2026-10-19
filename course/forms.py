@@ -132,6 +132,7 @@ class UploadFormFile(forms.ModelForm):
             "file",
             "is_activity",
             "is_evaluable",
+            "visible",
             "extensiones_permitidas",
         )
 
@@ -141,12 +142,13 @@ class UploadFormFile(forms.ModelForm):
         self.fields["file"].widget.attrs.update({"class": "form-control"})
         self.fields["is_activity"].widget.attrs.update({"class": "form-check-input"})
         self.fields["is_evaluable"].widget.attrs.update({"class": "form-check-input"})
+        self.fields["visible"].widget.attrs.update({"class": "form-check-input"})
         # El campo del modelo guarda "pdf,odt"; el formulario trabaja con una
         # lista, asi que el initial hay que darlo ya troceado.
         if self.instance.pk:
-            self.initial["extensiones_permitidas"] = (
-                self.instance.get_extensiones_permitidas()
-            )
+            self.initial[
+                "extensiones_permitidas"
+            ] = self.instance.get_extensiones_permitidas()
 
     def clean_extensiones_permitidas(self):
         elegidas = self.cleaned_data["extensiones_permitidas"]
@@ -199,7 +201,9 @@ class SubmissionForm(forms.ModelForm):
             ).order_by("upload_time")
         # El alumno tiene que ver, al elegir la actividad, en que formato puede
         # entregarla: la etiqueta lleva los formatos admitidos.
-        self.fields["document"].label_from_instance = (
+        self.fields[
+            "document"
+        ].label_from_instance = (
             lambda actividad: f"{actividad.title} ({actividad.formatos_entrega()})"
         )
         self.fields["document"].widget.attrs.update({"class": "form-select"})
