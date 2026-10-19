@@ -228,6 +228,15 @@ class Upload(models.Model):
         verbose_name=_("Actividad evaluable"),
         help_text=_("Solo las actividades evaluables cuentan para la nota final."),
     )
+    visible = models.BooleanField(
+        default=True,
+        verbose_name=_("Visible para el alumnado"),
+        help_text=_(
+            "Desmárquelo para dejarlo oculto: el profesorado lo ve igualmente y el "
+            "alumnado no. Sirve para subir una prueba antes de tiempo y mostrarla "
+            "cuando toque."
+        ),
+    )
     extensiones_permitidas = models.CharField(
         max_length=100,
         default=EXTENSION_ENTREGA_POR_DEFECTO,

@@ -213,6 +213,11 @@ def course_single(request, slug):
     videos = UploadVideo.objects.filter(course__slug=slug)
     lecturers = CourseAllocation.objects.filter(courses__pk=course.id)
     is_editor = request.user.is_lecturer or request.user.is_superuser
+    # Los documentos ocultos son los que el profesorado sube antes de tiempo: una
+    # prueba que no debe ver el alumnado hasta que toque. El docente los ve
+    # siempre, para poder prepararlos.
+    if not is_editor:
+        files = files.filter(visible=True)
     # solo se entrega si hay matricula: antes cualquier cuenta que entraba
     # podia entregar en cualquier curso
     matriculado = TakenCourse.objects.filter(
