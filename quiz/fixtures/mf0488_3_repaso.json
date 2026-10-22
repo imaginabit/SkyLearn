@@ -1,0 +1,2462 @@
+[
+ {
+  "model": "quiz.question",
+  "pk": 3001,
+  "fields": {
+   "content": "Sobre la elección entre NIDS y HIDS en una organización:",
+   "content_es": "Sobre la elección entre NIDS y HIDS en una organización:",
+   "explanation": "Correcta: C - NIDS mira el camino, HIDS mira el destino. Son complementarios. A - El NIDS no ve el tráfico cifrado, ni lo que pasa dentro del equipo. B - El HIDS no ve el tráfico entre equipos, ni el origen externo. D - La marca no decide; decide el alcance de la vigilancia. Manual: cap. 1 §4–§5, CE1.2. Visto en: Clase 02, mazo Ids-y-reglas.md.",
+   "explanation_es": "Correcta: C - NIDS mira el camino, HIDS mira el destino. Son complementarios. A - El NIDS no ve el tráfico cifrado, ni lo que pasa dentro del equipo. B - El HIDS no ve el tráfico entre equipos, ni el origen externo. D - La marca no decide; decide el alcance de la vigilancia. Manual: cap. 1 §4–§5, CE1.2. Visto en: Clase 02, mazo Ids-y-reglas.md.",
+   "quiz": [
+    5
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 3001,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2001,
+  "fields": {
+   "question": 3001,
+   "choice_text": "Un NIDS basta siempre, porque ve todo el tráfico de la red",
+   "choice_text_es": "Un NIDS basta siempre, porque ve todo el tráfico de la red",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2002,
+  "fields": {
+   "question": 3001,
+   "choice_text": "Un HIDS basta siempre, porque ve lo que hace cada equipo",
+   "choice_text_es": "Un HIDS basta siempre, porque ve lo que hace cada equipo",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2003,
+  "fields": {
+   "question": 3001,
+   "choice_text": "La elección depende de qué se quiere vigilar: red o equipo",
+   "choice_text_es": "La elección depende de qué se quiere vigilar: red o equipo",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2004,
+  "fields": {
+   "question": 3001,
+   "choice_text": "La elección la decide la marca del fabricante",
+   "choice_text_es": "La elección la decide la marca del fabricante",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 3002,
+  "fields": {
+   "content": "La diferencia operativa entre un IDS y un IPS es:",
+   "content_es": "La diferencia operativa entre un IDS y un IPS es:",
+   "explanation": "Correcta: C - Lo que distingue al IPS es la acción sobre el tráfico. A - Es al revés: el IDS avisa, el IPS corta. B - Los dos usan reglas. D - Los dos necesitan privilegios para escuchar y actuar. Manual: cap. 1 §4, CE1.1. Visto en: Clase 01, mazo Gestion-de-incidentes.md.",
+   "explanation_es": "Correcta: C - Lo que distingue al IPS es la acción sobre el tráfico. A - Es al revés: el IDS avisa, el IPS corta. B - Los dos usan reglas. D - Los dos necesitan privilegios para escuchar y actuar. Manual: cap. 1 §4, CE1.1. Visto en: Clase 01, mazo Gestion-de-incidentes.md.",
+   "quiz": [
+    5
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 3002,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2005,
+  "fields": {
+   "question": 3002,
+   "choice_text": "El IDS corta la conexión; el IPS solo avisa",
+   "choice_text_es": "El IDS corta la conexión; el IPS solo avisa",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2006,
+  "fields": {
+   "question": 3002,
+   "choice_text": "El IDS aplica reglas; el IPS no",
+   "choice_text_es": "El IDS aplica reglas; el IPS no",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2007,
+  "fields": {
+   "question": 3002,
+   "choice_text": "El IDS avisa; el IPS además aplica la medida preventiva",
+   "choice_text_es": "El IDS avisa; el IPS además aplica la medida preventiva",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2008,
+  "fields": {
+   "question": 3002,
+   "choice_text": "El IDS necesita root; el IPS no",
+   "choice_text_es": "El IDS necesita root; el IPS no",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 3003,
+  "fields": {
+   "content": "Una regla de detección con umbral de 20 intentos en 60 segundos significa que:",
+   "content_es": "Una regla de detección con umbral de 20 intentos en 60 segundos significa que:",
+   "explanation": "Correcta: B - El umbral es el contador que dispara la alerta. A - El umbral cuenta eventos, no bloquea por sí mismo. C - El umbral es independiente de la sensibilidad. D - El umbral es el número de coincidencias, no la frecuencia de ejecución. Manual: cap. 1 §5, CE1.4. Visto en: Clase 02, mazo Ids-y-reglas.md.",
+   "explanation_es": "Correcta: B - El umbral es el contador que dispara la alerta. A - El umbral cuenta eventos, no bloquea por sí mismo. C - El umbral es independiente de la sensibilidad. D - El umbral es el número de coincidencias, no la frecuencia de ejecución. Manual: cap. 1 §5, CE1.4. Visto en: Clase 02, mazo Ids-y-reglas.md.",
+   "quiz": [
+    5
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 3003,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2009,
+  "fields": {
+   "question": 3003,
+   "choice_text": "Se bloquea la IP a los 20 intentos sin más",
+   "choice_text_es": "Se bloquea la IP a los 20 intentos sin más",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2010,
+  "fields": {
+   "question": 3003,
+   "choice_text": "El sistema avisa cuando se llega a 20 intentos en la ventana de 60 s",
+   "choice_text_es": "El sistema avisa cuando se llega a 20 intentos en la ventana de 60 s",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2011,
+  "fields": {
+   "question": 3003,
+   "choice_text": "Se reduce la sensibilidad del sensor",
+   "choice_text_es": "Se reduce la sensibilidad del sensor",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2012,
+  "fields": {
+   "question": 3003,
+   "choice_text": "La regla se ejecuta 20 veces por minuto",
+   "choice_text_es": "La regla se ejecuta 20 veces por minuto",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 3004,
+  "fields": {
+   "content": "En la organización en zonas del manual, la zona azul se caracteriza por:",
+   "content_es": "En la organización en zonas del manual, la zona azul se caracteriza por:",
+   "explanation": "Correcta: C - Aquí cualquier acceso anómalo es hostil; la alarma se revisa una a una. A - Eso es la zona roja. B - La zona azul es de confianza, no de riesgo. D - Precisamente el tráfico interno es el que vigila el IDS de la azul. Manual: cap. 1 §6, CE1.2. Visto en: Clase 02, mazo Ids-y-reglas.md.",
+   "explanation_es": "Correcta: C - Aquí cualquier acceso anómalo es hostil; la alarma se revisa una a una. A - Eso es la zona roja. B - La zona azul es de confianza, no de riesgo. D - Precisamente el tráfico interno es el que vigila el IDS de la azul. Manual: cap. 1 §6, CE1.2. Visto en: Clase 02, mazo Ids-y-reglas.md.",
+   "quiz": [
+    5
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 3004,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2013,
+  "fields": {
+   "question": 3004,
+   "choice_text": "Mucho tráfico y sensibilidad baja",
+   "choice_text_es": "Mucho tráfico y sensibilidad baja",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2014,
+  "fields": {
+   "question": 3004,
+   "choice_text": "Poca confianza, IDS delante del cortafuegos",
+   "choice_text_es": "Poca confianza, IDS delante del cortafuegos",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2015,
+  "fields": {
+   "question": 3004,
+   "choice_text": "Tráfico escaso entre equipos de confianza, sensibilidad alta, toda alarma se mira",
+   "choice_text_es": "Tráfico escaso entre equipos de confianza, sensibilidad alta, toda alarma se mira",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2016,
+  "fields": {
+   "question": 3004,
+   "choice_text": "Ningún IDS, porque el tráfico es interno",
+   "choice_text_es": "Ningún IDS, porque el tráfico es interno",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 3005,
+  "fields": {
+   "content": "Un honeypot, en producción, se coloca:",
+   "content_es": "Un honeypot, en producción, se coloca:",
+   "explanation": "Correcta: B - Lo que sostiene el engaño es que el atacante no pueda llegar a nada verdadero. A - Si comparte VLAN con servidores reales y cae dentro, el atacante llega a producción. C - Un honeypot no filtra; observa. Y no va en la DMZ: va en su propia zona. D - OpenCanary corre en Kali (Linux) y los hay también para Windows; la plataforma no es lo que decide. Manual: cap. 1 §5.2, CE1.5. Visto en: Clase 01 y Clase 02, mazos de honeypot.",
+   "explanation_es": "Correcta: B - Lo que sostiene el engaño es que el atacante no pueda llegar a nada verdadero. A - Si comparte VLAN con servidores reales y cae dentro, el atacante llega a producción. C - Un honeypot no filtra; observa. Y no va en la DMZ: va en su propia zona. D - OpenCanary corre en Kali (Linux) y los hay también para Windows; la plataforma no es lo que decide. Manual: cap. 1 §5.2, CE1.5. Visto en: Clase 01 y Clase 02, mazos de honeypot.",
+   "quiz": [
+    5
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 3005,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2017,
+  "fields": {
+   "question": 3005,
+   "choice_text": "En la misma VLAN que los servidores reales, para protegerlos",
+   "choice_text_es": "En la misma VLAN que los servidores reales, para protegerlos",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2018,
+  "fields": {
+   "question": 3005,
+   "choice_text": "En una zona aislada, con IP propia y sin servicios reales detrás",
+   "choice_text_es": "En una zona aislada, con IP propia y sin servicios reales detrás",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2019,
+  "fields": {
+   "question": 3005,
+   "choice_text": "En la DMZ, para que filtre el tráfico de internet",
+   "choice_text_es": "En la DMZ, para que filtre el tráfico de internet",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2020,
+  "fields": {
+   "question": 3005,
+   "choice_text": "Solo en Linux, porque los honeypots de Windows no existen",
+   "choice_text_es": "Solo en Linux, porque los honeypots de Windows no existen",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 3006,
+  "fields": {
+   "content": "En un análisis forense, el principio de Locard implica que:",
+   "content_es": "En un análisis forense, el principio de Locard implica que:",
+   "explanation": "Correcta: C - Es la base del forense: el atacante entra, toca y sale; en cada paso queda algo. A - Eso es una consecuencia operativa, no el principio en sí. B - La memoria es importante, pero hay más evidencias. D - El hash es necesario, pero sin el rastro y la cadena no basta. Manual: cap. 5 §2, CE3.1. Visto en: Clase 07, mazo Forense-y-evidencias.md.",
+   "explanation_es": "Correcta: C - Es la base del forense: el atacante entra, toca y sale; en cada paso queda algo. A - Eso es una consecuencia operativa, no el principio en sí. B - La memoria es importante, pero hay más evidencias. D - El hash es necesario, pero sin el rastro y la cadena no basta. Manual: cap. 5 §2, CE3.1. Visto en: Clase 07, mazo Forense-y-evidencias.md.",
+   "quiz": [
+    5
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 3006,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2021,
+  "fields": {
+   "question": 3006,
+   "choice_text": "La cadena de custodia se rompe al primer movimiento",
+   "choice_text_es": "La cadena de custodia se rompe al primer movimiento",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2022,
+  "fields": {
+   "question": 3006,
+   "choice_text": "Sin memoria volátil no se puede hacer nada",
+   "choice_text_es": "Sin memoria volátil no se puede hacer nada",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2023,
+  "fields": {
+   "question": 3006,
+   "choice_text": "Toda acción deja un rastro, y el forense lo encuentra y lo presenta",
+   "choice_text_es": "Toda acción deja un rastro, y el forense lo encuentra y lo presenta",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2024,
+  "fields": {
+   "question": 3006,
+   "choice_text": "El hash SHA-256 es suficiente para defender un caso",
+   "choice_text_es": "El hash SHA-256 es suficiente para defender un caso",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 3007,
+  "fields": {
+   "content": "En el orden de recogida, la memoria RAM se captura:",
+   "content_es": "En el orden de recogida, la memoria RAM se captura:",
+   "explanation": "Correcta: B - El orden del manual: memoria, conexiones, procesos, ficheros abiertos, registro, sistema de ficheros, metadatos. A - La memoria es lo más volátil y se recoge primero. C - Se recoge siempre que sea posible, antes de tocar nada. D - Si se hace en paralelo, se pisa la volatilidad. El orden es estricto. Manual: cap. 5 §3, CE3.3. Visto en: Clase 07, mazo Forense-y-evidencias.md.",
+   "explanation_es": "Correcta: B - El orden del manual: memoria, conexiones, procesos, ficheros abiertos, registro, sistema de ficheros, metadatos. A - La memoria es lo más volátil y se recoge primero. C - Se recoge siempre que sea posible, antes de tocar nada. D - Si se hace en paralelo, se pisa la volatilidad. El orden es estricto. Manual: cap. 5 §3, CE3.3. Visto en: Clase 07, mazo Forense-y-evidencias.md.",
+   "quiz": [
+    5
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 3007,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2025,
+  "fields": {
+   "question": 3007,
+   "choice_text": "Después del disco, porque es menos importante",
+   "choice_text_es": "Después del disco, porque es menos importante",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2026,
+  "fields": {
+   "question": 3007,
+   "choice_text": "Antes que cualquier evidencia no volátil",
+   "choice_text_es": "Antes que cualquier evidencia no volátil",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2027,
+  "fields": {
+   "question": 3007,
+   "choice_text": "Solo si la máquina no se puede apagar",
+   "choice_text_es": "Solo si la máquina no se puede apagar",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2028,
+  "fields": {
+   "question": 3007,
+   "choice_text": "En paralelo con el disco, para ahorrar tiempo",
+   "choice_text_es": "En paralelo con el disco, para ahorrar tiempo",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 3008,
+  "fields": {
+   "content": "En Snort 3, el comando snort -T se utiliza para:",
+   "content_es": "En Snort 3, el comando snort -T se utiliza para:",
+   "explanation": "Correcta: B - -T valida el snort.lua y las reglas, y debe terminar con código 0. A - Eso es sin -T y con -i. C - El log se define con -A o en la configuración. D - La HOME NET se cambia en snort.lua, no en la línea de comandos. Manual: cap. 1 §5, CE1.6. Visto en: Clase 01, mazo Gestion-de-incidentes.md.",
+   "explanation_es": "Correcta: B - -T valida el snort.lua y las reglas, y debe terminar con código 0. A - Eso es sin -T y con -i. C - El log se define con -A o en la configuración. D - La HOME NET se cambia en snort.lua, no en la línea de comandos. Manual: cap. 1 §5, CE1.6. Visto en: Clase 01, mazo Gestion-de-incidentes.md.",
+   "quiz": [
+    5
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 3008,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2029,
+  "fields": {
+   "question": 3008,
+   "choice_text": "Capturar tráfico en vivo en una interfaz",
+   "choice_text_es": "Capturar tráfico en vivo en una interfaz",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2030,
+  "fields": {
+   "question": 3008,
+   "choice_text": "Probar la configuración y contar las reglas sin poner el IDS en producción",
+   "choice_text_es": "Probar la configuración y contar las reglas sin poner el IDS en producción",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2031,
+  "fields": {
+   "question": 3008,
+   "choice_text": "Definir el nivel de log",
+   "choice_text_es": "Definir el nivel de log",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2032,
+  "fields": {
+   "question": 3008,
+   "choice_text": "Cambiar la HOME NET en caliente",
+   "choice_text_es": "Cambiar la HOME NET en caliente",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 3009,
+  "fields": {
+   "content": "Si la variable HOME NET de Snort queda como any:",
+   "content_es": "Si la variable HOME NET de Snort queda como any:",
+   "explanation": "Correcta: B - Sin la red del laboratorio definida, las reglas con $HOME NET no disparan. A - Snort avisa de lo que encaja con las reglas; any no cambia eso. C - any es un valor válido; el problema es operativo, no de sintaxis. D - El modo promiscuo se activa con -k none, no con HOME NET. Manual: cap. 1 §5, CE1.3. Visto en: Clase 01, mazo Gestion-de-incidentes.md.",
+   "explanation_es": "Correcta: B - Sin la red del laboratorio definida, las reglas con $HOME NET no disparan. A - Snort avisa de lo que encaja con las reglas; any no cambia eso. C - any es un valor válido; el problema es operativo, no de sintaxis. D - El modo promiscuo se activa con -k none, no con HOME NET. Manual: cap. 1 §5, CE1.3. Visto en: Clase 01, mazo Gestion-de-incidentes.md.",
+   "quiz": [
+    5
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 3009,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2033,
+  "fields": {
+   "question": 3009,
+   "choice_text": "Snort avisa de más, porque evalúa todas las redes",
+   "choice_text_es": "Snort avisa de más, porque evalúa todas las redes",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2034,
+  "fields": {
+   "question": 3009,
+   "choice_text": "Snort arranca sin error y se queda mudo ante ataques externos",
+   "choice_text_es": "Snort arranca sin error y se queda mudo ante ataques externos",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2035,
+  "fields": {
+   "question": 3009,
+   "choice_text": "Snort no arranca y muestra un error de configuración",
+   "choice_text_es": "Snort no arranca y muestra un error de configuración",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2036,
+  "fields": {
+   "question": 3009,
+   "choice_text": "Snort entra en modo promiscuo",
+   "choice_text_es": "Snort entra en modo promiscuo",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 3010,
+  "fields": {
+   "content": "Una alerta del IDS que no corresponde a un ataque real se denomina:",
+   "content_es": "Una alerta del IDS que no corresponde a un ataque real se denomina:",
+   "explanation": "Correcta: B - Es la alerta sin ataque detrás. A - El falso negativo es el ataque real que no se detecta. C - El ruido es tráfico de fondo; el falso positivo es una alerta concreta. D - El evento descartado es el que se filtra antes de generar alerta. Manual: cap. 1 §5, CE1.4. Visto en: Clase 02, mazo Ids-y-reglas.md.",
+   "explanation_es": "Correcta: B - Es la alerta sin ataque detrás. A - El falso negativo es el ataque real que no se detecta. C - El ruido es tráfico de fondo; el falso positivo es una alerta concreta. D - El evento descartado es el que se filtra antes de generar alerta. Manual: cap. 1 §5, CE1.4. Visto en: Clase 02, mazo Ids-y-reglas.md.",
+   "quiz": [
+    5
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 3010,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2037,
+  "fields": {
+   "question": 3010,
+   "choice_text": "Falso negativo",
+   "choice_text_es": "Falso negativo",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2038,
+  "fields": {
+   "question": 3010,
+   "choice_text": "Falso positivo",
+   "choice_text_es": "Falso positivo",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2039,
+  "fields": {
+   "question": 3010,
+   "choice_text": "Ruido blanco",
+   "choice_text_es": "Ruido blanco",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2040,
+  "fields": {
+   "question": 3010,
+   "choice_text": "Evento descartado",
+   "choice_text_es": "Evento descartado",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 3011,
+  "fields": {
+   "content": "OpenCanary, en este módulo, se utiliza como:",
+   "content_es": "OpenCanary, en este módulo, se utiliza como:",
+   "explanation": "Correcta: B - Simula servicios (SSH, FTP, HTTP) y registra los intentos. A - No es un NIDS; es un señuelo. C - No vigila el equipo: vigila al atacante. D - No descifra nada; solo escucha puertos y registra conexiones. Manual: cap. 1 §5.2, CE1.5. Visto en: Clase 03, mazo Verificacion-y-E1.md.",
+   "explanation_es": "Correcta: B - Simula servicios (SSH, FTP, HTTP) y registra los intentos. A - No es un NIDS; es un señuelo. C - No vigila el equipo: vigila al atacante. D - No descifra nada; solo escucha puertos y registra conexiones. Manual: cap. 1 §5.2, CE1.5. Visto en: Clase 03, mazo Verificacion-y-E1.md.",
+   "quiz": [
+    5
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 3011,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2041,
+  "fields": {
+   "question": 3011,
+   "choice_text": "NIDS de producción",
+   "choice_text_es": "NIDS de producción",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2042,
+  "fields": {
+   "question": 3011,
+   "choice_text": "Honeypot de baja interacción",
+   "choice_text_es": "Honeypot de baja interacción",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2043,
+  "fields": {
+   "question": 3011,
+   "choice_text": "Herramienta de control de código malicioso de endpoint",
+   "choice_text_es": "Herramienta de control de código malicioso de endpoint",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2044,
+  "fields": {
+   "question": 3011,
+   "choice_text": "Analizador de tráfico cifrado",
+   "choice_text_es": "Analizador de tráfico cifrado",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 3012,
+  "fields": {
+   "content": "En un análisis forense, un fichero con extensión .pcap contiene:",
+   "content_es": "En un análisis forense, un fichero con extensión .pcap contiene:",
+   "explanation": "Correcta: B - Es el formato estándar de captura de paquetes. A - La imagen del disco se guarda en .dd o .img, no en .pcap. C - Los logs del sistema están en /var/log/ o en el visor de eventos. D - Las claves de registro se exportan a .reg. Manual: cap. 5 §3, CE3.3. Visto en: Clase 07, mazo Forense-y-evidencias.md.",
+   "explanation_es": "Correcta: B - Es el formato estándar de captura de paquetes. A - La imagen del disco se guarda en .dd o .img, no en .pcap. C - Los logs del sistema están en /var/log/ o en el visor de eventos. D - Las claves de registro se exportan a .reg. Manual: cap. 5 §3, CE3.3. Visto en: Clase 07, mazo Forense-y-evidencias.md.",
+   "quiz": [
+    5
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 3012,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2045,
+  "fields": {
+   "question": 3012,
+   "choice_text": "La imagen del disco duro",
+   "choice_text_es": "La imagen del disco duro",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2046,
+  "fields": {
+   "question": 3012,
+   "choice_text": "Una captura de tráfico de red",
+   "choice_text_es": "Una captura de tráfico de red",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2047,
+  "fields": {
+   "question": 3012,
+   "choice_text": "Un log del sistema comprimido",
+   "choice_text_es": "Un log del sistema comprimido",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2048,
+  "fields": {
+   "question": 3012,
+   "choice_text": "Una clave de registro de Windows",
+   "choice_text_es": "Una clave de registro de Windows",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 3013,
+  "fields": {
+   "content": "En la cadena de custodia, la firma en la etiqueta de la evidencia sirve para:",
+   "content_es": "En la cadena de custodia, la firma en la etiqueta de la evidencia sirve para:",
+   "explanation": "Correcta: B - Sin firma, la cadena se rompe en el primer \"no sé quién fue\". A - El cifrado va aparte, si lo hay. C - La firma no comprime. D - La firma y el hash son cosas distintas y complementarias. Manual: cap. 5 §4, CE3.4. Visto en: Clase 07, mazo Forense-y-evidencias.md.",
+   "explanation_es": "Correcta: B - Sin firma, la cadena se rompe en el primer \"no sé quién fue\". A - El cifrado va aparte, si lo hay. C - La firma no comprime. D - La firma y el hash son cosas distintas y complementarias. Manual: cap. 5 §4, CE3.4. Visto en: Clase 07, mazo Forense-y-evidencias.md.",
+   "quiz": [
+    5
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 3013,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2049,
+  "fields": {
+   "question": 3013,
+   "choice_text": "Cifrar la evidencia",
+   "choice_text_es": "Cifrar la evidencia",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2050,
+  "fields": {
+   "question": 3013,
+   "choice_text": "Identificar al responsable que la recogió, y romper la cadena si falta",
+   "choice_text_es": "Identificar al responsable que la recogió, y romper la cadena si falta",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2051,
+  "fields": {
+   "question": 3013,
+   "choice_text": "Comprimir la evidencia",
+   "choice_text_es": "Comprimir la evidencia",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2052,
+  "fields": {
+   "question": 3013,
+   "choice_text": "Sustituir al hash SHA-256",
+   "choice_text_es": "Sustituir al hash SHA-256",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 3014,
+  "fields": {
+   "content": "En el visor de eventos de Windows, un evento con identificador 4624 indica:",
+   "content_es": "En el visor de eventos de Windows, un evento con identificador 4624 indica:",
+   "explanation": "Correcta: A - 4624 es éxito de autenticación; 4625 es fallo. B - El 4625 es el fallo; el 4624 es el éxito. C - La creación de cuenta es 4720. D - El bloqueo es 4740. Manual: cap. 1 §3, CE1.1. Visto en: Clase 01, mazo Gestion-de-incidentes.md.",
+   "explanation_es": "Correcta: A - 4624 es éxito de autenticación; 4625 es fallo. B - El 4625 es el fallo; el 4624 es el éxito. C - La creación de cuenta es 4720. D - El bloqueo es 4740. Manual: cap. 1 §3, CE1.1. Visto en: Clase 01, mazo Gestion-de-incidentes.md.",
+   "quiz": [
+    5
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 3014,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2053,
+  "fields": {
+   "question": 3014,
+   "choice_text": "Inicio de sesión correcto",
+   "choice_text_es": "Inicio de sesión correcto",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2054,
+  "fields": {
+   "question": 3014,
+   "choice_text": "Inicio de sesión fallido",
+   "choice_text_es": "Inicio de sesión fallido",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2055,
+  "fields": {
+   "question": 3014,
+   "choice_text": "Creación de una cuenta de usuario",
+   "choice_text_es": "Creación de una cuenta de usuario",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2056,
+  "fields": {
+   "question": 3014,
+   "choice_text": "Bloqueo de una cuenta",
+   "choice_text_es": "Bloqueo de una cuenta",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 3015,
+  "fields": {
+   "content": "En una Kali Linux, los intentos fallidos de inicio de sesión por SSH se registran, por defecto, en:",
+   "content_es": "En una Kali Linux, los intentos fallidos de inicio de sesión por SSH se registran, por defecto, en:",
+   "explanation": "Correcta: B - En Debian y Kali, las autenticaciones van a auth.log. A - syslog es el log general, pero el de autenticación es otro. C - secure es el nombre en Red Hat y derivados, no en Kali. D - messages es el log genérico, no de autenticación. Manual: cap. 1 §3, CE1.1. Visto en: Clase 01, mazo Gestion-de-incidentes.md.",
+   "explanation_es": "Correcta: B - En Debian y Kali, las autenticaciones van a auth.log. A - syslog es el log general, pero el de autenticación es otro. C - secure es el nombre en Red Hat y derivados, no en Kali. D - messages es el log genérico, no de autenticación. Manual: cap. 1 §3, CE1.1. Visto en: Clase 01, mazo Gestion-de-incidentes.md.",
+   "quiz": [
+    5
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 3015,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2057,
+  "fields": {
+   "question": 3015,
+   "choice_text": "/var/log/syslog",
+   "choice_text_es": "/var/log/syslog",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2058,
+  "fields": {
+   "question": 3015,
+   "choice_text": "/var/log/auth.log",
+   "choice_text_es": "/var/log/auth.log",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2059,
+  "fields": {
+   "question": 3015,
+   "choice_text": "/var/log/secure",
+   "choice_text_es": "/var/log/secure",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2060,
+  "fields": {
+   "question": 3015,
+   "choice_text": "/var/log/messages",
+   "choice_text_es": "/var/log/messages",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.quiz",
+  "pk": 5,
+  "fields": {
+   "course": 8,
+   "title": "Repaso UA1 - IDS/IPS",
+   "title_es": "Repaso UA1 - IDS/IPS",
+   "slug": "repaso-ua1-mf0488-3",
+   "description": "Repaso de la UA1: sistemas de detección y prevención de intrusiones (IDS/IPS). 15 preguntas de opción múltiple. Se corrigen solas y, al responder, sale la respuesta correcta con el motivo de cada opción descartada. Se puede repetir tantas veces como quieras.",
+   "description_es": "Repaso de la UA1: sistemas de detección y prevención de intrusiones (IDS/IPS). 15 preguntas de opción múltiple. Se corrigen solas y, al responder, sale la respuesta correcta con el motivo de cada opción descartada. Se puede repetir tantas veces como quieras.",
+   "category": "practice",
+   "draft": false,
+   "single_attempt": false,
+   "pass_mark": 0,
+   "timestamp": "2026-10-22T00:00:00Z",
+   "random_order": true,
+   "answers_at_end": false,
+   "exam_paper": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 3016,
+  "fields": {
+   "content": "El efecto principal de un ransomware sobre los ficheros de un equipo es:",
+   "content_es": "El efecto principal de un ransomware sobre los ficheros de un equipo es:",
+   "explanation": "Correcta: B - Es la definición del ransomware. A - El ransomware cifra, no borra. Borrar es de otro tipo (wiper). C - Eso es un sabotaje, no ransomware. D - Eso es exfiltración, no ransomware (aunque algunos ransomware modernos también lo hacen). Manual: cap. 3, CE2.5. Visto en: Clase 06, mazo Codigo-malicioso-y-E2.md.",
+   "explanation_es": "Correcta: B - Es la definición del ransomware. A - El ransomware cifra, no borra. Borrar es de otro tipo (wiper). C - Eso es un sabotaje, no ransomware. D - Eso es exfiltración, no ransomware (aunque algunos ransomware modernos también lo hacen). Manual: cap. 3, CE2.5. Visto en: Clase 06, mazo Codigo-malicioso-y-E2.md.",
+   "quiz": [
+    6
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 3016,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2061,
+  "fields": {
+   "question": 3016,
+   "choice_text": "Borrarlos sin posibilidad de recuperación",
+   "choice_text_es": "Borrarlos sin posibilidad de recuperación",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2062,
+  "fields": {
+   "question": 3016,
+   "choice_text": "Cifrarlos y pedir un rescate a cambio de la clave",
+   "choice_text_es": "Cifrarlos y pedir un rescate a cambio de la clave",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2063,
+  "fields": {
+   "question": 3016,
+   "choice_text": "Modificarlos para que el sistema no arranque",
+   "choice_text_es": "Modificarlos para que el sistema no arranque",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2064,
+  "fields": {
+   "question": 3016,
+   "choice_text": "Enviar copias a un servidor externo",
+   "choice_text_es": "Enviar copias a un servidor externo",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 3017,
+  "fields": {
+   "content": "Una empresa con un servidor de correo y 200 puestos cliente quiere vigilar el comportamiento del equipo, no el tráfico de red. La herramienta más adecuada es:",
+   "content_es": "Una empresa con un servidor de correo y 200 puestos cliente quiere vigilar el comportamiento del equipo, no el tráfico de red. La herramienta más adecuada es:",
+   "explanation": "Correcta: B - Vigila procesos, ficheros y comportamiento del equipo. A - Vigila la red, no el equipo. C - Vigila el correo, no el comportamiento del equipo. D - Vigila la navegación, no el comportamiento del equipo. Manual: cap. 3 §2, CE2.5. Visto en: Clase 06, mazo Codigo-malicioso-y-E2.md.",
+   "explanation_es": "Correcta: B - Vigila procesos, ficheros y comportamiento del equipo. A - Vigila la red, no el equipo. C - Vigila el correo, no el comportamiento del equipo. D - Vigila la navegación, no el comportamiento del equipo. Manual: cap. 3 §2, CE2.5. Visto en: Clase 06, mazo Codigo-malicioso-y-E2.md.",
+   "quiz": [
+    6
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 3017,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2065,
+  "fields": {
+   "question": 3017,
+   "choice_text": "Un IDS de malware en línea",
+   "choice_text_es": "Un IDS de malware en línea",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2066,
+  "fields": {
+   "question": 3017,
+   "choice_text": "Un antivirus de endpoint",
+   "choice_text_es": "Un antivirus de endpoint",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2067,
+  "fields": {
+   "question": 3017,
+   "choice_text": "Un filtro de correo",
+   "choice_text_es": "Un filtro de correo",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2068,
+  "fields": {
+   "question": 3017,
+   "choice_text": "Un proxy con categorización web",
+   "choice_text_es": "Un proxy con categorización web",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 3018,
+  "fields": {
+   "content": "El propósito del registro SPF, DKIM y DMARC en un servidor de correo es:",
+   "content_es": "El propósito del registro SPF, DKIM y DMARC en un servidor de correo es:",
+   "explanation": "Correcta: B - Los tres son mecanismos de autenticación del dominio remitente. A - El cifrado del mensaje se hace con S/MIME o PGP. C - La compresión no depende de SPF/DKIM/DMARC. D - El bloqueo por contenido se hace con filtros bayesianos y listas grises. Manual: cap. 3 §2, CE2.5. Visto en: Clase 06, mazo Codigo-malicioso-y-E2.md.",
+   "explanation_es": "Correcta: B - Los tres son mecanismos de autenticación del dominio remitente. A - El cifrado del mensaje se hace con S/MIME o PGP. C - La compresión no depende de SPF/DKIM/DMARC. D - El bloqueo por contenido se hace con filtros bayesianos y listas grises. Manual: cap. 3 §2, CE2.5. Visto en: Clase 06, mazo Codigo-malicioso-y-E2.md.",
+   "quiz": [
+    6
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 3018,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2069,
+  "fields": {
+   "question": 3018,
+   "choice_text": "Cifrar el contenido del mensaje",
+   "choice_text_es": "Cifrar el contenido del mensaje",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2070,
+  "fields": {
+   "question": 3018,
+   "choice_text": "Comprobar la autenticidad del remitente del mensaje",
+   "choice_text_es": "Comprobar la autenticidad del remitente del mensaje",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2071,
+  "fields": {
+   "question": 3018,
+   "choice_text": "Comprimir los adjuntos",
+   "choice_text_es": "Comprimir los adjuntos",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2072,
+  "fields": {
+   "question": 3018,
+   "choice_text": "Bloquear el correo no deseado por contenido",
+   "choice_text_es": "Bloquear el correo no deseado por contenido",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 3019,
+  "fields": {
+   "content": "En la gestión de incidentes, la fase de identificación tiene como entrada:",
+   "content_es": "En la gestión de incidentes, la fase de identificación tiene como entrada:",
+   "explanation": "Correcta: B - Es la fase que decide si el evento es o no un incidente. A - Eso es entrada de la fase de aprendizaje. C - Eso es entrada de la fase de recuperación. D - La orden de restaurar es la salida de la recuperación. Manual: cap. 4 §1, CE2.1. Visto en: Clase 04, mazo Recoleccion-e-indicios.md.",
+   "explanation_es": "Correcta: B - Es la fase que decide si el evento es o no un incidente. A - Eso es entrada de la fase de aprendizaje. C - Eso es entrada de la fase de recuperación. D - La orden de restaurar es la salida de la recuperación. Manual: cap. 4 §1, CE2.1. Visto en: Clase 04, mazo Recoleccion-e-indicios.md.",
+   "quiz": [
+    6
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 3019,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2073,
+  "fields": {
+   "question": 3019,
+   "choice_text": "Un informe del cierre anterior",
+   "choice_text_es": "Un informe del cierre anterior",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2074,
+  "fields": {
+   "question": 3019,
+   "choice_text": "Una alerta del IDS o un evento sospechoso",
+   "choice_text_es": "Una alerta del IDS o un evento sospechoso",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2075,
+  "fields": {
+   "question": 3019,
+   "choice_text": "Una copia de seguridad validada",
+   "choice_text_es": "Una copia de seguridad validada",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2076,
+  "fields": {
+   "question": 3019,
+   "choice_text": "Una orden de restaurar",
+   "choice_text_es": "Una orden de restaurar",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 3020,
+  "fields": {
+   "content": "Un indicio de intrusión se considera verificado cuando se cumplen los cuatro condicionantes: vulnerabilidad, exposición, credencial o camino, y tiempo. Si falta uno, el indicio:",
+   "content_es": "Un indicio de intrusión se considera verificado cuando se cumplen los cuatro condicionantes: vulnerabilidad, exposición, credencial o camino, y tiempo. Si falta uno, el indicio:",
+   "explanation": "Correcta: B - Sin los cuatro, es un \"puede que\", no un \"es que\". Se documenta y se sigue. A - Sin los cuatro, no se descarta; se sigue investigando. C - Notificar sin los cuatro es propagar un falso positivo. D - Borrar evidencia rompe la cadena de custodia. Manual: cap. 4 §2, CE2.2. Visto en: Clase 04, mazo Recoleccion-e-indicios.md.",
+   "explanation_es": "Correcta: B - Sin los cuatro, es un \"puede que\", no un \"es que\". Se documenta y se sigue. A - Sin los cuatro, no se descarta; se sigue investigando. C - Notificar sin los cuatro es propagar un falso positivo. D - Borrar evidencia rompe la cadena de custodia. Manual: cap. 4 §2, CE2.2. Visto en: Clase 04, mazo Recoleccion-e-indicios.md.",
+   "quiz": [
+    6
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 3020,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2077,
+  "fields": {
+   "question": 3020,
+   "choice_text": "Se descarta y se cierra el caso",
+   "choice_text_es": "Se descarta y se cierra el caso",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2078,
+  "fields": {
+   "question": 3020,
+   "choice_text": "Se mantiene como sospecha y se documenta",
+   "choice_text_es": "Se mantiene como sospecha y se documenta",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2079,
+  "fields": {
+   "question": 3020,
+   "choice_text": "Se eleva a incidente y se notifica al CERT",
+   "choice_text_es": "Se eleva a incidente y se notifica al CERT",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2080,
+  "fields": {
+   "question": 3020,
+   "choice_text": "Se borra para no contaminar la cadena",
+   "choice_text_es": "Se borra para no contaminar la cadena",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 3021,
+  "fields": {
+   "content": "En la correlación de alertas, dos o más alertas se consideran el mismo caso cuando comparten al menos tres campos entre origen, destino, hora, sistema y tipo. Si comparten solo dos, se trata como:",
+   "content_es": "En la correlación de alertas, dos o más alertas se consideran el mismo caso cuando comparten al menos tres campos entre origen, destino, hora, sistema y tipo. Si comparten solo dos, se trata como:",
+   "explanation": "Correcta: B - Dos campos no bastan; hace falta el tercero. A - Sin tres campos, no es caso. C - El falso positivo es una alerta sin ataque; aquí son alertas reales que no se sostienen como caso. D - El ruido es tráfico de fondo, no alertas que han pasado el proceso de correlación. Manual: cap. 4 §5, CE2.3. Visto en: Clase 05, mazo Correlacion-e-informe.md.",
+   "explanation_es": "Correcta: B - Dos campos no bastan; hace falta el tercero. A - Sin tres campos, no es caso. C - El falso positivo es una alerta sin ataque; aquí son alertas reales que no se sostienen como caso. D - El ruido es tráfico de fondo, no alertas que han pasado el proceso de correlación. Manual: cap. 4 §5, CE2.3. Visto en: Clase 05, mazo Correlacion-e-informe.md.",
+   "quiz": [
+    6
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 3021,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2081,
+  "fields": {
+   "question": 3021,
+   "choice_text": "Caso confirmado",
+   "choice_text_es": "Caso confirmado",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2082,
+  "fields": {
+   "question": 3021,
+   "choice_text": "Coincidencia, no correlación",
+   "choice_text_es": "Coincidencia, no correlación",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2083,
+  "fields": {
+   "question": 3021,
+   "choice_text": "Falso positivo",
+   "choice_text_es": "Falso positivo",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2084,
+  "fields": {
+   "question": 3021,
+   "choice_text": "Ruido estadístico",
+   "choice_text_es": "Ruido estadístico",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 3022,
+  "fields": {
+   "content": "El resumen ejecutivo de un informe de incidente, según el manual, debe ocupar:",
+   "content_es": "El resumen ejecutivo de un informe de incidente, según el manual, debe ocupar:",
+   "explanation": "Correcta: B - Es lo primero que lee quien tiene que decidir. A - El resumen no es el lugar para los detalles. C - Una página es para el alcance, no para el resumen. D - Sin resumen, el informe no se entiende. Manual: cap. 4 §6, CE2.4. Visto en: Clase 05, mazo Correlacion-e-informe.md.",
+   "explanation_es": "Correcta: B - Es lo primero que lee quien tiene que decidir. A - El resumen no es el lugar para los detalles. C - Una página es para el alcance, no para el resumen. D - Sin resumen, el informe no se entiende. Manual: cap. 4 §6, CE2.4. Visto en: Clase 05, mazo Correlacion-e-informe.md.",
+   "quiz": [
+    6
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 3022,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2085,
+  "fields": {
+   "question": 3022,
+   "choice_text": "Un párrafo largo, con todos los detalles",
+   "choice_text_es": "Un párrafo largo, con todos los detalles",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2086,
+  "fields": {
+   "question": 3022,
+   "choice_text": "Tres líneas, sin siglas",
+   "choice_text_es": "Tres líneas, sin siglas",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2087,
+  "fields": {
+   "question": 3022,
+   "choice_text": "Una página entera, con tablas",
+   "choice_text_es": "Una página entera, con tablas",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2088,
+  "fields": {
+   "question": 3022,
+   "choice_text": "Solo el título y la fecha",
+   "choice_text_es": "Solo el título y la fecha",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 3023,
+  "fields": {
+   "content": "En el plan de actuación, la fase de contención se diferencia de la de erradicación en que:",
+   "content_es": "En el plan de actuación, la fase de contención se diferencia de la de erradicación en que:",
+   "explanation": "Correcta: A - Contener es parar (aislar, cortar accesos); erradicar es limpiar (quitar el malware, parchear). B - La E2 las pregunta por separado. C - Primero se contiene, después se erradica. D - Va en medio del plan, no al final. Manual: cap. 4 §3, CE2.4. Visto en: Clase 05, mazo Correlacion-e-informe.md y Clase 06, Codigo-malicioso-y-E2.md.",
+   "explanation_es": "Correcta: A - Contener es parar (aislar, cortar accesos); erradicar es limpiar (quitar el malware, parchear). B - La E2 las pregunta por separado. C - Primero se contiene, después se erradica. D - Va en medio del plan, no al final. Manual: cap. 4 §3, CE2.4. Visto en: Clase 05, mazo Correlacion-e-informe.md y Clase 06, Codigo-malicioso-y-E2.md.",
+   "quiz": [
+    6
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 3023,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2089,
+  "fields": {
+   "question": 3023,
+   "choice_text": "La contención aísla el sistema y la erradicación limpia la causa",
+   "choice_text_es": "La contención aísla el sistema y la erradicación limpia la causa",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2090,
+  "fields": {
+   "question": 3023,
+   "choice_text": "Son sinónimos",
+   "choice_text_es": "Son sinónimos",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2091,
+  "fields": {
+   "question": 3023,
+   "choice_text": "La erradicación va antes que la contención",
+   "choice_text_es": "La erradicación va antes que la contención",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2092,
+  "fields": {
+   "question": 3023,
+   "choice_text": "La contención se hace al final",
+   "choice_text_es": "La contención se hace al final",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 3024,
+  "fields": {
+   "content": "En España, la notificación formal de un incidente de seguridad con alcance público a un CERT nacional se hace al:",
+   "content_es": "En España, la notificación formal de un incidente de seguridad con alcance público a un CERT nacional se hace al:",
+   "explanation": "Correcta: B - Es el CERT nacional español, dependiente del CCN. A - FIRST agrupa CERTs internacionales; no es un CERT nacional. C - Interpol no es un CERT. D - INCIBE gestiona el 017, atención a la ciudadanía, no la notificación de incidentes de organizaciones. Manual: cap. 4 §4, CE2.4. Visto en: Clase 04, mazo Recoleccion-e-indicios.md.",
+   "explanation_es": "Correcta: B - Es el CERT nacional español, dependiente del CCN. A - FIRST agrupa CERTs internacionales; no es un CERT nacional. C - Interpol no es un CERT. D - INCIBE gestiona el 017, atención a la ciudadanía, no la notificación de incidentes de organizaciones. Manual: cap. 4 §4, CE2.4. Visto en: Clase 04, mazo Recoleccion-e-indicios.md.",
+   "quiz": [
+    6
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 3024,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2093,
+  "fields": {
+   "question": 3024,
+   "choice_text": "FIRST",
+   "choice_text_es": "FIRST",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2094,
+  "fields": {
+   "question": 3024,
+   "choice_text": "CCN-CERT",
+   "choice_text_es": "CCN-CERT",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2095,
+  "fields": {
+   "question": 3024,
+   "choice_text": "Interpol",
+   "choice_text_es": "Interpol",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2096,
+  "fields": {
+   "question": 3024,
+   "choice_text": "INCIBE",
+   "choice_text_es": "INCIBE",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 3025,
+  "fields": {
+   "content": "En una correlación de alertas, se considera falsa la que:",
+   "content_es": "En una correlación de alertas, se considera falsa la que:",
+   "explanation": "Correcta: B - Coincide en el tiempo pero no en los demás campos; parece correlación y no lo es. A - Con tres campos en común, es correlación verdadera. C - Si tienen hora distinta, no es correlación por la ventana temporal; se trata aparte. D - El mismo sid es la misma regla, no una correlación. Manual: cap. 4 §5, CE2.3. Visto en: Clase 05, mazo Correlacion-e-informe.md.",
+   "explanation_es": "Correcta: B - Coincide en el tiempo pero no en los demás campos; parece correlación y no lo es. A - Con tres campos en común, es correlación verdadera. C - Si tienen hora distinta, no es correlación por la ventana temporal; se trata aparte. D - El mismo sid es la misma regla, no una correlación. Manual: cap. 4 §5, CE2.3. Visto en: Clase 05, mazo Correlacion-e-informe.md.",
+   "quiz": [
+    6
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 3025,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2097,
+  "fields": {
+   "question": 3025,
+   "choice_text": "Comparte origen, destino y tipo",
+   "choice_text_es": "Comparte origen, destino y tipo",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2098,
+  "fields": {
+   "question": 3025,
+   "choice_text": "Comparte solo día, sin tipo ni sistema",
+   "choice_text_es": "Comparte solo día, sin tipo ni sistema",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2099,
+  "fields": {
+   "question": 3025,
+   "choice_text": "Tiene distinta hora y mismo origen",
+   "choice_text_es": "Tiene distinta hora y mismo origen",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2100,
+  "fields": {
+   "question": 3025,
+   "choice_text": "Tiene el mismo sid en Snort",
+   "choice_text_es": "Tiene el mismo sid en Snort",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 3026,
+  "fields": {
+   "content": "El ciclo de actualización de una herramienta de control de código malicioso, según el manual, incluye al menos cuatro actualizaciones con periodicidades distintas. Las dos más importantes son:",
+   "content_es": "El ciclo de actualización de una herramienta de control de código malicioso, según el manual, incluye al menos cuatro actualizaciones con periodicidades distintas. Las dos más importantes son:",
+   "explanation": "Correcta: A - Las firmas caducan a diario; el motor se actualiza con cada versión. B - La actualización del SO no es de la herramienta. C - La base de IOC es una de las cuatro, pero no la única. D - La configuración se cambia a mano, no es una actualización periódica. Manual: cap. 3 §4, CE2.5. Visto en: Clase 06, mazo Codigo-malicioso-y-E2.md.",
+   "explanation_es": "Correcta: A - Las firmas caducan a diario; el motor se actualiza con cada versión. B - La actualización del SO no es de la herramienta. C - La base de IOC es una de las cuatro, pero no la única. D - La configuración se cambia a mano, no es una actualización periódica. Manual: cap. 3 §4, CE2.5. Visto en: Clase 06, mazo Codigo-malicioso-y-E2.md.",
+   "quiz": [
+    6
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 3026,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2101,
+  "fields": {
+   "question": 3026,
+   "choice_text": "Firmas y motor",
+   "choice_text_es": "Firmas y motor",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2102,
+  "fields": {
+   "question": 3026,
+   "choice_text": "Solo el sistema operativo",
+   "choice_text_es": "Solo el sistema operativo",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2103,
+  "fields": {
+   "question": 3026,
+   "choice_text": "Solo la base de datos de IOC",
+   "choice_text_es": "Solo la base de datos de IOC",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2104,
+  "fields": {
+   "question": 3026,
+   "choice_text": "Solo la configuración",
+   "choice_text_es": "Solo la configuración",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 3027,
+  "fields": {
+   "content": "En el informe de incidente, la línea de correlación se escribe como:",
+   "content_es": "En el informe de incidente, la línea de correlación se escribe como:",
+   "explanation": "Correcta: A - Es la línea que abre el resumen y la que entra al informe. B - Cada alerta tiene su fila en la tabla, pero la línea de correlación es una sola. C - La tabla es para el anexo; la línea es la síntesis. D - El informe es texto; los gráficos se usan en la presentación, no aquí. Manual: cap. 4 §5, CE2.3. Visto en: Clase 05, mazo Correlacion-e-informe.md.",
+   "explanation_es": "Correcta: A - Es la línea que abre el resumen y la que entra al informe. B - Cada alerta tiene su fila en la tabla, pero la línea de correlación es una sola. C - La tabla es para el anexo; la línea es la síntesis. D - El informe es texto; los gráficos se usan en la presentación, no aquí. Manual: cap. 4 §5, CE2.3. Visto en: Clase 05, mazo Correlacion-e-informe.md.",
+   "quiz": [
+    6
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 3027,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2105,
+  "fields": {
+   "question": 3027,
+   "choice_text": "Una sola frase con los IDs de las alertas y los campos en común",
+   "choice_text_es": "Una sola frase con los IDs de las alertas y los campos en común",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2106,
+  "fields": {
+   "question": 3027,
+   "choice_text": "Un párrafo por cada alerta",
+   "choice_text_es": "Un párrafo por cada alerta",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2107,
+  "fields": {
+   "question": 3027,
+   "choice_text": "Una tabla con todas las alertas del IDS",
+   "choice_text_es": "Una tabla con todas las alertas del IDS",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2108,
+  "fields": {
+   "question": 3027,
+   "choice_text": "Un gráfico de barras",
+   "choice_text_es": "Un gráfico de barras",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 3028,
+  "fields": {
+   "content": "En la gestión de incidentes, la fase de erradicación del plan, según el manual, se sitúa entre:",
+   "content_es": "En la gestión de incidentes, la fase de erradicación del plan, según el manual, se sitúa entre:",
+   "explanation": "Correcta: C - El orden es: preparación, identificación, contención, erradicación, recuperación, aprendizaje. A - Va después de la contención. B - Va después de la contención, no antes. D - La erradicación es anterior a la recuperación. Manual: cap. 4 §3, CE2.4. Visto en: Clase 05, mazo Correlacion-e-informe.md.",
+   "explanation_es": "Correcta: C - El orden es: preparación, identificación, contención, erradicación, recuperación, aprendizaje. A - Va después de la contención. B - Va después de la contención, no antes. D - La erradicación es anterior a la recuperación. Manual: cap. 4 §3, CE2.4. Visto en: Clase 05, mazo Correlacion-e-informe.md.",
+   "quiz": [
+    6
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 3028,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2109,
+  "fields": {
+   "question": 3028,
+   "choice_text": "Preparación e identificación",
+   "choice_text_es": "Preparación e identificación",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2110,
+  "fields": {
+   "question": 3028,
+   "choice_text": "Identificación y contención",
+   "choice_text_es": "Identificación y contención",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2111,
+  "fields": {
+   "question": 3028,
+   "choice_text": "Contención y recuperación",
+   "choice_text_es": "Contención y recuperación",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2112,
+  "fields": {
+   "question": 3028,
+   "choice_text": "Recuperación y aprendizaje",
+   "choice_text_es": "Recuperación y aprendizaje",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.quiz",
+  "pk": 6,
+  "fields": {
+   "course": 8,
+   "title": "Repaso UA2 - Código malicioso y respuesta ante incidentes",
+   "title_es": "Repaso UA2 - Código malicioso y respuesta ante incidentes",
+   "slug": "repaso-ua2-mf0488-3",
+   "description": "Repaso de la UA2: control de código malicioso y respuesta ante incidentes. 13 preguntas de opción múltiple. Se corrigen solas y, al responder, sale la respuesta correcta con el motivo de cada opción descartada. Se puede repetir tantas veces como quieras.",
+   "description_es": "Repaso de la UA2: control de código malicioso y respuesta ante incidentes. 13 preguntas de opción múltiple. Se corrigen solas y, al responder, sale la respuesta correcta con el motivo de cada opción descartada. Se puede repetir tantas veces como quieras.",
+   "category": "practice",
+   "draft": false,
+   "single_attempt": false,
+   "pass_mark": 0,
+   "timestamp": "2026-10-22T00:00:00Z",
+   "random_order": true,
+   "answers_at_end": false,
+   "exam_paper": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 3029,
+  "fields": {
+   "content": "En el orden de recogida de evidencias del manual, la primera evidencia que se recoge es:",
+   "content_es": "En el orden de recogida de evidencias del manual, la primera evidencia que se recoge es:",
+   "explanation": "Correcta: B - Memoria, conexiones, procesos, ficheros abiertos, registro, sistema de ficheros, metadatos. A - El disco va después de la memoria. C - El registro va después de los procesos y ficheros abiertos. D - Los metadatos van al final, con el sistema de ficheros. Manual: cap. 5 §3, CE3.3. Visto en: Clase 07, mazo Forense-y-evidencias.md.",
+   "explanation_es": "Correcta: B - Memoria, conexiones, procesos, ficheros abiertos, registro, sistema de ficheros, metadatos. A - El disco va después de la memoria. C - El registro va después de los procesos y ficheros abiertos. D - Los metadatos van al final, con el sistema de ficheros. Manual: cap. 5 §3, CE3.3. Visto en: Clase 07, mazo Forense-y-evidencias.md.",
+   "quiz": [
+    7
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 3029,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2113,
+  "fields": {
+   "question": 3029,
+   "choice_text": "La imagen del disco",
+   "choice_text_es": "La imagen del disco",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2114,
+  "fields": {
+   "question": 3029,
+   "choice_text": "La memoria volátil",
+   "choice_text_es": "La memoria volátil",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2115,
+  "fields": {
+   "question": 3029,
+   "choice_text": "El registro de eventos",
+   "choice_text_es": "El registro de eventos",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2116,
+  "fields": {
+   "question": 3029,
+   "choice_text": "Los metadatos del sistema de ficheros",
+   "choice_text_es": "Los metadatos del sistema de ficheros",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 3030,
+  "fields": {
+   "content": "El hash SHA-256 de una evidencia forense sirve, principalmente, para:",
+   "content_es": "El hash SHA-256 de una evidencia forense sirve, principalmente, para:",
+   "explanation": "Correcta: B - Si el hash cambia, la evidencia se ha tocado. A - SHA-256 no comprime; es un hash criptográfico. C - SHA-256 no cifra; el cifrado es otra cosa. D - El hash y la firma son complementarios, no sustitutivos. Manual: cap. 5 §4, CE3.4. Visto en: Clase 07, mazo Forense-y-evidencias.md.",
+   "explanation_es": "Correcta: B - Si el hash cambia, la evidencia se ha tocado. A - SHA-256 no comprime; es un hash criptográfico. C - SHA-256 no cifra; el cifrado es otra cosa. D - El hash y la firma son complementarios, no sustitutivos. Manual: cap. 5 §4, CE3.4. Visto en: Clase 07, mazo Forense-y-evidencias.md.",
+   "quiz": [
+    7
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 3030,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2117,
+  "fields": {
+   "question": 3030,
+   "choice_text": "Comprimir el fichero",
+   "choice_text_es": "Comprimir el fichero",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2118,
+  "fields": {
+   "question": 3030,
+   "choice_text": "Comprobar la integridad de la evidencia en cualquier momento del proceso",
+   "choice_text_es": "Comprobar la integridad de la evidencia en cualquier momento del proceso",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2119,
+  "fields": {
+   "question": 3030,
+   "choice_text": "Cifrar la evidencia",
+   "choice_text_es": "Cifrar la evidencia",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2120,
+  "fields": {
+   "question": 3030,
+   "choice_text": "Sustituir la firma",
+   "choice_text_es": "Sustituir la firma",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 3031,
+  "fields": {
+   "content": "En un equipo Windows comprometido, la presencia de una clave HKCU\\...\\RunOnce apuntando a un ejecutable sospechoso es un indicio de:",
+   "content_es": "En un equipo Windows comprometido, la presencia de una clave HKCU\\...\\RunOnce apuntando a un ejecutable sospechoso es un indicio de:",
+   "explanation": "Correcta: B - Es el mecanismo clásico de persistencia en Windows. A - Las actualizaciones del sistema no usan RunOnce del usuario. C - Un programa legítimo no oculta su ejecutable en AppData\\Roaming. D - Los servicios usan HKLM\\...\\Run, no HKCU\\...\\RunOnce. Manual: cap. 5 §5, CE3.5. Visto en: Clase 07, mazo Forense-y-evidencias.md.",
+   "explanation_es": "Correcta: B - Es el mecanismo clásico de persistencia en Windows. A - Las actualizaciones del sistema no usan RunOnce del usuario. C - Un programa legítimo no oculta su ejecutable en AppData\\Roaming. D - Los servicios usan HKLM\\...\\Run, no HKCU\\...\\RunOnce. Manual: cap. 5 §5, CE3.5. Visto en: Clase 07, mazo Forense-y-evidencias.md.",
+   "quiz": [
+    7
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 3031,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2121,
+  "fields": {
+   "question": 3031,
+   "choice_text": "Actualización automática del sistema",
+   "choice_text_es": "Actualización automática del sistema",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2122,
+  "fields": {
+   "question": 3031,
+   "choice_text": "Persistencia del malware, para ejecutarse al siguiente inicio de sesión",
+   "choice_text_es": "Persistencia del malware, para ejecutarse al siguiente inicio de sesión",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2123,
+  "fields": {
+   "question": 3031,
+   "choice_text": "Instalación de un programa legítimo",
+   "choice_text_es": "Instalación de un programa legítimo",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2124,
+  "fields": {
+   "question": 3031,
+   "choice_text": "Servicio del sistema",
+   "choice_text_es": "Servicio del sistema",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 3032,
+  "fields": {
+   "content": "En un sistema de ficheros NTFS, un ADS (Alternate Data Stream) es:",
+   "content_es": "En un sistema de ficheros NTFS, un ADS (Alternate Data Stream) es:",
+   "explanation": "Correcta: B - Los ADS no se ven con un ls normal; dir /r los muestra. A - El ADS no cifra nada. C - Las particiones de recovery son otra cosa. D - El registro de auditoría está en el visor de eventos, no en NTFS. Manual: cap. 5 §5, CE3.5. Visto en: Clase 07, mazo Forense-y-evidencias.md.",
+   "explanation_es": "Correcta: B - Los ADS no se ven con un ls normal; dir /r los muestra. A - El ADS no cifra nada. C - Las particiones de recovery son otra cosa. D - El registro de auditoría está en el visor de eventos, no en NTFS. Manual: cap. 5 §5, CE3.5. Visto en: Clase 07, mazo Forense-y-evidencias.md.",
+   "quiz": [
+    7
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 3032,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2125,
+  "fields": {
+   "question": 3032,
+   "choice_text": "Un tipo de cifrado del fichero",
+   "choice_text_es": "Un tipo de cifrado del fichero",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2126,
+  "fields": {
+   "question": 3032,
+   "choice_text": "Un stream alternativo asociado a un fichero, que puede esconder datos",
+   "choice_text_es": "Un stream alternativo asociado a un fichero, que puede esconder datos",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2127,
+  "fields": {
+   "question": 3032,
+   "choice_text": "Una partición de recuperación",
+   "choice_text_es": "Una partición de recuperación",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2128,
+  "fields": {
+   "question": 3032,
+   "choice_text": "Un registro de auditoría del sistema",
+   "choice_text_es": "Un registro de auditoría del sistema",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 3033,
+  "fields": {
+   "content": "En el manual, la etiqueta de una evidencia forense incluye, al menos, cinco campos. ¿Cuáles son?",
+   "content_es": "En el manual, la etiqueta de una evidencia forense incluye, al menos, cinco campos. ¿Cuáles son?",
+   "explanation": "Correcta: A - Son los cinco que se piden en la cadena de custodia. B - Esos son de un libro, no de una evidencia. C - El color no se etiqueta. D - Esos son campos de una alerta, no de una etiqueta forense. Manual: cap. 5 §4, CE3.4. Visto en: Clase 07, mazo Forense-y-evidencias.md.",
+   "explanation_es": "Correcta: A - Son los cinco que se piden en la cadena de custodia. B - Esos son de un libro, no de una evidencia. C - El color no se etiqueta. D - Esos son campos de una alerta, no de una etiqueta forense. Manual: cap. 5 §4, CE3.4. Visto en: Clase 07, mazo Forense-y-evidencias.md.",
+   "quiz": [
+    7
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 3033,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2129,
+  "fields": {
+   "question": 3033,
+   "choice_text": "Nombre, fecha, hash, origen, firma",
+   "choice_text_es": "Nombre, fecha, hash, origen, firma",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2130,
+  "fields": {
+   "question": 3033,
+   "choice_text": "Nombre, autor, editorial, ISBN, año",
+   "choice_text_es": "Nombre, autor, editorial, ISBN, año",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2131,
+  "fields": {
+   "question": 3033,
+   "choice_text": "Nombre, extensión, tamaño, color, fecha",
+   "choice_text_es": "Nombre, extensión, tamaño, color, fecha",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2132,
+  "fields": {
+   "question": 3033,
+   "choice_text": "Nombre, IP, puerto, protocolo, timestamp",
+   "choice_text_es": "Nombre, IP, puerto, protocolo, timestamp",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 3034,
+  "fields": {
+   "content": "En un sistema de ficheros ext4, la herramienta extundelete se utiliza para:",
+   "content_es": "En un sistema de ficheros ext4, la herramienta extundelete se utiliza para:",
+   "explanation": "Correcta: B - Es la herramienta de referencia para ext3/ext4. A - Para borrar de forma segura se usa shred o wipe. C - La compresión se hace con otra herramienta. D - El cifrado se hace con LUKS, no con extundelete. Manual: cap. 5 §6, CE3.5. Visto en: Clase 07, mazo Forense-y-evidencias.md.",
+   "explanation_es": "Correcta: B - Es la herramienta de referencia para ext3/ext4. A - Para borrar de forma segura se usa shred o wipe. C - La compresión se hace con otra herramienta. D - El cifrado se hace con LUKS, no con extundelete. Manual: cap. 5 §6, CE3.5. Visto en: Clase 07, mazo Forense-y-evidencias.md.",
+   "quiz": [
+    7
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 3034,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2133,
+  "fields": {
+   "question": 3034,
+   "choice_text": "Borrar ficheros de forma segura",
+   "choice_text_es": "Borrar ficheros de forma segura",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2134,
+  "fields": {
+   "question": 3034,
+   "choice_text": "Recuperar ficheros borrados mientras el sistema de ficheros no los haya sobrescrito",
+   "choice_text_es": "Recuperar ficheros borrados mientras el sistema de ficheros no los haya sobrescrito",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2135,
+  "fields": {
+   "question": 3034,
+   "choice_text": "Comprimir la partición entera",
+   "choice_text_es": "Comprimir la partición entera",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2136,
+  "fields": {
+   "question": 3034,
+   "choice_text": "Cifrar la partición",
+   "choice_text_es": "Cifrar la partición",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 3035,
+  "fields": {
+   "content": "En la recuperación estandarizada, el RTO se define como:",
+   "content_es": "En la recuperación estandarizada, el RTO se define como:",
+   "explanation": "Correcta: A - RTO = Recovery Time Objective. B - Eso es el RPO. C - Eso se parece al RPO, pero no es la definición. D - El RTO es del servicio, no del equipo. Manual: cap. 5 §7, CE3.6. Visto en: Clase 08, mazo Recuperacion-y-E3.md.",
+   "explanation_es": "Correcta: A - RTO = Recovery Time Objective. B - Eso es el RPO. C - Eso se parece al RPO, pero no es la definición. D - El RTO es del servicio, no del equipo. Manual: cap. 5 §7, CE3.6. Visto en: Clase 08, mazo Recuperacion-y-E3.md.",
+   "quiz": [
+    7
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 3035,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2137,
+  "fields": {
+   "question": 3035,
+   "choice_text": "El tiempo máximo de caída del servicio, medido en horas",
+   "choice_text_es": "El tiempo máximo de caída del servicio, medido en horas",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2138,
+  "fields": {
+   "question": 3035,
+   "choice_text": "La cantidad máxima de dato que se puede perder",
+   "choice_text_es": "La cantidad máxima de dato que se puede perder",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2139,
+  "fields": {
+   "question": 3035,
+   "choice_text": "El tiempo entre la copia y el incidente",
+   "choice_text_es": "El tiempo entre la copia y el incidente",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2140,
+  "fields": {
+   "question": 3035,
+   "choice_text": "El tiempo que tarda el equipo de seguridad en llegar",
+   "choice_text_es": "El tiempo que tarda el equipo de seguridad en llegar",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 3036,
+  "fields": {
+   "content": "En la recuperación estandarizada, el RPO se define como:",
+   "content_es": "En la recuperación estandarizada, el RPO se define como:",
+   "explanation": "Correcta: B - RPO = Recovery Point Objective. A - Eso es el RTO. C - El tiempo de validación es un paso del DRP, no el RPO. D - El RPO no cuenta copias, mide tiempo de dato perdido. Manual: cap. 5 §7, CE3.6. Visto en: Clase 08, mazo Recuperacion-y-E3.md.",
+   "explanation_es": "Correcta: B - RPO = Recovery Point Objective. A - Eso es el RTO. C - El tiempo de validación es un paso del DRP, no el RPO. D - El RPO no cuenta copias, mide tiempo de dato perdido. Manual: cap. 5 §7, CE3.6. Visto en: Clase 08, mazo Recuperacion-y-E3.md.",
+   "quiz": [
+    7
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 3036,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2141,
+  "fields": {
+   "question": 3036,
+   "choice_text": "El tiempo máximo de caída",
+   "choice_text_es": "El tiempo máximo de caída",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2142,
+  "fields": {
+   "question": 3036,
+   "choice_text": "La cantidad máxima de dato perdido, medida en horas de copia",
+   "choice_text_es": "La cantidad máxima de dato perdido, medida en horas de copia",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2143,
+  "fields": {
+   "question": 3036,
+   "choice_text": "El tiempo de validación de la copia",
+   "choice_text_es": "El tiempo de validación de la copia",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2144,
+  "fields": {
+   "question": 3036,
+   "choice_text": "El número de copias que se conservan",
+   "choice_text_es": "El número de copias que se conservan",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 3037,
+  "fields": {
+   "content": "El DRP estandarizado, según el manual, tiene cinco pasos en este orden:",
+   "content_es": "El DRP estandarizado, según el manual, tiene cinco pasos en este orden:",
+   "explanation": "Correcta: B - Es el orden del manual: validar la copia, limpiar, restaurar, monitorizar, cerrar. A - Esas son las fases del plan de actuación, no del DRP. C - Es otra mezcla. D - Esas son las fases del análisis forense, no del DRP. Manual: cap. 6 §1, CE3.6. Visto en: Clase 08, mazo Recuperacion-y-E3.md.",
+   "explanation_es": "Correcta: B - Es el orden del manual: validar la copia, limpiar, restaurar, monitorizar, cerrar. A - Esas son las fases del plan de actuación, no del DRP. C - Es otra mezcla. D - Esas son las fases del análisis forense, no del DRP. Manual: cap. 6 §1, CE3.6. Visto en: Clase 08, mazo Recuperacion-y-E3.md.",
+   "quiz": [
+    7
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 3037,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2145,
+  "fields": {
+   "question": 3037,
+   "choice_text": "Detección, contención, erradicación, recuperación, aprendizaje",
+   "choice_text_es": "Detección, contención, erradicación, recuperación, aprendizaje",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2146,
+  "fields": {
+   "question": 3037,
+   "choice_text": "Validación, limpieza, restauración, monitorización, cierre",
+   "choice_text_es": "Validación, limpieza, restauración, monitorización, cierre",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2147,
+  "fields": {
+   "question": 3037,
+   "choice_text": "Identificación, análisis, contención, erradicación, cierre",
+   "choice_text_es": "Identificación, análisis, contención, erradicación, cierre",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2148,
+  "fields": {
+   "question": 3037,
+   "choice_text": "Recogida, preservación, análisis, documentación, presentación",
+   "choice_text_es": "Recogida, preservación, análisis, documentación, presentación",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 3038,
+  "fields": {
+   "content": "Tras restaurar un servicio desde una copia validada, el paso de monitorización del DRP tiene como objetivo:",
+   "content_es": "Tras restaurar un servicio desde una copia validada, el paso de monitorización del DRP tiene como objetivo:",
+   "explanation": "Correcta: B - Sin esto, el incidente se repite. A - Si está caído, no se ha restaurado bien. C - Eso se hace en el paso de limpieza, no en la monitorización. D - El cierre va al final, y solo cuando la monitorización confirma que no queda nada. Manual: cap. 6 §1, CE3.6. Visto en: Clase 08, mazo Recuperacion-y-E3.md.",
+   "explanation_es": "Correcta: B - Sin esto, el incidente se repite. A - Si está caído, no se ha restaurado bien. C - Eso se hace en el paso de limpieza, no en la monitorización. D - El cierre va al final, y solo cuando la monitorización confirma que no queda nada. Manual: cap. 6 §1, CE3.6. Visto en: Clase 08, mazo Recuperacion-y-E3.md.",
+   "quiz": [
+    7
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 3038,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2149,
+  "fields": {
+   "question": 3038,
+   "choice_text": "Confirmar que el servicio está caído",
+   "choice_text_es": "Confirmar que el servicio está caído",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2150,
+  "fields": {
+   "question": 3038,
+   "choice_text": "Verificar que no queda nada del atacante: conexiones, procesos, claves, persistencia",
+   "choice_text_es": "Verificar que no queda nada del atacante: conexiones, procesos, claves, persistencia",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2151,
+  "fields": {
+   "question": 3038,
+   "choice_text": "Cambiar las contraseñas de los usuarios",
+   "choice_text_es": "Cambiar las contraseñas de los usuarios",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2152,
+  "fields": {
+   "question": 3038,
+   "choice_text": "Cerrar el caso al día siguiente",
+   "choice_text_es": "Cerrar el caso al día siguiente",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 3039,
+  "fields": {
+   "content": "Una lección aprendida en un informe forense se considera defendible cuando incluye:",
+   "content_es": "Una lección aprendida en un informe forense se considera defendible cuando incluye:",
+   "explanation": "Correcta: B - Es lo que cierra el caso y permite el seguimiento. A - Sin propuesta concreta, no es lección. C - La queja no es lección; es un comentario. D - La auditoría no es la lección del incidente. Manual: cap. 5 §7, CE3.6. Visto en: Clase 07 y Clase 08, mazos de forense y recuperación.",
+   "explanation_es": "Correcta: B - Es lo que cierra el caso y permite el seguimiento. A - Sin propuesta concreta, no es lección. C - La queja no es lección; es un comentario. D - La auditoría no es la lección del incidente. Manual: cap. 5 §7, CE3.6. Visto en: Clase 07 y Clase 08, mazos de forense y recuperación.",
+   "quiz": [
+    7
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 3039,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2153,
+  "fields": {
+   "question": 3039,
+   "choice_text": "Un deseo genérico del tipo «mejorar la seguridad»",
+   "choice_text_es": "Un deseo genérico del tipo «mejorar la seguridad»",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2154,
+  "fields": {
+   "question": 3039,
+   "choice_text": "Una propuesta concreta, con responsable y fecha",
+   "choice_text_es": "Una propuesta concreta, con responsable y fecha",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2155,
+  "fields": {
+   "question": 3039,
+   "choice_text": "Una queja sobre la herramienta usada",
+   "choice_text_es": "Una queja sobre la herramienta usada",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2156,
+  "fields": {
+   "question": 3039,
+   "choice_text": "Una lista de las próximas auditorías",
+   "choice_text_es": "Una lista de las próximas auditorías",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 3040,
+  "fields": {
+   "content": "El informe forense de un incidente, según el manual, debe incluir, al menos, los siguientes bloques:",
+   "content_es": "El informe forense de un incidente, según el manual, debe incluir, al menos, los siguientes bloques:",
+   "explanation": "Correcta: A - Son los seis bloques del informe. B - Sin los demás bloques, el informe no se cierra. C - Faltan cuatro bloques. D - Faltan cinco bloques. Manual: cap. 5 §5, CE3.5. Visto en: Clase 07, mazo Forense-y-evidencias.md y Clase 08, Recuperacion-y-E3.md.",
+   "explanation_es": "Correcta: A - Son los seis bloques del informe. B - Sin los demás bloques, el informe no se cierra. C - Faltan cuatro bloques. D - Faltan cinco bloques. Manual: cap. 5 §5, CE3.5. Visto en: Clase 07, mazo Forense-y-evidencias.md y Clase 08, Recuperacion-y-E3.md.",
+   "quiz": [
+    7
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 3040,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2157,
+  "fields": {
+   "question": 3040,
+   "choice_text": "Cronología, evidencias, vulnerabilidades, actividad del intruso, método de recuperación, lección",
+   "choice_text_es": "Cronología, evidencias, vulnerabilidades, actividad del intruso, método de recuperación, lección",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2158,
+  "fields": {
+   "question": 3040,
+   "choice_text": "Solo la cronología del intruso",
+   "choice_text_es": "Solo la cronología del intruso",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2159,
+  "fields": {
+   "question": 3040,
+   "choice_text": "Solo las vulnerabilidades y la actividad",
+   "choice_text_es": "Solo las vulnerabilidades y la actividad",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 2160,
+  "fields": {
+   "question": 3040,
+   "choice_text": "Solo el método de recuperación",
+   "choice_text_es": "Solo el método de recuperación",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.quiz",
+  "pk": 7,
+  "fields": {
+   "course": 8,
+   "title": "Repaso UA3 - Análisis forense y recuperación",
+   "title_es": "Repaso UA3 - Análisis forense y recuperación",
+   "slug": "repaso-ua3-mf0488-3",
+   "description": "Repaso de la UA3: análisis forense informático y recuperación. 12 preguntas de opción múltiple. Se corrigen solas y, al responder, sale la respuesta correcta con el motivo de cada opción descartada. Se puede repetir tantas veces como quieras.",
+   "description_es": "Repaso de la UA3: análisis forense informático y recuperación. 12 preguntas de opción múltiple. Se corrigen solas y, al responder, sale la respuesta correcta con el motivo de cada opción descartada. Se puede repetir tantas veces como quieras.",
+   "category": "practice",
+   "draft": false,
+   "single_attempt": false,
+   "pass_mark": 0,
+   "timestamp": "2026-10-22T00:00:00Z",
+   "random_order": true,
+   "answers_at_end": false,
+   "exam_paper": false
+  }
+ }
+]
