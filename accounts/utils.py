@@ -2,11 +2,15 @@ import threading
 from datetime import datetime
 from django.contrib.auth import get_user_model
 from django.conf import settings
+from django.utils.crypto import get_random_string
 from core.utils import send_html_email
 
+PASSWORD_CHARS = "abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789"
 
-def generate_password():
-    return get_user_model().objects.make_random_password()
+
+def generate_password(length=10):
+    """Sustituye a BaseUserManager.make_random_password(), eliminado en Django 5.1."""
+    return get_random_string(length, PASSWORD_CHARS)
 
 
 def _next_numbered_id(prefix):
