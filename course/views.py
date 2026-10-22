@@ -234,7 +234,9 @@ def course_single(request, slug):
         if not matriculado:
             messages.error(request, "No estas matriculado en este curso.")
             return redirect("course_detail", slug=slug)
-        form = SubmissionForm(request.POST, request.FILES, course=course)
+        form = SubmissionForm(
+            request.POST, request.FILES, course=course, solo_visibles=not is_editor
+        )
         if form.is_valid():
             document = form.cleaned_data["document"]
             submission, _ = Submission.objects.get_or_create(
@@ -248,7 +250,11 @@ def course_single(request, slug):
             return redirect("course_detail", slug=slug)
         messages.error(request, "Revisa los errores del formulario.")
     else:
-        form = SubmissionForm(course=course) if matriculado else None
+        form = (
+            SubmissionForm(course=course, solo_visibles=not is_editor)
+            if matriculado
+            else None
+        )
 
     my_submissions = None
     submissions = None
@@ -381,6 +387,11 @@ def upload_file_download(request, slug, file_id, archivo_id=None):
     """
     course = get_object_or_404(Course, slug=slug)
     upload = get_object_or_404(Upload, pk=file_id, course=course)
+    # el documento oculto no se descarga por id: si no está en la lista, no existe
+    if not upload.visible and not (
+        request.user.is_lecturer or request.user.is_superuser
+    ):
+        raise Http404
     fichero = upload.file
     if archivo_id is not None:
         adicional = get_object_or_404(UploadFile, pk=archivo_id, upload=upload)

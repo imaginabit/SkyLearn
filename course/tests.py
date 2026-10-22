@@ -1110,3 +1110,93 @@ class ProgramActivityProgressTests(TestCase):
 
         self.assertNotIn("Seguimiento de actividades", html)
         self.assertNotIn("Actividad calificada", html)
+
+
+class DocumentoOcultoTests(TestCase):
+    """Lo que se sube oculto no existe para el alumnado.
+
+    Ni aparece en la lista del curso, ni se puede elegir en el formulario de
+    entrega, ni se descarga por la URL del fichero. El docente lo ve siempre.
+    """
+
+    def setUp(self):
+        self.program = Program.objects.create(title="Programa de prueba")
+        self.curso = Course.objects.create(
+            title="Curso de prueba",
+            code="MIO-1",
+            program=self.program,
+            level="Bachelor",
+            year=1,
+            semester="First",
+        )
+        self.alumno = User.objects.create_user(
+            username="tmp-oculto-alumno", password="password", is_student=True
+        )
+        self.docente = User.objects.create_user(
+            username="tmp-oculto-docente", password="password", is_lecturer=True
+        )
+        self.student = Student.objects.create(
+            student=self.alumno, level="Bachelor", program=self.program
+        )
+        TakenCourse.objects.create(student=self.student, course=self.curso)
+        self.oculta = Upload.objects.create(
+            title="Actividad evaluable E2-B",
+            course=self.curso,
+            file="oculta.pdf",
+            is_activity=True,
+            is_evaluable=True,
+            visible=False,
+        )
+        self.url = reverse("course_detail", kwargs={"slug": self.curso.slug})
+
+    def _descarga(self, upload):
+        return reverse(
+            "upload_file_download",
+            kwargs={"slug": self.curso.slug, "file_id": upload.pk},
+        )
+
+    def test_el_alumno_no_la_ve_en_la_lista(self):
+        self.client.force_login(self.alumno)
+
+        html = self.client.get(self.url).content.decode()
+
+        self.assertNotIn(self.oculta.title, html)
+
+    def test_el_alumno_no_puede_entregarla(self):
+        self.client.force_login(self.alumno)
+
+        with tempfile.TemporaryDirectory() as media:
+            with self.settings(MEDIA_ROOT=media):
+                self.client.post(
+                    self.url,
+                    {
+                        "document": self.oculta.pk,
+                        "file": SimpleUploadedFile("trabajo.pdf", b"%PDF-1.4"),
+                    },
+                )
+
+        self.assertEqual(Submission.objects.count(), 0)
+
+    def test_el_alumno_no_la_descarga(self):
+        self.client.force_login(self.alumno)
+
+        self.assertEqual(self.client.get(self._descarga(self.oculta)).status_code, 404)
+
+    def test_el_docente_si_la_ve_y_la_descarga(self):
+        self.client.force_login(self.docente)
+
+        html = self.client.get(self.url).content.decode()
+        self.assertIn(self.oculta.title, html)
+
+        with tempfile.TemporaryDirectory() as media:
+            with self.settings(MEDIA_ROOT=media):
+                upload = Upload.objects.create(
+                    title="Oculta con fichero",
+                    course=self.curso,
+                    file=SimpleUploadedFile("oculta.pdf", b"%PDF-1.4"),
+                    is_activity=True,
+                    visible=False,
+                )
+                response = self.client.get(self._descarga(upload))
+
+        self.assertEqual(response.status_code, 200)

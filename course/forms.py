@@ -193,12 +193,15 @@ class SubmissionForm(forms.ModelForm):
         model = Submission
         fields = ("document", "file")
 
-    def __init__(self, *args, course=None, **kwargs):
+    def __init__(self, *args, course=None, solo_visibles=False, **kwargs):
         super().__init__(*args, **kwargs)
         if course is not None:
-            self.fields["document"].queryset = Upload.objects.filter(
-                course=course, is_activity=True
-            ).order_by("upload_time")
+            actividades = Upload.objects.filter(course=course, is_activity=True)
+            # lo oculto es lo que el profesorado sube antes de tiempo: el alumnado
+            # no puede ni entregarlo ni verlo en la lista
+            if solo_visibles:
+                actividades = actividades.filter(visible=True)
+            self.fields["document"].queryset = actividades.order_by("upload_time")
         # El alumno tiene que ver, al elegir la actividad, en que formato puede
         # entregarla: la etiqueta lleva los formatos admitidos.
         self.fields[
