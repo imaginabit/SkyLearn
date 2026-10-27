@@ -155,6 +155,16 @@ class Course(models.Model):
     year = models.IntegerField(choices=settings.YEARS, default=1)
     semester = models.CharField(choices=settings.SEMESTER_CHOICES, max_length=200)
     is_elective = models.BooleanField(default=False)
+    embeber_mazo = models.BooleanField(
+        default=True,
+        verbose_name=_("Embeber la presentacion"),
+        help_text=_(
+            "Si esta desmarcado, el curso no muestra ningun mazo embebido arriba: "
+            "los mazos se abren y se descargan desde la tabla de documentos. "
+            "Para los cursos que acumulan el material de varias clases, donde "
+            "embeber solo uno deja a los demas escondidos."
+        ),
+    )
 
     objects = CourseManager()
 
@@ -255,6 +265,14 @@ class Upload(models.Model):
 
     def get_program_name(self):
         return programa(self.file.name)
+
+    @property
+    def es_html(self):
+        """Si el fichero principal es un HTML: un mazo de diapositivas.
+
+        Los mazos se pueden abrir en el navegador, aparte de descargarse.
+        """
+        return extension(self.file.name) == "html"
 
     def get_extensiones_permitidas(self):
         """Los formatos que se aceptan en la entrega de esta actividad.

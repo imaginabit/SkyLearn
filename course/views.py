@@ -38,7 +38,7 @@ from course.models import (
     UploadFile,
     UploadVideo,
 )
-from course.utils import curso_asignado, deck_del_curso
+from course.utils import curso_asignado, deck_del_curso, decks_del_curso
 from result.models import TakenCourse
 
 
@@ -209,7 +209,13 @@ def course_single(request, slug):
     course = get_object_or_404(Course, slug=slug)
     # prefetch de los ficheros adicionales: sin esto, la tabla del curso hace
     # una consulta por actividad para listar sus .odt y .docx alternativos
-    files = Upload.objects.filter(course__slug=slug).prefetch_related("archivos")
+    # por fecha de subida: el material sale en el orden de las clases, y no
+    # en el orden en que se fue creando cada fila
+    files = (
+        Upload.objects.filter(course__slug=slug)
+        .prefetch_related("archivos")
+        .order_by("upload_time", "pk")
+    )
     videos = UploadVideo.objects.filter(course__slug=slug)
     lecturers = CourseAllocation.objects.filter(courses__pk=course.id)
     is_editor = request.user.is_lecturer or request.user.is_superuser
@@ -225,6 +231,8 @@ def course_single(request, slug):
     ).exists()
     # el mazo de diapositivas, si lo hay: se muestra embebido arriba del curso
     deck = deck_del_curso(course)
+    # todos los mazos, para los cursos que no embeben ninguno
+    decks = decks_del_curso(course)
 
     if request.method == "POST":
         # ponytail: entrega del alumno; el profesor solo revisa la tabla de abajo
@@ -303,6 +311,7 @@ def course_single(request, slug):
             "lecturers": lecturers,
             "media_url": settings.MEDIA_URL,
             "deck": deck,
+            "decks": decks,
             "submission_form": form,
             "my_submissions": my_submissions,
             "submissions": submissions,
@@ -408,6 +417,31 @@ def upload_file_download(request, slug, file_id, archivo_id=None):
         as_attachment=True,
         filename=f"{prefijo}_{request.user.username}{extension}",
     )
+
+
+@login_required
+def deck_abrir(request, slug, file_id):
+    """Abre un mazo de diapositivas en el navegador, sin descargarlo.
+
+    El mazo es un HTML autocontenido, con el estilo y el motor de navegacion
+    dentro, asi que se puede abrir desde el disco. Aqui se sirve en linea, con
+    `Content-Disposition: inline`, para que se abra en una pestana nueva.
+    """
+    course = get_object_or_404(Course, slug=slug)
+    upload = get_object_or_404(Upload, pk=file_id, course=course)
+    if not upload.es_html:
+        raise Http404("Este documento no es una presentacion")
+    if not upload.visible and not (
+        request.user.is_lecturer or request.user.is_superuser
+    ):
+        raise Http404
+    respuesta = FileResponse(
+        upload.file.open("rb"), content_type="text/html; charset=utf-8"
+    )
+    respuesta["Content-Disposition"] = 'inline; filename="%s"' % os.path.basename(
+        upload.file.name
+    )
+    return respuesta
 
 
 @login_required

@@ -1200,3 +1200,111 @@ class DocumentoOcultoTests(TestCase):
                 response = self.client.get(self._descarga(upload))
 
         self.assertEqual(response.status_code, 200)
+
+
+class MazosDelCursoTests(TestCase):
+    """Un curso puede no embeber ningun mazo.
+
+    El curso del temario completo acumula el material de todas las clases:
+    embeber solo uno dejaba a los demas escondidos. Con `embeber_mazo` a False
+    no se muestra el iframe, pero todos los mazos se pueden abrir en una
+    pestana y descargar.
+    """
+
+    def setUp(self):
+        self.program = Program.objects.create(title="Programa de prueba")
+        self.curso = Course.objects.create(
+            title="Curso de prueba",
+            code="MIO-1",
+            program=self.program,
+            level="Bachelor",
+            year=1,
+            semester="First",
+        )
+        self.lector = User.objects.create_user(
+            username="tmp-mazos-lector", password="password"
+        )
+        self.url = reverse("course_detail", kwargs={"slug": self.curso.slug})
+
+    def _mazo(self, titulo="Presentacion", nombre="presentacion.html"):
+        return Upload.objects.create(
+            title=titulo,
+            course=self.curso,
+            file=SimpleUploadedFile(nombre, b"<html>mazo</html>"),
+        )
+
+    def _abrir(self, upload):
+        return reverse(
+            "deck_abrir", kwargs={"slug": self.curso.slug, "file_id": upload.pk}
+        )
+
+    def test_por_defecto_el_curso_embebe_el_mazo(self):
+        with tempfile.TemporaryDirectory() as media:
+            with self.settings(MEDIA_ROOT=media):
+                self._mazo()
+                self.client.force_login(self.lector)
+
+                html = self.client.get(self.url).content.decode()
+
+                self.assertIn("<iframe", html)
+
+    def test_sin_embeber_no_hay_iframe_pero_estan_todos_los_mazos(self):
+        self.curso.embeber_mazo = False
+        self.curso.save()
+        with tempfile.TemporaryDirectory() as media:
+            with self.settings(MEDIA_ROOT=media):
+                primero = self._mazo("Presentacion de la clase 2", "clase2.html")
+                segundo = self._mazo("Presentacion de la clase 3", "clase3.html")
+                self.client.force_login(self.lector)
+
+                html = self.client.get(self.url).content.decode()
+
+                self.assertNotIn("<iframe", html)
+                self.assertIn(self._abrir(primero), html)
+                self.assertIn(self._abrir(segundo), html)
+
+    def test_abrir_un_mazo_lo_sirve_en_linea(self):
+        with tempfile.TemporaryDirectory() as media:
+            with self.settings(MEDIA_ROOT=media):
+                mazo = self._mazo()
+                self.client.force_login(self.lector)
+
+                response = self.client.get(self._abrir(mazo))
+
+                self.assertEqual(response.status_code, 200)
+                self.assertIn("inline", response["Content-Disposition"])
+                self.assertEqual(b"".join(response.streaming_content), b"<html>mazo</html>")
+
+    def test_abrir_un_documento_que_no_es_mazo_da_404(self):
+        with tempfile.TemporaryDirectory() as media:
+            with self.settings(MEDIA_ROOT=media):
+                pdf = Upload.objects.create(
+                    title="Una ficha",
+                    course=self.curso,
+                    file=SimpleUploadedFile("ficha.pdf", b"%PDF-1.4"),
+                )
+                self.client.force_login(self.lector)
+
+                self.assertEqual(self.client.get(self._abrir(pdf)).status_code, 404)
+
+    def test_el_alumno_no_abre_un_mazo_oculto(self):
+        self.alumno = User.objects.create_user(
+            username="tmp-mazos-alumno", password="password", is_student=True
+        )
+        self.docente = User.objects.create_user(
+            username="tmp-mazos-docente", password="password", is_lecturer=True
+        )
+        student = Student.objects.create(
+            student=self.alumno, level="Bachelor", program=self.program
+        )
+        TakenCourse.objects.create(student=student, course=self.curso)
+        with tempfile.TemporaryDirectory() as media:
+            with self.settings(MEDIA_ROOT=media):
+                oculto = self._mazo("Mazo oculto")
+                Upload.objects.filter(pk=oculto.pk).update(visible=False)
+
+                self.client.force_login(self.alumno)
+                self.assertEqual(self.client.get(self._abrir(oculto)).status_code, 404)
+
+                self.client.force_login(self.docente)
+                self.assertEqual(self.client.get(self._abrir(oculto)).status_code, 200)

@@ -83,6 +83,29 @@
 </div>
 {% endif %}
 
+{% if decks and not deck %}
+<div class="container mt-3">
+    <div class="card">
+        <div class="card-header py-2">
+            <p class="form-title m-0">{% trans "Presentaciones" %}</p>
+        </div>
+        <ul class="list-unstyled mb-0">
+            {% for mazo in decks %}
+            <li class="d-flex flex-wrap align-items-center gap-2 px-3 py-2 border-top">
+                <i class="fas fa-file-code me-1"></i>
+                <a href="{% url 'deck_abrir' slug=course.slug file_id=mazo.pk %}" target="_blank" rel="noopener"
+                    class="text-decoration-none">{{ mazo.title }}</a>
+                <a href="{% url 'upload_file_download' slug=course.slug file_id=mazo.pk %}"
+                    class="btn btn-sm btn-outline-secondary ms-auto">
+                    <i class="fas fa-download me-1"></i>{% trans 'Descargar HTML' %}
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endif %}
+
 <div class="container mt-3">
     {% if request.user.is_superuser or request.user.is_lecturer %}
     <p class="form-title m-0">{% trans "Entregas de los alumnos" %}</p>
@@ -301,6 +324,12 @@
                                     <i class="fas fa-file-{{ file.get_extension_short }} me-1" title="{{ file.get_program_name }}"></i>
                                     {{ file.title|title }}
                                 </a>
+                                {% if file.es_html %}
+                                <a href="{% url 'deck_abrir' slug=course.slug file_id=file.pk %}" target="_blank" rel="noopener"
+                                    title="Abrir la presentacion en una pestana nueva">
+                                    <i class="fas fa-up-right-from-square me-1"></i> Abrir
+                                </a>
+                                {% endif %}
                                 {% for archivo in file.archivos.all %}
                                 <a href="{% url 'upload_archivo_download' slug=course.slug file_id=file.pk archivo_id=archivo.pk %}" title="{{ archivo.nombre }}"
                                     class="d-flex align-items-center small text-muted ps-3">
