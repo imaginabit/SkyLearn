@@ -224,6 +224,8 @@ def course_single(request, slug):
     # siempre, para poder prepararlos.
     if not is_editor:
         files = files.filter(visible=True)
+        # Los vídeos también: se revelan el día de cada clase.
+        videos = videos.filter(visible=True)
     # solo se entrega si hay matricula: antes cualquier cuenta que entraba
     # podia entregar en cualquier curso
     matriculado = TakenCourse.objects.filter(
@@ -677,7 +679,10 @@ def handle_archivo_delete(request, slug, file_id, archivo_id):
 @login_required
 @lecturer_required
 def handle_video_upload(request, slug):
-    course = get_object_or_404(Course, slug=slug)
+    # `curso_asignado`: un docente solo sube material a los cursos que tiene
+    # asignados. Antes cogía el curso por el slug y cualquiera podía subir a
+    # un curso ajeno cambiando la URL.
+    course = curso_asignado(request, slug)
     if request.method == "POST":
         form = UploadFormVideo(request.POST, request.FILES)
         if form.is_valid():
@@ -699,7 +704,13 @@ def handle_video_upload(request, slug):
 @login_required
 def handle_video_single(request, slug, video_slug):
     course = get_object_or_404(Course, slug=slug)
-    video = get_object_or_404(UploadVideo, slug=video_slug)
+    # El vídeo se busca dentro del curso de la URL: con el slug suelto se
+    # veía el vídeo de otro curso. Y un vídeo oculto solo lo abre el
+    # profesorado: el alumnado, hasta que se revela.
+    videos = UploadVideo.objects.filter(course=course)
+    if not (request.user.is_lecturer or request.user.is_superuser):
+        videos = videos.filter(visible=True)
+    video = get_object_or_404(videos, slug=video_slug)
     return render(
         request,
         "upload/video_single.html",

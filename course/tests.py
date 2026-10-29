@@ -4,6 +4,7 @@ from decimal import Decimal
 
 from django.conf import settings
 from django.contrib.auth import get_user_model
+from django.core.exceptions import ValidationError
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import TestCase
 from django.urls import reverse
@@ -1308,3 +1309,205 @@ class MazosDelCursoTests(TestCase):
 
                 self.client.force_login(self.docente)
                 self.assertEqual(self.client.get(self._abrir(oculto)).status_code, 200)
+
+
+class VideoEnlaceTests(TestCase):
+    """Los v�deos del curso: un enlace externo, y ocultos hasta que toca.
+
+    Un v�deo se puede subir como fichero o enlazarlo. Los enlaces no se
+    descargan: la ficha los muestra con el reproductor incrustado. Y todos
+    nacen ocultos, como las pruebas: el profesorado los va revelando.
+    """
+
+    def setUp(self):
+        self.program = Program.objects.create(title="Programa de prueba")
+        self.curso = Course.objects.create(
+            title="Curso de prueba",
+            code="MIO-1",
+            program=self.program,
+            level="Bachelor",
+            year=1,
+            semester="First",
+        )
+        self.alumno = User.objects.create_user(
+            username="tmp-video-alumno", password="password", is_student=True
+        )
+        self.docente = User.objects.create_user(
+            username="tmp-video-docente", password="password", is_lecturer=True
+        )
+        asignacion = CourseAllocation.objects.create(lecturer=self.docente)
+        asignacion.courses.set([self.curso])
+        student = Student.objects.create(
+            student=self.alumno, level="Bachelor", program=self.program
+        )
+        TakenCourse.objects.create(student=student, course=self.curso)
+        self.url_curso = reverse("course_detail", kwargs={"slug": self.curso.slug})
+
+    def _video(self, titulo="Clase decriptaci�n", url="https://www.youtube.com/watch?v=gtuKuryDFuE", visible=True):
+        return UploadVideo.objects.create(
+            title=titulo, course=self.curso, url=url, visible=visible
+        )
+
+    def _ficha(self, video):
+        return reverse(
+            "video_single",
+            kwargs={"slug": self.curso.slug, "video_slug": video.slug},
+        )
+
+    def test_un_video_solo_con_enlace_es_valido(self):
+        video = self._video()
+
+        video.full_clean()
+
+        self.assertTrue(video.pk)
+
+    def test_un_video_sin_fichero_ni_enlace_no_es_valido(self):
+        video = UploadVideo(title="Sin nada", course=self.curso)
+
+        with self.assertRaises(ValidationError):
+            video.full_clean()
+
+    def test_el_enlace_de_youtube_sale_con_nocookie(self):
+        video = self._video(url="https://www.youtube.com/watch?v=gtuKuryDFuE")
+
+        self.assertEqual(
+            video.embed_url, "https://www.youtube-nocookie.com/embed/gtuKuryDFuE"
+        )
+
+    def test_el_enlace_corto_de_youtube_tambien_sirve(self):
+        video = self._video(url="https://youtu.be/e3bRv7wnt6E")
+
+        self.assertEqual(
+            video.embed_url, "https://www.youtube-nocookie.com/embed/e3bRv7wnt6E"
+        )
+
+    def test_el_enlace_de_vimeo_sale_con_su_reproductor(self):
+        video = self._video(url="https://vimeo.com/123456789")
+
+        self.assertEqual(video.embed_url, "https://player.vimeo.com/video/123456789")
+
+    def test_una_url_desconocida_no_tiene_reproductor(self):
+        video = self._video(url="https://ejemplo.local/clase.mp4")
+
+        self.assertEqual(video.embed_url, "")
+
+    def test_los_videos_nacen_ocultos(self):
+        video = UploadVideo.objects.create(
+            title="Sin publicar", course=self.curso, url="https://youtu.be/e3bRv7wnt6E"
+        )
+
+        self.assertFalse(video.visible)
+
+    def test_el_alumno_no_ve_los_videos_ocultos(self):
+        self._video(titulo="Clase de los modos", visible=False)
+
+        self.client.force_login(self.alumno)
+        html = self.client.get(self.url_curso).content.decode()
+
+        self.assertNotIn("Clase de los modos", html)
+
+    def test_el_docente_si_los_ve(self):
+        self._video(titulo="Clase de los modos", visible=False)
+
+        self.client.force_login(self.docente)
+        html = self.client.get(self.url_curso).content.decode()
+
+        self.assertIn("Clase de los modos", html)
+
+    def test_el_alumno_solo_ve_los_videos_publicados(self):
+        self._video(titulo="Clase publicada", visible=True)
+        self._video(titulo="Clase guardada", visible=False)
+
+        self.client.force_login(self.alumno)
+        html = self.client.get(self.url_curso).content.decode()
+
+        self.assertIn("Clase publicada", html)
+        self.assertNotIn("Clase guardada", html)
+
+    def test_el_alumno_no_abre_un_video_oculto(self):
+        video = self._video(visible=False)
+
+        self.client.force_login(self.alumno)
+
+        self.assertEqual(self.client.get(self._ficha(video)).status_code, 404)
+
+    def test_el_docente_abre_un_video_oculto(self):
+        video = self._video(visible=False)
+
+        self.client.force_login(self.docente)
+
+        self.assertEqual(self.client.get(self._ficha(video)).status_code, 200)
+
+    def test_el_alumno_abre_un_video_publicado(self):
+        video = self._video(visible=True)
+
+        self.client.force_login(self.alumno)
+
+        self.assertEqual(self.client.get(self._ficha(video)).status_code, 200)
+
+    def test_un_video_de_otro_curso_da_404(self):
+        otro = Course.objects.create(
+            title="Otro curso",
+            code="MIO-2",
+            program=self.program,
+            level="Bachelor",
+            year=1,
+            semester="First",
+        )
+        video = UploadVideo.objects.create(
+            title="Clase ajena", course=otro, url="https://youtu.be/e3bRv7wnt6E"
+        )
+
+        self.client.force_login(self.alumno)
+
+        self.assertEqual(self.client.get(self._ficha(video)).status_code, 404)
+
+    def test_el_formulario_admite_un_enlace_sin_fichero(self):
+        url = reverse("upload_video", kwargs={"slug": self.curso.slug})
+        self.client.force_login(self.docente)
+
+        response = self.client.post(
+            url,
+            {
+                "title": "Modos de cifrado",
+                "url": "https://www.youtube.com/watch?v=gtuKuryDFuE",
+                "summary": "1:27:17, corte de 0 a 40 minutos",
+                "orden": 20,
+            },
+        )
+
+        self.assertEqual(response.status_code, 302)
+        video = UploadVideo.objects.get(title="Modos de cifrado")
+        self.assertEqual(video.course, self.curso)
+        self.assertFalse(video.visible)
+
+    def test_el_formulario_rechaza_un_video_sin_fichero_ni_enlace(self):
+        url = reverse("upload_video", kwargs={"slug": self.curso.slug})
+        self.client.force_login(self.docente)
+
+        response = self.client.post(url, {"title": "Ni una cosa ni la otra"})
+
+        self.assertEqual(response.status_code, 200)
+        self.assertFalse(UploadVideo.objects.filter(title="Ni una cosa ni la otra").exists())
+
+    def test_un_docente_de_otro_curso_no_sube_videos(self):
+        otro = Course.objects.create(
+            title="Otro curso",
+            code="MIO-2",
+            program=self.program,
+            level="Bachelor",
+            year=1,
+            semester="First",
+        )
+        ajena = User.objects.create_user(
+            username="tmp-video-ajena", password="password", is_lecturer=True
+        )
+        url = reverse("upload_video", kwargs={"slug": otro.slug})
+
+        self.client.force_login(ajena)
+        response = self.client.post(
+            url, {"title": "Colado", "url": "https://youtu.be/e3bRv7wnt6E"}
+        )
+
+        self.assertEqual(response.status_code, 404)
+        self.assertFalse(UploadVideo.objects.filter(title="Colado").exists())

@@ -1,6 +1,8 @@
+import re
 from decimal import Decimal
 
 from django.conf import settings
+from django.core.exceptions import ValidationError
 from django.core.validators import (
     FileExtensionValidator,
     MaxValueValidator,
@@ -370,18 +372,59 @@ def log_upload_delete(sender, instance, **kwargs):
 
 
 class UploadVideo(models.Model):
+    """Un vídeo del curso: un fichero subido o un enlace externo.
+
+    Lo habitual es el enlace externo (una clase de Class4crypt, un
+    documental): no se descarga, se enlaza. La ficha lo muestra con el
+    reproductor incrustado y, si el sitio no lo permite, con un botón para
+    abrirlo en su página.
+
+    Los vídeos nacen ocultos: el profesorado los va revelando el día de cada
+    clase, como se hace con las pruebas.
+    """
+
     title = models.CharField(max_length=100)
     slug = models.SlugField(unique=True, blank=True)
-    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    course = models.ForeignKey(
+        Course, on_delete=models.CASCADE, related_name="videos"
+    )
     video = models.FileField(
         upload_to="course_videos/",
+        blank=True,
+        null=True,
         help_text=_("Valid video formats: mp4, mkv, wmv, 3gp, f4v, avi, mp3"),
         validators=[
             FileExtensionValidator(["mp4", "mkv", "wmv", "3gp", "f4v", "avi", "mp3"])
         ],
     )
+    url = models.URLField(
+        blank=True,
+        verbose_name=_("Enlace externo"),
+        help_text=_(
+            "Vídeo de YouTube, Vimeo o cualquier otra URL. No se descarga ni se "
+            "copia: el alumno lo ve en el sitio de origen."
+        ),
+    )
     summary = models.TextField(blank=True)
+    orden = models.PositiveSmallIntegerField(
+        default=0,
+        verbose_name=_("Orden"),
+        help_text=_("El orden en que salen en la lista del curso."),
+    )
+    visible = models.BooleanField(
+        default=False,
+        verbose_name=_("Visible para el alumnado"),
+        help_text=_(
+            "Desmarcado, el alumnado no lo ve. Se marca el día de la clase, "
+            "como se hace con las pruebas."
+        ),
+    )
     timestamp = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ["orden", "timestamp"]
+        verbose_name = _("Vídeo")
+        verbose_name_plural = _("Vídeos")
 
     def __str__(self):
         return f"{self.title}"
@@ -391,8 +434,37 @@ class UploadVideo(models.Model):
             "video_single", kwargs={"slug": self.course.slug, "video_slug": self.slug}
         )
 
+    def clean(self):
+        """O un fichero o un enlace: un vídeo sin nada no vale."""
+        if not self.video and not self.url:
+            raise ValidationError(
+                _("Sube un fichero o indica un enlace externo: hace falta uno de los dos.")
+            )
+
+    @property
+    def embed_url(self):
+        """La URL del reproductor incrustado, si el enlace es de un sitio conocido.
+
+        YouTube va con `youtube-nocookie`, que no mete cookies de Google en la
+        plataforma, y con el vídeo que toque: el identificador va en la ruta.
+        """
+        if not self.url:
+            return ""
+        youtube = re.search(
+            r"(?:youtube\.com/(?:watch\?v=|embed/|shorts/|live/)|youtu\.be/)"
+            r"([A-Za-z0-9_-]{6,})",
+            self.url,
+        )
+        if youtube:
+            return f"https://www.youtube-nocookie.com/embed/{youtube.group(1)}"
+        vimeo = re.search(r"vimeo\.com/(?:video/)?(\d+)", self.url)
+        if vimeo:
+            return f"https://player.vimeo.com/video/{vimeo.group(1)}"
+        return ""
+
     def delete(self, *args, **kwargs):
-        self.video.delete(save=False)
+        if self.video:
+            self.video.delete(save=False)
         super().delete(*args, **kwargs)
 
 

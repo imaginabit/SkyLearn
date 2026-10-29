@@ -175,17 +175,33 @@ class UploadFormFile(forms.ModelForm):
 
 # Upload video to specific course
 class UploadFormVideo(forms.ModelForm):
+    """Un vídeo del curso: un fichero subido o un enlace externo.
+
+    Lo normal es el enlace: una clase de Class4crypt, un documental. El
+    fichero se deja para el material propio.
+    """
+
     class Meta:
         model = UploadVideo
         fields = (
             "title",
             "video",
+            "url",
+            "summary",
+            "orden",
+            "visible",
         )
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields["title"].widget.attrs.update({"class": "form-control"})
         self.fields["video"].widget.attrs.update({"class": "form-control"})
+        self.fields["url"].widget.attrs.update({"class": "form-control"})
+        self.fields["summary"].widget.attrs.update(
+            {"class": "form-control", "rows": 3}
+        )
+        self.fields["orden"].widget.attrs.update({"class": "form-control"})
+        self.fields["visible"].widget.attrs.update({"class": "form-check-input"})
 
 
 class SubmissionForm(forms.ModelForm):

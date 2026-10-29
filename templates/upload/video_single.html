@@ -19,7 +19,27 @@
 <br><br>
 
 <div class="col-md-10 mx-auto d-block">
+    {% if video.video %}
     <div class=""><video src="{{ video.video.url }}" controls ></video></div>
+    {% elif video.embed_url %}
+    <div class="ratio ratio-16x9">
+        <iframe src="{{ video.embed_url }}"
+                title="{{ video.title }}"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen loading="lazy"
+                referrerpolicy="strict-origin-when-cross-origin"></iframe>
+    </div>
+    {% elif video.url %}
+    <p><a class="btn btn-primary" href="{{ video.url }}" target="_blank" rel="noopener noreferrer">
+        <i class="fas fa-play me-1"></i>{% trans 'Play now' %}</a></p>
+    {% endif %}
+
+    {% if video.url %}
+    <p class="mt-3">
+        <a href="{{ video.url }}" target="_blank" rel="noopener noreferrer">{{ video.url }}</a>
+    </p>
+    {% endif %}
+
     <p><i class="fas fa-calendar"></i> {{ video.timestamp|timesince }} {% trans 'ago' %}</p>
     {% if video.summary %}
     <p class="text-orange text-center">{{ video.summary }}</p>
