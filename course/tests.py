@@ -1511,3 +1511,78 @@ class VideoEnlaceTests(TestCase):
 
         self.assertEqual(response.status_code, 404)
         self.assertFalse(UploadVideo.objects.filter(title="Colado").exists())
+
+
+class MazoOcultoTests(TestCase):
+    """Un mazo oculto no se embebe ni se descarga.
+
+    El mazo se embebe con un iframe y se descarga con la ruta del curso, y las
+    dos cogian el primer HTML del curso sin mirar si estaba publicado. Un
+    mazo que se sube oculto para preparar la clase se veía entero.
+    """
+
+    def setUp(self):
+        self.program = Program.objects.create(title="Programa de prueba")
+        self.curso = Course.objects.create(
+            title="Curso de prueba",
+            code="MIO-1",
+            program=self.program,
+            level="Bachelor",
+            year=1,
+            semester="First",
+        )
+        self.alumno = User.objects.create_user(
+            username="tmp-oculto-mazo-alumno", password="password", is_student=True
+        )
+        self.docente = User.objects.create_user(
+            username="tmp-oculto-mazo-docente", password="password", is_lecturer=True
+        )
+        student = Student.objects.create(
+            student=self.alumno, level="Bachelor", program=self.program
+        )
+        TakenCourse.objects.create(student=student, course=self.curso)
+        self.url = reverse("course_detail", kwargs={"slug": self.curso.slug})
+        self.descarga = reverse("deck_download", kwargs={"slug": self.curso.slug})
+        # El media vive mientras dure la prueba: si el directorio temporal se
+        # cierra antes de la descarga, el fichero ya no esta.
+        self.media = tempfile.TemporaryDirectory()
+        self.addCleanup(self.media.cleanup)
+        self.ajustes = self.settings(MEDIA_ROOT=self.media.name)
+        self.ajustes.enable()
+        self.addCleanup(self.ajustes.disable)
+
+    def _mazo_oculto(self):
+        return Upload.objects.create(
+            title="Presentación de mañana",
+            course=self.curso,
+            file=SimpleUploadedFile("presentacion.html", b"<html>mazo</html>"),
+            visible=False,
+        )
+
+    def test_el_alumno_no_ve_el_mazo_oculto_embebido(self):
+        self._mazo_oculto()
+
+        self.client.force_login(self.alumno)
+        html = self.client.get(self.url).content.decode()
+
+        self.assertNotIn("Presentación de mañana", html)
+
+    def test_el_alumno_no_descarga_el_mazo_oculto(self):
+        self._mazo_oculto()
+
+        self.client.force_login(self.alumno)
+
+        self.assertEqual(self.client.get(self.descarga).status_code, 404)
+
+    def test_el_docente_lo_ve_y_lo_descarga(self):
+        self._mazo_oculto()
+
+        self.client.force_login(self.docente)
+        html = self.client.get(self.url).content.decode()
+
+        self.assertIn("Presentación de mañana", html)
+        respuesta = self.client.get(self.descarga)
+        self.assertEqual(respuesta.status_code, 200)
+        # El fichero se sirve abierto: si no se cierra, al borrar el directorio
+        # temporal el sistema dice que el archivo esta en uso.
+        respuesta.close()

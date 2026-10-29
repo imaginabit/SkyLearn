@@ -3,7 +3,7 @@ from django.shortcuts import get_object_or_404
 from .models import Course, Upload
 
 
-def deck_del_curso(curso):
+def deck_del_curso(curso, solo_visibles=False):
     """El mazo de diapositivas del curso, si tiene uno.
 
     Se reconoce por extension (.html). Ordena por pk para que el embed y la
@@ -12,25 +12,29 @@ def deck_del_curso(curso):
     Un curso puede no embeber ninguno: es lo que hace el curso del temario
     completo, que acumula el material de todas las clases y donde embeber solo
     uno dejaria a los demas escondidos. Se decide con `embeber_mazo`.
+
+    Con `solo_visibles` se ignoran los mazos ocultos: uno que todavia no se ha
+    revelado no puede embeberse ni descargarse, o el alumnado lo veria antes
+    de tiempo.
     """
     if not curso.embeber_mazo:
         return None
-    return (
-        Upload.objects.filter(course=curso, file__iendswith=".html")
-        .order_by("pk")
-        .first()
-    )
+    mazos = Upload.objects.filter(course=curso, file__iendswith=".html")
+    if solo_visibles:
+        mazos = mazos.filter(visible=True)
+    return mazos.order_by("pk").first()
 
 
-def decks_del_curso(curso):
+def decks_del_curso(curso, solo_visibles=False):
     """Todos los mazos del curso, en el orden en que se fueron subiendo.
 
     Cada uno es un HTML autocontenido, asi que se puede abrir en el navegador
     tal cual, sin la plataforma de por medio.
     """
-    return Upload.objects.filter(course=curso, file__iendswith=".html").order_by(
-        "upload_time", "pk"
-    )
+    mazos = Upload.objects.filter(course=curso, file__iendswith=".html")
+    if solo_visibles:
+        mazos = mazos.filter(visible=True)
+    return mazos.order_by("upload_time", "pk")
 
 
 def curso_asignado(request, slug):

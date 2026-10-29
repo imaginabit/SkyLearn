@@ -232,9 +232,9 @@ def course_single(request, slug):
         student__student=request.user, course=course
     ).exists()
     # el mazo de diapositivas, si lo hay: se muestra embebido arriba del curso
-    deck = deck_del_curso(course)
+    deck = deck_del_curso(course, solo_visibles=not is_editor)
     # todos los mazos, para los cursos que no embeben ninguno
-    decks = decks_del_curso(course)
+    decks = decks_del_curso(course, solo_visibles=not is_editor)
 
     if request.method == "POST":
         # ponytail: entrega del alumno; el profesor solo revisa la tabla de abajo
@@ -373,7 +373,10 @@ def deck_download(request, slug):
     submission_download con las entregas.
     """
     course = get_object_or_404(Course, slug=slug)
-    deck = deck_del_curso(course)
+    deck = deck_del_curso(
+        course,
+        solo_visibles=not (request.user.is_lecturer or request.user.is_superuser),
+    )
     if deck is None:
         raise Http404("Este curso no tiene presentacion")
     return FileResponse(
