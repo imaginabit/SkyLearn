@@ -460,7 +460,7 @@ class ArchivosAdicionalesTests(TestCase):
 class FormatosDeEntregaTests(TestCase):
     """Cada actividad decide en que formatos puede entregar el alumno.
 
-    Por defecto, solo PDF; el docente puede marcar tambien ODT, DOCX, ZIP...
+    Por defecto, solo PDF; el docente puede marcar tambien ODT, DOCX, ZIP, ASC...
     El alumno ve los formatos admitidos al elegir la actividad, y el .odt tiene
     su propio icono y su aviso de LibreOffice: no es el formato pobre.
     """
@@ -492,13 +492,16 @@ class FormatosDeEntregaTests(TestCase):
         self.url_curso = reverse("course_detail", kwargs={"slug": self.curso.slug})
 
     def _entrega(self, actividad, nombre):
+        contenido = b"%PDF-1.4"
+        if nombre.lower().endswith(".asc"):
+            contenido = b"-----BEGIN PGP PUBLIC KEY BLOCK-----\ncontenido de prueba\n"
         with tempfile.TemporaryDirectory() as media:
             with self.settings(MEDIA_ROOT=media):
                 return self.client.post(
                     self.url_curso,
                     {
                         "document": actividad.pk,
-                        "file": SimpleUploadedFile(nombre, b"%PDF-1.4"),
+                        "file": SimpleUploadedFile(nombre, contenido),
                     },
                 )
 
@@ -538,21 +541,21 @@ class FormatosDeEntregaTests(TestCase):
         self.assertEqual(Submission.objects.count(), 0)
 
     def test_el_alumno_entrega_en_los_formatos_admitidos(self):
-        self.actividad.extensiones_permitidas = "pdf,odt"
+        self.actividad.extensiones_permitidas = "pdf,odt,asc"
         self.actividad.save()
 
-        response = self._entrega(self.actividad, "trabajo.odt")
+        response = self._entrega(self.actividad, "clave-publica.asc")
 
         self.assertEqual(response.status_code, 302)
         self.assertEqual(Submission.objects.count(), 1)
 
     def test_el_alumno_ve_los_formatos_de_cada_actividad(self):
-        self.actividad.extensiones_permitidas = "pdf,odt"
+        self.actividad.extensiones_permitidas = "pdf,odt,asc"
         self.actividad.save()
 
         html = self.client.get(self.url_curso).content.decode()
 
-        self.assertIn("Actividad 1 (PDF, ODT)", html)
+        self.assertIn("Actividad 1 (PDF, ODT, ASC)", html)
         self.assertIn("Cada actividad admite unos formatos concretos", html)
 
     def test_el_formulario_del_docente_ofrece_los_formatos(self):
@@ -562,7 +565,7 @@ class FormatosDeEntregaTests(TestCase):
             reverse("upload_file_view", kwargs={"slug": self.curso.slug})
         ).content.decode()
 
-        for formato in ("PDF", "ODT", "DOCX", "ZIP"):
+        for formato in ("PDF", "ODT", "DOCX", "ZIP", "ASC"):
             self.assertIn(formato, html)
 
     def test_el_formulario_del_docente_guarda_los_formatos_marcados(self):

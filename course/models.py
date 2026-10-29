@@ -75,6 +75,7 @@ EXTENSIONES_ENTREGA = [
     "zip",
     "rar",
     "7zip",
+    "asc",
     "png",
     "jpg",
     "jpeg",
