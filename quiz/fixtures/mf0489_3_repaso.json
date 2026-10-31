@@ -245,8 +245,8 @@
   "fields": {
    "content": "Respecto a la esteganografía, frente a la criptografía:",
    "content_es": "Respecto a la esteganografía, frente a la criptografía:",
-   "explanation": "Correcta: C - Esa es su gran disadvantage: en cuanto el atacante sabe dónde mirar, el mensaje queda al descubierto. A - La esteganografía esconde el mensaje, pero no protege su contenido: si lo encuentra, lo lee. Cifrar el mensaje antes de esconderlo es lo que protege la confidencialidad. B - La esteganografía es tan antigua como la criptografía: la tinta invisible y los agujeros junto a las letras son anteriores a los cifradores clásicos. D - El no repudio lo dan las firmas, no esconder el mensaje. Manual: cap. 1 §2, CE1.1. Visto en: Clase 01 y complemento, mazo Complemento-criptografia.md.",
-   "explanation_es": "Correcta: C - Esa es su gran disadvantage: en cuanto el atacante sabe dónde mirar, el mensaje queda al descubierto. A - La esteganografía esconde el mensaje, pero no protege su contenido: si lo encuentra, lo lee. Cifrar el mensaje antes de esconderlo es lo que protege la confidencialidad. B - La esteganografía es tan antigua como la criptografía: la tinta invisible y los agujeros junto a las letras son anteriores a los cifradores clásicos. D - El no repudio lo dan las firmas, no esconder el mensaje. Manual: cap. 1 §2, CE1.1. Visto en: Clase 01 y complemento, mazo Complemento-criptografia.md.",
+   "explanation": "Correcta: C - Esa es su gran disadvantage: en cuanto el atacante sabe dónde mirar, el mensaje queda al descubierto. A - La esteganografía esconde el mensaje, pero no protege su contenido: si lo encuentra, lo lee. Cifrar el mensaje antes de esconderlo es lo que protege la confidencialidad. B - La esteganografía es tan antigua como la criptografía: la tinta invisible y los agujeros junto a las letras son anteriores a los cifradores clásicos. D - El no repudio lo dan las firmas, no esconder el mensaje. Manual: cap. 1 §2, CE1.1. Visto en: Clase 01 y complemento, mazo Complemento-UA1.md.",
+   "explanation_es": "Correcta: C - Esa es su gran disadvantage: en cuanto el atacante sabe dónde mirar, el mensaje queda al descubierto. A - La esteganografía esconde el mensaje, pero no protege su contenido: si lo encuentra, lo lee. Cifrar el mensaje antes de esconderlo es lo que protege la confidencialidad. B - La esteganografía es tan antigua como la criptografía: la tinta invisible y los agujeros junto a las letras son anteriores a los cifradores clásicos. D - El no repudio lo dan las firmas, no esconder el mensaje. Manual: cap. 1 §2, CE1.1. Visto en: Clase 01 y complemento, mazo Complemento-UA1.md.",
    "quiz": [
     8
    ]
@@ -365,8 +365,8 @@
   "fields": {
    "content": "La entropía, en la teoría de la información de Shannon, mide:",
    "content_es": "La entropía, en la teoría de la información de Shannon, mide:",
-   "explanation": "Correcta: C - Cuanto mayor es la incertidumbre, mayor es la entropía. En una clase con ocho alumnos y dos alumnas hay más entropía que en una con nueve y una. A - La entropía mide incertidumbre, no desorden. Aplicada a la salida de un cifrador, una entropía alta indica que esa salida es la que peor se comprime. B - El tamaño del mensaje es una longitud, no una medida de incertidumbre. D - Esa es la capacidad del canal, que es otro concepto de la misma teoría. Manual: cap. 1 §3.1, CE1.1. Visto en: Clase 01 y complemento, mazo Complemento-criptografia.md.",
-   "explanation_es": "Correcta: C - Cuanto mayor es la incertidumbre, mayor es la entropía. En una clase con ocho alumnos y dos alumnas hay más entropía que en una con nueve y una. A - La entropía mide incertidumbre, no desorden. Aplicada a la salida de un cifrador, una entropía alta indica que esa salida es la que peor se comprime. B - El tamaño del mensaje es una longitud, no una medida de incertidumbre. D - Esa es la capacidad del canal, que es otro concepto de la misma teoría. Manual: cap. 1 §3.1, CE1.1. Visto en: Clase 01 y complemento, mazo Complemento-criptografia.md.",
+   "explanation": "Correcta: C - Cuanto mayor es la incertidumbre, mayor es la entropía. En una clase con ocho alumnos y dos alumnas hay más entropía que en una con nueve y una. A - La entropía mide incertidumbre, no desorden. Aplicada a la salida de un cifrador, una entropía alta indica que esa salida es la que peor se comprime. B - El tamaño del mensaje es una longitud, no una medida de incertidumbre. D - Esa es la capacidad del canal, que es otro concepto de la misma teoría. Manual: cap. 1 §3.1, CE1.1. Visto en: Clase 01 y complemento, mazo Complemento-UA1.md.",
+   "explanation_es": "Correcta: C - Cuanto mayor es la incertidumbre, mayor es la entropía. En una clase con ocho alumnos y dos alumnas hay más entropía que en una con nueve y una. A - La entropía mide incertidumbre, no desorden. Aplicada a la salida de un cifrador, una entropía alta indica que esa salida es la que peor se comprime. B - El tamaño del mensaje es una longitud, no una medida de incertidumbre. D - Esa es la capacidad del canal, que es otro concepto de la misma teoría. Manual: cap. 1 §3.1, CE1.1. Visto en: Clase 01 y complemento, mazo Complemento-UA1.md.",
    "quiz": [
     8
    ]
@@ -485,8 +485,8 @@
   "fields": {
    "content": "Un código de redundancia cíclica (CRC) no puede usarse para detectar que un mensaje ha sido manipulado porque:",
    "content_es": "Un código de redundancia cíclica (CRC) no puede usarse para detectar que un mensaje ha sido manipulado porque:",
-   "explanation": "Correcta: C - Al poder rehacer el CRC, la modificación pasa desapercibida. A - El CRC se inventó precisamente para detectar errores de transmisión. B - El CRC se calcula sin clave: es un mecanismo público. D - Es una limitación real del cifrado de bloque, no del CRC. Manual: cap. 1 §3.3, CE1.1. Visto en: complemento, mazo Complemento-criptografia.md (no estaba en los mazos de clase).",
-   "explanation_es": "Correcta: C - Al poder rehacer el CRC, la modificación pasa desapercibida. A - El CRC se inventó precisamente para detectar errores de transmisión. B - El CRC se calcula sin clave: es un mecanismo público. D - Es una limitación real del cifrado de bloque, no del CRC. Manual: cap. 1 §3.3, CE1.1. Visto en: complemento, mazo Complemento-criptografia.md (no estaba en los mazos de clase).",
+   "explanation": "Correcta: C - Al poder rehacer el CRC, la modificación pasa desapercibida. A - El CRC se inventó precisamente para detectar errores de transmisión. B - El CRC se calcula sin clave: es un mecanismo público. D - Es una limitación real del cifrado de bloque, no del CRC. Manual: cap. 1 §3.3, CE1.1. Visto en: complemento, mazo Complemento-UA1.md (no estaba en los mazos de clase).",
+   "explanation_es": "Correcta: C - Al poder rehacer el CRC, la modificación pasa desapercibida. A - El CRC se inventó precisamente para detectar errores de transmisión. B - El CRC se calcula sin clave: es un mecanismo público. D - Es una limitación real del cifrado de bloque, no del CRC. Manual: cap. 1 §3.3, CE1.1. Visto en: complemento, mazo Complemento-UA1.md (no estaba en los mazos de clase).",
    "quiz": [
     8
    ]
@@ -1085,8 +1085,8 @@
   "fields": {
    "content": "El cifrador de Vernam, o One Time Pad, usa como operación de cifrado:",
    "content_es": "El cifrador de Vernam, o One Time Pad, usa como operación de cifrado:",
-   "explanation": "Correcta: B - El XOR da un 1 cuando los bits son distintos y un 0 cuando son iguales. A - Eso es lo que hacen César y sus derivados. C - La modular es la base de Vigenère. D - Eso es lo que hacen los cifradores de bloque. Manual: cap. 1 §5.1, CE1.3. Visto en: complemento, mazo Complemento-criptografia.md.",
-   "explanation_es": "Correcta: B - El XOR da un 1 cuando los bits son distintos y un 0 cuando son iguales. A - Eso es lo que hacen César y sus derivados. C - La modular es la base de Vigenère. D - Eso es lo que hacen los cifradores de bloque. Manual: cap. 1 §5.1, CE1.3. Visto en: complemento, mazo Complemento-criptografia.md.",
+   "explanation": "Correcta: B - El XOR da un 1 cuando los bits son distintos y un 0 cuando son iguales. A - Eso es lo que hacen César y sus derivados. C - La modular es la base de Vigenère. D - Eso es lo que hacen los cifradores de bloque. Manual: cap. 1 §5.1, CE1.3. Visto en: complemento, mazo Complemento-UA1.md.",
+   "explanation_es": "Correcta: B - El XOR da un 1 cuando los bits son distintos y un 0 cuando son iguales. A - Eso es lo que hacen César y sus derivados. C - La modular es la base de Vigenère. D - Eso es lo que hacen los cifradores de bloque. Manual: cap. 1 §5.1, CE1.3. Visto en: complemento, mazo Complemento-UA1.md.",
    "quiz": [
     8
    ]
@@ -1145,8 +1145,8 @@
   "fields": {
    "content": "En un cifrador de flujo autosíncrono, la serie cifrante se genera a partir de:",
    "content_es": "En un cifrador de flujo autosíncrono, la serie cifrante se genera a partir de:",
-   "explanation": "Correcta: D - Por eso el descifrado depende de lo que precede al criptograma y la sincronización se recupera sola. A - Depende de un conjunto fijo de caracteres previamente cifrados. B - Eso es el modo CTR. C - El IV es lo que distingue a CBC, CFB y OFB. Manual: cap. 1 §5.1, CE1.2. Visto en: complemento, mazo Complemento-criptografia.md (no estaba en los mazos de clase).",
-   "explanation_es": "Correcta: D - Por eso el descifrado depende de lo que precede al criptograma y la sincronización se recupera sola. A - Depende de un conjunto fijo de caracteres previamente cifrados. B - Eso es el modo CTR. C - El IV es lo que distingue a CBC, CFB y OFB. Manual: cap. 1 §5.1, CE1.2. Visto en: complemento, mazo Complemento-criptografia.md (no estaba en los mazos de clase).",
+   "explanation": "Correcta: D - Por eso el descifrado depende de lo que precede al criptograma y la sincronización se recupera sola. A - Depende de un conjunto fijo de caracteres previamente cifrados. B - Eso es el modo CTR. C - El IV es lo que distingue a CBC, CFB y OFB. Manual: cap. 1 §5.1, CE1.2. Visto en: complemento, mazo Complemento-UA1.md (no estaba en los mazos de clase).",
+   "explanation_es": "Correcta: D - Por eso el descifrado depende de lo que precede al criptograma y la sincronización se recupera sola. A - Depende de un conjunto fijo de caracteres previamente cifrados. B - Eso es el modo CTR. C - El IV es lo que distingue a CBC, CFB y OFB. Manual: cap. 1 §5.1, CE1.2. Visto en: complemento, mazo Complemento-UA1.md (no estaba en los mazos de clase).",
    "quiz": [
     8
    ]
@@ -1565,8 +1565,8 @@
   "fields": {
    "content": "El algoritmo DES, adoptado por el NIST en 1977, se caracteriza por:",
    "content_es": "El algoritmo DES, adoptado por el NIST en 1977, se caracteriza por:",
-   "explanation": "Correcta: D - Fue atacado con éxito en 1998, y en 2001 lo sustituyó AES. A - Esa es la ficha de IDEA: bloques de 64 bits, claves de 128 y 8 rondas. B - Es de clave privada; el primer algoritmo de clave pública fue RSA, en 1978. C - El Vernam es un cifrador de flujo, y DES es de bloque. Manual: cap. 1 §8.1, CE1.3. Visto en: Clase 02 y complemento, mazo Complemento-criptografia.md.",
-   "explanation_es": "Correcta: D - Fue atacado con éxito en 1998, y en 2001 lo sustituyó AES. A - Esa es la ficha de IDEA: bloques de 64 bits, claves de 128 y 8 rondas. B - Es de clave privada; el primer algoritmo de clave pública fue RSA, en 1978. C - El Vernam es un cifrador de flujo, y DES es de bloque. Manual: cap. 1 §8.1, CE1.3. Visto en: Clase 02 y complemento, mazo Complemento-criptografia.md.",
+   "explanation": "Correcta: D - Fue atacado con éxito en 1998, y en 2001 lo sustituyó AES. A - Esa es la ficha de IDEA: bloques de 64 bits, claves de 128 y 8 rondas. B - Es de clave privada; el primer algoritmo de clave pública fue RSA, en 1978. C - El Vernam es un cifrador de flujo, y DES es de bloque. Manual: cap. 1 §8.1, CE1.3. Visto en: Clase 02 y complemento, mazo Complemento-UA1.md.",
+   "explanation_es": "Correcta: D - Fue atacado con éxito en 1998, y en 2001 lo sustituyó AES. A - Esa es la ficha de IDEA: bloques de 64 bits, claves de 128 y 8 rondas. B - Es de clave privada; el primer algoritmo de clave pública fue RSA, en 1978. C - El Vernam es un cifrador de flujo, y DES es de bloque. Manual: cap. 1 §8.1, CE1.3. Visto en: Clase 02 y complemento, mazo Complemento-UA1.md.",
    "quiz": [
     8
    ]
@@ -1745,8 +1745,8 @@
   "fields": {
    "content": "Respecto a la ley española de firma electrónica, la Ley 6/2020:",
    "content_es": "Respecto a la ley española de firma electrónica, la Ley 6/2020:",
-   "explanation": "Correcta: C - Si usa un certificado reconocido y un dispositivo seguro de creación de firma, tiene la misma equivalencia jurídica. A - La Ley 6/2020 deroga la 59/2003. B - Solo las personas físicas pueden firmar electrónicamente; una persona jurídica actúa mediante el certificado de quien la representa legalmente. D - El periodo de vigencia no puede pasar de cinco años, y la información se conserva quince años. Manual: cap. 1 §11, CE1.1. Visto en: complemento, mazo Complemento-firma-electronica.md (la ley que está en vigor).",
-   "explanation_es": "Correcta: C - Si usa un certificado reconocido y un dispositivo seguro de creación de firma, tiene la misma equivalencia jurídica. A - La Ley 6/2020 deroga la 59/2003. B - Solo las personas físicas pueden firmar electrónicamente; una persona jurídica actúa mediante el certificado de quien la representa legalmente. D - El periodo de vigencia no puede pasar de cinco años, y la información se conserva quince años. Manual: cap. 1 §11, CE1.1. Visto en: complemento, mazo Complemento-firma-electronica.md (la ley que está en vigor).",
+   "explanation": "Correcta: C - Si usa un certificado reconocido y un dispositivo seguro de creación de firma, tiene la misma equivalencia jurídica. A - La Ley 6/2020 deroga la 59/2003. B - Solo las personas físicas pueden firmar electrónicamente; una persona jurídica actúa mediante el certificado de quien la representa legalmente. D - El periodo de vigencia no puede pasar de cinco años, y la información se conserva quince años. Manual: cap. 1 §11, CE1.1. Visto en: complemento, mazo Complemento-UA1.md (la ley que está en vigor).",
+   "explanation_es": "Correcta: C - Si usa un certificado reconocido y un dispositivo seguro de creación de firma, tiene la misma equivalencia jurídica. A - La Ley 6/2020 deroga la 59/2003. B - Solo las personas físicas pueden firmar electrónicamente; una persona jurídica actúa mediante el certificado de quien la representa legalmente. D - El periodo de vigencia no puede pasar de cinco años, y la información se conserva quince años. Manual: cap. 1 §11, CE1.1. Visto en: complemento, mazo Complemento-UA1.md (la ley que está en vigor).",
    "quiz": [
     8
    ]
