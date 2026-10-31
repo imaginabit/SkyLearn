@@ -1,0 +1,1822 @@
+[
+ {
+  "model": "quiz.question",
+  "pk": 4001,
+  "fields": {
+   "content": "La escítala, el sistema de cifrado más antiguo del que hay constancia, se basa en:",
+   "content_es": "La escítala, el sistema de cifrado más antiguo del que hay constancia, se basa en:",
+   "explanation": "Correcta: B - El mensaje se enrolla en el bastón y se desenrolla para transportarlo. Sin un bastón del mismo diámetro es ininteligible. A - Eso es el cifrado de César. La escítala no sustituye nada: enrolla una tira de papiro en un bastón y cambia el orden de los caracteres. C - No hay ninguna serie aleatoria: la clave es el propio bastón. D - Vigenère es del siglo XV; la escítala es del siglo IV a. C. Manual: cap. 1 §2, CE1.1. Visto en: Clase 01, mazo Criptografia.md.",
+   "explanation_es": "Correcta: B - El mensaje se enrolla en el bastón y se desenrolla para transportarlo. Sin un bastón del mismo diámetro es ininteligible. A - Eso es el cifrado de César. La escítala no sustituye nada: enrolla una tira de papiro en un bastón y cambia el orden de los caracteres. C - No hay ninguna serie aleatoria: la clave es el propio bastón. D - Vigenère es del siglo XV; la escítala es del siglo IV a. C. Manual: cap. 1 §2, CE1.1. Visto en: Clase 01, mazo Criptografia.md.",
+   "quiz": [
+    8
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 4001,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3001,
+  "fields": {
+   "question": 4001,
+   "choice_text": "La sustitución de cada letra por la que ocupa tres posiciones más adelante",
+   "choice_text_es": "La sustitución de cada letra por la que ocupa tres posiciones más adelante",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3002,
+  "fields": {
+   "question": 4001,
+   "choice_text": "La transposición: cambiar el orden en que aparecen los caracteres",
+   "choice_text_es": "La transposición: cambiar el orden en que aparecen los caracteres",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3003,
+  "fields": {
+   "question": 4001,
+   "choice_text": "Un cifrado de flujo con una serie aleatoria",
+   "choice_text_es": "Un cifrado de flujo con una serie aleatoria",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3004,
+  "fields": {
+   "question": 4001,
+   "choice_text": "Un cifrado polialfabético con la clave Vigenère",
+   "choice_text_es": "Un cifrado polialfabético con la clave Vigenère",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 4002,
+  "fields": {
+   "content": "El cifrado de César pertenece a la familia de los sistemas:",
+   "content_es": "El cifrado de César pertenece a la familia de los sistemas:",
+   "explanation": "Correcta: C - La 'C' se convierte siempre en 'F': hay una única equivalencia para cada letra del alfabeto. A - En el cifrado de César el orden de las letras no cambia: cada letra se sustituye por otra. B - La clave que se repite es la de Vigenère. En César la sustitución es siempre la misma. D - César es un cifrado simétrico: emisor y receptor usan la misma clave y la comparten de antemano. Manual: cap. 1 §2, CE1.1. Visto en: Clase 01, mazo Criptografia.md.",
+   "explanation_es": "Correcta: C - La 'C' se convierte siempre en 'F': hay una única equivalencia para cada letra del alfabeto. A - En el cifrado de César el orden de las letras no cambia: cada letra se sustituye por otra. B - La clave que se repite es la de Vigenère. En César la sustitución es siempre la misma. D - César es un cifrado simétrico: emisor y receptor usan la misma clave y la comparten de antemano. Manual: cap. 1 §2, CE1.1. Visto en: Clase 01, mazo Criptografia.md.",
+   "quiz": [
+    8
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 4002,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3005,
+  "fields": {
+   "question": 4002,
+   "choice_text": "De transposición, porque cambia el orden de las letras",
+   "choice_text_es": "De transposición, porque cambia el orden de las letras",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3006,
+  "fields": {
+   "question": 4002,
+   "choice_text": "De sustitución polialfabética, porque usa una clave que se repite",
+   "choice_text_es": "De sustitución polialfabética, porque usa una clave que se repite",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3007,
+  "fields": {
+   "question": 4002,
+   "choice_text": "De sustitución monoalfabética, donde cada letra se sustituye siempre por la misma",
+   "choice_text_es": "De sustitución monoalfabética, donde cada letra se sustituye siempre por la misma",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3008,
+  "fields": {
+   "question": 4002,
+   "choice_text": "De clave pública, porque no necesita repartir la clave",
+   "choice_text_es": "De clave pública, porque no necesita repartir la clave",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 4003,
+  "fields": {
+   "content": "El punto débil del cifrado de César y de los sistemas de sustitución monoalfabética es que:",
+   "content_es": "El punto débil del cifrado de César y de los sistemas de sustitución monoalfabética es que:",
+   "explanation": "Correcta: B - Como cada letra se cambia siempre por la misma, las frecuencias del texto cifrado son las del original. Conocer las letras más frecuentes de un idioma permite reconstruir el mensaje. A - El problema no es la longitud de la clave, sino que el cifrado conserva la estadística del texto en claro. C - César se descifra igual que se cifra, desplazando las letras al revés. D - Sirve para cualquier longitud; lo que no aguanta es el criptoanálisis. Manual: cap. 1 §2, CE1.1. Visto en: Clase 01, mazo Criptografia.md.",
+   "explanation_es": "Correcta: B - Como cada letra se cambia siempre por la misma, las frecuencias del texto cifrado son las del original. Conocer las letras más frecuentes de un idioma permite reconstruir el mensaje. A - El problema no es la longitud de la clave, sino que el cifrado conserva la estadística del texto en claro. C - César se descifra igual que se cifra, desplazando las letras al revés. D - Sirve para cualquier longitud; lo que no aguanta es el criptoanálisis. Manual: cap. 1 §2, CE1.1. Visto en: Clase 01, mazo Criptografia.md.",
+   "quiz": [
+    8
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 4003,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3009,
+  "fields": {
+   "question": 4003,
+   "choice_text": "La clave es demasiado corta y se puede adivinar por fuerza bruta",
+   "choice_text_es": "La clave es demasiado corta y se puede adivinar por fuerza bruta",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3010,
+  "fields": {
+   "question": 4003,
+   "choice_text": "La frecuencia de aparición de los caracteres no cambia tras el cifrado",
+   "choice_text_es": "La frecuencia de aparición de los caracteres no cambia tras el cifrado",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3011,
+  "fields": {
+   "question": 4003,
+   "choice_text": "El algoritmo es reversible en un solo sentido",
+   "choice_text_es": "El algoritmo es reversible en un solo sentido",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3012,
+  "fields": {
+   "question": 4003,
+   "choice_text": "No sirve para textos largos",
+   "choice_text_es": "No sirve para textos largos",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 4004,
+  "fields": {
+   "content": "En el cifrado de Vigenère la sustitución depende de:",
+   "content_es": "En el cifrado de Vigenère la sustitución depende de:",
+   "explanation": "Correcta: D - Cada letra se suma a la que ocupa la misma posición en la clave. Si la clave es más corta que el mensaje, se repite. A - Esa distinción no aparece en la sustitución polialfabética clásica. B - Lo que cuenta es la posición de la letra dentro del mensaje, no la longitud del texto. C - La clave sí se repite, pero eso no es lo que decide la sustitución: la decisión la toma la posición. Manual: cap. 1 §2, CE1.1. Visto en: Clase 01, mazo Criptografia.md.",
+   "explanation_es": "Correcta: D - Cada letra se suma a la que ocupa la misma posición en la clave. Si la clave es más corta que el mensaje, se repite. A - Esa distinción no aparece en la sustitución polialfabética clásica. B - Lo que cuenta es la posición de la letra dentro del mensaje, no la longitud del texto. C - La clave sí se repite, pero eso no es lo que decide la sustitución: la decisión la toma la posición. Manual: cap. 1 §2, CE1.1. Visto en: Clase 01, mazo Criptografia.md.",
+   "quiz": [
+    8
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 4004,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3013,
+  "fields": {
+   "question": 4004,
+   "choice_text": "Del tipo de letra, mayúscula o minúscula",
+   "choice_text_es": "Del tipo de letra, mayúscula o minúscula",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3014,
+  "fields": {
+   "question": 4004,
+   "choice_text": "De la longitud del texto en claro",
+   "choice_text_es": "De la longitud del texto en claro",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3015,
+  "fields": {
+   "question": 4004,
+   "choice_text": "De una clave que se repite hasta cubrir el mensaje",
+   "choice_text_es": "De una clave que se repite hasta cubrir el mensaje",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3016,
+  "fields": {
+   "question": 4004,
+   "choice_text": "De la posición de la letra en el mensaje, la clave aporta el valor del desplazamiento",
+   "choice_text_es": "De la posición de la letra en el mensaje, la clave aporta el valor del desplazamiento",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 4005,
+  "fields": {
+   "content": "Respecto a la esteganografía, frente a la criptografía:",
+   "content_es": "Respecto a la esteganografía, frente a la criptografía:",
+   "explanation": "Correcta: C - Esa es su gran disadvantage: en cuanto el atacante sabe dónde mirar, el mensaje queda al descubierto. A - La esteganografía esconde el mensaje, pero no protege su contenido: si lo encuentra, lo lee. Cifrar el mensaje antes de esconderlo es lo que protege la confidencialidad. B - La esteganografía es tan antigua como la criptografía: la tinta invisible y los agujeros junto a las letras son anteriores a los cifradores clásicos. D - El no repudio lo dan las firmas, no esconder el mensaje. Manual: cap. 1 §2, CE1.1. Visto en: Clase 01, mazo Criptografia.md.",
+   "explanation_es": "Correcta: C - Esa es su gran disadvantage: en cuanto el atacante sabe dónde mirar, el mensaje queda al descubierto. A - La esteganografía esconde el mensaje, pero no protege su contenido: si lo encuentra, lo lee. Cifrar el mensaje antes de esconderlo es lo que protege la confidencialidad. B - La esteganografía es tan antigua como la criptografía: la tinta invisible y los agujeros junto a las letras son anteriores a los cifradores clásicos. D - El no repudio lo dan las firmas, no esconder el mensaje. Manual: cap. 1 §2, CE1.1. Visto en: Clase 01, mazo Criptografia.md.",
+   "quiz": [
+    8
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 4005,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3017,
+  "fields": {
+   "question": 4005,
+   "choice_text": "Protege la confidencialidad del mensaje igual que el cifrado, porque el atacante no puede encontrarlo",
+   "choice_text_es": "Protege la confidencialidad del mensaje igual que el cifrado, porque el atacante no puede encontrarlo",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3018,
+  "fields": {
+   "question": 4005,
+   "choice_text": "Es más antigua que la criptografía",
+   "choice_text_es": "Es más antigua que la criptografía",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3019,
+  "fields": {
+   "question": 4005,
+   "choice_text": "Cuando el sistema se descubre, deja de ser útil",
+   "choice_text_es": "Cuando el sistema se descubre, deja de ser útil",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3020,
+  "fields": {
+   "question": 4005,
+   "choice_text": "Ofrece la propiedad de no repudio",
+   "choice_text_es": "Ofrece la propiedad de no repudio",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 4006,
+  "fields": {
+   "content": "Si el criptoanalista conoce parte del texto en claro y ha podido elegirla, está hablando de:",
+   "content_es": "Si el criptoanalista conoce parte del texto en claro y ha podido elegirla, está hablando de:",
+   "explanation": "Correcta: D - Ha elegido la entrada y la conoce, que es la situación que más ayuda al atacante. A - Ese es el caso en que conoce la entrada pero no la eligió. B - Ese es el caso en que elige el criptograma y conoce su descifrado. C - Solo dispone de la salida del sistema: es la situación más desfavorable para el criptoanálisis. Manual: cap. 1 §2.1, CE1.1. Visto en: Clase 01, mazo Criptografia.md.",
+   "explanation_es": "Correcta: D - Ha elegido la entrada y la conoce, que es la situación que más ayuda al atacante. A - Ese es el caso en que conoce la entrada pero no la eligió. B - Ese es el caso en que elige el criptograma y conoce su descifrado. C - Solo dispone de la salida del sistema: es la situación más desfavorable para el criptoanálisis. Manual: cap. 1 §2.1, CE1.1. Visto en: Clase 01, mazo Criptografia.md.",
+   "quiz": [
+    8
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 4006,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3021,
+  "fields": {
+   "question": 4006,
+   "choice_text": "Criptoanálisis de texto en claro conocido",
+   "choice_text_es": "Criptoanálisis de texto en claro conocido",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3022,
+  "fields": {
+   "question": 4006,
+   "choice_text": "Criptoanálisis de texto cifrado escogido",
+   "choice_text_es": "Criptoanálisis de texto cifrado escogido",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3023,
+  "fields": {
+   "question": 4006,
+   "choice_text": "Criptoanálisis de texto cifrado desconocido",
+   "choice_text_es": "Criptoanálisis de texto cifrado desconocido",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3024,
+  "fields": {
+   "question": 4006,
+   "choice_text": "Criptoanálisis de texto en claro escogido",
+   "choice_text_es": "Criptoanálisis de texto en claro escogido",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 4007,
+  "fields": {
+   "content": "La entropía, en la teoría de la información de Shannon, mide:",
+   "content_es": "La entropía, en la teoría de la información de Shannon, mide:",
+   "explanation": "Correcta: C - Cuanto mayor es la incertidumbre, mayor es la entropía. En una clase con ocho alumnos y dos alumnas hay más entropía que en una con nueve y una. A - La entropía mide incertidumbre, no desorden. Aplicada a la salida de un cifrador, una entropía alta indica que esa salida es la que peor se comprime. B - El tamaño del mensaje es una longitud, no una medida de incertidumbre. D - Esa es la capacidad del canal, que es otro concepto de la misma teoría. Manual: cap. 1 §3.1, CE1.1. Visto en: Clase 01, mazo Criptografia.md.",
+   "explanation_es": "Correcta: C - Cuanto mayor es la incertidumbre, mayor es la entropía. En una clase con ocho alumnos y dos alumnas hay más entropía que en una con nueve y una. A - La entropía mide incertidumbre, no desorden. Aplicada a la salida de un cifrador, una entropía alta indica que esa salida es la que peor se comprime. B - El tamaño del mensaje es una longitud, no una medida de incertidumbre. D - Esa es la capacidad del canal, que es otro concepto de la misma teoría. Manual: cap. 1 §3.1, CE1.1. Visto en: Clase 01, mazo Criptografia.md.",
+   "quiz": [
+    8
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 4007,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3025,
+  "fields": {
+   "question": 4007,
+   "choice_text": "El desorden o la aleatoriedad de un conjunto de datos",
+   "choice_text_es": "El desorden o la aleatoriedad de un conjunto de datos",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3026,
+  "fields": {
+   "question": 4007,
+   "choice_text": "El número de bits que tiene un mensaje",
+   "choice_text_es": "El número de bits que tiene un mensaje",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3027,
+  "fields": {
+   "question": 4007,
+   "choice_text": "La incertidumbre asociada a un suceso",
+   "choice_text_es": "La incertidumbre asociada a un suceso",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3028,
+  "fields": {
+   "question": 4007,
+   "choice_text": "La capacidad máxima de un canal de transmisión",
+   "choice_text_es": "La capacidad máxima de un canal de transmisión",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 4008,
+  "fields": {
+   "content": "Según la teoría de la información de Shannon, el único cifrador que se considera incondicionalmente seguro es:",
+   "content_es": "Según la teoría de la información de Shannon, el único cifrador que se considera incondicionalmente seguro es:",
+   "explanation": "Correcta: B - Y solo si la serie cifrante es completamente aleatoria, se usa una sola vez y su longitud es igual o mayor que la del mensaje. A - Se rompe con las frecuencias. C - Es el esquema de bloque que usan DES o AES, que no son incondicionalmente seguros. D - Su seguridad depende de la dificultad de factorizar, no de la teoría de la información. Manual: cap. 1 §3.2, CE1.3. Visto en: Clase 01, mazo Criptografia.md.",
+   "explanation_es": "Correcta: B - Y solo si la serie cifrante es completamente aleatoria, se usa una sola vez y su longitud es igual o mayor que la del mensaje. A - Se rompe con las frecuencias. C - Es el esquema de bloque que usan DES o AES, que no son incondicionalmente seguros. D - Su seguridad depende de la dificultad de factorizar, no de la teoría de la información. Manual: cap. 1 §3.2, CE1.3. Visto en: Clase 01, mazo Criptografia.md.",
+   "quiz": [
+    8
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 4008,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3029,
+  "fields": {
+   "question": 4008,
+   "choice_text": "El cifrado de César",
+   "choice_text_es": "El cifrado de César",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3030,
+  "fields": {
+   "question": 4008,
+   "choice_text": "El cifrador de Vernam (One Time Pad)",
+   "choice_text_es": "El cifrador de Vernam (One Time Pad)",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3031,
+  "fields": {
+   "question": 4008,
+   "choice_text": "El cifrado de Feistel",
+   "choice_text_es": "El cifrado de Feistel",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3032,
+  "fields": {
+   "question": 4008,
+   "choice_text": "El algoritmo RSA",
+   "choice_text_es": "El algoritmo RSA",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 4009,
+  "fields": {
+   "content": "Un código de redundancia cíclica (CRC) no puede usarse para detectar que un mensaje ha sido manipulado porque:",
+   "content_es": "Un código de redundancia cíclica (CRC) no puede usarse para detectar que un mensaje ha sido manipulado porque:",
+   "explanation": "Correcta: C - Al poder rehacer el CRC, la modificación pasa desapercibida. A - El CRC se inventó precisamente para detectar errores de transmisión. B - El CRC se calcula sin clave: es un mecanismo público. D - Es una limitación real del cifrado de bloque, no del CRC. Manual: cap. 1 §3.3, CE1.1. Visto en: Clase 01, mazo Criptografia.md.",
+   "explanation_es": "Correcta: C - Al poder rehacer el CRC, la modificación pasa desapercibida. A - El CRC se inventó precisamente para detectar errores de transmisión. B - El CRC se calcula sin clave: es un mecanismo público. D - Es una limitación real del cifrado de bloque, no del CRC. Manual: cap. 1 §3.3, CE1.1. Visto en: Clase 01, mazo Criptografia.md.",
+   "quiz": [
+    8
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 4009,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3033,
+  "fields": {
+   "question": 4009,
+   "choice_text": "No detecta los errores de bits sueltos",
+   "choice_text_es": "No detecta los errores de bits sueltos",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3034,
+  "fields": {
+   "question": 4009,
+   "choice_text": "Necesita una clave secreta para calcularlo",
+   "choice_text_es": "Necesita una clave secreta para calcularlo",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3035,
+  "fields": {
+   "question": 4009,
+   "choice_text": "El cálculo es público y solo depende del mensaje, así que un atacante puede alterarlo y recalcularlo",
+   "choice_text_es": "El cálculo es público y solo depende del mensaje, así que un atacante puede alterarlo y recalcularlo",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3036,
+  "fields": {
+   "question": 4009,
+   "choice_text": "Solo sirve para bloques de tamaño fijo",
+   "choice_text_es": "Solo sirve para bloques de tamaño fijo",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 4010,
+  "fields": {
+   "content": "La confidencialidad de la información se protege, entre otros mecanismos, con:",
+   "content_es": "La confidencialidad de la información se protege, entre otros mecanismos, con:",
+   "explanation": "Correcta: A - Si los datos se cifran desde el origen con una clave que solo tiene el receptor, quien intercepte el tráfico no obtiene nada. B - El sellado de tiempo acredita cuándo existió la información, no que esté secreta. C - El CRC detecta errores de transmisión y, además, es público. D - La firma acredita la autoría y la integridad; el mensaje sigue siendo legible por cualquiera. Manual: cap. 1 §4.1, CE1.1. Visto en: Clase 01, mazo Criptografia.md.",
+   "explanation_es": "Correcta: A - Si los datos se cifran desde el origen con una clave que solo tiene el receptor, quien intercepte el tráfico no obtiene nada. B - El sellado de tiempo acredita cuándo existió la información, no que esté secreta. C - El CRC detecta errores de transmisión y, además, es público. D - La firma acredita la autoría y la integridad; el mensaje sigue siendo legible por cualquiera. Manual: cap. 1 §4.1, CE1.1. Visto en: Clase 01, mazo Criptografia.md.",
+   "quiz": [
+    8
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 4010,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3037,
+  "fields": {
+   "question": 4010,
+   "choice_text": "El cifrado de los datos con una clave que solo el destinatario autorizado posee",
+   "choice_text_es": "El cifrado de los datos con una clave que solo el destinatario autorizado posee",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3038,
+  "fields": {
+   "question": 4010,
+   "choice_text": "Un sellado de tiempo",
+   "choice_text_es": "Un sellado de tiempo",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3039,
+  "fields": {
+   "question": 4010,
+   "choice_text": "Un CRC añadido al mensaje",
+   "choice_text_es": "Un CRC añadido al mensaje",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3040,
+  "fields": {
+   "question": 4010,
+   "choice_text": "Una firma digital",
+   "choice_text_es": "Una firma digital",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 4011,
+  "fields": {
+   "content": "Una de las amenazas clásicas contra la integridad del mensaje es:",
+   "content_es": "Una de las amenazas clásicas contra la integridad del mensaje es:",
+   "explanation": "Correcta: B - El atacante se coloca entre el origen y el destino y modifica la información, que llega distinta de como salió. A - Esa amenaza va contra la confidencialidad. C - Un fallo del algoritmo rompe la confidencialidad, no la integridad. D - La suplantación ataca la autenticidad de la entidad. Manual: cap. 1 §4.2, CE1.1. Visto en: Clase 01, mazo Criptografia.md.",
+   "explanation_es": "Correcta: B - El atacante se coloca entre el origen y el destino y modifica la información, que llega distinta de como salió. A - Esa amenaza va contra la confidencialidad. C - Un fallo del algoritmo rompe la confidencialidad, no la integridad. D - La suplantación ataca la autenticidad de la entidad. Manual: cap. 1 §4.2, CE1.1. Visto en: Clase 01, mazo Criptografia.md.",
+   "quiz": [
+    8
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 4011,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3041,
+  "fields": {
+   "question": 4011,
+   "choice_text": "La ingeniería social, que engaña al usuario para que entregue datos",
+   "choice_text_es": "La ingeniería social, que engaña al usuario para que entregue datos",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3042,
+  "fields": {
+   "question": 4011,
+   "choice_text": "El ataque de hombre en el medio, que se interpone y modifica lo que pasa",
+   "choice_text_es": "El ataque de hombre en el medio, que se interpone y modifica lo que pasa",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3043,
+  "fields": {
+   "question": 4011,
+   "choice_text": "El fallo del algoritmo de cifrado",
+   "choice_text_es": "El fallo del algoritmo de cifrado",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3044,
+  "fields": {
+   "question": 4011,
+   "choice_text": "La suplantación de identidad",
+   "choice_text_es": "La suplantación de identidad",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 4012,
+  "fields": {
+   "content": "Los factores de autenticación de una entidad se agrupan en tres familias:",
+   "content_es": "Los factores de autenticación de una entidad se agrupan en tres familias:",
+   "explanation": "Correcta: A - Contraseñas, tarjetas o USB, y rasgos biométricos como la huella o el iris. Se pueden combinar. B - Lo que se ve y lo que se oye son parte de lo que se es. C - Son elementos criptográficos, no factores de autenticación. D - La firma manuscrita no es un factor de autenticación automatizable. Manual: cap. 1 §4.3, CE1.1. Visto en: Clase 01, mazo Criptografia.md.",
+   "explanation_es": "Correcta: A - Contraseñas, tarjetas o USB, y rasgos biométricos como la huella o el iris. Se pueden combinar. B - Lo que se ve y lo que se oye son parte de lo que se es. C - Son elementos criptográficos, no factores de autenticación. D - La firma manuscrita no es un factor de autenticación automatizable. Manual: cap. 1 §4.3, CE1.1. Visto en: Clase 01, mazo Criptografia.md.",
+   "quiz": [
+    8
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 4012,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3045,
+  "fields": {
+   "question": 4012,
+   "choice_text": "Lo que se sabe, lo que se tiene y lo que se es",
+   "choice_text_es": "Lo que se sabe, lo que se tiene y lo que se es",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3046,
+  "fields": {
+   "question": 4012,
+   "choice_text": "Lo que se sabe, lo que se ve y lo que se oye",
+   "choice_text_es": "Lo que se sabe, lo que se ve y lo que se oye",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3047,
+  "fields": {
+   "question": 4012,
+   "choice_text": "La clave pública, la clave privada y el certificado",
+   "choice_text_es": "La clave pública, la clave privada y el certificado",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3048,
+  "fields": {
+   "question": 4012,
+   "choice_text": "La biometría, la firma manuscrita y el PIN",
+   "choice_text_es": "La biometría, la firma manuscrita y el PIN",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 4013,
+  "fields": {
+   "content": "El modo de autenticación en el que no hace falta sincronizar los relojes es:",
+   "content_es": "El modo de autenticación en el que no hace falta sincronizar los relojes es:",
+   "explanation": "Correcta: D - Es la ventaja de esta variante frente a la bidireccional: funciona en entornos donde no se puede sincronizar el reloj. A - La simple sí incluye una marca de tiempo en el mensaje que envía A. B - La unidireccional incluye la marca de tiempo, y es la que la hace dependiente del reloj. C - También lleva marcas de tiempo. Manual: cap. 1 §4.3, CE1.1. Visto en: Clase 01, mazo Criptografia.md.",
+   "explanation_es": "Correcta: D - Es la ventaja de esta variante frente a la bidireccional: funciona en entornos donde no se puede sincronizar el reloj. A - La simple sí incluye una marca de tiempo en el mensaje que envía A. B - La unidireccional incluye la marca de tiempo, y es la que la hace dependiente del reloj. C - También lleva marcas de tiempo. Manual: cap. 1 §4.3, CE1.1. Visto en: Clase 01, mazo Criptografia.md.",
+   "quiz": [
+    8
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 4013,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3049,
+  "fields": {
+   "question": 4013,
+   "choice_text": "La autenticación simple, porque no usa marcas de tiempo",
+   "choice_text_es": "La autenticación simple, porque no usa marcas de tiempo",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3050,
+  "fields": {
+   "question": 4013,
+   "choice_text": "La autenticación fuerte unidireccional, porque firma con marca de tiempo",
+   "choice_text_es": "La autenticación fuerte unidireccional, porque firma con marca de tiempo",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3051,
+  "fields": {
+   "question": 4013,
+   "choice_text": "La autenticación fuerte bidireccional, porque ambas partes se firman",
+   "choice_text_es": "La autenticación fuerte bidireccional, porque ambas partes se firman",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3052,
+  "fields": {
+   "question": 4013,
+   "choice_text": "La autenticación fuerte de tres sentidos, que añade un mensaje y permite prescindir de las marcas de tiempo",
+   "choice_text_es": "La autenticación fuerte de tres sentidos, que añade un mensaje y permite prescindir de las marcas de tiempo",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 4014,
+  "fields": {
+   "content": "El no repudio en origen es la prueba que:",
+   "content_es": "El no repudio en origen es la prueba que:",
+   "explanation": "Correcta: C - El no repudio en origen engloba el no repudio en creación y el no repudio en envío. A - Eso es el no repudio en recepción. B - Eso es el no repudio en presentación. D - Eso es el no repudio en conocimiento. Manual: cap. 1 §4.4, CE1.1. Visto en: Clase 01, mazo Criptografia.md.",
+   "explanation_es": "Correcta: C - El no repudio en origen engloba el no repudio en creación y el no repudio en envío. A - Eso es el no repudio en recepción. B - Eso es el no repudio en presentación. D - Eso es el no repudio en conocimiento. Manual: cap. 1 §4.4, CE1.1. Visto en: Clase 01, mazo Criptografia.md.",
+   "quiz": [
+    8
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 4014,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3053,
+  "fields": {
+   "question": 4014,
+   "choice_text": "Garantiza que el receptor ha recibido el mensaje",
+   "choice_text_es": "Garantiza que el receptor ha recibido el mensaje",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3054,
+  "fields": {
+   "question": 4014,
+   "choice_text": "Garantiza que la autoridad de entrega ha aceptado el mensaje",
+   "choice_text_es": "Garantiza que la autoridad de entrega ha aceptado el mensaje",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3055,
+  "fields": {
+   "question": 4014,
+   "choice_text": "Garantiza que el emisor creó el contenido y lo envió",
+   "choice_text_es": "Garantiza que el emisor creó el contenido y lo envió",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3056,
+  "fields": {
+   "question": 4014,
+   "choice_text": "Garantiza que el mensaje fue conocido por el destinatario",
+   "choice_text_es": "Garantiza que el mensaje fue conocido por el destinatario",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 4015,
+  "fields": {
+   "content": "Para poder imputar una acción a un usuario hay que:",
+   "content_es": "Para poder imputar una acción a un usuario hay que:",
+   "explanation": "Correcta: B - La imputabilidad es el seguimiento de las acciones; para garantizarlo se usan firmas y, además, el registro de auditoría. A - El cifrado esconde el registro, pero no permite después atribuirle la acción. C - La copia externa no dice quién hizo la acción. D - El sellado de tiempo dice cuándo, no quién. Manual: cap. 1 §4.5, CE1.1. Visto en: Clase 01, mazo Criptografia.md.",
+   "explanation_es": "Correcta: B - La imputabilidad es el seguimiento de las acciones; para garantizarlo se usan firmas y, además, el registro de auditoría. A - El cifrado esconde el registro, pero no permite después atribuirle la acción. C - La copia externa no dice quién hizo la acción. D - El sellado de tiempo dice cuándo, no quién. Manual: cap. 1 §4.5, CE1.1. Visto en: Clase 01, mazo Criptografia.md.",
+   "quiz": [
+    8
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 4015,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3057,
+  "fields": {
+   "question": 4015,
+   "choice_text": "Cifrar el registro con la clave del usuario",
+   "choice_text_es": "Cifrar el registro con la clave del usuario",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3058,
+  "fields": {
+   "question": 4015,
+   "choice_text": "Conseguir el no repudio de las acciones y acompañarlo de mecanismos como los ficheros de auditoría",
+   "choice_text_es": "Conseguir el no repudio de las acciones y acompañarlo de mecanismos como los ficheros de auditoría",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3059,
+  "fields": {
+   "question": 4015,
+   "choice_text": "Guardar una copia del registro fuera del sistema",
+   "choice_text_es": "Guardar una copia del registro fuera del sistema",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3060,
+  "fields": {
+   "question": 4015,
+   "choice_text": "Usar un sellado de tiempo en el registro",
+   "choice_text_es": "Usar un sellado de tiempo en el registro",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 4016,
+  "fields": {
+   "content": "El sellado de tiempo se normaliza según:",
+   "content_es": "El sellado de tiempo se normaliza según:",
+   "explanation": "Correcta: B - La autoridad de sellado de tiempo firma la información junto con una marca de tiempo, y la fiabilidad de esa hora exige una fuente fiable de tiempo. A - Ese estándar regula la autenticación de entidades. C - Esa ley regula los tipos de firma, no el sellado de tiempo. D - X.509 es el formato de los certificados digitales. Manual: cap. 1 §4.6, CE1.1. Visto en: Clase 01, mazo Criptografia.md.",
+   "explanation_es": "Correcta: B - La autoridad de sellado de tiempo firma la información junto con una marca de tiempo, y la fiabilidad de esa hora exige una fuente fiable de tiempo. A - Ese estándar regula la autenticación de entidades. C - Esa ley regula los tipos de firma, no el sellado de tiempo. D - X.509 es el formato de los certificados digitales. Manual: cap. 1 §4.6, CE1.1. Visto en: Clase 01, mazo Criptografia.md.",
+   "quiz": [
+    8
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 4016,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3061,
+  "fields": {
+   "question": 4016,
+   "choice_text": "La ISO/IEC 9594-8",
+   "choice_text_es": "La ISO/IEC 9594-8",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3062,
+  "fields": {
+   "question": 4016,
+   "choice_text": "El RFC 3161, propuesto por el IETF",
+   "choice_text_es": "El RFC 3161, propuesto por el IETF",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3063,
+  "fields": {
+   "question": 4016,
+   "choice_text": "La Ley 59/2003 de firma electrónica",
+   "choice_text_es": "La Ley 59/2003 de firma electrónica",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3064,
+  "fields": {
+   "question": 4016,
+   "choice_text": "El estándar X.509",
+   "choice_text_es": "El estándar X.509",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 4017,
+  "fields": {
+   "content": "El principio de Kerckhoffs dice que:",
+   "content_es": "El principio de Kerckhoffs dice que:",
+   "explanation": "Correcta: D - Los algoritmos son bien conocidos; la fortaleza está en que la clave no se sepa. A - Es justo al revés: los algoritmos son públicos y conocidos. B - La longitud importa, pero no es lo que enuncia el principio. C - El principio habla de la clave, no del canal. Manual: cap. 1 §5, CE1.1. Visto en: Clase 02, mazo Clave-publica-y-modos.md.",
+   "explanation_es": "Correcta: D - Los algoritmos son bien conocidos; la fortaleza está en que la clave no se sepa. A - Es justo al revés: los algoritmos son públicos y conocidos. B - La longitud importa, pero no es lo que enuncia el principio. C - El principio habla de la clave, no del canal. Manual: cap. 1 §5, CE1.1. Visto en: Clase 02, mazo Clave-publica-y-modos.md.",
+   "quiz": [
+    8
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 4017,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3065,
+  "fields": {
+   "question": 4017,
+   "choice_text": "El algoritmo debe mantenerse en secreto",
+   "choice_text_es": "El algoritmo debe mantenerse en secreto",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3066,
+  "fields": {
+   "question": 4017,
+   "choice_text": "La seguridad del sistema depende de la longitud de la clave",
+   "choice_text_es": "La seguridad del sistema depende de la longitud de la clave",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3067,
+  "fields": {
+   "question": 4017,
+   "choice_text": "El canal de comunicación debe ser secreto",
+   "choice_text_es": "El canal de comunicación debe ser secreto",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3068,
+  "fields": {
+   "question": 4017,
+   "choice_text": "Solo el secreto de la clave proporciona un cifrado seguro",
+   "choice_text_es": "Solo el secreto de la clave proporciona un cifrado seguro",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 4018,
+  "fields": {
+   "content": "Como inconvenientes de la criptografía de clave privada, el manual señala que:",
+   "content_es": "Como inconvenientes de la criptografía de clave privada, el manual señala que:",
+   "explanation": "Correcta: C - Con n usuarios hacen falta n(n-1)/2 claves, y ninguna entidad puede probar la identidad de la otra. A - Es la rápida; la lenta es la de clave pública. B - Conviven: lo habitual es el criptosistema híbrido. D - Se aplica perfectamente; es la que se usa para los datos voluminosos. Manual: cap. 1 §5.1, CE1.1. Visto en: Clase 02, mazo Clave-publica-y-modos.md.",
+   "explanation_es": "Correcta: C - Con n usuarios hacen falta n(n-1)/2 claves, y ninguna entidad puede probar la identidad de la otra. A - Es la rápida; la lenta es la de clave pública. B - Conviven: lo habitual es el criptosistema híbrido. D - Se aplica perfectamente; es la que se usa para los datos voluminosos. Manual: cap. 1 §5.1, CE1.1. Visto en: Clase 02, mazo Clave-publica-y-modos.md.",
+   "quiz": [
+    8
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 4018,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3069,
+  "fields": {
+   "question": 4018,
+   "choice_text": "Es demasiado lenta para datos de gran tamaño",
+   "choice_text_es": "Es demasiado lenta para datos de gran tamaño",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3070,
+  "fields": {
+   "question": 4018,
+   "choice_text": "Los algoritmos de clave pública la han sustituido",
+   "choice_text_es": "Los algoritmos de clave pública la han sustituido",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3071,
+  "fields": {
+   "question": 4018,
+   "choice_text": "Cada entidad no puede autenticar a la otra, solo sabe que conoce la clave, y el número de claves crece mucho",
+   "choice_text_es": "Cada entidad no puede autenticar a la otra, solo sabe que conoce la clave, y el número de claves crece mucho",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3072,
+  "fields": {
+   "question": 4018,
+   "choice_text": "No se puede aplicar a ficheros de gran tamaño",
+   "choice_text_es": "No se puede aplicar a ficheros de gran tamaño",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 4019,
+  "fields": {
+   "content": "El cifrador de Vernam, o One Time Pad, usa como operación de cifrado:",
+   "content_es": "El cifrador de Vernam, o One Time Pad, usa como operación de cifrado:",
+   "explanation": "Correcta: B - El XOR da un 1 cuando los bits son distintos y un 0 cuando son iguales. A - Eso es lo que hacen César y sus derivados. C - La modular es la base de Vigenère. D - Eso es lo que hacen los cifradores de bloque. Manual: cap. 1 §5.1, CE1.3. Visto en: Clase 02, mazo Clave-publica-y-modos.md.",
+   "explanation_es": "Correcta: B - El XOR da un 1 cuando los bits son distintos y un 0 cuando son iguales. A - Eso es lo que hacen César y sus derivados. C - La modular es la base de Vigenère. D - Eso es lo que hacen los cifradores de bloque. Manual: cap. 1 §5.1, CE1.3. Visto en: Clase 02, mazo Clave-publica-y-modos.md.",
+   "quiz": [
+    8
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 4019,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3073,
+  "fields": {
+   "question": 4019,
+   "choice_text": "La sustitución monoalfabética",
+   "choice_text_es": "La sustitución monoalfabética",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3074,
+  "fields": {
+   "question": 4019,
+   "choice_text": "El OR-exclusivo (XOR) entre la serie cifrante y el texto en claro",
+   "choice_text_es": "El OR-exclusivo (XOR) entre la serie cifrante y el texto en claro",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3075,
+  "fields": {
+   "question": 4019,
+   "choice_text": "La aritmética modular sobre el alfabeto",
+   "choice_text_es": "La aritmética modular sobre el alfabeto",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3076,
+  "fields": {
+   "question": 4019,
+   "choice_text": "La permutación de los bits del bloque",
+   "choice_text_es": "La permutación de los bits del bloque",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 4020,
+  "fields": {
+   "content": "En un cifrador de flujo autosíncrono, la serie cifrante se genera a partir de:",
+   "content_es": "En un cifrador de flujo autosíncrono, la serie cifrante se genera a partir de:",
+   "explanation": "Correcta: D - Por eso el descifrado depende de lo que precede al criptograma y la sincronización se recupera sola. A - Depende de un conjunto fijo de caracteres previamente cifrados. B - Eso es el modo CTR. C - El IV es lo que distingue a CBC, CFB y OFB. Manual: cap. 1 §5.1, CE1.2. Visto en: Clase 02, mazo Clave-publica-y-modos.md.",
+   "explanation_es": "Correcta: D - Por eso el descifrado depende de lo que precede al criptograma y la sincronización se recupera sola. A - Depende de un conjunto fijo de caracteres previamente cifrados. B - Eso es el modo CTR. C - El IV es lo que distingue a CBC, CFB y OFB. Manual: cap. 1 §5.1, CE1.2. Visto en: Clase 02, mazo Clave-publica-y-modos.md.",
+   "quiz": [
+    8
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 4020,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3077,
+  "fields": {
+   "question": 4020,
+   "choice_text": "La clave base y del texto en claro, así que depende de lo que se cifra",
+   "choice_text_es": "La clave base y del texto en claro, así que depende de lo que se cifra",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3078,
+  "fields": {
+   "question": 4020,
+   "choice_text": "Un contador que se incrementa en cada bloque",
+   "choice_text_es": "Un contador que se incrementa en cada bloque",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3079,
+  "fields": {
+   "question": 4020,
+   "choice_text": "Un vector de inicialización que se renueva en cada bloque",
+   "choice_text_es": "Un vector de inicialización que se renueva en cada bloque",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3080,
+  "fields": {
+   "question": 4020,
+   "choice_text": "La clave base y de un conjunto fijo de caracteres previamente cifrados",
+   "choice_text_es": "La clave base y de un conjunto fijo de caracteres previamente cifrados",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 4021,
+  "fields": {
+   "content": "El modo de operación ECB (Electronic Code Book) tiene como característica:",
+   "content_es": "El modo de operación ECB (Electronic Code Book) tiene como característica:",
+   "explanation": "Correcta: A - Como cada bloque se cifra por separado, los bloques repetidos se ven y son atacables por estadística. A cambio, no propaga errores entre bloques. B - Eso es CBC. C - El IV es de CBC, CFB y OFB; ECB no lo tiene. D - Eso es propio de CTR. Manual: cap. 1 §5.1, CE1.2. Visto en: Clase 02, mazo Clave-publica-y-modos.md.",
+   "explanation_es": "Correcta: A - Como cada bloque se cifra por separado, los bloques repetidos se ven y son atacables por estadística. A cambio, no propaga errores entre bloques. B - Eso es CBC. C - El IV es de CBC, CFB y OFB; ECB no lo tiene. D - Eso es propio de CTR. Manual: cap. 1 §5.1, CE1.2. Visto en: Clase 02, mazo Clave-publica-y-modos.md.",
+   "quiz": [
+    8
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 4021,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3081,
+  "fields": {
+   "question": 4021,
+   "choice_text": "Que un mismo bloque de entrada produce siempre el mismo bloque de salida, lo que filtra patrones",
+   "choice_text_es": "Que un mismo bloque de entrada produce siempre el mismo bloque de salida, lo que filtra patrones",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3082,
+  "fields": {
+   "question": 4021,
+   "choice_text": "Que el cifrado de un bloque depende del bloque cifrado anterior",
+   "choice_text_es": "Que el cifrado de un bloque depende del bloque cifrado anterior",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3083,
+  "fields": {
+   "question": 4021,
+   "choice_text": "Que necesita un vector de inicialización",
+   "choice_text_es": "Que necesita un vector de inicialización",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3084,
+  "fields": {
+   "question": 4021,
+   "choice_text": "Que permite el acceso aleatorio a los datos",
+   "choice_text_es": "Que permite el acceso aleatorio a los datos",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 4022,
+  "fields": {
+   "content": "En el modo CBC, un error de transmisión en el primer bloque cifrado afecta a:",
+   "content_es": "En el modo CBC, un error de transmisión en el primer bloque cifrado afecta a:",
+   "explanation": "Correcta: B - Como cada bloque se descifra con el XOR del bloque cifrado anterior, el error se extiende al bloque siguiente. A - Lo que no propaga errores es ECB: en CBC el error se extiende al bloque siguiente. C - La propagación se detiene: son dos bloques, no todos. D - No se puede recalcular: el error viene del canal. Manual: cap. 1 §5.1, CE1.2. Visto en: Clase 02, mazo Clave-publica-y-modos.md.",
+   "explanation_es": "Correcta: B - Como cada bloque se descifra con el XOR del bloque cifrado anterior, el error se extiende al bloque siguiente. A - Lo que no propaga errores es ECB: en CBC el error se extiende al bloque siguiente. C - La propagación se detiene: son dos bloques, no todos. D - No se puede recalcular: el error viene del canal. Manual: cap. 1 §5.1, CE1.2. Visto en: Clase 02, mazo Clave-publica-y-modos.md.",
+   "quiz": [
+    8
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 4022,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3085,
+  "fields": {
+   "question": 4022,
+   "choice_text": "Solo a ese bloque",
+   "choice_text_es": "Solo a ese bloque",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3086,
+  "fields": {
+   "question": 4022,
+   "choice_text": "Ese bloque y al siguiente",
+   "choice_text_es": "Ese bloque y al siguiente",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3087,
+  "fields": {
+   "question": 4022,
+   "choice_text": "A todos los bloques del mensaje",
+   "choice_text_es": "A todos los bloques del mensaje",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3088,
+  "fields": {
+   "question": 4022,
+   "choice_text": "A ningún bloque, porque se puede recalcular",
+   "choice_text_es": "A ningún bloque, porque se puede recalcular",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 4023,
+  "fields": {
+   "content": "Entre los modos de operación de bloque, el que propaga el error de transmisión en un único bloque y permite acceso aleatorio es:",
+   "content_es": "Entre los modos de operación de bloque, el que propaga el error de transmisión en un único bloque y permite acceso aleatorio es:",
+   "explanation": "Correcta: D - Es el modo contador: cada bloque se cifra con el XOR de un contador cifrado, y por eso se puede leer un bloque suelto sin descifrar los anteriores. A - CBC propaga el error a dos bloques y no da acceso aleatorio. B - CFB también propaga el error en dos bloques. C - OFB propaga el error en un único bloque, pero el acceso aleatorio es cosa de CTR. Manual: cap. 1 §5.1, CE1.2. Visto en: Clase 02, mazo Clave-publica-y-modos.md.",
+   "explanation_es": "Correcta: D - Es el modo contador: cada bloque se cifra con el XOR de un contador cifrado, y por eso se puede leer un bloque suelto sin descifrar los anteriores. A - CBC propaga el error a dos bloques y no da acceso aleatorio. B - CFB también propaga el error en dos bloques. C - OFB propaga el error en un único bloque, pero el acceso aleatorio es cosa de CTR. Manual: cap. 1 §5.1, CE1.2. Visto en: Clase 02, mazo Clave-publica-y-modos.md.",
+   "quiz": [
+    8
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 4023,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3089,
+  "fields": {
+   "question": 4023,
+   "choice_text": "CBC",
+   "choice_text_es": "CBC",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3090,
+  "fields": {
+   "question": 4023,
+   "choice_text": "CFB",
+   "choice_text_es": "CFB",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3091,
+  "fields": {
+   "question": 4023,
+   "choice_text": "OFB",
+   "choice_text_es": "OFB",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3092,
+  "fields": {
+   "question": 4023,
+   "choice_text": "CTR",
+   "choice_text_es": "CTR",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 4024,
+  "fields": {
+   "content": "La criptografía de clave pública se apoya en problemas matemáticos que son muy caros de resolver con ordenador. En concreto:",
+   "content_es": "La criptografía de clave pública se apoya en problemas matemáticos que son muy caros de resolver con ordenador. En concreto:",
+   "explanation": "Correcta: A - Factorizar un número grande o resolver un logaritmo discreto son problemas NP-completos en la práctica. B - Son conceptos de la teoría de la información, no problemas de cálculo. C - Ninguno de los dos es el problema en el que se apoyan. D - No tiene relación con la criptografía. Manual: cap. 1 §5.2, CE1.4. Visto en: Clase 03, mazo Cifrado-asimetrico-y-sobre-digital.md.",
+   "explanation_es": "Correcta: A - Factorizar un número grande o resolver un logaritmo discreto son problemas NP-completos en la práctica. B - Son conceptos de la teoría de la información, no problemas de cálculo. C - Ninguno de los dos es el problema en el que se apoyan. D - No tiene relación con la criptografía. Manual: cap. 1 §5.2, CE1.4. Visto en: Clase 03, mazo Cifrado-asimetrico-y-sobre-digital.md.",
+   "quiz": [
+    8
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 4024,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3093,
+  "fields": {
+   "question": 4024,
+   "choice_text": "El problema de la factorización, en RSA, y el del logaritmo discreto, en El Gamal",
+   "choice_text_es": "El problema de la factorización, en RSA, y el del logaritmo discreto, en El Gamal",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3094,
+  "fields": {
+   "question": 4024,
+   "choice_text": "El problema de la entropía, en RSA, y el de la redundancia, en El Gamal",
+   "choice_text_es": "El problema de la entropía, en RSA, y el de la redundancia, en El Gamal",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3095,
+  "fields": {
+   "question": 4024,
+   "choice_text": "El problema de la partición, en RSA, y el de la ordenación de tareas, en El Gamal",
+   "choice_text_es": "El problema de la partición, en RSA, y el de la ordenación de tareas, en El Gamal",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3096,
+  "fields": {
+   "question": 4024,
+   "choice_text": "El problema del Traveling Salesman, en ambos",
+   "choice_text_es": "El problema del Traveling Salesman, en ambos",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 4025,
+  "fields": {
+   "content": "Entre las ventajas de la criptografía de curvas elípticas sobre la de clave pública clásica:",
+   "content_es": "Entre las ventajas de la criptografía de curvas elípticas sobre la de clave pública clásica:",
+   "explanation": "Correcta: B - Con claves cortas bajan la memoria, el coste de cálculo y el de transmisión, y por eso valen para dispositivos con recursos limitados. A - Es justo al revés: usa claves más cortas. C - El tipo de certificado es independiente del algoritmo. D - Se apoyan en variantes de ese mismo problema. Manual: cap. 1 §5.3, CE1.4. Visto en: Clase 03, mazo Cifrado-asimetrico-y-sobre-digital.md.",
+   "explanation_es": "Correcta: B - Con claves cortas bajan la memoria, el coste de cálculo y el de transmisión, y por eso valen para dispositivos con recursos limitados. A - Es justo al revés: usa claves más cortas. C - El tipo de certificado es independiente del algoritmo. D - Se apoyan en variantes de ese mismo problema. Manual: cap. 1 §5.3, CE1.4. Visto en: Clase 03, mazo Cifrado-asimetrico-y-sobre-digital.md.",
+   "quiz": [
+    8
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 4025,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3097,
+  "fields": {
+   "question": 4025,
+   "choice_text": "Que el cifrado es más rápido porque usa claves más largas",
+   "choice_text_es": "Que el cifrado es más rápido porque usa claves más largas",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3098,
+  "fields": {
+   "question": 4025,
+   "choice_text": "Que ofrecen la misma seguridad con claves mucho más cortas, lo que las hace aptas para móviles y tarjetas inteligentes",
+   "choice_text_es": "Que ofrecen la misma seguridad con claves mucho más cortas, lo que las hace aptas para móviles y tarjetas inteligentes",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3099,
+  "fields": {
+   "question": 4025,
+   "choice_text": "Que el certificado que las contiene es de tipo X.509 y no PGP",
+   "choice_text_es": "Que el certificado que las contiene es de tipo X.509 y no PGP",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3100,
+  "fields": {
+   "question": 4025,
+   "choice_text": "Que no dependen del problema del logaritmo discreto",
+   "choice_text_es": "Que no dependen del problema del logaritmo discreto",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 4026,
+  "fields": {
+   "content": "En un criptosistema híbrido, el mensaje se cifra con un algoritmo de clave privada y la clave de sesión con un algoritmo de clave pública:",
+   "content_es": "En un criptosistema híbrido, el mensaje se cifra con un algoritmo de clave privada y la clave de sesión con un algoritmo de clave pública:",
+   "explanation": "Correcta: C - Así se consigue lo mejor de las dos: la rapidez del simétrico para el volumen de datos y la comodidad de repartir la clave sin canal seguro. A - La clave de sesión se protege con la clave pública del destinatario. B - La clave privada del receptor es para descifrar, no para cifrar. D - Si ya compartieran la clave secreta, no haría falta el cifrado asimétrico. Manual: cap. 1 §8.3, CE1.4. Visto en: Clase 04, mazo Criptografia-hibrida.md.",
+   "explanation_es": "Correcta: C - Así se consigue lo mejor de las dos: la rapidez del simétrico para el volumen de datos y la comodidad de repartir la clave sin canal seguro. A - La clave de sesión se protege con la clave pública del destinatario. B - La clave privada del receptor es para descifrar, no para cifrar. D - Si ya compartieran la clave secreta, no haría falta el cifrado asimétrico. Manual: cap. 1 §8.3, CE1.4. Visto en: Clase 04, mazo Criptografia-hibrida.md.",
+   "quiz": [
+    8
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 4026,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3101,
+  "fields": {
+   "question": 4026,
+   "choice_text": "Con la clave pública del emisor, para que solo él pueda descifrarla",
+   "choice_text_es": "Con la clave pública del emisor, para que solo él pueda descifrarla",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3102,
+  "fields": {
+   "question": 4026,
+   "choice_text": "Con la clave privada del receptor",
+   "choice_text_es": "Con la clave privada del receptor",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3103,
+  "fields": {
+   "question": 4026,
+   "choice_text": "Con la clave pública del destinatario, y el receptor la recupera con su clave privada",
+   "choice_text_es": "Con la clave pública del destinatario, y el receptor la recupera con su clave privada",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3104,
+  "fields": {
+   "question": 4026,
+   "choice_text": "Con la clave maestra que comparten emisor y receptor",
+   "choice_text_es": "Con la clave maestra que comparten emisor y receptor",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 4027,
+  "fields": {
+   "content": "El algoritmo DES, adoptado por el NIST en 1977, se caracteriza por:",
+   "content_es": "El algoritmo DES, adoptado por el NIST en 1977, se caracteriza por:",
+   "explanation": "Correcta: D - Fue atacado con éxito en 1998, y en 2001 lo sustituyó AES. A - Esa es la ficha de IDEA: bloques de 64 bits, claves de 128 y 8 rondas. B - Es de clave privada; el primer algoritmo de clave pública fue RSA, en 1978. C - El Vernam es un cifrador de flujo, y DES es de bloque. Manual: cap. 1 §8.1, CE1.3. Visto en: Clase 02, mazo Clave-publica-y-modos.md.",
+   "explanation_es": "Correcta: D - Fue atacado con éxito en 1998, y en 2001 lo sustituyó AES. A - Esa es la ficha de IDEA: bloques de 64 bits, claves de 128 y 8 rondas. B - Es de clave privada; el primer algoritmo de clave pública fue RSA, en 1978. C - El Vernam es un cifrador de flujo, y DES es de bloque. Manual: cap. 1 §8.1, CE1.3. Visto en: Clase 02, mazo Clave-publica-y-modos.md.",
+   "quiz": [
+    8
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 4027,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3105,
+  "fields": {
+   "question": 4027,
+   "choice_text": "Usar claves de 128 bits y 10 rondas",
+   "choice_text_es": "Usar claves de 128 bits y 10 rondas",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3106,
+  "fields": {
+   "question": 4027,
+   "choice_text": "Ser el primer cifrador de clave pública",
+   "choice_text_es": "Ser el primer cifrador de clave pública",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3107,
+  "fields": {
+   "question": 4027,
+   "choice_text": "Usar el cifrado de Vernam",
+   "choice_text_es": "Usar el cifrado de Vernam",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3108,
+  "fields": {
+   "question": 4027,
+   "choice_text": "Usar una clave de 64 bits, bloques del mismo tamaño y 16 rondas con subclaves de 48 bits",
+   "choice_text_es": "Usar una clave de 64 bits, bloques del mismo tamaño y 16 rondas con subclaves de 48 bits",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 4028,
+  "fields": {
+   "content": "Las cuatro funciones que se aplican en cada ronda del algoritmo AES son:",
+   "content_es": "Las cuatro funciones que se aplican en cada ronda del algoritmo AES son:",
+   "explanation": "Correcta: A - SubBytes es la caja S, ShiftRows desplaza filas, MixColumns multiplica columnas por un polinomio fijo y AddRoundKey hace el XOR con la clave de ronda. B - Son las fases del algoritmo DES. C - Ni Expand ni XOR con la clave de ronda son funciones propias de AES. D - Ninguna de esas dos primeras es una función de AES. Manual: cap. 1 §8.1, CE1.3. Visto en: Clase 02, mazo Clave-publica-y-modos.md.",
+   "explanation_es": "Correcta: A - SubBytes es la caja S, ShiftRows desplaza filas, MixColumns multiplica columnas por un polinomio fijo y AddRoundKey hace el XOR con la clave de ronda. B - Son las fases del algoritmo DES. C - Ni Expand ni XOR con la clave de ronda son funciones propias de AES. D - Ninguna de esas dos primeras es una función de AES. Manual: cap. 1 §8.1, CE1.3. Visto en: Clase 02, mazo Clave-publica-y-modos.md.",
+   "quiz": [
+    8
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 4028,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3109,
+  "fields": {
+   "question": 4028,
+   "choice_text": "SubBytes, ShiftRows, MixColumns y AddRoundKey",
+   "choice_text_es": "SubBytes, ShiftRows, MixColumns y AddRoundKey",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3110,
+  "fields": {
+   "question": 4028,
+   "choice_text": "IP, E, S y P",
+   "choice_text_es": "IP, E, S y P",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3111,
+  "fields": {
+   "question": 4028,
+   "choice_text": "SubBytes, RoundKey, XOR y Expand",
+   "choice_text_es": "SubBytes, RoundKey, XOR y Expand",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3112,
+  "fields": {
+   "question": 4028,
+   "choice_text": "KeyGen, MixRows, AddRoundKey y FinalRound",
+   "choice_text_es": "KeyGen, MixRows, AddRoundKey y FinalRound",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 4029,
+  "fields": {
+   "content": "Una función resumen criptográficamente segura debe satisfacer tres propiedades:",
+   "content_es": "Una función resumen criptográficamente segura debe satisfacer tres propiedades:",
+   "explanation": "Correcta: C - Son distintas entre sí: la segunda y la de colisiones no se pueden confundir, como pasa con dos personas que nacen el mismo día. A - Son las propiedades de seguridad del sistema, no de la función resumen. B - La aleatoriedad no es una propiedad de la función: la clave la aporta quien la usa. D - Las tres son propiedades de las funciones resumen, pero no las que las hacen seguras frente al atacante. Manual: cap. 1 §10, CE1.1. Visto en: Clase 03, mazo Cifrado-asimetrico-y-sobre-digital.md.",
+   "explanation_es": "Correcta: C - Son distintas entre sí: la segunda y la de colisiones no se pueden confundir, como pasa con dos personas que nacen el mismo día. A - Son las propiedades de seguridad del sistema, no de la función resumen. B - La aleatoriedad no es una propiedad de la función: la clave la aporta quien la usa. D - Las tres son propiedades de las funciones resumen, pero no las que las hacen seguras frente al atacante. Manual: cap. 1 §10, CE1.1. Visto en: Clase 03, mazo Cifrado-asimetrico-y-sobre-digital.md.",
+   "quiz": [
+    8
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 4029,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3113,
+  "fields": {
+   "question": 4029,
+   "choice_text": "Confidencialidad, integridad y no repudio",
+   "choice_text_es": "Confidencialidad, integridad y no repudio",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3114,
+  "fields": {
+   "question": 4029,
+   "choice_text": "Rapidez, difusión y aleatoriedad de la clave",
+   "choice_text_es": "Rapidez, difusión y aleatoriedad de la clave",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3115,
+  "fields": {
+   "question": 4029,
+   "choice_text": "Resistencia a la primera preimagen, a la segunda preimagen y a colisiones",
+   "choice_text_es": "Resistencia a la primera preimagen, a la segunda preimagen y a colisiones",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3116,
+  "fields": {
+   "question": 4029,
+   "choice_text": "Determinismo, eficiencia y efecto avalancha",
+   "choice_text_es": "Determinismo, eficiencia y efecto avalancha",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 4030,
+  "fields": {
+   "content": "Respecto a la ley española de firma electrónica, la Ley 6/2020:",
+   "content_es": "Respecto a la ley española de firma electrónica, la Ley 6/2020:",
+   "explanation": "Correcta: C - Si usa un certificado reconocido y un dispositivo seguro de creación de firma, tiene la misma equivalencia jurídica. A - La Ley 6/2020 deroga la 59/2003. B - Solo las personas físicas pueden firmar electrónicamente; una persona jurídica actúa mediante el certificado de quien la representa legalmente. D - El periodo de vigencia no puede pasar de cinco años, y la información se conserva quince años. Manual: cap. 1 §11, CE1.1. Visto en: Clase 03, mazo Cifrado-asimetrico-y-sobre-digital.md.",
+   "explanation_es": "Correcta: C - Si usa un certificado reconocido y un dispositivo seguro de creación de firma, tiene la misma equivalencia jurídica. A - La Ley 6/2020 deroga la 59/2003. B - Solo las personas físicas pueden firmar electrónicamente; una persona jurídica actúa mediante el certificado de quien la representa legalmente. D - El periodo de vigencia no puede pasar de cinco años, y la información se conserva quince años. Manual: cap. 1 §11, CE1.1. Visto en: Clase 03, mazo Cifrado-asimetrico-y-sobre-digital.md.",
+   "quiz": [
+    8
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 4030,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3117,
+  "fields": {
+   "question": 4030,
+   "choice_text": "Mantiene la Ley 59/2003 como norma principal",
+   "choice_text_es": "Mantiene la Ley 59/2003 como norma principal",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3118,
+  "fields": {
+   "question": 4030,
+   "choice_text": "Permite que las personas jurídicas firmen electrónicamente con su propio certificado",
+   "choice_text_es": "Permite que las personas jurídicas firmen electrónicamente con su propio certificado",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3119,
+  "fields": {
+   "question": 4030,
+   "choice_text": "Equipara la firma electrónica cualificada con la firma manuscrita",
+   "choice_text_es": "Equipara la firma electrónica cualificada con la firma manuscrita",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 3120,
+  "fields": {
+   "question": 4030,
+   "choice_text": "Permite que los certificados cualificados tengan una vigencia superior a cinco años",
+   "choice_text_es": "Permite que los certificados cualificados tengan una vigencia superior a cinco años",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.quiz",
+  "pk": 8,
+  "fields": {
+   "course": 17,
+   "title": "Repaso Capítulo 1 · Criptografía",
+   "title_es": "Repaso Capítulo 1 · Criptografía",
+   "slug": "repaso-cap1-mf0489-3",
+   "description": "Repaso del capítulo 1 del manual (criptografía), que es la UA1 del módulo y lo que evalúa la E1. 30 preguntas de opción múltiple. Se corrigen solas y, al responder, sale la respuesta correcta con el motivo de cada opción descartada. Se puede repetir tantas veces como quieras.",
+   "description_es": "Repaso del capítulo 1 del manual (criptografía), que es la UA1 del módulo y lo que evalúa la E1. 30 preguntas de opción múltiple. Se corrigen solas y, al responder, sale la respuesta correcta con el motivo de cada opción descartada. Se puede repetir tantas veces como quieras.",
+   "category": "practice",
+   "draft": false,
+   "single_attempt": false,
+   "pass_mark": 0,
+   "timestamp": "2026-10-31T00:00:00Z",
+   "random_order": true,
+   "answers_at_end": false,
+   "exam_paper": false
+  }
+ }
+]
