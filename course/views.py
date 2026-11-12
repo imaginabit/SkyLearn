@@ -208,7 +208,7 @@ def program_delete(request, pk):
 # Un t??tulo que empieza por un n??mero ("0 ?? El m??dulo", "7 ?? Herramientas")
 # es una presentaci??n numerada. Esas van primero y en orden num??rico; el
 # resto de los documentos conserva el orden por fecha de subida.
-NUMERO_DE_TITULO = re.compile(r"^\s*(\d+)\b")
+NUMERO_DE_TITULO = re.compile(r"^(?:Actividad\s+)?(\d+)\s*\u00b7")
 
 
 def _orden_de_lectura(documento):
