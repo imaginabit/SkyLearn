@@ -83,7 +83,7 @@
 </div>
 {% endif %}
 
-{% if decks and not deck %}
+{% if decks %}
 <div class="container mt-3">
     <div class="card">
         <div class="card-header py-2">
@@ -95,10 +95,22 @@
                 <i class="fas fa-file-code me-1"></i>
                 <a href="{% url 'deck_abrir' slug=course.slug file_id=mazo.pk %}" target="_blank" rel="noopener"
                     class="text-decoration-none">{{ mazo.title }}</a>
+                {% if not mazo.visible %}
+                <span class="badge bg-secondary">{% trans 'Oculto' %}</span>
+                {% endif %}
                 <a href="{% url 'upload_file_download' slug=course.slug file_id=mazo.pk %}"
                     class="btn btn-sm btn-outline-secondary ms-auto">
                     <i class="fas fa-download me-1"></i>{% trans 'Descargar HTML' %}
                 </a>
+                {% if request.user.is_superuser or request.user.is_lecturer %}
+                <div class="update-delete">
+                    <a href="{% url 'upload_file_edit' slug=course.slug file_id=mazo.pk %}"
+                        class="update" title="{% trans 'Edit' %}">
+                        <i class="fas fa-pencil-alt"></i>
+                    </a>
+                    {% url 'upload_file_delete' slug=course.slug file_id=mazo.pk as borrar_url %}{% trans 'Delete' as label %}{% include "snippets/delete_form.html" with url=borrar_url clase="border-0 bg-transparent p-0 align-baseline" titulo=label etiqueta="" confirmar="??Borrar esta presentacion y todos sus ficheros? Esta accion no se puede deshacer." %}
+                </div>
+                {% endif %}
             </li>
             {% endfor %}
         </ul>
@@ -247,7 +259,7 @@
                             <td>{{ forloop.counter }}</td>
                             <td>
                                 <a href="{{ video.get_absolute_url }}" title="{{ video }}" class="d-flex align-items-center">
-                                    <i class="fas fa-video me-1"></i> {{ video.title|title }}
+                                    <i class="fas fa-video me-1"></i> {{ video.title }}
                                 </a>
                                 {% if not video.visible %}
                                 <span class="badge bg-secondary ms-1">{% trans 'Oculto' %}</span>
@@ -327,8 +339,11 @@
                                 {% url 'upload_file_download' slug=course.slug file_id=file.pk as enlace %}
                                 <a href="{{ enlace }}" title="{{ file }}" class="d-flex align-items-center">
                                     <i class="fas fa-file-{{ file.get_extension_short }} me-1" title="{{ file.get_program_name }}"></i>
-                                    {{ file.title|title }}
+                                    {{ file.title }}
                                 </a>
+                                {% if not file.visible %}
+                                <span class="badge bg-secondary ms-1">{% trans 'Oculto' %}</span>
+                                {% endif %}
                                 {% if file.es_html %}
                                 <a href="{% url 'deck_abrir' slug=course.slug file_id=file.pk %}" target="_blank" rel="noopener"
                                     title="Abrir la presentacion en una pestana nueva">

@@ -204,6 +204,19 @@ def program_delete(request, pk):
 # ########################################################
 
 
+# Un t??tulo que empieza por un n??mero ("0 ?? El m??dulo", "7 ?? Herramientas")
+# es una presentaci??n numerada. Esas van primero y en orden num??rico; el
+# resto de los documentos conserva el orden por fecha de subida.
+NUMERO_DE_TITULO = re.compile(r"^\s*(\d+)\b")
+
+
+def _orden_de_lectura(documento):
+    empareja = NUMERO_DE_TITULO.match(documento.title or "")
+    if empareja:
+        return (0, int(empareja.group(1)), documento.upload_time, documento.pk)
+    return (1, 0, documento.upload_time, documento.pk)
+
+
 @login_required
 def course_single(request, slug):
     course = get_object_or_404(Course, slug=slug)
@@ -226,6 +239,14 @@ def course_single(request, slug):
         files = files.filter(visible=True)
         # Los vídeos también: se revelan el día de cada clase.
         videos = videos.filter(visible=True)
+    # Orden de lectura: las presentaciones numeradas ("0 - ...", "1 - ...") van
+    # primero y en orden numerico; el resto de los documentos conserva el
+    # orden por fecha de subida. Asi el alumnado ve la secuencia del modulo
+    # sin tener que descifrar los numeros.
+    # Las presentaciones (.html) tienen su propia seccion arriba del curso:
+    # en la tabla de Documentaciones solo quedan las actividades y los
+    # documentos.
+    files = sorted(files.exclude(file__iendswith=".html"), key=_orden_de_lectura)
     # solo se entrega si hay matricula: antes cualquier cuenta que entraba
     # podia entregar en cualquier curso
     matriculado = TakenCourse.objects.filter(
@@ -234,7 +255,9 @@ def course_single(request, slug):
     # el mazo de diapositivas, si lo hay: se muestra embebido arriba del curso
     deck = deck_del_curso(course, solo_visibles=not is_editor)
     # todos los mazos, para los cursos que no embeben ninguno
-    decks = decks_del_curso(course, solo_visibles=not is_editor)
+    decks = sorted(
+        decks_del_curso(course, solo_visibles=not is_editor), key=_orden_de_lectura
+    )
 
     if request.method == "POST":
         # ponytail: entrega del alumno; el profesor solo revisa la tabla de abajo
