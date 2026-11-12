@@ -81,6 +81,11 @@ urlpatterns = [
         name="upload_file_delete",
     ),
     path(
+        "course/<slug>/documentations/<int:file_id>/resaltar/",
+        views.resaltar_documento,
+        name="upload_file_resaltar",
+    ),
+    path(
         "course/<slug>/documentations/<int:file_id>/archivo/<int:archivo_id>/delete/",
         views.handle_archivo_delete,
         name="upload_archivo_delete",

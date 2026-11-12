@@ -250,6 +250,23 @@ class Upload(models.Model):
             "cuando toque."
         ),
     )
+    resaltado = models.BooleanField(
+        default=False,
+        verbose_name=_("Resaltado"),
+        help_text=_(
+            "Marca el documento para que el alumnado lo vea destacado en la "
+            "tabla. Solo uno puede estar resaltado a la vez."
+        ),
+    )
+    resaltado_hasta = models.DateTimeField(
+        null=True,
+        blank=True,
+        verbose_name=_("Resaltado hasta"),
+        help_text=_(
+            "El resalte caduca solo a las 24 horas, o antes si se resalta "
+            "otro documento."
+        ),
+    )
     extensiones_permitidas = models.CharField(
         max_length=100,
         default=EXTENSION_ENTREGA_POR_DEFECTO,

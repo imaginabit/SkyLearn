@@ -1,5 +1,6 @@
 import os
 import re
+from datetime import timedelta
 
 from django.conf import settings
 from django.contrib import messages
@@ -247,6 +248,14 @@ def course_single(request, slug):
     # en la tabla de Documentaciones solo quedan las actividades y los
     # documentos.
     files = sorted(files.exclude(file__iendswith=".html"), key=_orden_de_lectura)
+    # El resalte caduca solo: se marca mientras no haya pasado la hora.
+    ahora = timezone.now()
+    for documento in files:
+        documento.resaltado_activo = bool(
+            documento.resaltado
+            and documento.resaltado_hasta
+            and documento.resaltado_hasta > ahora
+        )
     # solo se entrega si hay matricula: antes cualquier cuenta que entraba
     # podia entregar en cualquier curso
     matriculado = TakenCourse.objects.filter(
@@ -680,6 +689,32 @@ def handle_file_delete(request, slug, file_id):
     title = upload.title
     upload.delete()
     messages.success(request, f"{title} has been deleted.")
+    return redirect("course_detail", slug=slug)
+
+
+@require_POST
+@login_required
+@lecturer_required
+def resaltar_documento(request, slug, file_id):
+    """Resalta una fila de la tabla de documentaciones para el alumnado.
+
+    El resalte dura 24 horas, o hasta que se resalte otra: al resaltar una
+    fila, las demas se apagan. Pulsando otra vez la misma fila se quita.
+    """
+    course = curso_asignado(request, slug)
+    upload = get_object_or_404(Upload, pk=file_id, course=course)
+    ahora = timezone.now()
+    # Solo una fila puede estar resaltada: al resaltar esta, se apagan las demas.
+    Upload.objects.filter(course=course).exclude(pk=upload.pk).update(
+        resaltado=False, resaltado_hasta=None
+    )
+    if upload.resaltado and upload.resaltado_hasta and upload.resaltado_hasta > ahora:
+        upload.resaltado = False
+        upload.resaltado_hasta = None
+    else:
+        upload.resaltado = True
+        upload.resaltado_hasta = ahora + timedelta(days=1)
+    upload.save(update_fields=["resaltado", "resaltado_hasta"])
     return redirect("course_detail", slug=slug)
 
 

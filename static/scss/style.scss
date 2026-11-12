@@ -20,6 +20,21 @@
 
 :root {
   --primary: #f8d270;
+  /* Color de los enlaces y de lo que lleva la marca del curso. */
+  --bs-primary: #021756;
+  --bs-primary-rgb: 2, 23, 86;
+}
+
+/* Fila resaltada por el profesorado: la ve el alumnado destacada. */
+tr.resaltada {
+  background-color: rgba(2, 23, 86, 0.1) !important;
+  box-shadow: inset 5px 0 0 var(--bs-primary);
+}
+tr.resaltada td {
+  font-weight: 600;
+}
+i.resaltado-activo {
+  color: #f8d270;
 }
 
 *,

@@ -333,7 +333,7 @@
                     </thead>
                     <tbody>
                         {% for file in files %}
-                        <tr>
+                        <tr class="{% if file.resaltado_activo %}resaltada{% endif %}">
                             <td>{{ forloop.counter }}</td>
                             <td>
                                 {% url 'upload_file_download' slug=course.slug file_id=file.pk as enlace %}
@@ -374,6 +374,13 @@
                                         class="update" title="{% trans 'Edit' %}">
                                         <i class="fas fa-pencil-alt"></i>
                                     </a>
+                                    <form action="{% url 'upload_file_resaltar' slug=course.slug file_id=file.pk %}" method="post" class="d-inline">
+                                        {% csrf_token %}
+                                        <button type="submit" class="border-0 bg-transparent p-0 align-baseline"
+                                            title="{% trans 'Resaltar esta fila para el alumnado (un día)' %}">
+                                            <i class="fas fa-star{% if file.resaltado_activo %} resaltado-activo{% endif %}"></i>
+                                        </button>
+                                    </form>
                                     {% url 'upload_file_delete' slug=course.slug file_id=file.pk as borrar_url %}{% trans 'Delete' as label %}{% include "snippets/delete_form.html" with url=borrar_url clase="border-0 bg-transparent p-0 align-baseline" titulo=label etiqueta="" confirmar="¿Borrar esta actividad y todos sus ficheros? Esta acción no se puede deshacer." %}
                                 </div>
                                 {% for archivo in file.archivos.all %}
