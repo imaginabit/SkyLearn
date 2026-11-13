@@ -47,6 +47,11 @@ urlpatterns = [
         views.submission_grade,
         name="submission_grade",
     ),
+    path(
+        "course/<slug>/submission/<int:pk>/delete/",
+        views.submission_delete,
+        name="submission_delete",
+    ),
     path("<int:pk>/course/add/", views.course_add, name="course_add"),
     path("course/<slug>/edit/", views.course_edit, name="edit_course"),
     path("course/delete/<slug>/", views.course_delete, name="delete_course"),

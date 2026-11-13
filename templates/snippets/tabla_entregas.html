@@ -1,0 +1,144 @@
+{% load i18n %}{% comment %}
+La tabla de estado de las entregas del alumno, para una lista de actividades.
+Quien la incluye pasa:
+
+  lista       las filas: dicts con `actividad` (Upload) y `entrega` (Submission o None)
+  titulo      el titulo de la tabla, ya traducido
+  subtitulo   la aclaracion de debajo, ya traducida
+  destacada   si es "1", las filas salen resaltadas (tabla-warning)
+
+Las evaluables y las demas van en dos tablas distintas (misma plantilla, dos
+inclusiones). En la columna de estado, si la entrega no esta calificada hay
+una X para borrarla: el modal de confirmacion se genera aqui mismo, fuera de
+la tabla, porque Bootstrap no se lleva bien con los modales dentro de
+<table>.
+{% endcomment %}
+<p class="form-title mb-1">{{ titulo }}</p>
+{% if subtitulo %}
+<p class="text-muted small mb-2">{{ subtitulo }}</p>
+{% endif %}
+<div class="table-responsive">
+    <table class="table table-shadow table-light table-striped m-0">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>{% trans "Actividad" %}</th>
+                <th>{% trans "Formatos que admite" %}</th>
+                <th>{% trans "Estado" %}</th>
+                <th>{% trans "Nota" %}</th>
+                <th>{% trans "Enviar" %}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for fila in lista %}
+            <tr class="{% if fila.entrega.resaltado_activo %}resaltada{% endif %}{% if destacada == "1" %} table-warning{% endif %}">
+                <td>{{ forloop.counter }}</td>
+                <td>
+                    {% url 'upload_file_download' slug=course.slug file_id=fila.actividad.pk as enlace_actividad %}
+                    <a href="{{ enlace_actividad }}" title="{{ fila.actividad }}" class="d-flex align-items-center">
+                        <i class="fas fa-file-{{ fila.actividad.get_extension_short }} me-1" title="{{ fila.actividad.get_program_name }}"></i>
+                        {{ fila.actividad.title }}
+                    </a>
+                    {% if not fila.actividad.visible %}
+                    <span class="badge bg-secondary ms-1">{% trans 'Oculto' %}</span>
+                    {% endif %}
+                    {% for archivo in fila.actividad.archivos.all %}
+                    <a href="{% url 'upload_archivo_download' slug=course.slug file_id=fila.actividad.pk archivo_id=archivo.pk %}" title="{{ archivo.nombre }}"
+                        class="d-flex align-items-center small text-muted ps-3">
+                        <i class="fas fa-file-{{ archivo.get_extension_short }} me-1" title="{{ archivo.get_program_name }}"></i>
+                        {{ archivo.nombre }}
+                    </a>
+                    {% endfor %}
+                </td>
+                <td class="small text-muted">{{ fila.actividad.formatos_entrega }}</td>
+                <td>
+                    {% if fila.entrega %}
+                    <span class="badge bg-success me-1">{% trans "Entregada" %}</span>
+                    <span class="small text-muted d-block">{{ fila.entrega.uploaded_at|date:"SHORT_DATETIME_FORMAT" }}</span>
+                    <a class="small" href="{% url 'submission_download' slug=course.slug pk=fila.entrega.pk %}">{{ fila.entrega.filename }}</a>
+                    {% if fila.entrega.mark is None %}
+                    <button class="btn btn-sm btn-outline-danger py-0 px-2 ms-1" type="button"
+                        data-bs-toggle="modal" data-bs-target="#modal-borrar-entrega-{{ fila.entrega.pk }}"
+                        title="{% trans 'Borrar la entrega para volver a entregar' %}">&times;</button>
+                    {% endif %}
+                    {% if fila.entrega.feedback %}
+                    <details class="mt-1">
+                        <summary class="btn btn-sm btn-outline-secondary py-0 px-2"
+                            title="{% trans 'Ver los comentarios de corrección' %}">
+                            <i class="fas fa-comment-dots me-1"></i>{% trans "Ver comentarios" %}
+                        </summary>
+                        <div class="small text-muted mt-1">{{ fila.entrega.feedback|linebreaksbr }}</div>
+                    </details>
+                    {% endif %}
+                    {% else %}
+                    <span class="badge bg-secondary">{% trans "Sin entregar" %}</span>
+                    {% endif %}
+                </td>
+                <td>{% if fila.entrega and fila.entrega.mark is not None %}{{ fila.entrega.mark }}{% else %}<span class="text-muted">&mdash;</span>{% endif %}</td>
+                <td>
+                    {% comment %}
+                    Via alternativa: subir el fichero desde la propia fila. Es
+                    el mismo POST del formulario de arriba, con la actividad ya
+                    fijada en un campo oculto. Si ya hay entrega, el aviso de
+                    reemplazo salta antes de enviar; si esta calificada, no
+                    admite nada.
+                    {% endcomment %}
+                    {% if fila.entrega and fila.entrega.mark is not None %}
+                    <i class="fas fa-lock text-muted" title="{% trans 'La entrega esta calificada: no se puede reemplazar. Para cambiarla, habla con tu docente.' %}"></i>
+                    {% else %}
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <input type="hidden" name="document" value="{{ fila.actividad.pk }}">
+                        <label class="btn btn-sm btn-primary"
+                            title="{% trans 'Enviar o reemplazar la entrega de esta actividad: al elegir el fichero se envía' %}">
+                            <i class="fas fa-upload me-1"></i>{% trans "Enviar" %}
+                            <input type="file" name="file" class="d-none" required
+                                accept="{{ fila.actividad.formatos_accept }}"
+                                data-peso-original="{{ fila.actividad.file.size }}"
+                                data-entregada="{% if fila.entrega %}1{% else %}0{% endif %}"
+                                onchange="elige_entrega(this)">
+                        </label>
+                        <noscript>
+                            <button class="btn btn-sm btn-outline-secondary" type="submit"
+                                title="{{ fila.actividad.formatos_entrega }}">
+                                <i class="fas fa-upload"></i>
+                            </button>
+                        </noscript>
+                    </form>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% for fila in lista %}
+{% if fila.entrega and fila.entrega.mark is None %}
+<div class="modal fade" id="modal-borrar-entrega-{{ fila.entrega.pk }}" tabindex="-1"
+    aria-labelledby="titulo-modal-borrar-entrega-{{ fila.entrega.pk }}" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="titulo-modal-borrar-entrega-{{ fila.entrega.pk }}">
+                    {% trans "Borrar la entrega" %}
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="{% trans 'Cerrar' %}"></button>
+            </div>
+            <div class="modal-body">
+                {% blocktrans with titulo=fila.actividad.title %}¿Borrar tu entrega de «{{ titulo }}»? La entrega desaparece y la actividad vuelve a aparecer como «Sin entregar». Esta acción no se puede deshacer.{% endblocktrans %}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">
+                    {% trans "Cancelar" %}
+                </button>
+                <form action="{% url 'submission_delete' slug=course.slug pk=fila.entrega.pk %}" method="post">
+                    {% csrf_token %}
+                    <button class="btn btn-sm btn-danger" type="submit">{% trans "Sí, borrar" %}</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endfor %}

@@ -322,10 +322,24 @@ def course_single(request, slug):
             messages.error(request, "No estas matriculado en este curso.")
             return redirect("course_detail", slug=slug)
         form = SubmissionForm(
-            request.POST, request.FILES, course=course, solo_visibles=not is_editor
+            request.POST,
+            request.FILES,
+            course=course,
+            solo_visibles=not is_editor,
+            alumno=request.user,
         )
         if form.is_valid():
             document = form.cleaned_data["document"]
+            entrega_previa = Submission.objects.filter(
+                course=course, student=request.user, document=document
+            ).first()
+            if entrega_previa and entrega_previa.mark is not None:
+                messages.error(
+                    request,
+                    "Esta entrega ya esta calificada y no se puede reemplazar: "
+                    "habla con tu docente.",
+                )
+                return al_curso(slug, "entregas")
             submission, _ = Submission.objects.get_or_create(
                 course=course, student=request.user, document=document
             )
@@ -333,18 +347,29 @@ def course_single(request, slug):
                 submission.file.delete(save=False)
             submission.file = form.cleaned_data["file"]
             submission.save()
-            messages.success(request, "Tu entrega se ha enviado correctamente.")
+            if entrega_previa:
+                messages.success(
+                    request,
+                    f"Se ha reemplazado tu entrega anterior de '{document.title}'.",
+                )
+            else:
+                messages.success(request, "Tu entrega se ha enviado correctamente.")
             return al_curso(slug, "entregas")
         messages.error(request, "Revisa los errores del formulario.")
     else:
         form = (
-            SubmissionForm(course=course, solo_visibles=not is_editor)
+            SubmissionForm(
+                course=course,
+                solo_visibles=not is_editor,
+                alumno=request.user,
+            )
             if matriculado
             else None
         )
 
     my_submissions = None
-    entregas_del_alumno = None
+    entregas_evaluables = None
+    entregas_ordinarias = None
     submissions = None
     entregas_ocultas = 0
     entregas_totales = 0
@@ -381,18 +406,15 @@ def course_single(request, slug):
         )
         # La tabla de la pestana de entregas: cada actividad visible del curso
         # con su entrega, si la hay. Asi el alumno ve de un vistazo cual falta
-        # por entregar; el select de abajo sigue siendo la via de entrega.
+        # por entregar; el select de arriba sigue siendo la via de entrega.
         if matriculado:
             mis = {s.document_id: s for s in my_submissions}
-            entregas_del_alumno = [
-                {"actividad": a, "entrega": mis.get(a.pk)} for a in actividades
-            ]
-            # Las evaluables, al principio (cuentan para la nota: lo primero que
-            # hay que mirar); el resto conserva el orden de lectura. `sort` es
-            # estable, asi que dentro de cada grupo no se reordena nada.
-            entregas_del_alumno.sort(
-                key=lambda fila: not fila["actividad"].is_evaluable
-            )
+            filas = [{"actividad": a, "entrega": mis.get(a.pk)} for a in actividades]
+            # Dos tablas: las evaluables aparte, porque cuentan para la nota y
+            # son lo primero que hay que mirar; el resto conserva el orden de
+            # lectura.
+            entregas_evaluables = [f for f in filas if f["actividad"].is_evaluable]
+            entregas_ordinarias = [f for f in filas if not f["actividad"].is_evaluable]
 
     return render(
         request,
@@ -411,7 +433,8 @@ def course_single(request, slug):
             "tab_activa": tab,
             "submission_form": form,
             "my_submissions": my_submissions,
-            "entregas_del_alumno": entregas_del_alumno,
+            "entregas_evaluables": entregas_evaluables,
+            "entregas_ordinarias": entregas_ordinarias,
             "submissions": submissions,
             "entregas_ocultas": entregas_ocultas,
             "entregas_totales": entregas_totales,
@@ -485,6 +508,32 @@ def course_mazo_principal(request, slug, file_id):
             f"'{mazo.title}' es ahora la presentacion principal del curso.",
         )
     return al_curso(course.slug, "presentaciones")
+
+
+@require_POST
+@login_required
+def submission_delete(request, slug, pk):
+    """El alumno se arrepiente: borra su propia entrega para volver a entregar.
+
+    Solo se puede borrar la propia y solo mientras no este calificada: una
+    entrega con nota forma parte del expediente, y para cambiarla hay que
+    hablar con el docente.
+    """
+    course = get_object_or_404(Course, slug=slug)
+    submission = get_object_or_404(Submission, pk=pk, course=course)
+    if submission.student_id != request.user.id:
+        raise Http404
+    if submission.mark is not None:
+        messages.error(
+            request,
+            "No se puede borrar una entrega ya calificada: habla con tu docente.",
+        )
+        return al_curso(course.slug, "entregas")
+    titulo = submission.document.title if submission.document else submission.filename
+    submission.file.delete(save=False)
+    submission.delete()
+    messages.success(request, f"Se ha borrado tu entrega de '{titulo}'.")
+    return al_curso(course.slug, "entregas")
 
 
 @login_required

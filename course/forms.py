@@ -225,7 +225,7 @@ class SubmissionForm(forms.ModelForm):
         model = Submission
         fields = ("document", "file")
 
-    def __init__(self, *args, course=None, solo_visibles=False, **kwargs):
+    def __init__(self, *args, course=None, solo_visibles=False, alumno=None, **kwargs):
         super().__init__(*args, **kwargs)
         if course is not None:
             actividades = Upload.objects.filter(course=course, is_activity=True)
@@ -233,6 +233,13 @@ class SubmissionForm(forms.ModelForm):
             # no puede ni entregarlo ni verlo en la lista
             if solo_visibles:
                 actividades = actividades.filter(visible=True)
+            # Una entrega ya calificada forma parte del expediente: no se puede
+            # reemplazar, asi que su actividad sale del selector.
+            if alumno is not None:
+                calificadas = Submission.objects.filter(
+                    course=course, student=alumno, mark__isnull=False
+                ).values_list("document_id", flat=True)
+                actividades = actividades.exclude(pk__in=calificadas)
             self.fields["document"].queryset = actividades.order_by("upload_time")
         # El alumno tiene que ver, al elegir la actividad, en que formato puede
         # entregarla: la etiqueta lleva los formatos admitidos.

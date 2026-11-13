@@ -358,99 +358,46 @@ primer mazo, como se hacia antes.
                     </div>
                 </form>
             </div>
-            <p class="text-muted small mb-2 mt-3">
-                <i class="fas fa-list-check me-1"></i>
-                {% blocktrans %}Estado de cada actividad: las evaluables (E) cuentan para la nota y van primero.{% endblocktrans %}
-            </p>
-            <div class="table-responsive">
-                <table class="table table-shadow table-light table-striped m-0">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>{% trans "Actividad" %}</th>
-                            <th>{% trans "Formatos que admite" %}</th>
-                            <th>{% trans "Estado" %}</th>
-                            <th>{% trans "Nota" %}</th>
-                            <th>{% trans "Enviar" %}</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for fila in entregas_del_alumno %}
-                        <tr class="{% if fila.actividad.is_evaluable %}table-warning{% endif %}{% if fila.entrega.resaltado_activo %} resaltada{% endif %}">
-                            <td>{{ forloop.counter }}</td>
-                            <td>
-                                {% url 'upload_file_download' slug=course.slug file_id=fila.actividad.pk as enlace_actividad %}
-                                <a href="{{ enlace_actividad }}" title="{{ fila.actividad }}" class="d-flex align-items-center">
-                                    <i class="fas fa-file-{{ fila.actividad.get_extension_short }} me-1" title="{{ fila.actividad.get_program_name }}"></i>
-                                    {{ fila.actividad.title }}
-                                </a>
-                                {% if fila.actividad.is_evaluable %}
-                                <span class="badge bg-warning text-dark ms-1" title="{% trans 'Cuenta para la nota final' %}">E</span>
-                                {% endif %}
-                                {% if not fila.actividad.visible %}
-                                <span class="badge bg-secondary ms-1">{% trans 'Oculto' %}</span>
-                                {% endif %}
-                                {% for archivo in fila.actividad.archivos.all %}
-                                <a href="{% url 'upload_archivo_download' slug=course.slug file_id=fila.actividad.pk archivo_id=archivo.pk %}" title="{{ archivo.nombre }}"
-                                    class="d-flex align-items-center small text-muted ps-3">
-                                    <i class="fas fa-file-{{ archivo.get_extension_short }} me-1" title="{{ archivo.get_program_name }}"></i>
-                                    {{ archivo.nombre }}
-                                </a>
-                                {% endfor %}
-                            </td>
-                            <td class="small text-muted">{{ fila.actividad.formatos_entrega }}</td>
-                            <td>
-                                {% if fila.entrega %}
-                                <span class="badge bg-success me-1">{% trans "Entregada" %}</span>
-                                <span class="small text-muted d-block">{{ fila.entrega.uploaded_at|date:"SHORT_DATETIME_FORMAT" }}</span>
-                                <a class="small" href="{% url 'submission_download' slug=course.slug pk=fila.entrega.pk %}">{{ fila.entrega.filename }}</a>
-                                {% if fila.entrega.feedback %}
-                                <details class="mt-1">
-                                    <summary class="btn btn-sm btn-outline-secondary py-0 px-2"
-                                        title="{% trans 'Ver los comentarios de corrección' %}">
-                                        <i class="fas fa-comment-dots me-1"></i>{% trans "Ver comentarios" %}
-                                    </summary>
-                                    <div class="small text-muted mt-1">{{ fila.entrega.feedback|linebreaksbr }}</div>
-                                </details>
-                                {% endif %}
-                                {% else %}
-                                <span class="badge bg-secondary">{% trans "Sin entregar" %}</span>
-                                {% endif %}
-                            </td>
-                            <td>{% if fila.entrega and fila.entrega.mark is not None %}{{ fila.entrega.mark }}{% else %}<span class="text-muted">&mdash;</span>{% endif %}</td>
-                            <td>
-                                {% comment %}
-                                Via alternativa: subir el fichero desde la propia
-                                fila. Es el mismo POST del formulario de arriba,
-                                con la actividad ya fijada en un campo oculto.
-                                {% endcomment %}
-                                <form method="post" enctype="multipart/form-data">
-                                    {% csrf_token %}
-                                    <input type="hidden" name="document" value="{{ fila.actividad.pk }}">
-                                    <label class="btn btn-sm btn-primary"
-                                        title="{% trans 'Enviar o reemplazar la entrega de esta actividad: al elegir el fichero se envía' %}">
-                                        <i class="fas fa-upload me-1"></i>{% trans "Enviar" %}
-                                        <input type="file" name="file" class="d-none" required
-                                            accept="{{ fila.actividad.formatos_accept }}"
-                                            data-peso-original="{{ fila.actividad.file.size }}"
-                                            onchange="elige_entrega(this)">
-                                    </label>
-                                    <noscript>
-                                        <button class="btn btn-sm btn-outline-secondary" type="submit"
-                                            title="{{ fila.actividad.formatos_entrega }}">
-                                            <i class="fas fa-upload"></i>
-                                        </button>
-                                    </noscript>
-                                </form>
-                            </td>
-                        </tr>
-                        {% empty %}
-                        <tr><td colspan="6" class="text-muted">
-                            {% trans "Todavia no hay ninguna actividad en el curso." %}
-                        </td></tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
+            {% if entregas_evaluables or entregas_ordinarias %}
+            {% trans "Actividades evaluables" as titulo_evaluables %}
+            {% trans "Cuentan para la nota final del curso." as nota_evaluables %}
+            {% include "snippets/tabla_entregas.html" with lista=entregas_evaluables titulo=titulo_evaluables subtitulo=nota_evaluables destacada="1" %}
+            {% trans "Otras actividades" as titulo_ordinarias %}
+            {% include "snippets/tabla_entregas.html" with lista=entregas_ordinarias titulo=titulo_ordinarias subtitulo="" %}
+            {% else %}
+            <div class="card p-3">
+                <p class="text-muted small mb-2">{% trans "Todavia no hay ninguna actividad en el curso." %}</p>
+            </div>
+            {% endif %}
+
+            {% comment %}
+            El modal de reemplazo es unico para todas las filas: antes de
+            enviar, si la actividad ya tiene entrega, avisa de que la anterior
+            se borra. El formulario que lo dispara lo guarda el javascript.
+            {% endcomment %}
+            <div class="modal fade" id="modal-reemplazar-entrega" tabindex="-1"
+                aria-labelledby="titulo-modal-reemplazar-entrega" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="titulo-modal-reemplazar-entrega">
+                                {% trans "Ya tienes una entrega" %}
+                            </h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="{% trans 'Cerrar' %}"></button>
+                        </div>
+                        <div class="modal-body">
+                            {% trans "Ya hay una entrega para esta actividad. Al enviar, se borrará la entrega anterior y se quedará la nueva. ¿Continuar?" %}
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">
+                                {% trans "Cancelar" %}
+                            </button>
+                            <button type="button" class="btn btn-sm btn-warning" id="boton-reemplazar-entrega">
+                                {% trans "Sí, reemplazar" %}
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
             {% else %}
             <div class="card p-3">
@@ -659,29 +606,66 @@ subido sin hacer). El servidor lo vuelve a comprobar por si acaso.
             input.value = "";
             return;
         }
+        {% comment %}
+        Si la actividad ya tiene entrega, el modal avisa de que la anterior se
+        borra; el envio sale del boton de confirmacion del modal.
+        {% endcomment %}
+        if (input.dataset.entregada === "1") {
+            pendiente_entrega = input;
+            bootstrap.Modal.getOrCreateInstance(
+                document.getElementById("modal-reemplazar-entrega")
+            ).show();
+            return;
+        }
         input.form.submit();
     }
     {% comment %}
     En el formulario de arriba el peso del enunciado depende de la actividad
     elegida: cada opcion del select lleva su fichero y al cambiarla se
-    apunta el peso (y los formatos admitidos) en el input del fichero.
+    apunta el peso (y los formatos admitidos) en el input del fichero. La
+    marca `entregada` dispara el modal de reemplazo.
     {% endcomment %}
     var actividades_entrega = {
-        {% for fila in entregas_del_alumno %}
+        {% for fila in entregas_evaluables %}
         {{ fila.actividad.pk }}: {
             peso: {{ fila.actividad.file.size }},
-            acepta: "{{ fila.actividad.formatos_accept }}"
+            acepta: "{{ fila.actividad.formatos_accept }}",
+            entregada: {% if fila.entrega %}true{% else %}false{% endif %}
+        },
+        {% endfor %}
+        {% for fila in entregas_ordinarias %}
+        {{ fila.actividad.pk }}: {
+            peso: {{ fila.actividad.file.size }},
+            acepta: "{{ fila.actividad.formatos_accept }}",
+            entregada: {% if fila.entrega %}true{% else %}false{% endif %}
         },
         {% endfor %}
     };
+    var pendiente_entrega = null;
     var selector_actividad = document.querySelector('#form-entrega select[name="document"]');
     var fichero_superior = document.querySelector('#form-entrega input[type="file"]');
     if (selector_actividad && fichero_superior) {
         selector_actividad.addEventListener("change", function () {
             var elegida = actividades_entrega[selector_actividad.value] || {};
             fichero_superior.dataset.pesoOriginal = elegida.peso || "";
+            fichero_superior.dataset.entregada = elegida.entregada ? "1" : "0";
             fichero_superior.setAttribute("accept", elegida.acepta || "");
             fichero_superior.value = "";
+        });
+    }
+    var boton_reemplazar = document.getElementById("boton-reemplazar-entrega");
+    if (boton_reemplazar) {
+        boton_reemplazar.addEventListener("click", function () {
+            var modal = bootstrap.Modal.getInstance(
+                document.getElementById("modal-reemplazar-entrega")
+            );
+            if (modal) {
+                modal.hide();
+            }
+            if (pendiente_entrega) {
+                pendiente_entrega.form.submit();
+                pendiente_entrega = null;
+            }
         });
     }
 </script>
