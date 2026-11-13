@@ -156,3 +156,6 @@ dump.rdb
 
 # Localizacion castellano: se versiona el .mo compilado para el despliegue
 !locale/es/LC_MESSAGES/*.mo
+# datos de sincronizacion de entregas: llevan nombres de alumnos
+scripts/.sync_entregas_resultado.json
+scripts/manifest_entregas_mf0488.ndjson
