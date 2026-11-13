@@ -57,7 +57,7 @@ class Command(BaseCommand):
 
         self.stdout.write(f"Curso: {curso.title} ({curso.slug}) · {curso.code}")
         self.stdout.write(f"  ficheros:      {curso.upload_set.count()}")
-        self.stdout.write(f"  vídeos:        {curso.uploadvideo_set.count()}")
+        self.stdout.write(f"  vídeos:        {curso.videos.count()}")
         self.stdout.write(f"  cuestionarios: {curso.quiz_set.count()}")
         self.stdout.write(f"  matrículas:    {curso.taken_courses.count()}")
         self.stdout.write(
@@ -149,7 +149,7 @@ class Command(BaseCommand):
             if upload.file:
                 upload.file.delete(save=False)
                 borrados += 1
-        for video in curso.uploadvideo_set.all():
+        for video in curso.videos.all():
             if video.video:
                 video.video.delete(save=False)
                 borrados += 1

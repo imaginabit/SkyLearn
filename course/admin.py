@@ -28,7 +28,23 @@ class UploadFileInline(admin.TabularInline):
 
 
 class UploadAdmin(TranslationAdmin):
+    """Las actividades y el material del curso.
+
+    La casilla de `es_principal` (y su accion) solo significa algo en los
+    mazos de diapositivas: el docente la marca desde la pestana
+    Presentaciones del curso, aqui queda para desmarcar a mano.
+    """
+
     inlines = [UploadFileInline]
+    list_display = ("title", "course", "es_principal", "visible", "upload_time")
+    list_editable = ("es_principal", "visible")
+    list_filter = ("visible", "course")
+    search_fields = ("title",)
+    actions = ("quitar_principal",)
+
+    @admin.action(description="Desmarcar como presentacion principal")
+    def quitar_principal(self, request, queryset):
+        queryset.update(es_principal=False)
 
 
 class UploadVideoAdmin(admin.ModelAdmin):

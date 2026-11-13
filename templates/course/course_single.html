@@ -26,7 +26,7 @@
                 <i class="fas fa-pencil-alt"></i> {% trans 'Edit course' %}
             </a>
             {% endif %}
-            {% if request.user.is_superuser or request.user.is_lecturer %}
+            {% if is_editor %}
             <a class="btn btn-sm btn-primary" href="{% url 'upload_file_view' course.slug %}"><i class="fas fa-plus"></i>
                 {% trans 'Upload new file' %}
             </a>
@@ -36,7 +36,7 @@
             {% endif %}
         </div>
         <div class="ms-auto">
-            {% if request.user.is_superuser or request.user.is_lecturer %}
+            {% if is_editor %}
             <form action="{% url 'course_ocultar_corregidas' course.slug %}" method="post"
                 class="d-inline-flex align-items-center me-3">
                 {% csrf_token %}
@@ -66,11 +66,19 @@
 
 {% include 'snippets/messages.html' %}
 
+{% comment %}
+La presentacion principal, embebida encima de todo. La elige el docente en la
+pestana Presentaciones; si ninguna esta marcada y el curso embebe, sale el
+primer mazo, como se hacia antes.
+{% endcomment %}
 {% if deck %}
 <div class="container mt-3">
     <div class="card">
         <div class="card-header d-flex justify-content-between align-items-center py-2">
-            <p class="form-title m-0">{{ deck.title }}</p>
+            <p class="form-title m-0">
+                {{ deck.title }}
+                <span class="badge bg-primary ms-1">{% trans "Principal" %}</span>
+            </p>
             <a class="btn btn-sm btn-outline-secondary"
                href="{% url 'deck_download' slug=course.slug %}"
                title="{% trans 'Descargar la presentación en HTML' %}">
@@ -83,163 +91,275 @@
 </div>
 {% endif %}
 
-{% if decks %}
-<div class="container mt-3">
-    <div class="card">
-        <div class="card-header py-2">
-            <p class="form-title m-0">{% trans "Presentaciones" %}</p>
-        </div>
-        <ul class="list-unstyled mb-0">
-            {% for mazo in decks %}
-            <li class="d-flex flex-wrap align-items-center gap-2 px-3 py-2 border-top">
-                <i class="fas fa-file-code me-1"></i>
-                <a href="{% url 'deck_abrir' slug=course.slug file_id=mazo.pk %}" target="_blank" rel="noopener"
-                    class="text-decoration-none">{{ mazo.title }}</a>
-                {% if not mazo.visible %}
-                <span class="badge bg-secondary">{% trans 'Oculto' %}</span>
-                {% endif %}
-                <a href="{% url 'upload_file_download' slug=course.slug file_id=mazo.pk %}"
-                    class="btn btn-sm btn-outline-secondary ms-auto">
-                    <i class="fas fa-download me-1"></i>{% trans 'Descargar HTML' %}
-                </a>
-                {% if request.user.is_superuser or request.user.is_lecturer %}
-                <div class="update-delete">
-                    <a href="{% url 'upload_file_edit' slug=course.slug file_id=mazo.pk %}"
-                        class="update" title="{% trans 'Edit' %}">
-                        <i class="fas fa-pencil-alt"></i>
+<ul class="nav nav-tabs mt-4" id="pestanas-curso" role="tablist">
+    <li class="nav-item" role="presentation">
+        <a class="nav-link {% if tab_activa == 'presentaciones' %}active{% endif %}"
+           data-bs-toggle="tab" href="?tab=presentaciones" data-bs-target="#tab-presentaciones" role="tab"
+           title="{% trans 'Mazos de diapositivas del curso' %}">
+            <i class="fas fa-file-code me-1"></i>{% trans "Presentaciones" %}
+            <span class="badge bg-secondary ms-1">{{ decks|length }}</span>
+        </a>
+    </li>
+    <li class="nav-item" role="presentation">
+        <a class="nav-link {% if tab_activa == 'entregas' %}active{% endif %}"
+           data-bs-toggle="tab" href="?tab=entregas" data-bs-target="#tab-entregas" role="tab">
+            <i class="fas fa-inbox me-1"></i>{% trans "Entregas" %}
+            {% if is_editor %}
+            <span class="badge bg-secondary ms-1">{{ entregas_visibles }}</span>
+            {% else %}
+            <span class="badge bg-secondary ms-1">{{ my_submissions|length }}</span>
+            {% endif %}
+        </a>
+    </li>
+    <li class="nav-item" role="presentation">
+        <a class="nav-link {% if tab_activa == 'videos' %}active{% endif %}"
+           data-bs-toggle="tab" href="?tab=videos" data-bs-target="#tab-videos" role="tab">
+            <i class="fas fa-video me-1"></i>{% trans 'Video Tutorials' %}
+            <span class="badge bg-secondary ms-1">{{ videos|length }}</span>
+        </a>
+    </li>
+    <li class="nav-item" role="presentation">
+        <a class="nav-link {% if tab_activa == 'documentacion' %}active{% endif %}"
+           data-bs-toggle="tab" href="?tab=documentacion" data-bs-target="#tab-documentacion" role="tab">
+            <i class="fas fa-book me-1"></i>{% trans 'Documentations' %}
+            <span class="badge bg-secondary ms-1">{{ files|length }}</span>
+        </a>
+    </li>
+</ul>
+
+<div class="tab-content" id="contenido-pestanas-curso">
+
+    {% comment %}
+    Presentaciones: los mazos de diapositivas (.html). El docente elige aqui
+    la principal, la que se ve embebida encima de las pestanas.
+    {% endcomment %}
+    <div class="tab-pane fade {% if tab_activa == 'presentaciones' %}show active{% endif %}"
+         id="tab-presentaciones" role="tabpanel" tabindex="0">
+        <div class="container mt-3 mb-4">
+            {% if is_editor %}
+            <p class="text-muted small">
+                <i class="fas fa-star me-1"></i>
+                {% trans "La presentacion principal se muestra embebida encima de las pestanas. Marca aqui la que toca." %}
+            </p>
+            {% endif %}
+            {% if decks %}
+            <div class="table-responsive">
+                <table class="table table-shadow table-light table-striped m-0">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>{% trans 'Presentacion' %}</th>
+                            <th>{% trans 'Subida el' %}</th>
+                            <th>{% trans 'Acciones' %}</th>
+                            {% if is_editor %}
+                            <th></th>
+                            {% endif %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for mazo in decks %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>
+                                <a href="{% url 'deck_abrir' slug=course.slug file_id=mazo.pk %}" target="_blank"
+                                    rel="noopener" class="d-flex align-items-center text-decoration-none"
+                                    title="{% trans 'Abrir la presentacion en una pestana nueva' %}">
+                                    <i class="fas fa-file-code me-1"></i> {{ mazo.title }}
+                                </a>
+                                {% if mazo.es_principal %}
+                                <span class="badge bg-primary ms-1">{% trans "Principal" %}</span>
+                                {% endif %}
+                                {% if not mazo.visible %}
+                                <span class="badge bg-secondary ms-1">{% trans 'Oculto' %}</span>
+                                {% endif %}
+                            </td>
+                            <td>{{ mazo.upload_time|date }}</td>
+                            <td>
+                                <a class="download-btn" href="{% url 'deck_abrir' slug=course.slug file_id=mazo.pk %}"
+                                    target="_blank" rel="noopener"
+                                    title="{% trans 'Abrir en una pestana nueva' %}">
+                                    <i class="fas fa-up-right-from-square me-1"></i>{% trans 'Abrir' %}</a>
+                                <a class="download-btn ms-2"
+                                    href="{% url 'upload_file_download' slug=course.slug file_id=mazo.pk %}"
+                                    title="{% trans 'Descargar la presentación en HTML' %}">
+                                    <i class="fas fa-download me-1"></i>{% trans 'Descargar HTML' %}</a>
+                            </td>
+                            {% if is_editor %}
+                            <td>
+                                <div class="update-delete">
+                                    <form action="{% url 'course_mazo_principal' slug=course.slug file_id=mazo.pk %}"
+                                        method="post" class="d-inline">
+                                        {% csrf_token %}
+                                        {% if mazo.es_principal %}
+                                        <button class="btn btn-sm btn-primary" type="submit"
+                                            title="{% trans 'Dejar el curso sin presentacion embebida' %}">
+                                            <i class="fas fa-star me-1"></i>{% trans 'Quitar la principal' %}
+                                        </button>
+                                        {% else %}
+                                        <button class="btn btn-sm btn-outline-secondary" type="submit"
+                                            title="{% trans 'Mostrar esta presentacion embebida encima de las pestanas' %}">
+                                            <i class="fas fa-star me-1"></i>{% trans 'Hacer principal' %}
+                                        </button>
+                                        {% endif %}
+                                    </form>
+                                    <a href="{% url 'upload_file_edit' slug=course.slug file_id=mazo.pk %}"
+                                        class="update" title="{% trans 'Edit' %}">
+                                        <i class="fas fa-pencil-alt"></i>
+                                    </a>
+                                    {% url 'upload_file_delete' slug=course.slug file_id=mazo.pk as borrar_url %}{% trans 'Delete' as label %}{% include "snippets/delete_form.html" with url=borrar_url clase="border-0 bg-transparent p-0 align-baseline" titulo=label etiqueta="" confirmar="¿Borrar esta presentación? Esta acción no se puede deshacer." %}
+                                </div>
+                            </td>
+                            {% endif %}
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+            <div class="card p-3">
+                <span class="text-muted">
+                    {% trans 'Todavia no hay ninguna presentacion en el curso.' %}
+                    {% if is_editor %}
+                    <a href="{% url 'upload_file_view' course.slug %}" class="text-primary">
+                        <i class="fas fa-plus"></i> {% trans 'Upload now.' %}
                     </a>
-                    {% url 'upload_file_delete' slug=course.slug file_id=mazo.pk as borrar_url %}{% trans 'Delete' as label %}{% include "snippets/delete_form.html" with url=borrar_url clase="border-0 bg-transparent p-0 align-baseline" titulo=label etiqueta="" confirmar="??Borrar esta presentacion y todos sus ficheros? Esta accion no se puede deshacer." %}
-                </div>
-                {% endif %}
-            </li>
-            {% endfor %}
-        </ul>
-    </div>
-</div>
-{% endif %}
-
-<div class="container mt-3">
-    {% if request.user.is_superuser or request.user.is_lecturer %}
-    <p class="form-title m-0">{% trans "Entregas de los alumnos" %}</p>
-    <p class="text-muted small mb-2">
-        <i class="fas fa-inbox me-1"></i>
-        {% blocktrans with visibles=entregas_visibles total=entregas_totales %}{{ visibles }} de {{ total }} entregas visibles{% endblocktrans %}
-        <span class="ms-2"><i class="fas fa-check me-1"></i>{% trans "calificadas" %} {{ entregas_calificadas }}</span>
-        <span class="ms-2"><i class="fas fa-hourglass-half me-1"></i>{% trans "sin calificar" %} {{ entregas_sin_calificar }}</span>
-        {% if entregas_ocultas %}
-        <a class="ms-2" href="{% url 'course_ocultar_corregidas' course.slug %}"
-            onclick="document.getElementById('ver-todas').submit(); return false;">
-            {% trans "Ver las ya corregidas" %}</a>
-        <form action="{% url 'course_ocultar_corregidas' course.slug %}" method="post" id="ver-todas" class="d-none">
-            {% csrf_token %}
-        </form>
-        {% endif %}
-    </p>
-    <div class="table-responsive">
-        <table class="table table-shadow table-light table-striped m-0">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>{% trans "Alumno" %}</th>
-                    <th>{% trans "Actividad" %}</th>
-                    <th>{% trans "Fecha de entrega" %}</th>
-                    <th>{% trans "Archivo" %}</th>
-                    <th>{% trans "Nota" %}</th>
-                    <th>{% trans "Acciones" %}</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for s in submissions %}
-                <tr>
-                    <td>{{ forloop.counter }}</td>
-                    <td>{{ s.student.get_full_name|default:s.student.username }}</td>
-                    <td>
-                        {{ s.document.title|default:"-" }}
-                        {% if s.document.is_evaluable %}
-                        <span class="badge bg-warning text-dark ms-1" title="{% trans 'Cuenta para la nota final' %}">E</span>
-                        {% endif %}
-                    </td>
-                    <td>{{ s.uploaded_at|date:"SHORT_DATETIME_FORMAT" }}</td>
-                    <td>
-                        <a class="download-btn" href="{% url 'submission_download' slug=course.slug pk=s.pk %}">
-                            <i class="fas fa-download me-1"></i>{{ s.filename }}</a>
-                    </td>
-                    <td>{% if s.mark is not None %}{{ s.mark }}{% else %}<span class="text-muted">&mdash;</span>{% endif %}</td>
-                    <td>
-                        <a href="{% url 'submission_grade' slug=course.slug pk=s.pk %}" title="{% trans 'Calificar' %}">
-                            <i class="fas fa-pencil-alt"></i> {% trans "Calificar" %}</a>
-                    </td>
-                </tr>
-                {% empty %}
-                <tr><td colspan="7" class="text-muted">
-                    {% if entregas_ocultas %}
-                    {% trans "No queda ninguna entrega pendiente de corregir." %}
-                    {% else %}
-                    {% trans "Todavia no ha entregado nadie." %}
                     {% endif %}
-                </td></tr>
-                {% endfor %}
-            </tbody>
-        </table>
+                </span>
+            </div>
+            {% endif %}
+        </div>
     </div>
-    {% else %}
-    <p class="form-title m-0">{% trans "Tus entregas" %}</p>
-    <div class="card p-3">
-        {% if my_submissions %}
-        <ul class="list-unstyled mb-3">
-            {% for s in my_submissions %}
-            <li class="mb-2">
-                <i class="fas fa-check-circle text-success me-1"></i>
-                <strong>{{ s.document.title|default:"-" }}</strong> &mdash;
-                {{ s.uploaded_at|date:"SHORT_DATETIME_FORMAT" }}:
-                <a href="{% url 'submission_download' slug=course.slug pk=s.pk %}">{{ s.filename }}</a>
-                {% if s.mark is not None %}
-                <span class="badge bg-primary ms-1">{% trans "Nota" %}: {{ s.mark }}</span>
+
+    {% comment %}
+    Entregas: para el docente, la tabla de los alumnos; para el alumno, sus
+    entregas y el formulario para enviar la suya.
+    {% endcomment %}
+    <div class="tab-pane fade {% if tab_activa == 'entregas' %}show active{% endif %}"
+         id="tab-entregas" role="tabpanel" tabindex="0">
+        <div class="container mt-3 mb-4">
+            {% if is_editor %}
+            <p class="form-title m-0">{% trans "Entregas de los alumnos" %}</p>
+            <p class="text-muted small mb-2">
+                <i class="fas fa-inbox me-1"></i>
+                {% blocktrans with visibles=entregas_visibles total=entregas_totales %}{{ visibles }} de {{ total }} entregas visibles{% endblocktrans %}
+                <span class="ms-2"><i class="fas fa-check me-1"></i>{% trans "calificadas" %} {{ entregas_calificadas }}</span>
+                <span class="ms-2"><i class="fas fa-hourglass-half me-1"></i>{% trans "sin calificar" %} {{ entregas_sin_calificar }}</span>
+                {% if entregas_ocultas %}
+                <a class="ms-2" href="{% url 'course_ocultar_corregidas' course.slug %}"
+                    onclick="document.getElementById('ver-todas').submit(); return false;">
+                    {% trans "Ver las ya corregidas" %}</a>
+                <form action="{% url 'course_ocultar_corregidas' course.slug %}" method="post" id="ver-todas" class="d-none">
+                    {% csrf_token %}
+                </form>
                 {% endif %}
-                {% if s.feedback %}
-                <div class="small text-muted mt-1 ps-4">{{ s.feedback|linebreaksbr }}</div>
+            </p>
+            <div class="table-responsive">
+                <table class="table table-shadow table-light table-striped m-0">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>{% trans "Alumno" %}</th>
+                            <th>{% trans "Actividad" %}</th>
+                            <th>{% trans "Fecha de entrega" %}</th>
+                            <th>{% trans "Archivo" %}</th>
+                            <th>{% trans "Nota" %}</th>
+                            <th>{% trans "Acciones" %}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for s in submissions %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ s.student.get_full_name|default:s.student.username }}</td>
+                            <td>
+                                {{ s.document.title|default:"-" }}
+                                {% if s.document.is_evaluable %}
+                                <span class="badge bg-warning text-dark ms-1" title="{% trans 'Cuenta para la nota final' %}">E</span>
+                                {% endif %}
+                            </td>
+                            <td>{{ s.uploaded_at|date:"SHORT_DATETIME_FORMAT" }}</td>
+                            <td>
+                                <a class="download-btn" href="{% url 'submission_download' slug=course.slug pk=s.pk %}">
+                                    <i class="fas fa-download me-1"></i>{{ s.filename }}</a>
+                            </td>
+                            <td>{% if s.mark is not None %}{{ s.mark }}{% else %}<span class="text-muted">&mdash;</span>{% endif %}</td>
+                            <td>
+                                <a href="{% url 'submission_grade' slug=course.slug pk=s.pk %}" title="{% trans 'Calificar' %}">
+                                    <i class="fas fa-pencil-alt"></i> {% trans "Calificar" %}</a>
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr><td colspan="7" class="text-muted">
+                            {% if entregas_ocultas %}
+                            {% trans "No queda ninguna entrega pendiente de corregir." %}
+                            {% else %}
+                            {% trans "Todavia no ha entregado nadie." %}
+                            {% endif %}
+                        </td></tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+            <p class="form-title m-0">{% trans "Tus entregas" %}</p>
+            <div class="card p-3">
+                {% if my_submissions %}
+                <ul class="list-unstyled mb-3">
+                    {% for s in my_submissions %}
+                    <li class="mb-2">
+                        <i class="fas fa-check-circle text-success me-1"></i>
+                        <strong>{{ s.document.title|default:"-" }}</strong> &mdash;
+                        {{ s.uploaded_at|date:"SHORT_DATETIME_FORMAT" }}:
+                        <a href="{% url 'submission_download' slug=course.slug pk=s.pk %}">{{ s.filename }}</a>
+                        {% if s.mark is not None %}
+                        <span class="badge bg-primary ms-1">{% trans "Nota" %}: {{ s.mark }}</span>
+                        {% endif %}
+                        {% if s.feedback %}
+                        <div class="small text-muted mt-1 ps-4">{{ s.feedback|linebreaksbr }}</div>
+                        {% endif %}
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% else %}
+                <p class="text-muted small mb-2">{% trans "Todavia no has entregado nada." %}</p>
                 {% endif %}
-            </li>
-            {% endfor %}
-        </ul>
-        {% else %}
-        <p class="text-muted small mb-2">{% trans "Todavia no has entregado nada." %}</p>
-        {% endif %}
-        {% if submission_form %}
-        <form method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            <div class="mb-2">
-                <label class="form-label small text-muted">{% trans "Actividad" %}</label>
-                {{ submission_form.document }}
-                {% if submission_form.document.errors %}
-                <div class="text-danger small">{{ submission_form.document.errors }}</div>
+                {% if submission_form %}
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="mb-2">
+                        <label class="form-label small text-muted">{% trans "Actividad" %}</label>
+                        {{ submission_form.document }}
+                        {% if submission_form.document.errors %}
+                        <div class="text-danger small">{{ submission_form.document.errors }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="mb-2">
+                        <label class="form-label small text-muted">{% trans "Archivo" %}</label>
+                        {{ submission_form.file }}
+                        {% if submission_form.file.errors %}
+                        <div class="text-danger small">{{ submission_form.file.errors }}</div>
+                        {% endif %}
+                        <div class="form-text">
+                            {% trans "Cada actividad admite unos formatos concretos, que verás al elegirla (por defecto, solo PDF)." %}
+                        </div>
+                    </div>
+                    <button class="btn btn-sm btn-primary" type="submit">
+                        <i class="fas fa-upload me-1"></i>{% trans "Enviar mi entrega" %}
+                    </button>
+                </form>
                 {% endif %}
             </div>
-            <div class="mb-2">
-                <label class="form-label small text-muted">{% trans "Archivo" %}</label>
-                {{ submission_form.file }}
-                {% if submission_form.file.errors %}
-                <div class="text-danger small">{{ submission_form.file.errors }}</div>
-                {% endif %}
-                <div class="form-text">
-                    {% trans "Cada actividad admite unos formatos concretos, que verás al elegirla (por defecto, solo PDF)." %}
-                </div>
-            </div>
-            <button class="btn btn-sm btn-primary" type="submit">
-                <i class="fas fa-upload me-1"></i>{% trans "Enviar mi entrega" %}
-            </button>
-        </form>
-        {% endif %}
+            {% endif %}
+        </div>
     </div>
-    {% endif %}
-</div>
 
-<div class="container">
-
-    {% if videos or request.user.is_superuser or request.user.is_lecturer %}
-    <div class="row mb-5">
-        <div class="col-md-12 p-0">
-            <p class="form-title m-0">{% trans 'Video Tutorials' %}</p>
+    {% comment %}
+    Videotutoriales: los videos del curso, con su ficha aparte.
+    {% endcomment %}
+    <div class="tab-pane fade {% if tab_activa == 'videos' %}show active{% endif %}"
+         id="tab-videos" role="tabpanel" tabindex="0">
+        <div class="container mt-3 mb-4">
+            {% if videos or is_editor %}
             <div class="table-responsive">
                 <table class="table table-shadow table-light table-striped m-0">
                     <thead>
@@ -248,7 +368,7 @@
                             <th>{% trans 'Video Title' %}</th>
                             <th>{% trans 'Uploaded Date' %}</th>
                             <th>{% trans 'Get Started' %}</th>
-                            {% if request.user.is_superuser or request.user.is_lecturer %}
+                            {% if is_editor %}
                             <th>{% trans 'Actions' %}</th>
                             {% endif %}
                         </tr>
@@ -274,7 +394,7 @@
                                 </div>
                             </th>
 
-                            {% if request.user.is_superuser or request.user.is_lecturer %}
+                            {% if is_editor %}
                             <td>
                                 <div class="update-delete">
                                     <a href="{% url 'upload_video_edit' slug=course.slug video_slug=video.slug %}"
@@ -293,7 +413,7 @@
                             <td>
                                 <span class="text-danger">
                                     {% trans 'No video Uploaded.' %}
-                                    {% if request.user.is_superuser or request.user.is_lecturer %}
+                                    {% if is_editor %}
                                     <a href="{% url 'upload_video' course.slug %}" class="text-primary">
                                         <i class="primary" style="font-size: 22px;">
                                             {% trans 'Upload now.' %}
@@ -310,13 +430,17 @@
                     </tbody>
                 </table>
             </div>
+            {% endif %}
         </div>
     </div>
-    {% endif %}
 
-    <div class="row">
-        <div class="col-md-12 p-0">
-            <p class="form-title m-0">{% trans 'Documentations' %}</p>
+    {% comment %}
+    Documentacion: todo el material que no es presentacion. Los ficheros
+    adicionales (.odt, .docx...) cuelgan de su fichero principal.
+    {% endcomment %}
+    <div class="tab-pane fade {% if tab_activa == 'documentacion' %}show active{% endif %}"
+         id="tab-documentacion" role="tabpanel" tabindex="0">
+        <div class="container mt-3 mb-4">
             <div class="table-responsive">
                 <table class="table table-shadow table-light table-striped m-0">
                     <thead>
@@ -326,7 +450,7 @@
                             <th>{% trans 'Uploaded Date' %}</th>
                             <th>{% trans 'Updated Date' %}</th>
                             <th>{% trans 'Downloads' %}</th>
-                            {% if request.user.is_superuser or request.user.is_lecturer %}
+                            {% if is_editor %}
                             <th>{% trans 'Actions' %}</th>
                             {% endif %}
                         </tr>
@@ -343,12 +467,6 @@
                                 </a>
                                 {% if not file.visible %}
                                 <span class="badge bg-secondary ms-1">{% trans 'Oculto' %}</span>
-                                {% endif %}
-                                {% if file.es_html %}
-                                <a href="{% url 'deck_abrir' slug=course.slug file_id=file.pk %}" target="_blank" rel="noopener"
-                                    title="Abrir la presentacion en una pestana nueva">
-                                    <i class="fas fa-up-right-from-square me-1"></i> Abrir
-                                </a>
                                 {% endif %}
                                 {% for archivo in file.archivos.all %}
                                 <a href="{% url 'upload_archivo_download' slug=course.slug file_id=file.pk archivo_id=archivo.pk %}" title="{{ archivo.nombre }}"
@@ -367,7 +485,7 @@
                                 </div>
                             </th>
 
-                            {% if request.user.is_superuser or request.user.is_lecturer %}
+                            {% if is_editor %}
                             <td>
                                 <div class="update-delete">
                                     <a href="{% url 'upload_file_edit' slug=course.slug file_id=file.pk %}"
@@ -382,10 +500,10 @@
                                         </button>
                                     </form>
                                     {% url 'upload_file_delete' slug=course.slug file_id=file.pk as borrar_url %}{% trans 'Delete' as label %}{% include "snippets/delete_form.html" with url=borrar_url clase="border-0 bg-transparent p-0 align-baseline" titulo=label etiqueta="" confirmar="¿Borrar esta actividad y todos sus ficheros? Esta acción no se puede deshacer." %}
+                                    {% for archivo in file.archivos.all %}
+                                    {% url 'upload_archivo_delete' slug=course.slug file_id=file.pk archivo_id=archivo.pk as borrar_archivo_url %}{% trans 'Delete' as borrar_label %}{% include "snippets/delete_form.html" with url=borrar_archivo_url clase="border-0 bg-transparent p-0 align-baseline" titulo=borrar_label etiqueta="" confirmar="¿Borrar este fichero adicional? Esta acción no se puede deshacer." %}
+                                    {% endfor %}
                                 </div>
-                                {% for archivo in file.archivos.all %}
-                                {% url 'upload_archivo_delete' slug=course.slug file_id=file.pk archivo_id=archivo.pk as borrar_archivo_url %}{% trans 'Delete' as borrar_label %}{% include "snippets/delete_form.html" with url=borrar_archivo_url clase="border-0 bg-transparent p-0 align-baseline" titulo=borrar_label etiqueta="" confirmar="¿Borrar este fichero adicional? Esta acción no se puede deshacer." %}
-                                {% endfor %}
                             </td>
                             {% endif %}
                         </tr>
@@ -396,7 +514,7 @@
                             <td>
                                 <span class="text-danger">
                                     {% trans 'No File Uploaded.' %}
-                                    {% if request.user.is_superuser or request.user.is_lecturer %}
+                                    {% if is_editor %}
                                     <a href="{% url 'upload_file_view' course.slug %}" class="text-primary">
                                         <i class="primary" style="font-size: 22px;">
                                             {% trans 'Upload now.' %}
@@ -454,3 +572,20 @@
 </div>
 
 {% endblock content %}
+
+{% block js %}
+{% comment %}
+Sin javascript, cada enlace de pestana recarga la pagina (?tab=...), y el
+servidor la abre ya activa. Con javascript, Bootstrap cambia de pestana sin
+recargar: aqui solo se apunta la pestana en la URL, para que un F5 y un
+enlace compartido aterricen en la misma.
+{% endcomment %}
+<script>
+    document.querySelectorAll('#pestanas-curso [data-bs-toggle="tab"]').forEach(function (pestana) {
+        pestana.addEventListener('shown.bs.tab', function (event) {
+            var destino = event.target.getAttribute('href').replace('?tab=', '');
+            history.replaceState(null, '', '?tab=' + destino);
+        });
+    });
+</script>
+{% endblock js %}

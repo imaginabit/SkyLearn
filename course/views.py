@@ -9,6 +9,7 @@ from django.core.paginator import Paginator
 from django.db.models import Count, Q, Sum
 from django.http import FileResponse, Http404
 from django.shortcuts import get_object_or_404, redirect, render
+from django.urls import reverse
 from django.utils import timezone
 from django.utils.decorators import method_decorator
 from django.utils.text import slugify
@@ -41,6 +42,17 @@ from course.models import (
 )
 from course.utils import curso_asignado, deck_del_curso, decks_del_curso
 from result.models import TakenCourse
+
+
+# Las pestanas de la pagina del curso. La que se muestra va en la URL
+# (?tab=...), para que el enlace se pueda compartir y la pestana sobreviva a
+# un F5.
+PESTANAS = ("presentaciones", "entregas", "videos", "documentacion")
+
+
+def al_curso(slug, tab):
+    """El curso abierto en la pestana `tab`, para no perderla al volver."""
+    return redirect(f"{reverse('course_detail', kwargs={'slug': slug})}?tab={tab}")
 
 
 # ########################################################
@@ -221,6 +233,12 @@ def _orden_de_lectura(documento):
 @login_required
 def course_single(request, slug):
     course = get_object_or_404(Course, slug=slug)
+    # La pestana activa va en la URL (?tab=...). Sin javascript, cada enlace
+    # de pestana recarga la pagina con esa pestana abierta; con javascript el
+    # cambio no recarga y solo se actualiza la URL.
+    tab = request.GET.get("tab", "presentaciones")
+    if tab not in PESTANAS:
+        tab = "presentaciones"
     # prefetch de los ficheros adicionales: sin esto, la tabla del curso hace
     # una consulta por actividad para listar sus .odt y .docx alternativos
     # por fecha de subida: el material sale en el orden de las clases, y no
@@ -263,13 +281,15 @@ def course_single(request, slug):
     ).exists()
     # el mazo de diapositivas, si lo hay: se muestra embebido arriba del curso
     deck = deck_del_curso(course, solo_visibles=not is_editor)
-    # todos los mazos, para los cursos que no embeben ninguno
+    # todos los mazos, para la pestana de presentaciones
     decks = sorted(
         decks_del_curso(course, solo_visibles=not is_editor), key=_orden_de_lectura
     )
 
     if request.method == "POST":
         # ponytail: entrega del alumno; el profesor solo revisa la tabla de abajo
+        # El POST sale de la pestana de entregas, asi que ahi se vuelve a abrir.
+        tab = "entregas"
         if is_editor:
             messages.error(request, "Solo los alumnos pueden entregar trabajos.")
             return redirect("course_detail", slug=slug)
@@ -289,7 +309,7 @@ def course_single(request, slug):
             submission.file = form.cleaned_data["file"]
             submission.save()
             messages.success(request, "Tu entrega se ha enviado correctamente.")
-            return redirect("course_detail", slug=slug)
+            return al_curso(slug, "entregas")
         messages.error(request, "Revisa los errores del formulario.")
     else:
         form = (
@@ -344,8 +364,10 @@ def course_single(request, slug):
             "videos": videos,
             "lecturers": lecturers,
             "media_url": settings.MEDIA_URL,
+            "is_editor": is_editor,
             "deck": deck,
             "decks": decks,
+            "tab_activa": tab,
             "submission_form": form,
             "my_submissions": my_submissions,
             "submissions": submissions,
@@ -377,7 +399,50 @@ def course_ocultar_corregidas(request, slug):
         )
     else:
         messages.success(request, "Se veran todas las entregas.")
-    return redirect("course_detail", slug=course.slug)
+    return al_curso(course.slug, "entregas")
+
+
+@require_POST
+@login_required
+@lecturer_required
+def course_mazo_principal(request, slug, file_id):
+    """El docente elige la presentacion principal del curso.
+
+    La principal es la que se muestra embebida arriba de la pagina del curso,
+    encima de las pestanas: solo puede haber una, y al marcarla se desmarcan
+    las demas. Quitarla deja el curso sin mazo embebido (los mazos siguen en
+    su pestana, abribles y descargables).
+    """
+    course = curso_asignado(request, slug)
+    mazo = get_object_or_404(Upload, pk=file_id, course=course)
+    if not mazo.es_html:
+        messages.error(
+            request,
+            "Solo un mazo de diapositivas (.html) puede ser la presentacion principal.",
+        )
+        return redirect("course_detail", slug=slug)
+    if mazo.es_principal:
+        mazo.es_principal = False
+        mazo.save(update_fields=["es_principal"])
+        course.embeber_mazo = False
+        course.save(update_fields=["embeber_mazo"])
+        messages.success(
+            request,
+            f"'{mazo.title}' ya no es la presentacion principal del curso.",
+        )
+    else:
+        Upload.objects.filter(course=course).exclude(pk=mazo.pk).update(
+            es_principal=False
+        )
+        mazo.es_principal = True
+        mazo.save(update_fields=["es_principal"])
+        course.embeber_mazo = True
+        course.save(update_fields=["embeber_mazo"])
+        messages.success(
+            request,
+            f"'{mazo.title}' es ahora la presentacion principal del curso.",
+        )
+    return al_curso(course.slug, "presentaciones")
 
 
 @login_required
@@ -493,7 +558,7 @@ def submission_grade(request, slug, pk):
             submission.graded_at = timezone.now()
             submission.save()
             messages.success(request, "Calificacion guardada.")
-            return redirect("course_detail", slug=slug)
+            return al_curso(slug, "entregas")
         messages.error(request, "Revisa los errores del formulario.")
     else:
         form = SubmissionGradeForm(instance=submission)
@@ -647,7 +712,7 @@ def handle_file_upload(request, slug):
             upload.save()
             form.guardar_archivos(upload)
             messages.success(request, f"{upload.title} has been uploaded.")
-            return redirect("course_detail", slug=slug)
+            return al_curso(slug, "documentacion")
         messages.error(request, "Correct the error(s) below.")
     else:
         form = UploadFormFile()
@@ -669,7 +734,7 @@ def handle_file_edit(request, slug, file_id):
             upload = form.save()
             form.guardar_archivos(upload)
             messages.success(request, f"{upload.title} has been updated.")
-            return redirect("course_detail", slug=slug)
+            return al_curso(slug, "documentacion")
         messages.error(request, "Correct the error(s) below.")
     else:
         form = UploadFormFile(instance=upload)
@@ -689,7 +754,7 @@ def handle_file_delete(request, slug, file_id):
     title = upload.title
     upload.delete()
     messages.success(request, f"{title} has been deleted.")
-    return redirect("course_detail", slug=slug)
+    return al_curso(slug, "documentacion")
 
 
 @require_POST
@@ -715,7 +780,7 @@ def resaltar_documento(request, slug, file_id):
         upload.resaltado = True
         upload.resaltado_hasta = ahora + timedelta(days=1)
     upload.save(update_fields=["resaltado", "resaltado_hasta"])
-    return redirect("course_detail", slug=slug)
+    return al_curso(course.slug, "documentacion")
 
 
 @require_POST
@@ -729,7 +794,7 @@ def handle_archivo_delete(request, slug, file_id, archivo_id):
     nombre = archivo.file.name
     archivo.delete()
     messages.success(request, f"{nombre} has been deleted.")
-    return redirect("course_detail", slug=slug)
+    return al_curso(slug, "documentacion")
 
 
 # ########################################################
@@ -751,7 +816,7 @@ def handle_video_upload(request, slug):
             video.course = course
             video.save()
             messages.success(request, f"{video.title} has been uploaded.")
-            return redirect("course_detail", slug=slug)
+            return al_curso(slug, "videos")
         messages.error(request, "Correct the error(s) below.")
     else:
         form = UploadFormVideo()
@@ -789,7 +854,7 @@ def handle_video_edit(request, slug, video_slug):
         if form.is_valid():
             video = form.save()
             messages.success(request, f"{video.title} has been updated.")
-            return redirect("course_detail", slug=slug)
+            return al_curso(slug, "videos")
         messages.error(request, "Correct the error(s) below.")
     else:
         form = UploadFormVideo(instance=video)
@@ -809,7 +874,7 @@ def handle_video_delete(request, slug, video_slug):
     title = video.title
     video.delete()
     messages.success(request, f"{title} has been deleted.")
-    return redirect("course_detail", slug=slug)
+    return al_curso(slug, "videos")
 
 
 # ########################################################

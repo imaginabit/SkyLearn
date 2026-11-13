@@ -133,6 +133,7 @@ class UploadFormFile(forms.ModelForm):
             "is_activity",
             "is_evaluable",
             "visible",
+            "es_principal",
             "extensiones_permitidas",
         )
 
@@ -143,12 +144,27 @@ class UploadFormFile(forms.ModelForm):
         self.fields["is_activity"].widget.attrs.update({"class": "form-check-input"})
         self.fields["is_evaluable"].widget.attrs.update({"class": "form-check-input"})
         self.fields["visible"].widget.attrs.update({"class": "form-check-input"})
+        self.fields["es_principal"].widget.attrs.update({"class": "form-check-input"})
         # El campo del modelo guarda "pdf,odt"; el formulario trabaja con una
         # lista, asi que el initial hay que darlo ya troceado.
         if self.instance.pk:
             self.initial[
                 "extensiones_permitidas"
             ] = self.instance.get_extensiones_permitidas()
+
+    def clean_es_principal(self):
+        """Solo un mazo de diapositivas puede ser la presentacion principal.
+
+        Con otro fichero marcado no pasa nada grave, pero el campo es para
+        elegir que mazo se embebe arriba del curso: en un pdf no significa
+        nada, asi que se le quita la marca y punto.
+        """
+        if not self.cleaned_data.get("es_principal"):
+            return False
+        fichero = self.cleaned_data.get("file") or self.instance.file
+        if fichero and not fichero.name.lower().endswith(".html"):
+            return False
+        return True
 
     def clean_extensiones_permitidas(self):
         elegidas = self.cleaned_data["extensiones_permitidas"]

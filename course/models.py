@@ -163,7 +163,7 @@ class Course(models.Model):
         verbose_name=_("Embeber la presentacion"),
         help_text=_(
             "Si esta desmarcado, el curso no muestra ningun mazo embebido arriba: "
-            "los mazos se abren y se descargan desde la tabla de documentos. "
+            "los mazos se abren y se descargan desde la pestana Presentaciones. "
             "Para los cursos que acumulan el material de varias clases, donde "
             "embeber solo uno deja a los demas escondidos."
         ),
@@ -274,6 +274,15 @@ class Upload(models.Model):
         help_text=_(
             "Solo para actividades: extensiones separadas por comas. "
             "Por defecto, solo pdf."
+        ),
+    )
+    es_principal = models.BooleanField(
+        default=False,
+        verbose_name=_("Presentacion principal"),
+        help_text=_(
+            "Solo para los mazos de diapositivas (.html): el que se muestra "
+            "embebido arriba del curso, encima de las pestanas. Uno solo por "
+            "curso; al marcarlo se desmarcan los demas."
         ),
     )
 

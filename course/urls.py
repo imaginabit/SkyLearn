@@ -23,6 +23,11 @@ urlpatterns = [
         name="deck_abrir",
     ),
     path(
+        "course/<slug>/deck/<int:file_id>/principal/",
+        views.course_mazo_principal,
+        name="course_mazo_principal",
+    ),
+    path(
         "course/<slug>/documentations/<int:file_id>/download/",
         views.upload_file_download,
         name="upload_file_download",

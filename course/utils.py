@@ -6,8 +6,11 @@ from .models import Course, Upload
 def deck_del_curso(curso, solo_visibles=False):
     """El mazo de diapositivas del curso, si tiene uno.
 
-    Se reconoce por extension (.html). Ordena por pk para que el embed y la
-    descarga cojan siempre el mismo fichero, y no uno distinto segun el dia.
+    Se reconoce por extension (.html). Es el que el docente ha marcado como
+    principal: se embebe arriba del curso, encima de las pestanas. Si ninguno
+    esta marcado, se coge el primero por pk, como se hacia antes, para que el
+    embed y la descarga cojan siempre el mismo fichero, y no uno distinto
+    segun el dia.
 
     Un curso puede no embeber ninguno: es lo que hace el curso del temario
     completo, que acumula el material de todas las clases y donde embeber solo
@@ -22,6 +25,9 @@ def deck_del_curso(curso, solo_visibles=False):
     mazos = Upload.objects.filter(course=curso, file__iendswith=".html")
     if solo_visibles:
         mazos = mazos.filter(visible=True)
+    principal = mazos.filter(es_principal=True).order_by("pk").first()
+    if principal is not None:
+        return principal
     return mazos.order_by("pk").first()
 
 
