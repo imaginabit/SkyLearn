@@ -344,6 +344,7 @@ def course_single(request, slug):
         )
 
     my_submissions = None
+    entregas_del_alumno = None
     submissions = None
     entregas_ocultas = 0
     entregas_totales = 0
@@ -378,6 +379,20 @@ def course_single(request, slug):
             .select_related("document")
             .order_by("document__upload_time")
         )
+        # La tabla de la pestana de entregas: cada actividad visible del curso
+        # con su entrega, si la hay. Asi el alumno ve de un vistazo cual falta
+        # por entregar; el select de abajo sigue siendo la via de entrega.
+        if matriculado:
+            mis = {s.document_id: s for s in my_submissions}
+            entregas_del_alumno = [
+                {"actividad": a, "entrega": mis.get(a.pk)} for a in actividades
+            ]
+            # Las evaluables, al principio (cuentan para la nota: lo primero que
+            # hay que mirar); el resto conserva el orden de lectura. `sort` es
+            # estable, asi que dentro de cada grupo no se reordena nada.
+            entregas_del_alumno.sort(
+                key=lambda fila: not fila["actividad"].is_evaluable
+            )
 
     return render(
         request,
@@ -396,6 +411,7 @@ def course_single(request, slug):
             "tab_activa": tab,
             "submission_form": form,
             "my_submissions": my_submissions,
+            "entregas_del_alumno": entregas_del_alumno,
             "submissions": submissions,
             "entregas_ocultas": entregas_ocultas,
             "entregas_totales": entregas_totales,

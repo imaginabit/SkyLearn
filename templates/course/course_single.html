@@ -324,28 +324,74 @@ primer mazo, como se hacia antes.
             </div>
             {% else %}
             <p class="form-title m-0">{% trans "Tus entregas" %}</p>
+            {% if submission_form %}
+            <p class="text-muted small mb-2">
+                <i class="fas fa-list-check me-1"></i>
+                {% blocktrans %}Cada actividad con su estado: las evaluables (E) cuentan para la nota y van primero.{% endblocktrans %}
+            </p>
+            <div class="table-responsive">
+                <table class="table table-shadow table-light table-striped m-0">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>{% trans "Actividad" %}</th>
+                            <th>{% trans "Formatos que admite" %}</th>
+                            <th>{% trans "Estado" %}</th>
+                            <th>{% trans "Nota" %}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for fila in entregas_del_alumno %}
+                        <tr class="{% if fila.actividad.is_evaluable %}table-warning{% endif %}{% if fila.entrega.resaltado_activo %} resaltada{% endif %}">
+                            <td>{{ forloop.counter }}</td>
+                            <td>
+                                {% url 'upload_file_download' slug=course.slug file_id=fila.actividad.pk as enlace_actividad %}
+                                <a href="{{ enlace_actividad }}" title="{{ fila.actividad }}" class="d-flex align-items-center">
+                                    <i class="fas fa-file-{{ fila.actividad.get_extension_short }} me-1" title="{{ fila.actividad.get_program_name }}"></i>
+                                    {{ fila.actividad.title }}
+                                </a>
+                                {% if fila.actividad.is_evaluable %}
+                                <span class="badge bg-warning text-dark ms-1" title="{% trans 'Cuenta para la nota final' %}">E</span>
+                                {% endif %}
+                                {% if not fila.actividad.visible %}
+                                <span class="badge bg-secondary ms-1">{% trans 'Oculto' %}</span>
+                                {% endif %}
+                                {% for archivo in fila.actividad.archivos.all %}
+                                <a href="{% url 'upload_archivo_download' slug=course.slug file_id=fila.actividad.pk archivo_id=archivo.pk %}" title="{{ archivo.nombre }}"
+                                    class="d-flex align-items-center small text-muted ps-3">
+                                    <i class="fas fa-file-{{ archivo.get_extension_short }} me-1" title="{{ archivo.get_program_name }}"></i>
+                                    {{ archivo.nombre }}
+                                </a>
+                                {% endfor %}
+                            </td>
+                            <td class="small text-muted">{{ fila.actividad.formatos_entrega }}</td>
+                            <td>
+                                {% if fila.entrega %}
+                                <span class="badge bg-success me-1">{% trans "Entregada" %}</span>
+                                <span class="small text-muted">{{ fila.entrega.uploaded_at|date:"SHORT_DATETIME_FORMAT" }}</span>
+                                <a class="ms-1 small" href="{% url 'submission_download' slug=course.slug pk=fila.entrega.pk %}">{{ fila.entrega.filename }}</a>
+                                {% if fila.entrega.feedback %}
+                                <div class="small text-muted mt-1">{{ fila.entrega.feedback|linebreaksbr }}</div>
+                                {% endif %}
+                                {% else %}
+                                <span class="badge bg-secondary">{% trans "Sin entregar" %}</span>
+                                {% endif %}
+                            </td>
+                            <td>{% if fila.entrega and fila.entrega.mark is not None %}{{ fila.entrega.mark }}{% else %}<span class="text-muted">&mdash;</span>{% endif %}</td>
+                        </tr>
+                        {% empty %}
+                        <tr><td colspan="5" class="text-muted">
+                            {% trans "Todavia no hay ninguna actividad en el curso." %}
+                        </td></tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
             <div class="card p-3">
-                {% if my_submissions %}
-                <ul class="list-unstyled mb-3">
-                    {% for s in my_submissions %}
-                    <li class="mb-2">
-                        <i class="fas fa-check-circle text-success me-1"></i>
-                        <strong>{{ s.document.title|default:"-" }}</strong> &mdash;
-                        {{ s.uploaded_at|date:"SHORT_DATETIME_FORMAT" }}:
-                        <a href="{% url 'submission_download' slug=course.slug pk=s.pk %}">{{ s.filename }}</a>
-                        {% if s.mark is not None %}
-                        <span class="badge bg-primary ms-1">{% trans "Nota" %}: {{ s.mark }}</span>
-                        {% endif %}
-                        {% if s.feedback %}
-                        <div class="small text-muted mt-1 ps-4">{{ s.feedback|linebreaksbr }}</div>
-                        {% endif %}
-                    </li>
-                    {% endfor %}
-                </ul>
-                {% else %}
-                <p class="text-muted small mb-2">{% trans "Todavia no has entregado nada." %}</p>
-                {% endif %}
-                {% if submission_form %}
+                <p class="small text-muted mb-2">
+                    <i class="fas fa-circle-info me-1"></i>
+                    {% trans "Elige la actividad, sube tu fichero y envía. Puedes reemplazar tu entrega tantas veces como quieras." %}
+                </p>
                 <form method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="mb-2">
@@ -369,8 +415,31 @@ primer mazo, como se hacia antes.
                         <i class="fas fa-upload me-1"></i>{% trans "Enviar mi entrega" %}
                     </button>
                 </form>
+            </div>
+            {% else %}
+            <div class="card p-3">
+                {% if my_submissions %}
+                <ul class="list-unstyled mb-3">
+                    {% for s in my_submissions %}
+                    <li class="mb-2">
+                        <i class="fas fa-check-circle text-success me-1"></i>
+                        <strong>{{ s.document.title|default:"-" }}</strong> &mdash;
+                        {{ s.uploaded_at|date:"SHORT_DATETIME_FORMAT" }}:
+                        <a href="{% url 'submission_download' slug=course.slug pk=s.pk %}">{{ s.filename }}</a>
+                        {% if s.mark is not None %}
+                        <span class="badge bg-primary ms-1">{% trans "Nota" %}: {{ s.mark }}</span>
+                        {% endif %}
+                        {% if s.feedback %}
+                        <div class="small text-muted mt-1 ps-4">{{ s.feedback|linebreaksbr }}</div>
+                        {% endif %}
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% else %}
+                <p class="text-muted small mb-2">{% trans "Todavia no has entregado nada." %}</p>
                 {% endif %}
             </div>
+            {% endif %}
             {% endif %}
         </div>
     </div>
