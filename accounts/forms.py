@@ -6,6 +6,7 @@ from django.contrib.auth.forms import (
 )
 from django.contrib.auth.forms import PasswordResetForm
 from course.models import Program
+from accounts.utils import record_consent
 from .models import User, Student, Parent, RELATION_SHIP, LEVEL, GENDERS
 
 
@@ -75,11 +76,11 @@ class StaffAddForm(UserCreationForm):
         label="Mobile No.",
     )
 
-    email = forms.CharField(
-        max_length=30,
-        widget=forms.TextInput(
+    email = forms.EmailField(
+        max_length=254,
+        widget=forms.EmailInput(
             attrs={
-                "type": "text",
+                "type": "email",
                 "class": "form-control",
             }
         ),
@@ -512,4 +513,12 @@ class ParentAddForm(UserCreationForm):
             relation_ship=self.cleaned_data.get("relation_ship"),
         )
         parent.save()
+        # El padre es una cuenta con datos personales (nombre, email, telefono,
+        # direccion): su alta guarda tambien la prueba de consentimiento, con
+        # quien la dio, como en el alta de alumnos. `ParentAdd.form_valid` le
+        # inyecta la peticion al formulario; sin ella, no hay prueba que
+        # guardar y el alta se queda solo en el registro.
+        peticion = getattr(self, "request", None)
+        if peticion is not None:
+            record_consent(user, peticion, recorded_by=peticion.user)
         return user

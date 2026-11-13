@@ -24,7 +24,11 @@ class SearchView(ListView):
             news_events_results = NewsAndEvents.objects.search(query)
             program_results = Program.objects.search(query)
             course_results = Course.objects.search(query)
-            quiz_results = Quiz.objects.search(query)
+            # Los borradores de quiz no se publican en el buscador: solo los
+            # ve el profesorado.
+            quiz_results = Quiz.objects.search(query).exclude(draft=True)
+            if request.user.is_lecturer or request.user.is_superuser:
+                quiz_results = Quiz.objects.search(query)
 
             # combine querysets
             queryset_chain = chain(

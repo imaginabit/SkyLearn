@@ -31,7 +31,7 @@ la tabla, porque Bootstrap no se lleva bien con los modales dentro de
         </thead>
         <tbody>
             {% for fila in lista %}
-            <tr class="{% if fila.entrega.resaltado_activo %}resaltada{% endif %}{% if destacada == "1" %} table-warning{% endif %}">
+            <tr class="{% if fila.actividad.resaltado_activo %}resaltada{% endif %}{% if destacada == "1" %} table-warning{% endif %}">
                 <td>{{ forloop.counter }}</td>
                 <td>
                     {% url 'upload_file_download' slug=course.slug file_id=fila.actividad.pk as enlace_actividad %}

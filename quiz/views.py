@@ -246,7 +246,11 @@ class QuizMarkingDetail(DetailView):
         sitting = self.get_object()
         question_id = request.POST.get("qid")
         if question_id:
-            question = Question.objects.get_subclass(id=int(question_id))
+            # Un qid malformado no debe tirar un 500: se ignora.
+            try:
+                question = Question.objects.get_subclass(id=int(question_id))
+            except (ValueError, Question.DoesNotExist):
+                return self.get(request, *args, **kwargs)
             if int(question_id) in sitting.get_incorrect_questions:
                 sitting.remove_incorrect_question(question)
             else:
@@ -512,7 +516,12 @@ def live_create(request, slug):
     if request.method == "POST":
         quiz = get_object_or_404(Quiz, pk=request.POST.get("quiz"), course=course)
         preguntas = _preguntas_mc(quiz)
-        cuantas = int(request.POST.get("cuantas") or 0)
+        # Un valor malformado (o vacio) no tira un 500: 0 preguntas, y el
+        # flujo de abajo decide con eso.
+        try:
+            cuantas = int(request.POST.get("cuantas") or 0)
+        except (TypeError, ValueError):
+            cuantas = 0
         if cuantas and cuantas < len(preguntas):
             preguntas = random.sample(preguntas, cuantas)
         if not preguntas:

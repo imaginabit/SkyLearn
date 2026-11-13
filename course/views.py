@@ -1034,11 +1034,14 @@ def course_registration(request):
         # antes cogia los ids del POST tal cual (Course.objects.get) y admitia
         # cualquier curso del mundo; ahora solo los de su programa, nivel y
         # semestre, que es lo mismo que le ofrecian en el formulario
+        # Solo las claves del POST que sean ids numericos: una clave sobrante
+        # (csrf, un input de un plugin...) era un ValueError y un 500.
+        ids_validos = {int(clave) for clave in data.keys() if clave.isdigit()}
         cursos = Course.objects.filter(
             program__pk=student.program_id,
             level=student.level,
             semester=current_semester,
-        ).filter(pk__in=list(data.keys()))
+        ).filter(pk__in=ids_validos)
         for course in cursos:
             TakenCourse.objects.get_or_create(student=student, course=course)
         messages.success(request, "Courses registered successfully!")

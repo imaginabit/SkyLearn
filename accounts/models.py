@@ -145,7 +145,9 @@ class User(AbstractUser):
             pass
 
     def delete(self, *args, **kwargs):
-        if self.picture.url != settings.MEDIA_URL + "default.png":
+        # `picture` es null=True: sin este guard, borrar una cuenta sin foto
+        # reventaba con ValueError y la cuenta quedaba indeleble.
+        if self.picture and self.picture.url != settings.MEDIA_URL + "default.png":
             self.picture.delete()
         super().delete(*args, **kwargs)
 

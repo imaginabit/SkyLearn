@@ -33,7 +33,7 @@ EXTENSIONES = [
     "pptx",
     "zip",
     "rar",
-    "7zip",
+    "7z",
 ]
 
 ICONOS = {
@@ -47,7 +47,7 @@ ICONOS = {
     "pptx": "powerpoint",
     "zip": "archive",
     "rar": "archive",
-    "7zip": "archive",
+    "7z": "archive",
 }
 
 # Que programa abre cada formato. El .odt es de LibreOffice, no de Word, y se
@@ -63,7 +63,7 @@ PROGRAMAS = {
     "pptx": "Microsoft PowerPoint",
     "zip": "ZIP",
     "rar": "RAR",
-    "7zip": "7-Zip",
+    "7z": "7-Zip",
 }
 
 # Formatos que el alumno puede entregar en una actividad (`Submission.file`).
@@ -74,7 +74,7 @@ EXTENSIONES_ENTREGA = [
     "odt",
     "zip",
     "rar",
-    "7zip",
+    "7z",
     "asc",
     "png",
     "jpg",
@@ -225,7 +225,7 @@ class Upload(models.Model):
     file = models.FileField(
         upload_to="course_files/",
         help_text=_(
-            "Valid Files: pdf, docx, doc, odt, html, xls, xlsx, ppt, pptx, zip, rar, 7zip"
+            "Valid Files: pdf, docx, doc, odt, html, xls, xlsx, ppt, pptx, zip, rar, 7z"
         ),
         validators=[FileExtensionValidator(EXTENSIONES)],
     )
@@ -344,7 +344,7 @@ class UploadFile(models.Model):
     file = models.FileField(
         upload_to="course_files/",
         help_text=_(
-            "Valid Files: pdf, docx, doc, odt, html, xls, xlsx, ppt, pptx, zip, rar, 7zip"
+            "Valid Files: pdf, docx, doc, odt, html, xls, xlsx, ppt, pptx, zip, rar, 7z"
         ),
         validators=[FileExtensionValidator(EXTENSIONES)],
     )
@@ -563,7 +563,7 @@ class Submission(models.Model):
     )
     file = models.FileField(
         upload_to="submissions/",
-        help_text=_("Valid Files: pdf, docx, doc, odt, zip, rar, 7zip, png, jpg"),
+        help_text=_("Valid Files: pdf, docx, doc, odt, zip, rar, 7z, png, jpg"),
         validators=[FileExtensionValidator(EXTENSIONES_ENTREGA)],
     )
     uploaded_at = models.DateTimeField(auto_now=True)

@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, get_object_or_404
+﻿from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
@@ -11,12 +11,12 @@ from .models import NewsAndEvents, ActivityLog, Session, Semester
 
 
 # ########################################################
-# Páginas legales
+# PÃ¡ginas legales
 # ########################################################
 def _datos_legales(extra):
     """Lo que el texto legal toma de los ajustes, para no repetirlo.
 
-    El responsable, su dirección y el correo se cambian en el .env; el texto de
+    El responsable, su direcciÃ³n y el correo se cambian en el .env; el texto de
     las plantillas no lleva datos fijos.
     """
     contexto = {
@@ -32,12 +32,12 @@ def _datos_legales(extra):
 
 def privacy_view(request):
     return render(request, "legal/privacy.html", _datos_legales(
-        {"title": "Política de privacidad"}))
+        {"title": "PolÃ­tica de privacidad"}))
 
 
 def terms_view(request):
     return render(request, "legal/terms.html", _datos_legales(
-        {"title": "Términos de uso"}))
+        {"title": "TÃ©rminos de uso"}))
 
 
 # ########################################################
@@ -70,6 +70,7 @@ def dashboard_view(request):
 
 
 @login_required
+@lecturer_required
 def post_add(request):
     if request.method == "POST":
         form = NewsAndEventsForm(request.POST)
@@ -124,7 +125,7 @@ def session_list_view(request):
 
 
 @login_required
-@lecturer_required
+@admin_required
 def session_add_view(request):
     """Add a new session"""
     if request.method == "POST":
@@ -141,7 +142,7 @@ def session_add_view(request):
 
 
 @login_required
-@lecturer_required
+@admin_required
 def session_update_view(request, pk):
     session = get_object_or_404(Session, pk=pk)
     if request.method == "POST":
@@ -159,7 +160,7 @@ def session_update_view(request, pk):
 
 @require_POST
 @login_required
-@lecturer_required
+@admin_required
 def session_delete_view(request, pk):
     session = get_object_or_404(Session, pk=pk)
     if session.is_current_session:
@@ -189,7 +190,7 @@ def semester_list_view(request):
 
 
 @login_required
-@lecturer_required
+@admin_required
 def semester_add_view(request):
     if request.method == "POST":
         form = SemesterForm(request.POST)
@@ -206,7 +207,7 @@ def semester_add_view(request):
 
 
 @login_required
-@lecturer_required
+@admin_required
 def semester_update_view(request, pk):
     semester = get_object_or_404(Semester, pk=pk)
     if request.method == "POST":
@@ -225,7 +226,7 @@ def semester_update_view(request, pk):
 
 @require_POST
 @login_required
-@lecturer_required
+@admin_required
 def semester_delete_view(request, pk):
     semester = get_object_or_404(Semester, pk=pk)
     if semester.is_current_semester:

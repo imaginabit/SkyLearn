@@ -47,6 +47,9 @@ def render_to_pdf(template_name, context):
 # ########################################################
 
 
+# Solo para usuarios autenticados: sin esto, cualquiera podia sondear que
+# nombres de usuario existen (enumeracion de cuentas).
+@login_required
 def validate_username(request):
     username = request.GET.get("username", None)
     data = {"is_taken": User.objects.filter(username__iexact=username).exists()}
@@ -418,5 +421,8 @@ class ParentAdd(CreateView):
     template_name = "accounts/parent_form.html"
 
     def form_valid(self, form):
+        # El formulario necesita la peticion para guardar la prueba de
+        # consentimiento del padre (quien la dio, desde que IP).
+        form.request = self.request
         messages.success(self.request, "Parent added successfully.")
         return super().form_valid(form)

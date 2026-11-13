@@ -184,9 +184,18 @@ class UploadFormFile(forms.ModelForm):
         return self.cleaned_data["archivos"]
 
     def guardar_archivos(self, upload):
-        """Crea un `UploadFile` por cada fichero adicional marcado."""
+        """Crea un `UploadFile` por cada fichero adicional marcado.
+
+        Al reenviar el formulario de edicion, los que ya esten (por nombre)
+        no se vuelven a crear: duplicarlos dejaba dos filas para el mismo
+        fichero.
+        """
+        existentes = {a.nombre for a in upload.archivos.all()}
         for fichero in self.cleaned_data.get("archivos") or []:
+            if fichero.name in existentes:
+                continue
             UploadFile.objects.create(upload=upload, file=fichero)
+            existentes.add(fichero.name)
 
 
 # Upload video to specific course

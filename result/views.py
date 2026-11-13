@@ -1,5 +1,7 @@
 from decimal import Decimal, InvalidOperation
 
+import io
+
 from django.shortcuts import render, get_object_or_404
 from django.contrib import messages
 from django.http import HttpResponseRedirect
@@ -314,10 +316,13 @@ def result_sheet_pdf_view(request, id):
         + "_resultSheet.pdf"
     )
     fname = fname.replace("/", "-")
-    flocation = settings.MEDIA_ROOT + "/result_sheet/" + fname
 
+    # El PDF se compone en memoria: dejarlo en media/result_sheet/ con
+    # nombre predecible lo dejaba descargable sin autenticacion para quien
+    # sepa el nombre.
+    buffer = io.BytesIO()
     doc = SimpleDocTemplate(
-        flocation,
+        buffer,
         rightMargin=0,
         leftMargin=6.5 * CM,
         topMargin=0.3 * CM,
@@ -460,11 +465,9 @@ def result_sheet_pdf_view(request, id):
 
     doc.build(Story)
 
-    fs = FileSystemStorage(settings.MEDIA_ROOT + "/result_sheet")
-    with fs.open(fname) as pdf:
-        response = HttpResponse(pdf, content_type="application/pdf")
-        response["Content-Disposition"] = "inline; filename=" + fname + ""
-        return response
+    response = HttpResponse(buffer.getvalue(), content_type="application/pdf")
+    buffer.close()
+    response["Content-Disposition"] = "inline; filename=" + fname + ""
     return response
 
 
@@ -475,11 +478,11 @@ def course_registration_form(request):
     courses = TakenCourse.objects.filter(student__student__id=request.user.id)
     fname = request.user.username + ".pdf"
     fname = fname.replace("/", "-")
-    # flocation = '/tmp/' + fname
-    # print(MEDIA_ROOT + "\\" + fname)
-    flocation = settings.MEDIA_ROOT + "/registration_form/" + fname
+    # En memoria, como el boletin: un PDF con nombre y numero de registro
+    # escrito en media/registration_form/ quedaba descargable sin auth.
+    buffer = io.BytesIO()
     doc = SimpleDocTemplate(
-        flocation, rightMargin=15, leftMargin=15, topMargin=0, bottomMargin=0
+        buffer, rightMargin=15, leftMargin=15, topMargin=0, bottomMargin=0
     )
     styles = getSampleStyleSheet()
 
@@ -768,9 +771,7 @@ def course_registration_form(request):
     Story.append(im)
 
     doc.build(Story)
-    fs = FileSystemStorage(settings.MEDIA_ROOT + "/registration_form")
-    with fs.open(fname) as pdf:
-        response = HttpResponse(pdf, content_type="application/pdf")
-        response["Content-Disposition"] = "inline; filename=" + fname + ""
-        return response
+    response = HttpResponse(buffer.getvalue(), content_type="application/pdf")
+    buffer.close()
+    response["Content-Disposition"] = "inline; filename=" + fname + ""
     return response
