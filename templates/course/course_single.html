@@ -325,9 +325,38 @@ primer mazo, como se hacia antes.
             {% else %}
             <p class="form-title m-0">{% trans "Tus entregas" %}</p>
             {% if submission_form %}
-            <p class="text-muted small mb-2">
+            <div class="card p-3">
+                <p class="small text-muted mb-2">
+                    <i class="fas fa-circle-info me-1"></i>
+                    {% trans "Elige la actividad, sube tu fichero y envía. Puedes reemplazar tu entrega tantas veces como quieras; también hay un botón de enviar en cada fila de la tabla de abajo." %}
+                </p>
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="mb-2">
+                        <label class="form-label small text-muted">{% trans "Actividad" %}</label>
+                        {{ submission_form.document }}
+                        {% if submission_form.document.errors %}
+                        <div class="text-danger small">{{ submission_form.document.errors }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="mb-2">
+                        <label class="form-label small text-muted">{% trans "Archivo" %}</label>
+                        {{ submission_form.file }}
+                        {% if submission_form.file.errors %}
+                        <div class="text-danger small">{{ submission_form.file.errors }}</div>
+                        {% endif %}
+                        <div class="form-text">
+                            {% trans "Cada actividad admite unos formatos concretos, que verás al elegirla (por defecto, solo PDF)." %}
+                        </div>
+                    </div>
+                    <button class="btn btn-sm btn-primary" type="submit">
+                        <i class="fas fa-upload me-1"></i>{% trans "Enviar mi entrega" %}
+                    </button>
+                </form>
+            </div>
+            <p class="text-muted small mb-2 mt-3">
                 <i class="fas fa-list-check me-1"></i>
-                {% blocktrans %}Cada actividad con su estado: las evaluables (E) cuentan para la nota y van primero.{% endblocktrans %}
+                {% blocktrans %}Estado de cada actividad: las evaluables (E) cuentan para la nota y van primero.{% endblocktrans %}
             </p>
             <div class="table-responsive">
                 <table class="table table-shadow table-light table-striped m-0">
@@ -338,6 +367,7 @@ primer mazo, como se hacia antes.
                             <th>{% trans "Formatos que admite" %}</th>
                             <th>{% trans "Estado" %}</th>
                             <th>{% trans "Nota" %}</th>
+                            <th>{% trans "Enviar" %}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -368,53 +398,48 @@ primer mazo, como se hacia antes.
                             <td>
                                 {% if fila.entrega %}
                                 <span class="badge bg-success me-1">{% trans "Entregada" %}</span>
-                                <span class="small text-muted">{{ fila.entrega.uploaded_at|date:"SHORT_DATETIME_FORMAT" }}</span>
-                                <a class="ms-1 small" href="{% url 'submission_download' slug=course.slug pk=fila.entrega.pk %}">{{ fila.entrega.filename }}</a>
+                                <span class="small text-muted d-block">{{ fila.entrega.uploaded_at|date:"SHORT_DATETIME_FORMAT" }}</span>
+                                <a class="small" href="{% url 'submission_download' slug=course.slug pk=fila.entrega.pk %}">{{ fila.entrega.filename }}</a>
                                 {% if fila.entrega.feedback %}
-                                <div class="small text-muted mt-1">{{ fila.entrega.feedback|linebreaksbr }}</div>
+                                <details class="mt-1">
+                                    <summary class="btn btn-sm btn-outline-secondary py-0 px-2"
+                                        title="{% trans 'Ver los comentarios de corrección' %}">
+                                        <i class="fas fa-comment-dots me-1"></i>{% trans "Ver comentarios" %}
+                                    </summary>
+                                    <div class="small text-muted mt-1">{{ fila.entrega.feedback|linebreaksbr }}</div>
+                                </details>
                                 {% endif %}
                                 {% else %}
                                 <span class="badge bg-secondary">{% trans "Sin entregar" %}</span>
                                 {% endif %}
                             </td>
                             <td>{% if fila.entrega and fila.entrega.mark is not None %}{{ fila.entrega.mark }}{% else %}<span class="text-muted">&mdash;</span>{% endif %}</td>
+                            <td>
+                                {% comment %}
+                                Via alternativa: subir el fichero desde la propia
+                                fila. Es el mismo POST del formulario de arriba,
+                                con la actividad ya fijada en un campo oculto.
+                                {% endcomment %}
+                                <form method="post" enctype="multipart/form-data" class="d-flex gap-1">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="document" value="{{ fila.actividad.pk }}">
+                                    <input type="file" name="file" required class="form-control form-control-sm"
+                                        accept="{{ fila.actividad.formatos_accept }}"
+                                        title="{{ fila.actividad.formatos_entrega }}">
+                                    <button class="btn btn-sm btn-primary" type="submit"
+                                        title="{% trans 'Enviar o reemplazar la entrega de esta actividad' %}">
+                                        <i class="fas fa-upload"></i>
+                                    </button>
+                                </form>
+                            </td>
                         </tr>
                         {% empty %}
-                        <tr><td colspan="5" class="text-muted">
+                        <tr><td colspan="6" class="text-muted">
                             {% trans "Todavia no hay ninguna actividad en el curso." %}
                         </td></tr>
                         {% endfor %}
                     </tbody>
                 </table>
-            </div>
-            <div class="card p-3">
-                <p class="small text-muted mb-2">
-                    <i class="fas fa-circle-info me-1"></i>
-                    {% trans "Elige la actividad, sube tu fichero y envía. Puedes reemplazar tu entrega tantas veces como quieras." %}
-                </p>
-                <form method="post" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    <div class="mb-2">
-                        <label class="form-label small text-muted">{% trans "Actividad" %}</label>
-                        {{ submission_form.document }}
-                        {% if submission_form.document.errors %}
-                        <div class="text-danger small">{{ submission_form.document.errors }}</div>
-                        {% endif %}
-                    </div>
-                    <div class="mb-2">
-                        <label class="form-label small text-muted">{% trans "Archivo" %}</label>
-                        {{ submission_form.file }}
-                        {% if submission_form.file.errors %}
-                        <div class="text-danger small">{{ submission_form.file.errors }}</div>
-                        {% endif %}
-                        <div class="form-text">
-                            {% trans "Cada actividad admite unos formatos concretos, que verás al elegirla (por defecto, solo PDF)." %}
-                        </div>
-                    </div>
-                    <button class="btn btn-sm btn-primary" type="submit">
-                        <i class="fas fa-upload me-1"></i>{% trans "Enviar mi entrega" %}
-                    </button>
-                </form>
             </div>
             {% else %}
             <div class="card p-3">

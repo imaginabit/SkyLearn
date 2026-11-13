@@ -320,6 +320,16 @@ class Upload(models.Model):
         """Los formatos admitidos, separados por comas, para la pantalla."""
         return ", ".join(e.upper() for e in self.get_extensiones_permitidas())
 
+    @property
+    def formatos_accept(self):
+        """Los formatos admitidos con punto delante, para el `accept` del input.
+
+        El navegador no filtra con "pdf" a secas: hay que pasarle ".pdf",
+        ".odt"... Es solo una ayuda al elegir el fichero; la validacion de
+        verdad la hace el servidor.
+        """
+        return ", ".join("." + e for e in self.get_extensiones_permitidas())
+
 
 class UploadFile(models.Model):
     """Un fichero más de una actividad, que el alumno también puede bajar.
