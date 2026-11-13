@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.db.models import Count, Q, Sum
 from django.http import FileResponse, Http404
+from django.db import transaction
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from django.utils import timezone
@@ -337,23 +338,30 @@ def course_single(request, slug):
         )
         if form.is_valid():
             document = form.cleaned_data["document"]
-            entrega_previa = Submission.objects.filter(
-                course=course, student=request.user, document=document
-            ).first()
-            if entrega_previa and entrega_previa.mark is not None:
-                messages.error(
-                    request,
-                    "Esta entrega ya esta calificada y no se puede reemplazar: "
-                    "habla con tu docente.",
+            with transaction.atomic():
+                entrega_previa = (
+                    Submission.objects.select_for_update()
+                    .filter(course=course, student=request.user, document=document)
+                    .first()
                 )
-                return al_curso(slug, "entregas")
-            submission, _ = Submission.objects.get_or_create(
-                course=course, student=request.user, document=document
-            )
-            if submission.file:
-                submission.file.delete(save=False)
-            submission.file = form.cleaned_data["file"]
-            submission.save()
+                if entrega_previa and entrega_previa.mark is not None:
+                    messages.error(
+                        request,
+                        "Esta entrega ya esta calificada y no se puede reemplazar: "
+                        "habla con tu docente.",
+                    )
+                    return al_curso(slug, "entregas")
+                submission, _ = Submission.objects.get_or_create(
+                    course=course, student=request.user, document=document
+                )
+                # El fichero nuevo se guarda antes de tirar el viejo: si el
+                # save falla (o dos envios corren a la vez), la entrega no se
+                # pierde; el fichero sobrante se limpia al final.
+                fichero_viejo = submission.file
+                submission.file = form.cleaned_data["file"]
+                submission.save()
+                if fichero_viejo:
+                    fichero_viejo.delete(save=False)
             if entrega_previa:
                 messages.success(
                     request,
@@ -530,15 +538,26 @@ def submission_delete(request, slug, pk):
     submission = get_object_or_404(Submission, pk=pk, course=course)
     if submission.student_id != request.user.id:
         raise Http404
-    if submission.mark is not None:
-        messages.error(
-            request,
-            "No se puede borrar una entrega ya calificada: habla con tu docente.",
+    with transaction.atomic():
+        # El check del estado va dentro de la transaccion y con lock: si el
+        # docente califica justo entre el check y el borrado, la entrega ya
+        # calificada no desaparece del expediente.
+        submission = (
+            Submission.objects.select_for_update()
+            .select_related("document")
+            .get(pk=submission.pk)
         )
-        return al_curso(course.slug, "entregas")
-    titulo = submission.document.title if submission.document else submission.filename
-    submission.file.delete(save=False)
-    submission.delete()
+        if submission.mark is not None:
+            messages.error(
+                request,
+                "No se puede borrar una entrega ya calificada: habla con tu docente.",
+            )
+            return al_curso(course.slug, "entregas")
+        titulo = (
+            submission.document.title if submission.document else submission.filename
+        )
+        submission.file.delete(save=False)
+        submission.delete()
     messages.success(request, f"Se ha borrado tu entrega de '{titulo}'.")
     return al_curso(course.slug, "entregas")
 
@@ -836,8 +855,18 @@ def handle_file_edit(request, slug, file_id):
     if request.method == "POST":
         form = UploadFormFile(request.POST, request.FILES, instance=upload)
         if form.is_valid():
-            upload = form.save()
-            form.guardar_archivos(upload)
+            with transaction.atomic():
+                # Si se sube un fichero nuevo, el anterior queda en el disco
+                # y servible bajo /media/: se borra despues de guardar.
+                fichero_viejo = upload.file
+                upload = form.save()
+                form.guardar_archivos(upload)
+                if (
+                    fichero_viejo
+                    and upload.file
+                    and fichero_viejo.name != upload.file.name
+                ):
+                    fichero_viejo.delete(save=False)
             messages.success(request, f"{upload.title} has been updated.")
             return al_curso(slug, pestana_de(upload, course))
         messages.error(request, "Correct the error(s) below.")

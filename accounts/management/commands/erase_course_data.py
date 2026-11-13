@@ -82,12 +82,17 @@ class Command(BaseCommand):
             )
             return
 
+        # Los ficheros de media/ se borran DESPUES de que la base de datos se
+        # haya comprometido: dentro de la transaccion, si curso.delete() o
+        # u.delete() falla y se tira atras, los ficheros ya no estarian en el
+        # disco y la BD quedaria apuntando a ficheros borrados.
+        ficheros_pendientes = []
         with transaction.atomic():
             # el curso arrastra filas por las claves foráneas (cuestionarios,
-            # intentos, matrículas, asignaciones), pero los ficheros de media/
-            # hay que borrarlos a mano: eso es lo que hace _borra_ficheros
+            # intentos, matrículas, asignaciones); los ficheros se RECOGEN
+            # aqui, dentro, porque al borrar las filas desaparecerian
             titulo = curso.title
-            ficheros = self._borra_ficheros(curso)
+            ficheros_pendientes = self._recoge_ficheros(curso)
             curso.delete()
             n = 0
             if opts["alumnos"]:
@@ -95,6 +100,10 @@ class Command(BaseCommand):
                     u.delete()  # arrastra Student, Result, Progress,
                     # Sitting y ConsentRecord
                     n += 1
+        # Y se borran del disco DESPUES de que la transaccion se haya
+        # comprometido: si algo falla y se tira atras, la BD no queda
+        # apuntando a ficheros ya borrados.
+        ficheros = self._borra_ficheros(ficheros_pendientes)
         self.stdout.write(
             self.style.SUCCESS(
                 f"Borrado «{titulo}»"
@@ -134,29 +143,26 @@ class Command(BaseCommand):
             (borrables if not en_otros else conservados).append(u)
         return borrables, conservados
 
-    def _borra_ficheros(self, curso):
-        """Borra de media/ lo que cuelga del curso, antes de la cascada.
+    def _recoge_ficheros(self, curso):
+        """Recoge de media/ lo que cuelga del curso, antes de la cascada.
 
         El collector de Django borra filas, no ficheros: no llama a
         `Upload.delete()` en una cascada, y `Submission` ni siquiera lo tiene.
         Para un derecho al olvido, dejar el PDF de un alumno en media/ es
         justo lo que no puede pasar.
 
-        Devuelve cuántos ficheros se han borrado.
+        Devuelve la lista de ficheros (FieldFile) a borrar del disco.
         """
-        borrados = 0
+        pendientes = []
         for upload in curso.upload_set.all():
             if upload.file:
-                upload.file.delete(save=False)
-                borrados += 1
+                pendientes.append(upload.file)
         for video in curso.videos.all():
             if video.video:
-                video.video.delete(save=False)
-                borrados += 1
+                pendientes.append(video.video)
         for entrega in curso.submissions.all():
             if entrega.file:
-                entrega.file.delete(save=False)
-                borrados += 1
+                pendientes.append(entrega.file)
         # las preguntas de los cuestionarios del curso. Como `Question.quiz` es
         # ManyToMany, borrar el cuestionario deja la pregunta en la base; solo
         # se van las que no usa ningun otro curso, que las demas siguen vivas.
@@ -164,7 +170,14 @@ class Command(BaseCommand):
             if pregunta.quiz.exclude(course=curso).exists():
                 continue
             if pregunta.figure:
-                pregunta.figure.delete(save=False)
-                borrados += 1
+                pendientes.append(pregunta.figure)
             pregunta.delete()
+        return pendientes
+
+    def _borra_ficheros(self, pendientes):
+        """Borra del disco los ficheros recogidos. Devuelve cuántos."""
+        borrados = 0
+        for fichero in pendientes:
+            fichero.delete(save=False)
+            borrados += 1
         return borrados
