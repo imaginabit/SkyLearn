@@ -47,12 +47,33 @@ from result.models import TakenCourse
 # Las pestanas de la pagina del curso. La que se muestra va en la URL
 # (?tab=...), para que el enlace se pueda compartir y la pestana sobreviva a
 # un F5.
-PESTANAS = ("presentaciones", "entregas", "videos", "documentacion")
+PESTANAS = (
+    "presentaciones",
+    "actividades",
+    "entregas",
+    "videos",
+    "documentacion",
+)
 
 
 def al_curso(slug, tab):
     """El curso abierto en la pestana `tab`, para no perderla al volver."""
     return redirect(f"{reverse('course_detail', kwargs={'slug': slug})}?tab={tab}")
+
+
+def pestana_de(upload, curso):
+    """La pestana donde vive un fichero del curso.
+
+    Cada tipo se consulta en la suya, y asi el redirect vuelve a la que
+    estaba mirando quien lo ha tocado: las presentaciones (.html) en
+    Presentaciones, las actividades en Actividades y el resto en
+    Documentacion.
+    """
+    if upload.es_html:
+        return "presentaciones"
+    if upload.is_activity:
+        return "actividades"
+    return "documentacion"
 
 
 # ########################################################
@@ -262,9 +283,9 @@ def course_single(request, slug):
     # primero y en orden numerico; el resto de los documentos conserva el
     # orden por fecha de subida. Asi el alumnado ve la secuencia del modulo
     # sin tener que descifrar los numeros.
-    # Las presentaciones (.html) tienen su propia seccion arriba del curso:
-    # en la tabla de Documentaciones solo quedan las actividades y los
-    # documentos.
+    # Las presentaciones (.html) tienen su propia pestana: de lo demas, las
+    # actividades van a la suya (el alumno entrega ahi) y el resto de los
+    # documentos a Documentacion.
     files = sorted(files.exclude(file__iendswith=".html"), key=_orden_de_lectura)
     # El resalte caduca solo: se marca mientras no haya pasado la hora.
     ahora = timezone.now()
@@ -274,6 +295,10 @@ def course_single(request, slug):
             and documento.resaltado_hasta
             and documento.resaltado_hasta > ahora
         )
+    # La misma lista, separada por pestanas: la actividad se entrega, el
+    # documento solo se consulta.
+    actividades = [d for d in files if d.is_activity]
+    documentos = [d for d in files if not d.is_activity]
     # solo se entrega si hay matricula: antes cualquier cuenta que entraba
     # podia entregar en cualquier curso
     matriculado = TakenCourse.objects.filter(
@@ -360,7 +385,8 @@ def course_single(request, slug):
         {
             "title": course.title,
             "course": course,
-            "files": files,
+            "actividades": actividades,
+            "documentos": documentos,
             "videos": videos,
             "lecturers": lecturers,
             "media_url": settings.MEDIA_URL,
@@ -712,7 +738,7 @@ def handle_file_upload(request, slug):
             upload.save()
             form.guardar_archivos(upload)
             messages.success(request, f"{upload.title} has been uploaded.")
-            return al_curso(slug, "documentacion")
+            return al_curso(slug, pestana_de(upload, course))
         messages.error(request, "Correct the error(s) below.")
     else:
         form = UploadFormFile()
@@ -734,7 +760,7 @@ def handle_file_edit(request, slug, file_id):
             upload = form.save()
             form.guardar_archivos(upload)
             messages.success(request, f"{upload.title} has been updated.")
-            return al_curso(slug, "documentacion")
+            return al_curso(slug, pestana_de(upload, course))
         messages.error(request, "Correct the error(s) below.")
     else:
         form = UploadFormFile(instance=upload)
@@ -752,16 +778,19 @@ def handle_file_delete(request, slug, file_id):
     course = curso_asignado(request, slug)
     upload = get_object_or_404(Upload, pk=file_id, course=course)
     title = upload.title
+    # La pestana de destino, antes de borrar: el pre_delete limpia el fichero
+    # del disco y deja el nombre a None, asi que luego ya no se sabe.
+    pestana = pestana_de(upload, course)
     upload.delete()
     messages.success(request, f"{title} has been deleted.")
-    return al_curso(slug, "documentacion")
+    return al_curso(slug, pestana)
 
 
 @require_POST
 @login_required
 @lecturer_required
 def resaltar_documento(request, slug, file_id):
-    """Resalta una fila de la tabla de documentaciones para el alumnado.
+    """Resalta una fila de la tabla de actividades o de documentaciones.
 
     El resalte dura 24 horas, o hasta que se resalte otra: al resaltar una
     fila, las demas se apagan. Pulsando otra vez la misma fila se quita.
@@ -780,7 +809,7 @@ def resaltar_documento(request, slug, file_id):
         upload.resaltado = True
         upload.resaltado_hasta = ahora + timedelta(days=1)
     upload.save(update_fields=["resaltado", "resaltado_hasta"])
-    return al_curso(course.slug, "documentacion")
+    return al_curso(course.slug, pestana_de(upload, course))
 
 
 @require_POST
@@ -794,7 +823,7 @@ def handle_archivo_delete(request, slug, file_id, archivo_id):
     nombre = archivo.file.name
     archivo.delete()
     messages.success(request, f"{nombre} has been deleted.")
-    return al_curso(slug, "documentacion")
+    return al_curso(slug, pestana_de(upload, course))
 
 
 # ########################################################

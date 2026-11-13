@@ -101,6 +101,14 @@ primer mazo, como se hacia antes.
         </a>
     </li>
     <li class="nav-item" role="presentation">
+        <a class="nav-link {% if tab_activa == 'actividades' %}active{% endif %}"
+           data-bs-toggle="tab" href="?tab=actividades" data-bs-target="#tab-actividades" role="tab"
+           title="{% trans 'Las actividades que el alumnado entrega' %}">
+            <i class="fas fa-pen-to-square me-1"></i>{% trans "Actividades" %}
+            <span class="badge bg-secondary ms-1">{{ actividades|length }}</span>
+        </a>
+    </li>
+    <li class="nav-item" role="presentation">
         <a class="nav-link {% if tab_activa == 'entregas' %}active{% endif %}"
            data-bs-toggle="tab" href="?tab=entregas" data-bs-target="#tab-entregas" role="tab">
             <i class="fas fa-inbox me-1"></i>{% trans "Entregas" %}
@@ -114,7 +122,7 @@ primer mazo, como se hacia antes.
     <li class="nav-item" role="presentation">
         <a class="nav-link {% if tab_activa == 'videos' %}active{% endif %}"
            data-bs-toggle="tab" href="?tab=videos" data-bs-target="#tab-videos" role="tab">
-            <i class="fas fa-video me-1"></i>{% trans 'Video Tutorials' %}
+            <i class="fas fa-video me-1"></i>{% trans "Vídeos" %}
             <span class="badge bg-secondary ms-1">{{ videos|length }}</span>
         </a>
     </li>
@@ -122,7 +130,7 @@ primer mazo, como se hacia antes.
         <a class="nav-link {% if tab_activa == 'documentacion' %}active{% endif %}"
            data-bs-toggle="tab" href="?tab=documentacion" data-bs-target="#tab-documentacion" role="tab">
             <i class="fas fa-book me-1"></i>{% trans 'Documentations' %}
-            <span class="badge bg-secondary ms-1">{{ files|length }}</span>
+            <span class="badge bg-secondary ms-1">{{ documentos|length }}</span>
         </a>
     </li>
 </ul>
@@ -227,6 +235,20 @@ primer mazo, como se hacia antes.
                 </span>
             </div>
             {% endif %}
+        </div>
+    </div>
+
+    {% comment %}
+    Actividades: las que el alumnado entrega (Upload.is_activity). En la
+    pestana de Entregas esta su tabla de notas; aqui, el enunciado de cada
+    una, con sus ficheros adicionales.
+    {% endcomment %}
+    <div class="tab-pane fade {% if tab_activa == 'actividades' %}show active{% endif %}"
+         id="tab-actividades" role="tabpanel" tabindex="0">
+        <div class="container mt-3 mb-4">
+            {% trans 'Todavia no hay ninguna actividad en el curso.' as sin_actividades %}
+            {% trans "¿Borrar esta actividad y todos sus ficheros? Esta acción no se puede deshacer." as confirmar_actividad %}
+            {% include "snippets/tabla_ficheros.html" with lista=actividades vacio=sin_actividades confirmar_borrado=confirmar_actividad %}
         </div>
     </div>
 
@@ -354,7 +376,7 @@ primer mazo, como se hacia antes.
     </div>
 
     {% comment %}
-    Videotutoriales: los videos del curso, con su ficha aparte.
+    Vídeos: los videos del curso, con su ficha aparte.
     {% endcomment %}
     <div class="tab-pane fade {% if tab_activa == 'videos' %}show active{% endif %}"
          id="tab-videos" role="tabpanel" tabindex="0">
@@ -435,102 +457,16 @@ primer mazo, como se hacia antes.
     </div>
 
     {% comment %}
-    Documentacion: todo el material que no es presentacion. Los ficheros
-    adicionales (.odt, .docx...) cuelgan de su fichero principal.
+    Documentacion: el material de consulta que no es presentacion ni
+    actividad. Los ficheros adicionales (.odt, .docx...) cuelgan de su
+    fichero principal.
     {% endcomment %}
     <div class="tab-pane fade {% if tab_activa == 'documentacion' %}show active{% endif %}"
          id="tab-documentacion" role="tabpanel" tabindex="0">
         <div class="container mt-3 mb-4">
-            <div class="table-responsive">
-                <table class="table table-shadow table-light table-striped m-0">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>{% trans 'File name' %}</th>
-                            <th>{% trans 'Uploaded Date' %}</th>
-                            <th>{% trans 'Updated Date' %}</th>
-                            <th>{% trans 'Downloads' %}</th>
-                            {% if is_editor %}
-                            <th>{% trans 'Actions' %}</th>
-                            {% endif %}
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for file in files %}
-                        <tr class="{% if file.resaltado_activo %}resaltada{% endif %}">
-                            <td>{{ forloop.counter }}</td>
-                            <td>
-                                {% url 'upload_file_download' slug=course.slug file_id=file.pk as enlace %}
-                                <a href="{{ enlace }}" title="{{ file }}" class="d-flex align-items-center">
-                                    <i class="fas fa-file-{{ file.get_extension_short }} me-1" title="{{ file.get_program_name }}"></i>
-                                    {{ file.title }}
-                                </a>
-                                {% if not file.visible %}
-                                <span class="badge bg-secondary ms-1">{% trans 'Oculto' %}</span>
-                                {% endif %}
-                                {% for archivo in file.archivos.all %}
-                                <a href="{% url 'upload_archivo_download' slug=course.slug file_id=file.pk archivo_id=archivo.pk %}" title="{{ archivo.nombre }}"
-                                    class="d-flex align-items-center small text-muted ps-3">
-                                    <i class="fas fa-file-{{ archivo.get_extension_short }} me-1" title="{{ archivo.get_program_name }}"></i>
-                                    {{ archivo.nombre }}
-                                </a>
-                                {% endfor %}
-                            </td>
-                            <td>{{ file.upload_time|date }}</td>
-                            <td>{{ file.updated_date|date }}</td>
-                            <th>
-                                <div>
-                                    <a class="download-btn" href="{% url 'upload_file_download' slug=course.slug file_id=file.pk %}" title="Download to your device">
-                                        <i class="fas fa-download me-1"></i>{% trans 'Download' %}</a>
-                                </div>
-                            </th>
-
-                            {% if is_editor %}
-                            <td>
-                                <div class="update-delete">
-                                    <a href="{% url 'upload_file_edit' slug=course.slug file_id=file.pk %}"
-                                        class="update" title="{% trans 'Edit' %}">
-                                        <i class="fas fa-pencil-alt"></i>
-                                    </a>
-                                    <form action="{% url 'upload_file_resaltar' slug=course.slug file_id=file.pk %}" method="post" class="d-inline">
-                                        {% csrf_token %}
-                                        <button type="submit" class="border-0 bg-transparent p-0 align-baseline"
-                                            title="{% trans 'Resaltar esta fila para el alumnado (un día)' %}">
-                                            <i class="fas fa-star{% if file.resaltado_activo %} resaltado-activo{% endif %}"></i>
-                                        </button>
-                                    </form>
-                                    {% url 'upload_file_delete' slug=course.slug file_id=file.pk as borrar_url %}{% trans 'Delete' as label %}{% include "snippets/delete_form.html" with url=borrar_url clase="border-0 bg-transparent p-0 align-baseline" titulo=label etiqueta="" confirmar="¿Borrar esta actividad y todos sus ficheros? Esta acción no se puede deshacer." %}
-                                    {% for archivo in file.archivos.all %}
-                                    {% url 'upload_archivo_delete' slug=course.slug file_id=file.pk archivo_id=archivo.pk as borrar_archivo_url %}{% trans 'Delete' as borrar_label %}{% include "snippets/delete_form.html" with url=borrar_archivo_url clase="border-0 bg-transparent p-0 align-baseline" titulo=borrar_label etiqueta="" confirmar="¿Borrar este fichero adicional? Esta acción no se puede deshacer." %}
-                                    {% endfor %}
-                                </div>
-                            </td>
-                            {% endif %}
-                        </tr>
-                        {% empty %}
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td>
-                                <span class="text-danger">
-                                    {% trans 'No File Uploaded.' %}
-                                    {% if is_editor %}
-                                    <a href="{% url 'upload_file_view' course.slug %}" class="text-primary">
-                                        <i class="primary" style="font-size: 22px;">
-                                            {% trans 'Upload now.' %}
-                                        </i>
-                                        {% endif %}
-                                    </a>
-                                </span>
-                            </td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
+            {% trans 'No File Uploaded.' as sin_documentos %}
+            {% trans "¿Borrar este documento y todos sus ficheros? Esta acción no se puede deshacer." as confirmar_documento %}
+            {% include "snippets/tabla_ficheros.html" with lista=documentos vacio=sin_documentos confirmar_borrado=confirmar_documento %}
         </div>
     </div>
 
