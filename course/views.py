@@ -40,7 +40,12 @@ from course.models import (
     UploadFile,
     UploadVideo,
 )
-from course.utils import curso_asignado, deck_del_curso, decks_del_curso
+from course.utils import (
+    curso_asignado,
+    deck_del_curso,
+    decks_del_curso,
+    es_docente_asignado,
+)
 from result.models import TakenCourse
 
 
@@ -271,7 +276,9 @@ def course_single(request, slug):
     )
     videos = UploadVideo.objects.filter(course__slug=slug)
     lecturers = CourseAllocation.objects.filter(courses__pk=course.id)
-    is_editor = request.user.is_lecturer or request.user.is_superuser
+    # El docente solo ve lo oculto y las entregas de sus cursos asignados:
+    # el flag is_lecturer a secas dejaba verlo todo en cualquier curso.
+    is_editor = es_docente_asignado(request.user, course)
     # Los documentos ocultos son los que el profesorado sube antes de tiempo: una
     # prueba que no debe ver el alumnado hasta que toque. El docente los ve
     # siempre, para poder prepararlos.
@@ -540,9 +547,11 @@ def submission_delete(request, slug, pk):
 def submission_download(request, slug, pk):
     course = get_object_or_404(Course, slug=slug)
     submission = get_object_or_404(Submission, pk=pk, course=course)
-    if (
-        not (request.user.is_lecturer or request.user.is_superuser)
-        and submission.student_id != request.user.id
+    # La entrega es un fichero personal del alumno: la baja quien la hizo o
+    # el docente del curso, no cualquier docente.
+    if not (
+        submission.student_id == request.user.id
+        or es_docente_asignado(request.user, course)
     ):
         raise Http404
     return FileResponse(
@@ -563,7 +572,8 @@ def deck_download(request, slug):
     course = get_object_or_404(Course, slug=slug)
     deck = deck_del_curso(
         course,
-        solo_visibles=not (request.user.is_lecturer or request.user.is_superuser),
+        # solo el docente asignado ve los mazos aun ocultos
+        solo_visibles=not es_docente_asignado(request.user, course),
     )
     if deck is None:
         raise Http404("Este curso no tiene presentacion")
@@ -590,9 +600,7 @@ def upload_file_download(request, slug, file_id, archivo_id=None):
     course = get_object_or_404(Course, slug=slug)
     upload = get_object_or_404(Upload, pk=file_id, course=course)
     # el documento oculto no se descarga por id: si no está en la lista, no existe
-    if not upload.visible and not (
-        request.user.is_lecturer or request.user.is_superuser
-    ):
+    if not upload.visible and not es_docente_asignado(request.user, course):
         raise Http404
     fichero = upload.file
     if archivo_id is not None:
@@ -624,9 +632,7 @@ def deck_abrir(request, slug, file_id):
     upload = get_object_or_404(Upload, pk=file_id, course=course)
     if not upload.es_html:
         raise Http404("Este documento no es una presentacion")
-    if not upload.visible and not (
-        request.user.is_lecturer or request.user.is_superuser
-    ):
+    if not upload.visible and not es_docente_asignado(request.user, course):
         raise Http404
     respuesta = FileResponse(
         upload.file.open("rb"), content_type="text/html; charset=utf-8"
@@ -642,6 +648,10 @@ def deck_abrir(request, slug, file_id):
 def submission_grade(request, slug, pk):
     course = get_object_or_404(Course, slug=slug)
     submission = get_object_or_404(Submission, pk=pk, course=course)
+    # Calificar solo lo del propio curso: el pk suelto dejaba calificar a un
+    # docente ajeno.
+    if not es_docente_asignado(request.user, course):
+        raise Http404
     if request.method == "POST":
         form = SubmissionGradeForm(request.POST, instance=submission)
         if form.is_valid():
@@ -932,7 +942,7 @@ def handle_video_single(request, slug, video_slug):
     # veía el vídeo de otro curso. Y un vídeo oculto solo lo abre el
     # profesorado: el alumnado, hasta que se revela.
     videos = UploadVideo.objects.filter(course=course)
-    if not (request.user.is_lecturer or request.user.is_superuser):
+    if not es_docente_asignado(request.user, course):
         videos = videos.filter(visible=True)
     video = get_object_or_404(videos, slug=video_slug)
     return render(

@@ -43,6 +43,17 @@ def decks_del_curso(curso, solo_visibles=False):
     return mazos.order_by("upload_time", "pk")
 
 
+def es_docente_asignado(user, curso):
+    """El docente solo ve y toca lo de los cursos que tiene asignados.
+
+    El flag `is_lecturer` solo dice que es docente, no de que: con el flag a
+    secas, un docente ajeno veia material oculto, entregas y ficheros
+    personales de cualquier curso. El superusuario entra siempre, que es como
+    se ha usado el panel.
+    """
+    return user.is_superuser or curso.allocated_course.filter(lecturer=user).exists()
+
+
 def curso_asignado(request, slug):
     """El curso del slug, solo si el docente lo tiene asignado.
 
