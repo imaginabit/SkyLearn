@@ -245,7 +245,14 @@ class SubmissionForm(forms.ModelForm):
         self.fields["file"].widget.attrs.update({"class": "form-control"})
 
     def clean(self):
-        """El fichero tiene que ser de uno de los formatos de esa actividad."""
+        """El fichero tiene que ser de uno de los formatos de esa actividad.
+
+        Y tiene que parecer un trabajo hecho: un fichero de 0 KB es una
+        version rota o sin guardar, y uno que pesa exactamente lo mismo que
+        el enunciado es casi siempre el original subido sin hacer. En los dos
+        casos se bloquea el envio y se explica, para que no se mande por
+        equivocacion.
+        """
         cleaned_data = super().clean()
         actividad = cleaned_data.get("document")
         fichero = cleaned_data.get("file")
@@ -254,6 +261,26 @@ class SubmissionForm(forms.ModelForm):
                 self.add_error(
                     "file",
                     f"Esta actividad solo admite: {actividad.formatos_entrega()}.",
+                )
+                return cleaned_data
+            try:
+                peso_enunciado = actividad.file.size
+            except (OSError, ValueError, AttributeError):
+                # el enunciado no esta en el disco: sin el peso no se compara
+                peso_enunciado = None
+            if fichero.size == 0:
+                self.add_error(
+                    "file",
+                    "El fichero esta vacio (0 KB): parece una version rota o "
+                    "sin guardar. No se ha enviado; elige el fichero bueno y "
+                    "vuelve a enviar.",
+                )
+            elif peso_enunciado and fichero.size == peso_enunciado:
+                self.add_error(
+                    "file",
+                    "El fichero pesa exactamente lo mismo que el enunciado de "
+                    "la actividad: parece que has subido el original, no tu "
+                    "trabajo. Revisalo y envia tu version.",
                 )
         return cleaned_data
 

@@ -328,9 +328,9 @@ primer mazo, como se hacia antes.
             <div class="card p-3">
                 <p class="small text-muted mb-2">
                     <i class="fas fa-circle-info me-1"></i>
-                    {% trans "Elige la actividad, sube tu fichero y envía. Puedes reemplazar tu entrega tantas veces como quieras; también hay un botón de enviar en cada fila de la tabla de abajo." %}
+                    {% trans "Elige la actividad y dale al botón: al elegir el fichero se envía. Puedes reemplazar tu entrega tantas veces como quieras; también hay un botón de enviar en cada fila de la tabla de abajo." %}
                 </p>
-                <form method="post" enctype="multipart/form-data">
+                <form id="form-entrega" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="mb-2">
                         <label class="form-label small text-muted">{% trans "Actividad" %}</label>
@@ -339,19 +339,23 @@ primer mazo, como se hacia antes.
                         <div class="text-danger small">{{ submission_form.document.errors }}</div>
                         {% endif %}
                     </div>
-                    <div class="mb-2">
-                        <label class="form-label small text-muted">{% trans "Archivo" %}</label>
-                        {{ submission_form.file }}
-                        {% if submission_form.file.errors %}
-                        <div class="text-danger small">{{ submission_form.file.errors }}</div>
-                        {% endif %}
-                        <div class="form-text">
-                            {% trans "Cada actividad admite unos formatos concretos, que verás al elegirla (por defecto, solo PDF)." %}
-                        </div>
-                    </div>
-                    <button class="btn btn-sm btn-primary" type="submit">
+                    {% if submission_form.file.errors %}
+                    <div class="text-danger small mb-2">{{ submission_form.file.errors }}</div>
+                    {% endif %}
+                    <label class="btn btn-primary"
+                        title="{% trans 'Al elegir el fichero se envía la entrega' %}">
                         <i class="fas fa-upload me-1"></i>{% trans "Enviar mi entrega" %}
-                    </button>
+                        <input type="file" name="file" class="d-none" required
+                            onchange="elige_entrega(this)">
+                    </label>
+                    <noscript>
+                        <button class="btn btn-sm btn-primary" type="submit">
+                            <i class="fas fa-upload me-1"></i>{% trans "Enviar" %}
+                        </button>
+                    </noscript>
+                    <div class="form-text">
+                        {% trans "Cada actividad admite unos formatos concretos (por defecto, solo PDF)." %}
+                    </div>
                 </form>
             </div>
             <p class="text-muted small mb-2 mt-3">
@@ -420,16 +424,23 @@ primer mazo, como se hacia antes.
                                 fila. Es el mismo POST del formulario de arriba,
                                 con la actividad ya fijada en un campo oculto.
                                 {% endcomment %}
-                                <form method="post" enctype="multipart/form-data" class="d-flex gap-1">
+                                <form method="post" enctype="multipart/form-data">
                                     {% csrf_token %}
                                     <input type="hidden" name="document" value="{{ fila.actividad.pk }}">
-                                    <input type="file" name="file" required class="form-control form-control-sm"
-                                        accept="{{ fila.actividad.formatos_accept }}"
-                                        title="{{ fila.actividad.formatos_entrega }}">
-                                    <button class="btn btn-sm btn-primary" type="submit"
-                                        title="{% trans 'Enviar o reemplazar la entrega de esta actividad' %}">
-                                        <i class="fas fa-upload"></i>
-                                    </button>
+                                    <label class="btn btn-sm btn-primary"
+                                        title="{% trans 'Enviar o reemplazar la entrega de esta actividad: al elegir el fichero se envía' %}">
+                                        <i class="fas fa-upload me-1"></i>{% trans "Enviar" %}
+                                        <input type="file" name="file" class="d-none" required
+                                            accept="{{ fila.actividad.formatos_accept }}"
+                                            data-peso-original="{{ fila.actividad.file.size }}"
+                                            onchange="elige_entrega(this)">
+                                    </label>
+                                    <noscript>
+                                        <button class="btn btn-sm btn-outline-secondary" type="submit"
+                                            title="{{ fila.actividad.formatos_entrega }}">
+                                            <i class="fas fa-upload"></i>
+                                        </button>
+                                    </noscript>
                                 </form>
                             </td>
                         </tr>
@@ -618,4 +629,61 @@ enlace compartido aterricen en la misma.
         });
     });
 </script>
+{% if submission_form %}
+<script>
+{% comment %}
+Entrega de actividades: el boton unico abre el explorador y, al elegir el
+fichero, lo envia. Antes de enviar avisa si el fichero esta vacio (0 KB, una
+version rota) o si pesa exactamente lo mismo que el enunciado (el original
+subido sin hacer). El servidor lo vuelve a comprobar por si acaso.
+{% endcomment %}
+    function elige_entrega(input) {
+        var fichero = input.files[0];
+        if (!fichero) {
+            return;
+        }
+        var selector = input.form && input.form.querySelector('select[name="document"]');
+        if (selector && !selector.value) {
+            alert("Elige primero la actividad a la que corresponde el fichero.");
+            input.value = "";
+            return;
+        }
+        var peso_original = input.dataset.pesoOriginal;
+        if (fichero.size === 0) {
+            alert("El fichero esta vacio (0 KB): parece una version rota o sin guardar. No se ha enviado; elige el fichero bueno y vuelve a enviar.");
+            input.value = "";
+            return;
+        }
+        if (peso_original && parseInt(peso_original, 10) === fichero.size) {
+            alert("Este fichero pesa exactamente lo mismo que el enunciado de la actividad: parece que has elegido el original, no tu trabajo. No se ha enviado.");
+            input.value = "";
+            return;
+        }
+        input.form.submit();
+    }
+    {% comment %}
+    En el formulario de arriba el peso del enunciado depende de la actividad
+    elegida: cada opcion del select lleva su fichero y al cambiarla se
+    apunta el peso (y los formatos admitidos) en el input del fichero.
+    {% endcomment %}
+    var actividades_entrega = {
+        {% for fila in entregas_del_alumno %}
+        {{ fila.actividad.pk }}: {
+            peso: {{ fila.actividad.file.size }},
+            acepta: "{{ fila.actividad.formatos_accept }}"
+        },
+        {% endfor %}
+    };
+    var selector_actividad = document.querySelector('#form-entrega select[name="document"]');
+    var fichero_superior = document.querySelector('#form-entrega input[type="file"]');
+    if (selector_actividad && fichero_superior) {
+        selector_actividad.addEventListener("change", function () {
+            var elegida = actividades_entrega[selector_actividad.value] || {};
+            fichero_superior.dataset.pesoOriginal = elegida.peso || "";
+            fichero_superior.setAttribute("accept", elegida.acepta || "");
+            fichero_superior.value = "";
+        });
+    }
+</script>
+{% endif %}
 {% endblock js %}
