@@ -87,7 +87,10 @@ class QuizUpdateView(UpdateView):
     template_name = "quiz/quiz_form.html"
 
     def get_object(self, queryset=None):
-        return get_object_or_404(Quiz, pk=self.kwargs["pk"])
+        # `curso_asignado`: un docente solo edita los quizzes de los cursos que
+        # tiene asignados; el pk suelto dejaba editar el de otro curso.
+        curso = curso_asignado(self.request, self.kwargs["slug"])
+        return get_object_or_404(Quiz, pk=self.kwargs["pk"], course=curso)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -140,8 +143,11 @@ class MCQuestionCreate(CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["course"] = get_object_or_404(Course, slug=self.kwargs["slug"])
-        context["quiz_obj"] = get_object_or_404(Quiz, id=self.kwargs["quiz_id"])
+        curso = curso_asignado(self.request, self.kwargs["slug"])
+        context["course"] = curso
+        context["quiz_obj"] = get_object_or_404(
+            Quiz, id=self.kwargs["quiz_id"], course=curso
+        )
         context["quiz_questions_count"] = Question.objects.filter(
             quiz=self.kwargs["quiz_id"]
         ).count()
@@ -153,6 +159,7 @@ class MCQuestionCreate(CreateView):
 
     def form_valid(self, form):
         context = self.get_context_data()
+        curso = context["course"]
         formset = context["formset"]
         if formset.is_valid():
             with transaction.atomic():
@@ -160,8 +167,9 @@ class MCQuestionCreate(CreateView):
                 self.object = form.save(commit=False)
                 self.object.save()
 
-                # Retrieve the Quiz instance
-                quiz = get_object_or_404(Quiz, id=self.kwargs["quiz_id"])
+                # Retrieve the Quiz instance: dentro del curso asignado, el
+                # quiz_id suelto dejaba enganchar la pregunta a otro curso.
+                quiz = get_object_or_404(Quiz, id=self.kwargs["quiz_id"], course=curso)
 
                 # set the many-to-many relationship
                 self.object.quiz.add(quiz)
@@ -224,6 +232,16 @@ class QuizMarkingDetail(DetailView):
     model = Sitting
     template_name = "quiz/quiz_marking_detail.html"
 
+    def get_queryset(self):
+        # El listado ya filtra por asignacion; el detalle tambien, porque el
+        # pk suelto dejaba ver y calificar sittings de otros cursos.
+        queryset = Sitting.objects.filter(complete=True)
+        if not self.request.user.is_superuser:
+            queryset = queryset.filter(
+                quiz__course__allocated_course__lecturer__pk=self.request.user.id
+            )
+        return queryset
+
     def post(self, request, *args, **kwargs):
         sitting = self.get_object()
         question_id = request.POST.get("qid")
@@ -260,6 +278,19 @@ class QuizTake(FormView):
         ):
             messages.info(request, "This quiz is not available yet.")
             return redirect("quiz_index", slug=self.course.slug)
+        # Solo matriculados: sin este check, cualquier cuenta autenticada
+        # (padre, alumno de otro curso) hacia los quizzes de cualquier curso
+        # y veia sus preguntas.
+        if not (request.user.is_lecturer or request.user.is_superuser):
+            matriculado = TakenCourse.objects.filter(
+                student__student=request.user, course=self.course
+            ).exists()
+            if not matriculado:
+                messages.warning(
+                    request,
+                    "No estas matriculado en este curso, no puedes hacer sus quizzes.",
+                )
+                return redirect("quiz_index", slug=self.course.slug)
         if not Question.objects.filter(quiz=self.quiz).exists():
             messages.warning(request, "This quiz has no questions available.")
             return redirect("quiz_index", slug=self.course.slug)

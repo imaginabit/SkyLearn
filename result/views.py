@@ -292,10 +292,17 @@ def assessment_result(request):
 @login_required
 @lecturer_required
 def result_sheet_pdf_view(request, id):
+    course = get_object_or_404(Course, id=id)
+    # El boletin lleva nombre, ID y notas de todo el grupo: solo el docente
+    # asignado (o admin). Antes cogia el curso por id a secas.
+    if not (
+        request.user.is_superuser
+        or course.allocated_course.filter(lecturer=request.user).exists()
+    ):
+        raise Http404
     current_semester = Semester.objects.get(is_current_semester=True)
     current_session = Session.objects.get(is_current_session=True)
     result = TakenCourse.objects.filter(course__pk=id)
-    course = get_object_or_404(Course, id=id)
     no_of_pass = TakenCourse.objects.filter(course__pk=id, comment="PASS").count()
     no_of_fail = TakenCourse.objects.filter(course__pk=id, comment="FAIL").count()
     fname = (

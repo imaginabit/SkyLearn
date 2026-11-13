@@ -794,7 +794,11 @@ def deallocate_course(request, pk):
 @login_required
 @lecturer_required
 def handle_file_upload(request, slug):
-    course = get_object_or_404(Course, slug=slug)
+    # `curso_asignado`: un docente solo sube material a los cursos que tiene
+    # asignados. Antes cogia el curso por el slug y cualquiera podia subir
+    # (incluido un mazo .html con javascript) a un curso ajeno cambiando la
+    # URL; sus hermanas edit/delete ya lo hacian asi.
+    course = curso_asignado(request, slug)
     if request.method == "POST":
         form = UploadFormFile(request.POST, request.FILES)
         if form.is_valid():
