@@ -421,66 +421,6 @@
  },
  {
   "model": "quiz.question",
-  "pk": 5008,
-  "fields": {
-   "content": "Antes de detener un proceso en producción, el dato que falta siempre es:",
-   "content_es": "Antes de detener un proceso en producción, el dato que falta siempre es:",
-   "explanation": "Correcta: A - La clase 1 lo pone como criterio: el proceso se detiene sabiendo a quién deja sin servicio. B - La prioridad se registra, pero no es lo que decide si se detiene. C - Avisar está bien, pero la decisión no depende del correo. D - El PID se consigue con una orden; el dato que falta es otro. Manual: cap. 2 §2. Visto en: Clase 01, cierre del mazo.",
-   "explanation_es": "Correcta: A - La clase 1 lo pone como criterio: el proceso se detiene sabiendo a quién deja sin servicio. B - La prioridad se registra, pero no es lo que decide si se detiene. C - Avisar está bien, pero la decisión no depende del correo. D - El PID se consigue con una orden; el dato que falta es otro. Manual: cap. 2 §2. Visto en: Clase 01, cierre del mazo.",
-   "quiz": [
-    10
-   ]
-  }
- },
- {
-  "model": "quiz.mcquestion",
-  "pk": 5008,
-  "fields": {
-   "choice_order": ""
-  }
- },
- {
-  "model": "quiz.choice",
-  "pk": 4029,
-  "fields": {
-   "question": 5008,
-   "choice_text": "Qué servicio de negocio soporta, para saber a quién afecta",
-   "choice_text_es": "Qué servicio de negocio soporta, para saber a quién afecta",
-   "correct": true
-  }
- },
- {
-  "model": "quiz.choice",
-  "pk": 4030,
-  "fields": {
-   "question": 5008,
-   "choice_text": "La prioridad del proceso, porque hay que restaurarla después",
-   "choice_text_es": "La prioridad del proceso, porque hay que restaurarla después",
-   "correct": false
-  }
- },
- {
-  "model": "quiz.choice",
-  "pk": 4031,
-  "fields": {
-   "question": 5008,
-   "choice_text": "El usuario que lanzó el proceso, para avisarle por correo",
-   "choice_text_es": "El usuario que lanzó el proceso, para avisarle por correo",
-   "correct": false
-  }
- },
- {
-  "model": "quiz.choice",
-  "pk": 4032,
-  "fields": {
-   "question": 5008,
-   "choice_text": "El PID del proceso, porque sin número no se puede enviar la señal",
-   "choice_text_es": "El PID del proceso, porque sin número no se puede enviar la señal",
-   "correct": false
-  }
- },
- {
-  "model": "quiz.question",
   "pk": 5009,
   "fields": {
    "content": "La orden que lista los procesos con su PID, su padre y su estado en Linux es:",
@@ -1681,66 +1621,6 @@
  },
  {
   "model": "quiz.question",
-  "pk": 5029,
-  "fields": {
-   "content": "En la práctica del módulo, el vigía que se instala en la Kali es Monit y no Zabbix porque:",
-   "content_es": "En la práctica del módulo, el vigía que se instala en la Kali es Monit y no Zabbix porque:",
-   "explanation": "Correcta: B - Es lo que dice la práctica 4: mismo concepto, tamaño de laboratorio. A - Zabbix funciona; lo que pesa es el servidor y su base de datos en una máquina de 2 GB. C - Monit envía avisos con set alert. D - Los dos son libres. Manual: cap. 5 §7. Visto en: Práctica 4, apartado 6.",
-   "explanation_es": "Correcta: B - Es lo que dice la práctica 4: mismo concepto, tamaño de laboratorio. A - Zabbix funciona; lo que pesa es el servidor y su base de datos en una máquina de 2 GB. C - Monit envía avisos con set alert. D - Los dos son libres. Manual: cap. 5 §7. Visto en: Práctica 4, apartado 6.",
-   "quiz": [
-    10
-   ]
-  }
- },
- {
-  "model": "quiz.mcquestion",
-  "pk": 5029,
-  "fields": {
-   "choice_order": ""
-  }
- },
- {
-  "model": "quiz.choice",
-  "pk": 4113,
-  "fields": {
-   "question": 5029,
-   "choice_text": "Zabbix no funciona en Kali",
-   "choice_text_es": "Zabbix no funciona en Kali",
-   "correct": false
-  }
- },
- {
-  "model": "quiz.choice",
-  "pk": 4114,
-  "fields": {
-   "question": 5029,
-   "choice_text": "Monit se instala con una orden y trae panel web propio, del tamaño del laboratorio",
-   "choice_text_es": "Monit se instala con una orden y trae panel web propio, del tamaño del laboratorio",
-   "correct": true
-  }
- },
- {
-  "model": "quiz.choice",
-  "pk": 4115,
-  "fields": {
-   "question": 5029,
-   "choice_text": "Monit no envía avisos y por eso es más ligero",
-   "choice_text_es": "Monit no envía avisos y por eso es más ligero",
-   "correct": false
-  }
- },
- {
-  "model": "quiz.choice",
-  "pk": 4116,
-  "fields": {
-   "question": 5029,
-   "choice_text": "Monit es de pago y Zabbix es libre",
-   "choice_text_es": "Monit es de pago y Zabbix es libre",
-   "correct": false
-  }
- },
- {
-  "model": "quiz.question",
   "pk": 5030,
   "fields": {
    "content": "El cuadro de mando de un servicio lleva los dos o tres indicadores que se miran cada mañana; el resto del sistema se queda como:",
@@ -1807,8 +1687,8 @@
    "title": "Repaso UA1 - Procesos, rendimiento y monitorización",
    "title_es": "Repaso UA1 - Procesos, rendimiento y monitorización",
    "slug": "repaso-ua1-mf0490-3",
-   "description": "Repaso de la UA1: procesos del sistema, señales y prioridades, métricas, indicadores, umbrales y alarmas. 30 preguntas de opción múltiple. Se corrigen solas y, al responder, sale la respuesta correcta con el motivo de cada opción descartada. Se puede repetir tantas veces como quieras.",
-   "description_es": "Repaso de la UA1: procesos del sistema, señales y prioridades, métricas, indicadores, umbrales y alarmas. 30 preguntas de opción múltiple. Se corrigen solas y, al responder, sale la respuesta correcta con el motivo de cada opción descartada. Se puede repetir tantas veces como quieras.",
+   "description": "Repaso de la UA1: procesos del sistema, señales y prioridades, métricas, indicadores, umbrales y alarmas. 28 preguntas de opción múltiple. Se corrigen solas y, al responder, sale la respuesta correcta con el motivo de cada opción descartada. Se puede repetir tantas veces como quieras.",
+   "description_es": "Repaso de la UA1: procesos del sistema, señales y prioridades, métricas, indicadores, umbrales y alarmas. 28 preguntas de opción múltiple. Se corrigen solas y, al responder, sale la respuesta correcta con el motivo de cada opción descartada. Se puede repetir tantas veces como quieras.",
    "category": "practice",
    "draft": false,
    "single_attempt": false,
