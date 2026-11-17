@@ -421,66 +421,6 @@
  },
  {
   "model": "quiz.question",
-  "pk": 5009,
-  "fields": {
-   "content": "La orden que lista los procesos con su PID, su padre y su estado en Linux es:",
-   "content_es": "La orden que lista los procesos con su PID, su padre y su estado en Linux es:",
-   "explanation": "Correcta: B - Con -e salen todos, y cada columna se pide por nombre. A - top muestra y refresca, pero el listado con columnas concretas es de ps. C - pstree dibuja la jerarquía; el listado con columnas es de ps. D - ls /proc da los PID, pero no el padre ni el estado sin abrir ficheros. Manual: cap. 2 §5. Visto en: Clase 01, hoja de órdenes de la E1.",
-   "explanation_es": "Correcta: B - Con -e salen todos, y cada columna se pide por nombre. A - top muestra y refresca, pero el listado con columnas concretas es de ps. C - pstree dibuja la jerarquía; el listado con columnas es de ps. D - ls /proc da los PID, pero no el padre ni el estado sin abrir ficheros. Manual: cap. 2 §5. Visto en: Clase 01, hoja de órdenes de la E1.",
-   "quiz": [
-    10
-   ]
-  }
- },
- {
-  "model": "quiz.mcquestion",
-  "pk": 5009,
-  "fields": {
-   "choice_order": ""
-  }
- },
- {
-  "model": "quiz.choice",
-  "pk": 4033,
-  "fields": {
-   "question": 5009,
-   "choice_text": "top, que muestra los procesos en tiempo real",
-   "choice_text_es": "top, que muestra los procesos en tiempo real",
-   "correct": false
-  }
- },
- {
-  "model": "quiz.choice",
-  "pk": 4034,
-  "fields": {
-   "question": 5009,
-   "choice_text": "ps -eo pid,ppid,stat,comm",
-   "choice_text_es": "ps -eo pid,ppid,stat,comm",
-   "correct": true
-  }
- },
- {
-  "model": "quiz.choice",
-  "pk": 4035,
-  "fields": {
-   "question": 5009,
-   "choice_text": "pstree -p, que dibuja el árbol",
-   "choice_text_es": "pstree -p, que dibuja el árbol",
-   "correct": false
-  }
- },
- {
-  "model": "quiz.choice",
-  "pk": 4036,
-  "fields": {
-   "question": 5009,
-   "choice_text": "ls /proc, que lista los directorios de cada proceso",
-   "choice_text_es": "ls /proc, que lista los directorios de cada proceso",
-   "correct": false
-  }
- },
- {
-  "model": "quiz.question",
   "pk": 5010,
   "fields": {
    "content": "La columna PPID de ps indica:",
@@ -1381,66 +1321,6 @@
  },
  {
   "model": "quiz.question",
-  "pk": 5025,
-  "fields": {
-   "content": "En Monit, la línea if cpu usage > 80% for 5 cycles then alert significa que:",
-   "content_es": "En Monit, la línea if cpu usage > 80% for 5 cycles then alert significa que:",
-   "explanation": "Correcta: B - El for N cycles es la ventana, medida en ciclos del demonio. A - Los ciclos tienen que ser seguidos. C - El aviso depende de la condición cumplida. D - El intervalo lo fija set daemon, no la condición. Manual: cap. 5 §7. Visto en: Práctica 4, apartado 6.",
-   "explanation_es": "Correcta: B - El for N cycles es la ventana, medida en ciclos del demonio. A - Los ciclos tienen que ser seguidos. C - El aviso depende de la condición cumplida. D - El intervalo lo fija set daemon, no la condición. Manual: cap. 5 §7. Visto en: Práctica 4, apartado 6.",
-   "quiz": [
-    10
-   ]
-  }
- },
- {
-  "model": "quiz.mcquestion",
-  "pk": 5025,
-  "fields": {
-   "choice_order": ""
-  }
- },
- {
-  "model": "quiz.choice",
-  "pk": 4097,
-  "fields": {
-   "question": 5025,
-   "choice_text": "Se avisa si la CPU supera el 80 % cinco veces en cualquier momento",
-   "choice_text_es": "Se avisa si la CPU supera el 80 % cinco veces en cualquier momento",
-   "correct": false
-  }
- },
- {
-  "model": "quiz.choice",
-  "pk": 4098,
-  "fields": {
-   "question": 5025,
-   "choice_text": "Se avisa si la CPU supera el 80 % durante cinco ciclos seguidos",
-   "choice_text_es": "Se avisa si la CPU supera el 80 % durante cinco ciclos seguidos",
-   "correct": true
-  }
- },
- {
-  "model": "quiz.choice",
-  "pk": 4099,
-  "fields": {
-   "question": 5025,
-   "choice_text": "Se ejecuta un alert cada cinco ciclos pase lo que pase",
-   "choice_text_es": "Se ejecuta un alert cada cinco ciclos pase lo que pase",
-   "correct": false
-  }
- },
- {
-  "model": "quiz.choice",
-  "pk": 4100,
-  "fields": {
-   "question": 5025,
-   "choice_text": "Monit se queda dormido cinco minutos antes de empezar",
-   "choice_text_es": "Monit se queda dormido cinco minutos antes de empezar",
-   "correct": false
-  }
- },
- {
-  "model": "quiz.question",
   "pk": 5026,
   "fields": {
    "content": "En Zabbix, el objeto que contiene la condición de una alarma es:",
@@ -1497,66 +1377,6 @@
    "choice_text": "El item",
    "choice_text_es": "El item",
    "correct": false
-  }
- },
- {
-  "model": "quiz.question",
-  "pk": 5027,
-  "fields": {
-   "content": "En Zabbix, la ventana de una alarma no se escribe en el trigger, sino que sale:",
-   "content_es": "En Zabbix, la ventana de una alarma no se escribe en el trigger, sino que sale:",
-   "explanation": "Correcta: D - Con last() se mira el último valor; con min(...,5m), el peor de los últimos cinco minutos. A - El action repite avisos; no define la ventana de la condición. B - El nombre no entra en la evaluación. C - La severidad no define la ventana. Manual: cap. 5 §7. Visto en: Práctica 10, apartado 4.",
-   "explanation_es": "Correcta: D - Con last() se mira el último valor; con min(...,5m), el peor de los últimos cinco minutos. A - El action repite avisos; no define la ventana de la condición. B - El nombre no entra en la evaluación. C - La severidad no define la ventana. Manual: cap. 5 §7. Visto en: Práctica 10, apartado 4.",
-   "quiz": [
-    10
-   ]
-  }
- },
- {
-  "model": "quiz.mcquestion",
-  "pk": 5027,
-  "fields": {
-   "choice_order": ""
-  }
- },
- {
-  "model": "quiz.choice",
-  "pk": 4105,
-  "fields": {
-   "question": 5027,
-   "choice_text": "Del intervalo de repetición del action",
-   "choice_text_es": "Del intervalo de repetición del action",
-   "correct": false
-  }
- },
- {
-  "model": "quiz.choice",
-  "pk": 4106,
-  "fields": {
-   "question": 5027,
-   "choice_text": "Del nombre del host",
-   "choice_text_es": "Del nombre del host",
-   "correct": false
-  }
- },
- {
-  "model": "quiz.choice",
-  "pk": 4107,
-  "fields": {
-   "question": 5027,
-   "choice_text": "De la severidad que se ponga en el trigger",
-   "choice_text_es": "De la severidad que se ponga en el trigger",
-   "correct": false
-  }
- },
- {
-  "model": "quiz.choice",
-  "pk": 4108,
-  "fields": {
-   "question": 5027,
-   "choice_text": "Del intervalo del item y de la función que se use, como min(...,5m)",
-   "choice_text_es": "Del intervalo del item y de la función que se use, como min(...,5m)",
-   "correct": true
   }
  },
  {
@@ -1687,8 +1507,8 @@
    "title": "Repaso UA1 - Procesos, rendimiento y monitorización",
    "title_es": "Repaso UA1 - Procesos, rendimiento y monitorización",
    "slug": "repaso-ua1-mf0490-3",
-   "description": "Repaso de la UA1: procesos del sistema, señales y prioridades, métricas, indicadores, umbrales y alarmas. 28 preguntas de opción múltiple. Se corrigen solas y, al responder, sale la respuesta correcta con el motivo de cada opción descartada. Se puede repetir tantas veces como quieras.",
-   "description_es": "Repaso de la UA1: procesos del sistema, señales y prioridades, métricas, indicadores, umbrales y alarmas. 28 preguntas de opción múltiple. Se corrigen solas y, al responder, sale la respuesta correcta con el motivo de cada opción descartada. Se puede repetir tantas veces como quieras.",
+   "description": "Repaso de la UA1: procesos del sistema, señales y prioridades, métricas, indicadores, umbrales y alarmas. 25 preguntas de opción múltiple. Se corrigen solas y, al responder, sale la respuesta correcta con el motivo de cada opción descartada. Se puede repetir tantas veces como quieras.",
+   "description_es": "Repaso de la UA1: procesos del sistema, señales y prioridades, métricas, indicadores, umbrales y alarmas. 25 preguntas de opción múltiple. Se corrigen solas y, al responder, sale la respuesta correcta con el motivo de cada opción descartada. Se puede repetir tantas veces como quieras.",
    "category": "practice",
    "draft": false,
    "single_attempt": false,
