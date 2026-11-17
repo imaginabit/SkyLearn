@@ -1,0 +1,5462 @@
+[
+ {
+  "model": "quiz.question",
+  "pk": 5001,
+  "fields": {
+   "content": "La diferencia entre un proceso y un servicio es:",
+   "content_es": "La diferencia entre un proceso y un servicio es:",
+   "explanation": "Correcta: B - Lo que define al servicio es la gestión del sistema, no el hecho de ejecutarse. A - El servicio es un proceso que el sistema arranca, para y reinicia por su cuenta. C - Los dos conceptos existen en los dos sistemas, con nombres distintos. D - La velocidad no entra en la definición de ninguno de los dos. Manual: cap. 2 §5. Visto en: Práctica 7, ficha «Servicios del sistema».",
+   "explanation_es": "Correcta: B - Lo que define al servicio es la gestión del sistema, no el hecho de ejecutarse. A - El servicio es un proceso que el sistema arranca, para y reinicia por su cuenta. C - Los dos conceptos existen en los dos sistemas, con nombres distintos. D - La velocidad no entra en la definición de ninguno de los dos. Manual: cap. 2 §5. Visto en: Práctica 7, ficha «Servicios del sistema».",
+   "quiz": [
+    10
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 5001,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4001,
+  "fields": {
+   "question": 5001,
+   "choice_text": "Son lo mismo con nombres distintos del sistema operativo",
+   "choice_text_es": "Son lo mismo con nombres distintos del sistema operativo",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4002,
+  "fields": {
+   "question": 5001,
+   "choice_text": "Un proceso es una ejecución; un servicio es un proceso gestionado por el sistema, que arranca y se recupera solo",
+   "choice_text_es": "Un proceso es una ejecución; un servicio es un proceso gestionado por el sistema, que arranca y se recupera solo",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4003,
+  "fields": {
+   "question": 5001,
+   "choice_text": "Un servicio solo existe en Linux y un proceso solo en Windows",
+   "choice_text_es": "Un servicio solo existe en Linux y un proceso solo en Windows",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4004,
+  "fields": {
+   "question": 5001,
+   "choice_text": "El proceso es siempre más rápido que el servicio",
+   "choice_text_es": "El proceso es siempre más rápido que el servicio",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 5002,
+  "fields": {
+   "content": "En Linux, el proceso padre de todos los procesos del sistema es:",
+   "content_es": "En Linux, el proceso padre de todos los procesos del sistema es:",
+   "explanation": "Correcta: C - Todo proceso cuelga de la raíz, que es el PID 1. A - El kernel no aparece como proceso con PID propio en el árbol. B - La shell es hija del terminal o del entorno gráfico, y a su vez de otro proceso. D - Los programas del usuario cuelgan de la shell, y la shell cuelga de más arriba. Manual: cap. 2 §3. Visto en: Clase 01, diapositiva 17 «Todo proceso sale de otro».",
+   "explanation_es": "Correcta: C - Todo proceso cuelga de la raíz, que es el PID 1. A - El kernel no aparece como proceso con PID propio en el árbol. B - La shell es hija del terminal o del entorno gráfico, y a su vez de otro proceso. D - Los programas del usuario cuelgan de la shell, y la shell cuelga de más arriba. Manual: cap. 2 §3. Visto en: Clase 01, diapositiva 17 «Todo proceso sale de otro».",
+   "quiz": [
+    10
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 5002,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4005,
+  "fields": {
+   "question": 5002,
+   "choice_text": "El kernel, porque lo ejecuta directamente el procesador",
+   "choice_text_es": "El kernel, porque lo ejecuta directamente el procesador",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4006,
+  "fields": {
+   "question": 5002,
+   "choice_text": "bash, porque todas las órdenes salen de la shell",
+   "choice_text_es": "bash, porque todas las órdenes salen de la shell",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4007,
+  "fields": {
+   "question": 5002,
+   "choice_text": "init o systemd, que es el proceso con PID 1",
+   "choice_text_es": "init o systemd, que es el proceso con PID 1",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4008,
+  "fields": {
+   "question": 5002,
+   "choice_text": "El primer programa que arranca el usuario tras el inicio de sesión",
+   "choice_text_es": "El primer programa que arranca el usuario tras el inicio de sesión",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 5003,
+  "fields": {
+   "content": "El estado T de un proceso en Linux significa que:",
+   "content_es": "El estado T de un proceso en Linux significa que:",
+   "explanation": "Correcta: D - La T es *stopped*: sigue vivo, pero no consume CPU. A - Eso es el estado R, en ejecución. B - Eso es el estado Z, el zombi. C - Esperar E/S es el estado D, ininterrumpible. Manual: cap. 2 §3. Visto en: Clase 00, actividad 1 y mazo de señales.",
+   "explanation_es": "Correcta: D - La T es *stopped*: sigue vivo, pero no consume CPU. A - Eso es el estado R, en ejecución. B - Eso es el estado Z, el zombi. C - Esperar E/S es el estado D, ininterrumpible. Manual: cap. 2 §3. Visto en: Clase 00, actividad 1 y mazo de señales.",
+   "quiz": [
+    10
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 5003,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4009,
+  "fields": {
+   "question": 5003,
+   "choice_text": "El proceso se está ejecutando en ese momento en un procesador",
+   "choice_text_es": "El proceso se está ejecutando en ese momento en un procesador",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4010,
+  "fields": {
+   "question": 5003,
+   "choice_text": "El proceso ha terminado y espera que su padre recoja el resultado",
+   "choice_text_es": "El proceso ha terminado y espera que su padre recoja el resultado",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4011,
+  "fields": {
+   "question": 5003,
+   "choice_text": "El proceso está esperando entrada o salida de disco",
+   "choice_text_es": "El proceso está esperando entrada o salida de disco",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4012,
+  "fields": {
+   "question": 5003,
+   "choice_text": "El proceso está detenido, por ejemplo tras recibir SIGSTOP, y se reanuda con SIGCONT",
+   "choice_text_es": "El proceso está detenido, por ejemplo tras recibir SIGSTOP, y se reanuda con SIGCONT",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 5004,
+  "fields": {
+   "content": "Para terminar un proceso que no responde y no se puede cerrar de otra forma, la señal adecuada es:",
+   "content_es": "Para terminar un proceso que no responde y no se puede cerrar de otra forma, la señal adecuada es:",
+   "explanation": "Correcta: A - Es la señal que el kernel aplica directamente. B - SIGSTOP no termina nada: lo deja vivo y detenido. C - SIGINT es la de la terminal y también se puede capturar. D - SIGTERM se puede capturar e ignorar; si el proceso no responde, no sirve. Manual: cap. 2 §6. Visto en: Actividad 3 de la clase 02.",
+   "explanation_es": "Correcta: A - Es la señal que el kernel aplica directamente. B - SIGSTOP no termina nada: lo deja vivo y detenido. C - SIGINT es la de la terminal y también se puede capturar. D - SIGTERM se puede capturar e ignorar; si el proceso no responde, no sirve. Manual: cap. 2 §6. Visto en: Actividad 3 de la clase 02.",
+   "quiz": [
+    10
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 5004,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4013,
+  "fields": {
+   "question": 5004,
+   "choice_text": "SIGKILL, que el proceso no puede capturar ni ignorar",
+   "choice_text_es": "SIGKILL, que el proceso no puede capturar ni ignorar",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4014,
+  "fields": {
+   "question": 5004,
+   "choice_text": "SIGSTOP, porque detiene el proceso de inmediato",
+   "choice_text_es": "SIGSTOP, porque detiene el proceso de inmediato",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4015,
+  "fields": {
+   "question": 5004,
+   "choice_text": "SIGINT, que es la que envía la combinación de teclas de interrupción",
+   "choice_text_es": "SIGINT, que es la que envía la combinación de teclas de interrupción",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4016,
+  "fields": {
+   "question": 5004,
+   "choice_text": "SIGTERM, porque es la señal de terminar por defecto",
+   "choice_text_es": "SIGTERM, porque es la señal de terminar por defecto",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 5005,
+  "fields": {
+   "content": "La diferencia entre nice y renice es:",
+   "content_es": "La diferencia entre nice y renice es:",
+   "explanation": "Correcta: B - Uno fija al arrancar, el otro modifica en marcha. A - Es al revés. C - Los dos necesitan privilegios para subir la prioridad; la diferencia es el momento. D - Los dos son órdenes de Linux. Manual: cap. 2 §6. Visto en: Clase 00, captura de nice y renice.",
+   "explanation_es": "Correcta: B - Uno fija al arrancar, el otro modifica en marcha. A - Es al revés. C - Los dos necesitan privilegios para subir la prioridad; la diferencia es el momento. D - Los dos son órdenes de Linux. Manual: cap. 2 §6. Visto en: Clase 00, captura de nice y renice.",
+   "quiz": [
+    10
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 5005,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4017,
+  "fields": {
+   "question": 5005,
+   "choice_text": "nice cambia la prioridad en marcha; renice la fija al arrancar",
+   "choice_text_es": "nice cambia la prioridad en marcha; renice la fija al arrancar",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4018,
+  "fields": {
+   "question": 5005,
+   "choice_text": "nice lanza un proceso con una prioridad; renice cambia la de uno que ya corre",
+   "choice_text_es": "nice lanza un proceso con una prioridad; renice cambia la de uno que ya corre",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4019,
+  "fields": {
+   "question": 5005,
+   "choice_text": "Los dos hacen lo mismo, pero renice pide contraseña",
+   "choice_text_es": "Los dos hacen lo mismo, pero renice pide contraseña",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4020,
+  "fields": {
+   "question": 5005,
+   "choice_text": "nice solo sirve en Windows y renice solo en Linux",
+   "choice_text_es": "nice solo sirve en Windows y renice solo en Linux",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 5006,
+  "fields": {
+   "content": "Un proceso con nice negativo:",
+   "content_es": "Un proceso con nice negativo:",
+   "explanation": "Correcta: C - Bajar el número es subir la prioridad, y eso lo regula el sistema. A - El nice no tiene nada que ver con el estado. B - El valor bajo, incluido el negativo, indica prioridad alta. D - El nice se aplica a procesos de usuario. Manual: cap. 2 §6. Visto en: Clase 00, mazo de prioridades.",
+   "explanation_es": "Correcta: C - Bajar el número es subir la prioridad, y eso lo regula el sistema. A - El nice no tiene nada que ver con el estado. B - El valor bajo, incluido el negativo, indica prioridad alta. D - El nice se aplica a procesos de usuario. Manual: cap. 2 §6. Visto en: Clase 00, mazo de prioridades.",
+   "quiz": [
+    10
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 5006,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4021,
+  "fields": {
+   "question": 5006,
+   "choice_text": "Está en estado T, detenido",
+   "choice_text_es": "Está en estado T, detenido",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4022,
+  "fields": {
+   "question": 5006,
+   "choice_text": "Tiene menos prioridad que los demás y cede la CPU antes",
+   "choice_text_es": "Tiene menos prioridad que los demás y cede la CPU antes",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4023,
+  "fields": {
+   "question": 5006,
+   "choice_text": "Tiene más prioridad que la normal, y subirlo pide privilegios de administrador",
+   "choice_text_es": "Tiene más prioridad que la normal, y subirlo pide privilegios de administrador",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4024,
+  "fields": {
+   "question": 5006,
+   "choice_text": "Es un proceso del kernel y no se puede tocar",
+   "choice_text_es": "Es un proceso del kernel y no se puede tocar",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 5007,
+  "fields": {
+   "content": "Cambiar la prioridad de un proceso que consume CPU de forma sostenida:",
+   "content_es": "Cambiar la prioridad de un proceso que consume CPU de forma sostenida:",
+   "explanation": "Correcta: D - Se mide en la práctica 1: la diferencia se ve en los demás procesos, no en él. A - Primero se identifica la causa; la prioridad es una medida de contención, no de causa. B - El consumo del proceso no baja: lo que cambia es quién gana la CPU. C - Prioridad y memoria son recursos distintos. Manual: cap. 2 §6. Visto en: Práctica 1, apartado 2.",
+   "explanation_es": "Correcta: D - Se mide en la práctica 1: la diferencia se ve en los demás procesos, no en él. A - Primero se identifica la causa; la prioridad es una medida de contención, no de causa. B - El consumo del proceso no baja: lo que cambia es quién gana la CPU. C - Prioridad y memoria son recursos distintos. Manual: cap. 2 §6. Visto en: Práctica 1, apartado 2.",
+   "quiz": [
+    10
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 5007,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4025,
+  "fields": {
+   "question": 5007,
+   "choice_text": "Es la solución recomendada para un servidor saturado",
+   "choice_text_es": "Es la solución recomendada para un servidor saturado",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4026,
+  "fields": {
+   "question": 5007,
+   "choice_text": "Reduce su consumo de CPU, porque el sistema lo reparte mejor",
+   "choice_text_es": "Reduce su consumo de CPU, porque el sistema lo reparte mejor",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4027,
+  "fields": {
+   "question": 5007,
+   "choice_text": "Libera memoria, porque prioridad y memoria van juntas",
+   "choice_text_es": "Libera memoria, porque prioridad y memoria van juntas",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4028,
+  "fields": {
+   "question": 5007,
+   "choice_text": "Cambia la competencia por la CPU, no el consumo del proceso",
+   "choice_text_es": "Cambia la competencia por la CPU, no el consumo del proceso",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 5008,
+  "fields": {
+   "content": "Antes de detener un proceso en producción, el dato que falta siempre es:",
+   "content_es": "Antes de detener un proceso en producción, el dato que falta siempre es:",
+   "explanation": "Correcta: A - La clase 1 lo pone como criterio: el proceso se detiene sabiendo a quién deja sin servicio. B - La prioridad se registra, pero no es lo que decide si se detiene. C - Avisar está bien, pero la decisión no depende del correo. D - El PID se consigue con una orden; el dato que falta es otro. Manual: cap. 2 §2. Visto en: Clase 01, cierre del mazo.",
+   "explanation_es": "Correcta: A - La clase 1 lo pone como criterio: el proceso se detiene sabiendo a quién deja sin servicio. B - La prioridad se registra, pero no es lo que decide si se detiene. C - Avisar está bien, pero la decisión no depende del correo. D - El PID se consigue con una orden; el dato que falta es otro. Manual: cap. 2 §2. Visto en: Clase 01, cierre del mazo.",
+   "quiz": [
+    10
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 5008,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4029,
+  "fields": {
+   "question": 5008,
+   "choice_text": "Qué servicio de negocio soporta, para saber a quién afecta",
+   "choice_text_es": "Qué servicio de negocio soporta, para saber a quién afecta",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4030,
+  "fields": {
+   "question": 5008,
+   "choice_text": "La prioridad del proceso, porque hay que restaurarla después",
+   "choice_text_es": "La prioridad del proceso, porque hay que restaurarla después",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4031,
+  "fields": {
+   "question": 5008,
+   "choice_text": "El usuario que lanzó el proceso, para avisarle por correo",
+   "choice_text_es": "El usuario que lanzó el proceso, para avisarle por correo",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4032,
+  "fields": {
+   "question": 5008,
+   "choice_text": "El PID del proceso, porque sin número no se puede enviar la señal",
+   "choice_text_es": "El PID del proceso, porque sin número no se puede enviar la señal",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 5009,
+  "fields": {
+   "content": "La orden que lista los procesos con su PID, su padre y su estado en Linux es:",
+   "content_es": "La orden que lista los procesos con su PID, su padre y su estado en Linux es:",
+   "explanation": "Correcta: B - Con -e salen todos, y cada columna se pide por nombre. A - top muestra y refresca, pero el listado con columnas concretas es de ps. C - pstree dibuja la jerarquía; el listado con columnas es de ps. D - ls /proc da los PID, pero no el padre ni el estado sin abrir ficheros. Manual: cap. 2 §5. Visto en: Clase 01, hoja de órdenes de la E1.",
+   "explanation_es": "Correcta: B - Con -e salen todos, y cada columna se pide por nombre. A - top muestra y refresca, pero el listado con columnas concretas es de ps. C - pstree dibuja la jerarquía; el listado con columnas es de ps. D - ls /proc da los PID, pero no el padre ni el estado sin abrir ficheros. Manual: cap. 2 §5. Visto en: Clase 01, hoja de órdenes de la E1.",
+   "quiz": [
+    10
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 5009,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4033,
+  "fields": {
+   "question": 5009,
+   "choice_text": "top, que muestra los procesos en tiempo real",
+   "choice_text_es": "top, que muestra los procesos en tiempo real",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4034,
+  "fields": {
+   "question": 5009,
+   "choice_text": "ps -eo pid,ppid,stat,comm",
+   "choice_text_es": "ps -eo pid,ppid,stat,comm",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4035,
+  "fields": {
+   "question": 5009,
+   "choice_text": "pstree -p, que dibuja el árbol",
+   "choice_text_es": "pstree -p, que dibuja el árbol",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4036,
+  "fields": {
+   "question": 5009,
+   "choice_text": "ls /proc, que lista los directorios de cada proceso",
+   "choice_text_es": "ls /proc, que lista los directorios de cada proceso",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 5010,
+  "fields": {
+   "content": "La columna PPID de ps indica:",
+   "content_es": "La columna PPID de ps indica:",
+   "explanation": "Correcta: C - PPID es el padre: de quién sale este proceso. A - El estado sale en la columna STAT. B - El uso de CPU sale en %CPU. D - La prioridad sale en la columna NI o PRI. Manual: cap. 2 §3. Visto en: Clase 01, actividad 2.",
+   "explanation_es": "Correcta: C - PPID es el padre: de quién sale este proceso. A - El estado sale en la columna STAT. B - El uso de CPU sale en %CPU. D - La prioridad sale en la columna NI o PRI. Manual: cap. 2 §3. Visto en: Clase 01, actividad 2.",
+   "quiz": [
+    10
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 5010,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4037,
+  "fields": {
+   "question": 5010,
+   "choice_text": "El estado del proceso",
+   "choice_text_es": "El estado del proceso",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4038,
+  "fields": {
+   "question": 5010,
+   "choice_text": "El uso de CPU acumulado",
+   "choice_text_es": "El uso de CPU acumulado",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4039,
+  "fields": {
+   "question": 5010,
+   "choice_text": "El identificador del proceso que creó al proceso",
+   "choice_text_es": "El identificador del proceso que creó al proceso",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4040,
+  "fields": {
+   "question": 5010,
+   "choice_text": "La prioridad del proceso",
+   "choice_text_es": "La prioridad del proceso",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 5011,
+  "fields": {
+   "content": "Para saber cuánta memoria hay disponible de verdad en Linux, la orden es:",
+   "content_es": "Para saber cuánta memoria hay disponible de verdad en Linux, la orden es:",
+   "explanation": "Correcta: D - La columna *available* es la que puede asignarse sin intercambio. A - swpd es lo que hay en intercambio, no lo disponible. B - df mide espacio de disco, no memoria. C - La columna *free* es la memoria sin usar; casi siempre queda menos que la disponible. Manual: cap. 2 §5. Visto en: Actividad 4 de la clase 02.",
+   "explanation_es": "Correcta: D - La columna *available* es la que puede asignarse sin intercambio. A - swpd es lo que hay en intercambio, no lo disponible. B - df mide espacio de disco, no memoria. C - La columna *free* es la memoria sin usar; casi siempre queda menos que la disponible. Manual: cap. 2 §5. Visto en: Actividad 4 de la clase 02.",
+   "quiz": [
+    10
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 5011,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4041,
+  "fields": {
+   "question": 5011,
+   "choice_text": "vmstat, columna swpd",
+   "choice_text_es": "vmstat, columna swpd",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4042,
+  "fields": {
+   "question": 5011,
+   "choice_text": "df -h, que muestra los discos",
+   "choice_text_es": "df -h, que muestra los discos",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4043,
+  "fields": {
+   "question": 5011,
+   "choice_text": "free -h, mirando la columna *free*",
+   "choice_text_es": "free -h, mirando la columna *free*",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4044,
+  "fields": {
+   "question": 5011,
+   "choice_text": "free -h, mirando la columna *available*",
+   "choice_text_es": "free -h, mirando la columna *available*",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 5012,
+  "fields": {
+   "content": "En vmstat, la columna wa mide:",
+   "content_es": "En vmstat, la columna wa mide:",
+   "explanation": "Correcta: A - Es el tiempo de espera: si sube, el cuello de botella suele ser el disco. B - Eso es la columna us. C - El tiempo encendido lo da uptime. D - Eso es la columna sy. Manual: cap. 2 §5. Visto en: Actividad 4 de la clase 02.",
+   "explanation_es": "Correcta: A - Es el tiempo de espera: si sube, el cuello de botella suele ser el disco. B - Eso es la columna us. C - El tiempo encendido lo da uptime. D - Eso es la columna sy. Manual: cap. 2 §5. Visto en: Actividad 4 de la clase 02.",
+   "quiz": [
+    10
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 5012,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4045,
+  "fields": {
+   "question": 5012,
+   "choice_text": "El tiempo que la CPU pasa esperando E/S de disco",
+   "choice_text_es": "El tiempo que la CPU pasa esperando E/S de disco",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4046,
+  "fields": {
+   "question": 5012,
+   "choice_text": "El tiempo que la CPU pasa ejecutando código de usuario",
+   "choice_text_es": "El tiempo que la CPU pasa ejecutando código de usuario",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4047,
+  "fields": {
+   "question": 5012,
+   "choice_text": "El tiempo que el sistema lleva encendido",
+   "choice_text_es": "El tiempo que el sistema lleva encendido",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4048,
+  "fields": {
+   "question": 5012,
+   "choice_text": "El tiempo que la CPU pasa ejecutando código del kernel",
+   "choice_text_es": "El tiempo que la CPU pasa ejecutando código del kernel",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 5013,
+  "fields": {
+   "content": "El directorio /proc/<PID>/ en Linux contiene:",
+   "content_es": "El directorio /proc/<PID>/ en Linux contiene:",
+   "explanation": "Correcta: B - El kernel publica ahí lo que sabe del proceso. A - Cuando el proceso muere, su directorio desaparece. C - El registro del sistema va al journal o a /var/log/. D - La configuración de los servicios está en /etc/. Manual: cap. 2 §5. Visto en: E1, hoja de órdenes.",
+   "explanation_es": "Correcta: B - El kernel publica ahí lo que sabe del proceso. A - Cuando el proceso muere, su directorio desaparece. C - El registro del sistema va al journal o a /var/log/. D - La configuración de los servicios está en /etc/. Manual: cap. 2 §5. Visto en: E1, hoja de órdenes.",
+   "quiz": [
+    10
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 5013,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4049,
+  "fields": {
+   "question": 5013,
+   "choice_text": "Un registro histórico del proceso que ya terminó",
+   "choice_text_es": "Un registro histórico del proceso que ya terminó",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4050,
+  "fields": {
+   "question": 5013,
+   "choice_text": "La ficha en vivo del proceso: su estado, su memoria y sus descriptores",
+   "choice_text_es": "La ficha en vivo del proceso: su estado, su memoria y sus descriptores",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4051,
+  "fields": {
+   "question": 5013,
+   "choice_text": "El registro del sistema, con los mensajes del proceso",
+   "choice_text_es": "El registro del sistema, con los mensajes del proceso",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4052,
+  "fields": {
+   "question": 5013,
+   "choice_text": "La configuración del servicio del proceso",
+   "choice_text_es": "La configuración del servicio del proceso",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 5014,
+  "fields": {
+   "content": "Para localizar el proceso que más CPU consume en un instante dado, la lectura más directa es:",
+   "content_es": "Para localizar el proceso que más CPU consume en un instante dado, la lectura más directa es:",
+   "explanation": "Correcta: C - top es la vista en vivo ordenada por consumo. A - El árbol muestra la jerarquía, no el consumo ordenado. B - Eso mira un servicio, no la lista completa ordenada. D - df mide espacio, no procesos. Manual: cap. 2 §5. Visto en: Práctica 1, apartado 1.",
+   "explanation_es": "Correcta: C - top es la vista en vivo ordenada por consumo. A - El árbol muestra la jerarquía, no el consumo ordenado. B - Eso mira un servicio, no la lista completa ordenada. D - df mide espacio, no procesos. Manual: cap. 2 §5. Visto en: Práctica 1, apartado 1.",
+   "quiz": [
+    10
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 5014,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4053,
+  "fields": {
+   "question": 5014,
+   "choice_text": "pstree -p, que dibuja el árbol de procesos",
+   "choice_text_es": "pstree -p, que dibuja el árbol de procesos",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4054,
+  "fields": {
+   "question": 5014,
+   "choice_text": "systemctl status ssh, que mira un servicio concreto",
+   "choice_text_es": "systemctl status ssh, que mira un servicio concreto",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4055,
+  "fields": {
+   "question": 5014,
+   "choice_text": "top, ordenado por uso de CPU",
+   "choice_text_es": "top, ordenado por uso de CPU",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4056,
+  "fields": {
+   "question": 5014,
+   "choice_text": "df -h, que lista los discos",
+   "choice_text_es": "df -h, que lista los discos",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 5015,
+  "fields": {
+   "content": "Una medida, una métrica y un indicador se distinguen porque:",
+   "content_es": "Una medida, una métrica y un indicador se distinguen porque:",
+   "explanation": "Correcta: D - La cadena que enseña la clase 3: dato, medida, métrica, indicador. A - La métrica también se calcula: la unidad se aplica con una regla. B - Cada uno añade algo: criterio, unidad y objetivo. C - Ni la unidad ni el tipo dependen del nombre. Manual: cap. 4 §2–§4. Visto en: Clase 03, diapositivas 3-4.",
+   "explanation_es": "Correcta: D - La cadena que enseña la clase 3: dato, medida, métrica, indicador. A - La métrica también se calcula: la unidad se aplica con una regla. B - Cada uno añade algo: criterio, unidad y objetivo. C - Ni la unidad ni el tipo dependen del nombre. Manual: cap. 4 §2–§4. Visto en: Clase 03, diapositivas 3-4.",
+   "quiz": [
+    10
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 5015,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4057,
+  "fields": {
+   "question": 5015,
+   "choice_text": "El indicador se calcula y la métrica no",
+   "choice_text_es": "El indicador se calcula y la métrica no",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4058,
+  "fields": {
+   "question": 5015,
+   "choice_text": "Son tres nombres de lo mismo",
+   "choice_text_es": "Son tres nombres de lo mismo",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4059,
+  "fields": {
+   "question": 5015,
+   "choice_text": "La métrica es siempre porcentual y el indicador siempre en segundos",
+   "choice_text_es": "La métrica es siempre porcentual y el indicador siempre en segundos",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4060,
+  "fields": {
+   "question": 5015,
+   "choice_text": "La medida es un dato con criterio; la métrica es la unidad de medida; el indicador añade objetivo y umbral",
+   "choice_text_es": "La medida es un dato con criterio; la métrica es la unidad de medida; el indicador añade objetivo y umbral",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 5016,
+  "fields": {
+   "content": "De los cinco criterios de un buen indicador, el que exige saber quién responde es:",
+   "content_es": "De los cinco criterios de un buen indicador, el que exige saber quién responde es:",
+   "explanation": "Correcta: A - Un indicador sin dueño nadie lo mira ni responde a él. B - Comparable es que tenga línea base y referencia. C - Relevante es que afecte al servicio. D - Medible es que se pueda obtener con una herramienta. Manual: cap. 4 §4. Visto en: Clase 03, diapositiva 6.",
+   "explanation_es": "Correcta: A - Un indicador sin dueño nadie lo mira ni responde a él. B - Comparable es que tenga línea base y referencia. C - Relevante es que afecte al servicio. D - Medible es que se pueda obtener con una herramienta. Manual: cap. 4 §4. Visto en: Clase 03, diapositiva 6.",
+   "quiz": [
+    10
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 5016,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4061,
+  "fields": {
+   "question": 5016,
+   "choice_text": "Con dueño",
+   "choice_text_es": "Con dueño",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4062,
+  "fields": {
+   "question": 5016,
+   "choice_text": "Comparable",
+   "choice_text_es": "Comparable",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4063,
+  "fields": {
+   "question": 5016,
+   "choice_text": "Relevante",
+   "choice_text_es": "Relevante",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4064,
+  "fields": {
+   "question": 5016,
+   "choice_text": "Medible",
+   "choice_text_es": "Medible",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 5017,
+  "fields": {
+   "content": "La línea base de un servidor se calcula:",
+   "content_es": "La línea base de un servidor se calcula:",
+   "explanation": "Correcta: B - Primero se mide lo normal; después se pone el umbral. A - La clase 3 lo dice: un umbral copiado de otra máquina no sirve. C - El máximo teórico no dice cómo va el servicio. D - La percepción del usuario es un síntoma, no la línea base. Manual: cap. 4 §5. Visto en: Clase 03, diapositiva 8.",
+   "explanation_es": "Correcta: B - Primero se mide lo normal; después se pone el umbral. A - La clase 3 lo dice: un umbral copiado de otra máquina no sirve. C - El máximo teórico no dice cómo va el servicio. D - La percepción del usuario es un síntoma, no la línea base. Manual: cap. 4 §5. Visto en: Clase 03, diapositiva 8.",
+   "quiz": [
+    10
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 5017,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4065,
+  "fields": {
+   "question": 5017,
+   "choice_text": "Copiando los umbrales de otro servidor parecido",
+   "choice_text_es": "Copiando los umbrales de otro servidor parecido",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4066,
+  "fields": {
+   "question": 5017,
+   "choice_text": "Midiendo el sistema en un día normal, antes de fijar ningún umbral",
+   "choice_text_es": "Midiendo el sistema en un día normal, antes de fijar ningún umbral",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4067,
+  "fields": {
+   "question": 5017,
+   "choice_text": "Tomando el valor máximo que puede alcanzar el hardware",
+   "choice_text_es": "Tomando el valor máximo que puede alcanzar el hardware",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4068,
+  "fields": {
+   "question": 5017,
+   "choice_text": "Preguntando al usuario qué le parece lento",
+   "choice_text_es": "Preguntando al usuario qué le parece lento",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 5018,
+  "fields": {
+   "content": "La ventana de una alarma sirve para:",
+   "content_es": "La ventana de una alarma sirve para:",
+   "explanation": "Correcta: C - Con ventana se avisa de lo sostenido; sin ventana, de lo puntual. A - El responsable es otro campo. B - La severidad es otro campo de la alarma. D - La ventana no retrasa la corrección: define el tiempo de observación. Manual: cap. 4 §5. Visto en: Clase 03, diapositiva 9.",
+   "explanation_es": "Correcta: C - Con ventana se avisa de lo sostenido; sin ventana, de lo puntual. A - El responsable es otro campo. B - La severidad es otro campo de la alarma. D - La ventana no retrasa la corrección: define el tiempo de observación. Manual: cap. 4 §5. Visto en: Clase 03, diapositiva 9.",
+   "quiz": [
+    10
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 5018,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4069,
+  "fields": {
+   "question": 5018,
+   "choice_text": "Decidir quién recibe el aviso",
+   "choice_text_es": "Decidir quién recibe el aviso",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4070,
+  "fields": {
+   "question": 5018,
+   "choice_text": "Clasificar la severidad del problema",
+   "choice_text_es": "Clasificar la severidad del problema",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4071,
+  "fields": {
+   "question": 5018,
+   "choice_text": "Evitar que un pico de un minuto dispare un aviso por algo que se mantiene",
+   "choice_text_es": "Evitar que un pico de un minuto dispare un aviso por algo que se mantiene",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4072,
+  "fields": {
+   "question": 5018,
+   "choice_text": "Retrasar la corrección del problema hasta que pase el pico",
+   "choice_text_es": "Retrasar la corrección del problema hasta que pase el pico",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 5019,
+  "fields": {
+   "content": "Una alarma bien definida lleva cinco partes: condición, ventana, severidad, acción y:",
+   "content_es": "Una alarma bien definida lleva cinco partes: condición, ventana, severidad, acción y:",
+   "explanation": "Correcta: D - Alguien tiene que recibir el aviso y responder. A - La línea base es el dato con el que se calibró el umbral, no parte de la alarma. B - El coste no es una parte de la alarma. C - El gráfico es la visualización, no la alarma. Manual: cap. 4 §5. Visto en: Clase 03, diapositiva 10.",
+   "explanation_es": "Correcta: D - Alguien tiene que recibir el aviso y responder. A - La línea base es el dato con el que se calibró el umbral, no parte de la alarma. B - El coste no es una parte de la alarma. C - El gráfico es la visualización, no la alarma. Manual: cap. 4 §5. Visto en: Clase 03, diapositiva 10.",
+   "quiz": [
+    10
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 5019,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4073,
+  "fields": {
+   "question": 5019,
+   "choice_text": "Línea base",
+   "choice_text_es": "Línea base",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4074,
+  "fields": {
+   "question": 5019,
+   "choice_text": "Coste",
+   "choice_text_es": "Coste",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4075,
+  "fields": {
+   "question": 5019,
+   "choice_text": "Gráfico",
+   "choice_text_es": "Gráfico",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4076,
+  "fields": {
+   "question": 5019,
+   "choice_text": "Responsable",
+   "choice_text_es": "Responsable",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 5020,
+  "fields": {
+   "content": "En la ficha de alarma del módulo, la severidad responde a la pregunta:",
+   "content_es": "En la ficha de alarma del módulo, la severidad responde a la pregunta:",
+   "explanation": "Correcta: A - La severidad separa el aviso del crítico. B - Eso es el responsable. C - Eso es la acción. D - Eso es la ventana. Manual: cap. 4 §5. Visto en: Práctica 4, apartado 5.",
+   "explanation_es": "Correcta: A - La severidad separa el aviso del crítico. B - Eso es el responsable. C - Eso es la acción. D - Eso es la ventana. Manual: cap. 4 §5. Visto en: Práctica 4, apartado 5.",
+   "quiz": [
+    10
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 5020,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4077,
+  "fields": {
+   "question": 5020,
+   "choice_text": "¿Es aviso o es crítico?",
+   "choice_text_es": "¿Es aviso o es crítico?",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4078,
+  "fields": {
+   "question": 5020,
+   "choice_text": "¿Quién recibe el aviso?",
+   "choice_text_es": "¿Quién recibe el aviso?",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4079,
+  "fields": {
+   "question": 5020,
+   "choice_text": "¿Qué hace el sistema cuando se dispara?",
+   "choice_text_es": "¿Qué hace el sistema cuando se dispara?",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4080,
+  "fields": {
+   "question": 5020,
+   "choice_text": "¿Cuánto tiempo tiene que cumplirse la condición?",
+   "choice_text_es": "¿Cuánto tiempo tiene que cumplirse la condición?",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 5021,
+  "fields": {
+   "content": "En Windows, la herramienta que muestra el rendimiento del sistema y de cada recurso es:",
+   "content_es": "En Windows, la herramienta que muestra el rendimiento del sistema y de cada recurso es:",
+   "explanation": "Correcta: B - Es la pareja de herramientas que pide la práctica de Windows. A - El Administrador de tareas lista y permite actuar, pero la vista de contadores es del Monitor de rendimiento. C - msinfo32 es inventario, no medida en vivo. D - El Visor de eventos es de registros, no de contadores en vivo. Manual: cap. 2 §5. Visto en: Actividad 5 de la clase 02.",
+   "explanation_es": "Correcta: B - Es la pareja de herramientas que pide la práctica de Windows. A - El Administrador de tareas lista y permite actuar, pero la vista de contadores es del Monitor de rendimiento. C - msinfo32 es inventario, no medida en vivo. D - El Visor de eventos es de registros, no de contadores en vivo. Manual: cap. 2 §5. Visto en: Actividad 5 de la clase 02.",
+   "quiz": [
+    10
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 5021,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4081,
+  "fields": {
+   "question": 5021,
+   "choice_text": "El Administrador de tareas, que solo lista procesos",
+   "choice_text_es": "El Administrador de tareas, que solo lista procesos",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4082,
+  "fields": {
+   "question": 5021,
+   "choice_text": "El Monitor de rendimiento, con el Monitor de recursos dentro",
+   "choice_text_es": "El Monitor de rendimiento, con el Monitor de recursos dentro",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4083,
+  "fields": {
+   "question": 5021,
+   "choice_text": "msinfo32, que da el inventario del equipo",
+   "choice_text_es": "msinfo32, que da el inventario del equipo",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4084,
+  "fields": {
+   "question": 5021,
+   "choice_text": "El Visor de eventos, que guarda los registros",
+   "choice_text_es": "El Visor de eventos, que guarda los registros",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 5022,
+  "fields": {
+   "content": "En Windows, el registro donde el Administrador de control de servicios escribe el arranque y parada de servicios es:",
+   "content_es": "En Windows, el registro donde el Administrador de control de servicios escribe el arranque y parada de servicios es:",
+   "explanation": "Correcta: C - Es donde llegan los eventos 7000, 7001, 7009 y 7036 del servicio. A - Aplicación es de las aplicaciones, no del gestor de servicios. B - Ahí está el registro de Windows, el almacén de configuración, no los eventos. D - Seguridad es de auditoría de accesos. Manual: cap. 6 §2. Visto en: Práctica 7, apartado 5.",
+   "explanation_es": "Correcta: C - Es donde llegan los eventos 7000, 7001, 7009 y 7036 del servicio. A - Aplicación es de las aplicaciones, no del gestor de servicios. B - Ahí está el registro de Windows, el almacén de configuración, no los eventos. D - Seguridad es de auditoría de accesos. Manual: cap. 6 §2. Visto en: Práctica 7, apartado 5.",
+   "quiz": [
+    10
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 5022,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4085,
+  "fields": {
+   "question": 5022,
+   "choice_text": "El Visor de sucesos de aplicación",
+   "choice_text_es": "El Visor de sucesos de aplicación",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4086,
+  "fields": {
+   "question": 5022,
+   "choice_text": "El archivo C:\\Windows\\System32\\config",
+   "choice_text_es": "El archivo C:\\Windows\\System32\\config",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4087,
+  "fields": {
+   "question": 5022,
+   "choice_text": "El registro Sistema del Visor de eventos",
+   "choice_text_es": "El registro Sistema del Visor de eventos",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4088,
+  "fields": {
+   "question": 5022,
+   "choice_text": "El registro Seguridad del Visor de eventos",
+   "choice_text_es": "El registro Seguridad del Visor de eventos",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 5023,
+  "fields": {
+   "content": "En Linux, para ver los mensajes de un servicio concreto, la orden es:",
+   "content_es": "En Linux, para ver los mensajes de un servicio concreto, la orden es:",
+   "explanation": "Correcta: D - El -u filtra por unidad de systemd. A - dmesg es del kernel, no de los servicios. B - Lista las unidades, no los mensajes. C - Funciona, pero no filtra por servicio ni es la vía del módulo. Manual: cap. 2 §5. Visto en: Práctica 7, apartado 2.",
+   "explanation_es": "Correcta: D - El -u filtra por unidad de systemd. A - dmesg es del kernel, no de los servicios. B - Lista las unidades, no los mensajes. C - Funciona, pero no filtra por servicio ni es la vía del módulo. Manual: cap. 2 §5. Visto en: Práctica 7, apartado 2.",
+   "quiz": [
+    10
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 5023,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4089,
+  "fields": {
+   "question": 5023,
+   "choice_text": "dmesg, que muestra el búfer del kernel",
+   "choice_text_es": "dmesg, que muestra el búfer del kernel",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4090,
+  "fields": {
+   "question": 5023,
+   "choice_text": "systemctl list-units, que lista unidades",
+   "choice_text_es": "systemctl list-units, que lista unidades",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4091,
+  "fields": {
+   "question": 5023,
+   "choice_text": "cat /var/log/messages, y buscar a mano",
+   "choice_text_es": "cat /var/log/messages, y buscar a mano",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4092,
+  "fields": {
+   "question": 5023,
+   "choice_text": "journalctl -u <servicio>",
+   "choice_text_es": "journalctl -u <servicio>",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 5024,
+  "fields": {
+   "content": "Una alarma que se dispara todos los días sin que haya un problema de verdad se llama falsa alarma, y su causa más habitual es:",
+   "content_es": "Una alarma que se dispara todos los días sin que haya un problema de verdad se llama falsa alarma, y su causa más habitual es:",
+   "explanation": "Correcta: A - Umbral copiado o mal calibrado: la causa que la clase 3 señala. B - Si un servicio se para cada día, eso es un problema real. C - Una ventana larga reduce las falsas alarmas, no las provoca. D - El formato no dispara alarmas. Manual: cap. 4 §5. Visto en: Clase 03, diapositiva 8.",
+   "explanation_es": "Correcta: A - Umbral copiado o mal calibrado: la causa que la clase 3 señala. B - Si un servicio se para cada día, eso es un problema real. C - Una ventana larga reduce las falsas alarmas, no las provoca. D - El formato no dispara alarmas. Manual: cap. 4 §5. Visto en: Clase 03, diapositiva 8.",
+   "quiz": [
+    10
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 5024,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4093,
+  "fields": {
+   "question": 5024,
+   "choice_text": "Un umbral puesto sin línea base, demasiado bajo para la máquina",
+   "choice_text_es": "Un umbral puesto sin línea base, demasiado bajo para la máquina",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4094,
+  "fields": {
+   "question": 5024,
+   "choice_text": "Un usuario que apaga el servicio todos los días",
+   "choice_text_es": "Un usuario que apaga el servicio todos los días",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4095,
+  "fields": {
+   "question": 5024,
+   "choice_text": "Que la ventana sea demasiado larga",
+   "choice_text_es": "Que la ventana sea demasiado larga",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4096,
+  "fields": {
+   "question": 5024,
+   "choice_text": "El formato del registro del sistema",
+   "choice_text_es": "El formato del registro del sistema",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 5025,
+  "fields": {
+   "content": "En Monit, la línea if cpu usage > 80% for 5 cycles then alert significa que:",
+   "content_es": "En Monit, la línea if cpu usage > 80% for 5 cycles then alert significa que:",
+   "explanation": "Correcta: B - El for N cycles es la ventana, medida en ciclos del demonio. A - Los ciclos tienen que ser seguidos. C - El aviso depende de la condición cumplida. D - El intervalo lo fija set daemon, no la condición. Manual: cap. 5 §7. Visto en: Práctica 4, apartado 6.",
+   "explanation_es": "Correcta: B - El for N cycles es la ventana, medida en ciclos del demonio. A - Los ciclos tienen que ser seguidos. C - El aviso depende de la condición cumplida. D - El intervalo lo fija set daemon, no la condición. Manual: cap. 5 §7. Visto en: Práctica 4, apartado 6.",
+   "quiz": [
+    10
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 5025,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4097,
+  "fields": {
+   "question": 5025,
+   "choice_text": "Se avisa si la CPU supera el 80 % cinco veces en cualquier momento",
+   "choice_text_es": "Se avisa si la CPU supera el 80 % cinco veces en cualquier momento",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4098,
+  "fields": {
+   "question": 5025,
+   "choice_text": "Se avisa si la CPU supera el 80 % durante cinco ciclos seguidos",
+   "choice_text_es": "Se avisa si la CPU supera el 80 % durante cinco ciclos seguidos",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4099,
+  "fields": {
+   "question": 5025,
+   "choice_text": "Se ejecuta un alert cada cinco ciclos pase lo que pase",
+   "choice_text_es": "Se ejecuta un alert cada cinco ciclos pase lo que pase",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4100,
+  "fields": {
+   "question": 5025,
+   "choice_text": "Monit se queda dormido cinco minutos antes de empezar",
+   "choice_text_es": "Monit se queda dormido cinco minutos antes de empezar",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 5026,
+  "fields": {
+   "content": "En Zabbix, el objeto que contiene la condición de una alarma es:",
+   "content_es": "En Zabbix, el objeto que contiene la condición de una alarma es:",
+   "explanation": "Correcta: C - El trigger se evalúa con cada valor nuevo del item y pasa a estado de problema. A - El action hace lo que se ejecuta cuando hay problema. B - El host es la máquina vigilada. D - El item recoge el dato; no decide nada. Manual: cap. 5 §7. Visto en: Práctica 10, apartado 1.",
+   "explanation_es": "Correcta: C - El trigger se evalúa con cada valor nuevo del item y pasa a estado de problema. A - El action hace lo que se ejecuta cuando hay problema. B - El host es la máquina vigilada. D - El item recoge el dato; no decide nada. Manual: cap. 5 §7. Visto en: Práctica 10, apartado 1.",
+   "quiz": [
+    10
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 5026,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4101,
+  "fields": {
+   "question": 5026,
+   "choice_text": "El action",
+   "choice_text_es": "El action",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4102,
+  "fields": {
+   "question": 5026,
+   "choice_text": "El host",
+   "choice_text_es": "El host",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4103,
+  "fields": {
+   "question": 5026,
+   "choice_text": "El trigger",
+   "choice_text_es": "El trigger",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4104,
+  "fields": {
+   "question": 5026,
+   "choice_text": "El item",
+   "choice_text_es": "El item",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 5027,
+  "fields": {
+   "content": "En Zabbix, la ventana de una alarma no se escribe en el trigger, sino que sale:",
+   "content_es": "En Zabbix, la ventana de una alarma no se escribe en el trigger, sino que sale:",
+   "explanation": "Correcta: D - Con last() se mira el último valor; con min(...,5m), el peor de los últimos cinco minutos. A - El action repite avisos; no define la ventana de la condición. B - El nombre no entra en la evaluación. C - La severidad no define la ventana. Manual: cap. 5 §7. Visto en: Práctica 10, apartado 4.",
+   "explanation_es": "Correcta: D - Con last() se mira el último valor; con min(...,5m), el peor de los últimos cinco minutos. A - El action repite avisos; no define la ventana de la condición. B - El nombre no entra en la evaluación. C - La severidad no define la ventana. Manual: cap. 5 §7. Visto en: Práctica 10, apartado 4.",
+   "quiz": [
+    10
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 5027,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4105,
+  "fields": {
+   "question": 5027,
+   "choice_text": "Del intervalo de repetición del action",
+   "choice_text_es": "Del intervalo de repetición del action",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4106,
+  "fields": {
+   "question": 5027,
+   "choice_text": "Del nombre del host",
+   "choice_text_es": "Del nombre del host",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4107,
+  "fields": {
+   "question": 5027,
+   "choice_text": "De la severidad que se ponga en el trigger",
+   "choice_text_es": "De la severidad que se ponga en el trigger",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4108,
+  "fields": {
+   "question": 5027,
+   "choice_text": "Del intervalo del item y de la función que se use, como min(...,5m)",
+   "choice_text_es": "Del intervalo del item y de la función que se use, como min(...,5m)",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 5028,
+  "fields": {
+   "content": "En Nagios, el tiempo que un fallo tiene que mantenerse para que se dé por fallido sale de:",
+   "content_es": "En Nagios, el tiempo que un fallo tiene que mantenerse para que se dé por fallido sale de:",
+   "explanation": "Correcta: A - Cinco minutos por tres intentos, en la configuración de la ficha, dan quince minutos. B - El intervalo de notificación es de los avisos, no de los reintentos. C - El periodo de notificación dice en qué horas se avisa. D - El reintento es el ritmo entre intentos, no el total. Manual: cap. 5 §7. Visto en: Clase 03, diapositiva 17.",
+   "explanation_es": "Correcta: A - Cinco minutos por tres intentos, en la configuración de la ficha, dan quince minutos. B - El intervalo de notificación es de los avisos, no de los reintentos. C - El periodo de notificación dice en qué horas se avisa. D - El reintento es el ritmo entre intentos, no el total. Manual: cap. 5 §7. Visto en: Clase 03, diapositiva 17.",
+   "quiz": [
+    10
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 5028,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4109,
+  "fields": {
+   "question": 5028,
+   "choice_text": "Multiplicar check interval por max check attempts",
+   "choice_text_es": "Multiplicar check interval por max check attempts",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4110,
+  "fields": {
+   "question": 5028,
+   "choice_text": "Sumar check interval y notification interval",
+   "choice_text_es": "Sumar check interval y notification interval",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4111,
+  "fields": {
+   "question": 5028,
+   "choice_text": "El notification period",
+   "choice_text_es": "El notification period",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4112,
+  "fields": {
+   "question": 5028,
+   "choice_text": "La directiva retry interval sola",
+   "choice_text_es": "La directiva retry interval sola",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 5029,
+  "fields": {
+   "content": "En la práctica del módulo, el vigía que se instala en la Kali es Monit y no Zabbix porque:",
+   "content_es": "En la práctica del módulo, el vigía que se instala en la Kali es Monit y no Zabbix porque:",
+   "explanation": "Correcta: B - Es lo que dice la práctica 4: mismo concepto, tamaño de laboratorio. A - Zabbix funciona; lo que pesa es el servidor y su base de datos en una máquina de 2 GB. C - Monit envía avisos con set alert. D - Los dos son libres. Manual: cap. 5 §7. Visto en: Práctica 4, apartado 6.",
+   "explanation_es": "Correcta: B - Es lo que dice la práctica 4: mismo concepto, tamaño de laboratorio. A - Zabbix funciona; lo que pesa es el servidor y su base de datos en una máquina de 2 GB. C - Monit envía avisos con set alert. D - Los dos son libres. Manual: cap. 5 §7. Visto en: Práctica 4, apartado 6.",
+   "quiz": [
+    10
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 5029,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4113,
+  "fields": {
+   "question": 5029,
+   "choice_text": "Zabbix no funciona en Kali",
+   "choice_text_es": "Zabbix no funciona en Kali",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4114,
+  "fields": {
+   "question": 5029,
+   "choice_text": "Monit se instala con una orden y trae panel web propio, del tamaño del laboratorio",
+   "choice_text_es": "Monit se instala con una orden y trae panel web propio, del tamaño del laboratorio",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4115,
+  "fields": {
+   "question": 5029,
+   "choice_text": "Monit no envía avisos y por eso es más ligero",
+   "choice_text_es": "Monit no envía avisos y por eso es más ligero",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4116,
+  "fields": {
+   "question": 5029,
+   "choice_text": "Monit es de pago y Zabbix es libre",
+   "choice_text_es": "Monit es de pago y Zabbix es libre",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 5030,
+  "fields": {
+   "content": "El cuadro de mando de un servicio lleva los dos o tres indicadores que se miran cada mañana; el resto del sistema se queda como:",
+   "content_es": "El cuadro de mando de un servicio lleva los dos o tres indicadores que se miran cada mañana; el resto del sistema se queda como:",
+   "explanation": "Correcta: C - Los KPI son los pocos que se miran; el resto apoya. A - La clasificación no va por seguridad, va por uso. B - El informe periódico no es el cuadro de mando. D - El apoyo es necesario cuando hay que investigar. Manual: cap. 4 §7. Visto en: Clase 03, diapositiva 12.",
+   "explanation_es": "Correcta: C - Los KPI son los pocos que se miran; el resto apoya. A - La clasificación no va por seguridad, va por uso. B - El informe periódico no es el cuadro de mando. D - El apoyo es necesario cuando hay que investigar. Manual: cap. 4 §7. Visto en: Clase 03, diapositiva 12.",
+   "quiz": [
+    10
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 5030,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4117,
+  "fields": {
+   "question": 5030,
+   "choice_text": "Métricas de seguridad",
+   "choice_text_es": "Métricas de seguridad",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4118,
+  "fields": {
+   "question": 5030,
+   "choice_text": "Parte del informe anual",
+   "choice_text_es": "Parte del informe anual",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4119,
+  "fields": {
+   "question": 5030,
+   "choice_text": "Apoyo, para cuando hay que investigar",
+   "choice_text_es": "Apoyo, para cuando hay que investigar",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4120,
+  "fields": {
+   "question": 5030,
+   "choice_text": "Desperdicio, y se desactiva",
+   "choice_text_es": "Desperdicio, y se desactiva",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.quiz",
+  "pk": 10,
+  "fields": {
+   "course": 24,
+   "title": "Repaso UA1 - Procesos, rendimiento y monitorización",
+   "title_es": "Repaso UA1 - Procesos, rendimiento y monitorización",
+   "slug": "repaso-ua1-mf0490-3",
+   "description": "Repaso de la UA1: procesos del sistema, señales y prioridades, métricas, indicadores, umbrales y alarmas. 30 preguntas de opción múltiple. Se corrigen solas y, al responder, sale la respuesta correcta con el motivo de cada opción descartada. Se puede repetir tantas veces como quieras.",
+   "description_es": "Repaso de la UA1: procesos del sistema, señales y prioridades, métricas, indicadores, umbrales y alarmas. 30 preguntas de opción múltiple. Se corrigen solas y, al responder, sale la respuesta correcta con el motivo de cada opción descartada. Se puede repetir tantas veces como quieras.",
+   "category": "practice",
+   "draft": false,
+   "single_attempt": false,
+   "pass_mark": 0,
+   "timestamp": "2026-11-13T00:00:00Z",
+   "random_order": true,
+   "answers_at_end": false,
+   "exam_paper": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 5031,
+  "fields": {
+   "content": "La memoria RAM y el disco se distinguen porque:",
+   "content_es": "La memoria RAM y el disco se distinguen porque:",
+   "explanation": "Correcta: D - La volatilidad es la diferencia de fondo. A - Ambos guardan programas y datos. B - La RAM se amplía con módulos. C - El disco es mucho más lento; por eso hay jerarquía de memoria. Manual: cap. 3 §2. Visto en: Clase 02, temario 2.4.",
+   "explanation_es": "Correcta: D - La volatilidad es la diferencia de fondo. A - Ambos guardan programas y datos. B - La RAM se amplía con módulos. C - El disco es mucho más lento; por eso hay jerarquía de memoria. Manual: cap. 3 §2. Visto en: Clase 02, temario 2.4.",
+   "quiz": [
+    11
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 5031,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4121,
+  "fields": {
+   "question": 5031,
+   "choice_text": "El disco guarda solo datos y la RAM solo programas",
+   "choice_text_es": "El disco guarda solo datos y la RAM solo programas",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4122,
+  "fields": {
+   "question": 5031,
+   "choice_text": "La RAM no se puede ampliar",
+   "choice_text_es": "La RAM no se puede ampliar",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4123,
+  "fields": {
+   "question": 5031,
+   "choice_text": "El disco es más rápido que la RAM",
+   "choice_text_es": "El disco es más rápido que la RAM",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4124,
+  "fields": {
+   "question": 5031,
+   "choice_text": "La RAM pierde su contenido al apagar y el disco lo conserva",
+   "choice_text_es": "La RAM pierde su contenido al apagar y el disco lo conserva",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 5032,
+  "fields": {
+   "content": "Un disco de estado sólido frente a uno magnético se distingue porque:",
+   "content_es": "Un disco de estado sólido frente a uno magnético se distingue porque:",
+   "explanation": "Correcta: A - La SSD accede igual a cualquier bloque; el disco magnético depende de la posición. B - Por el mismo precio, el magnético suele dar más capacidad. C - Se formatea igual que cualquier disco. D - La SSD usa los mismos sistemas de archivos que el magnético. Manual: cap. 3 §2. Visto en: Clase 02, temario 2.4.",
+   "explanation_es": "Correcta: A - La SSD accede igual a cualquier bloque; el disco magnético depende de la posición. B - Por el mismo precio, el magnético suele dar más capacidad. C - Se formatea igual que cualquier disco. D - La SSD usa los mismos sistemas de archivos que el magnético. Manual: cap. 3 §2. Visto en: Clase 02, temario 2.4.",
+   "quiz": [
+    11
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 5032,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4125,
+  "fields": {
+   "question": 5032,
+   "choice_text": "No tiene cabezas ni platos, y su tiempo de acceso es uniforme",
+   "choice_text_es": "No tiene cabezas ni platos, y su tiempo de acceso es uniforme",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4126,
+  "fields": {
+   "question": 5032,
+   "choice_text": "Es siempre más grande en capacidad por el mismo precio",
+   "choice_text_es": "Es siempre más grande en capacidad por el mismo precio",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4127,
+  "fields": {
+   "question": 5032,
+   "choice_text": "No se puede formatear",
+   "choice_text_es": "No se puede formatear",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4128,
+  "fields": {
+   "question": 5032,
+   "choice_text": "No necesita sistema de archivos",
+   "choice_text_es": "No necesita sistema de archivos",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 5033,
+  "fields": {
+   "content": "La diferencia entre MBR y GPT es:",
+   "content_es": "La diferencia entre MBR y GPT es:",
+   "explanation": "Correcta: B - MBR llega a cuatro particiones primarias y 2 TB; GPT rompe esas dos limitaciones. A - Los dos esquemas se usan en los dos sistemas. C - La partición activa es un concepto de MBR. D - La copia de la tabla GPT es la que va al final; el MBR va al principio. Manual: cap. 3 §4. Visto en: Clase 02, presentación de discos y particiones.",
+   "explanation_es": "Correcta: B - MBR llega a cuatro particiones primarias y 2 TB; GPT rompe esas dos limitaciones. A - Los dos esquemas se usan en los dos sistemas. C - La partición activa es un concepto de MBR. D - La copia de la tabla GPT es la que va al final; el MBR va al principio. Manual: cap. 3 §4. Visto en: Clase 02, presentación de discos y particiones.",
+   "quiz": [
+    11
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 5033,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4129,
+  "fields": {
+   "question": 5033,
+   "choice_text": "El MBR solo vale en Linux y el GPT solo en Windows",
+   "choice_text_es": "El MBR solo vale en Linux y el GPT solo en Windows",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4130,
+  "fields": {
+   "question": 5033,
+   "choice_text": "El GPT es el esquema moderno: más particiones, discos mayores y una copia de la tabla al final",
+   "choice_text_es": "El GPT es el esquema moderno: más particiones, discos mayores y una copia de la tabla al final",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4131,
+  "fields": {
+   "question": 5033,
+   "choice_text": "El GPT es el formato de la partición activa",
+   "choice_text_es": "El GPT es el formato de la partición activa",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4132,
+  "fields": {
+   "question": 5033,
+   "choice_text": "El MBR guarda la tabla al final del disco",
+   "choice_text_es": "El MBR guarda la tabla al final del disco",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 5034,
+  "fields": {
+   "content": "Un sistema de archivos con journaling, como ext4 o NTFS:",
+   "content_es": "Un sistema de archivos con journaling, como ext4 o NTFS:",
+   "explanation": "Correcta: C - El diario es lo que permite reconstruir después de un apagón. A - Reduce la fragmentación, no la elimina. B - Existe en los dos: NTFS y ext4 lo llevan. D - El journaling no protege del borrado por error. Manual: cap. 3 §3. Visto en: Clase 02, presentación de sistemas de archivos.",
+   "explanation_es": "Correcta: C - El diario es lo que permite reconstruir después de un apagón. A - Reduce la fragmentación, no la elimina. B - Existe en los dos: NTFS y ext4 lo llevan. D - El journaling no protege del borrado por error. Manual: cap. 3 §3. Visto en: Clase 02, presentación de sistemas de archivos.",
+   "quiz": [
+    11
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 5034,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4133,
+  "fields": {
+   "question": 5034,
+   "choice_text": "Elimina la fragmentación",
+   "choice_text_es": "Elimina la fragmentación",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4134,
+  "fields": {
+   "question": 5034,
+   "choice_text": "Es obligatorio en Windows y no existe en Linux",
+   "choice_text_es": "Es obligatorio en Windows y no existe en Linux",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4135,
+  "fields": {
+   "question": 5034,
+   "choice_text": "Anota las operaciones antes de aplicarlas, para poder recuperar el estado tras un corte",
+   "choice_text_es": "Anota las operaciones antes de aplicarlas, para poder recuperar el estado tras un corte",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4136,
+  "fields": {
+   "question": 5034,
+   "choice_text": "Impide que se borren ficheros por error",
+   "choice_text_es": "Impide que se borren ficheros por error",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 5035,
+  "fields": {
+   "content": "Para intercambiar ficheros entre Windows y Linux con un pendrive, el sistema de archivos más práctico es:",
+   "content_es": "Para intercambiar ficheros entre Windows y Linux con un pendrive, el sistema de archivos más práctico es:",
+   "explanation": "Correcta: D - Es el común de los dos, con su límite de 4 GB por fichero. A - ISO 9660 es de medios ópticos de solo lectura. B - Windows no lee ext4 sin instalar algo. C - NTFS se lee en Linux, pero no es el cómodo para intercambio de un pendrive. Manual: cap. 3 §3. Visto en: Práctica 2, apartado 2.",
+   "explanation_es": "Correcta: D - Es el común de los dos, con su límite de 4 GB por fichero. A - ISO 9660 es de medios ópticos de solo lectura. B - Windows no lee ext4 sin instalar algo. C - NTFS se lee en Linux, pero no es el cómodo para intercambio de un pendrive. Manual: cap. 3 §3. Visto en: Práctica 2, apartado 2.",
+   "quiz": [
+    11
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 5035,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4137,
+  "fields": {
+   "question": 5035,
+   "choice_text": "ISO 9660, porque es el de los CD",
+   "choice_text_es": "ISO 9660, porque es el de los CD",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4138,
+  "fields": {
+   "question": 5035,
+   "choice_text": "ext4, porque es el de Linux",
+   "choice_text_es": "ext4, porque es el de Linux",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4139,
+  "fields": {
+   "question": 5035,
+   "choice_text": "NTFS, porque es el de Windows",
+   "choice_text_es": "NTFS, porque es el de Windows",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4140,
+  "fields": {
+   "question": 5035,
+   "choice_text": "FAT32, porque los dos sistemas lo leen y escriben sin instalar nada",
+   "choice_text_es": "FAT32, porque los dos sistemas lo leen y escriben sin instalar nada",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 5036,
+  "fields": {
+   "content": "En Windows, la herramienta gráfica para crear y formatear particiones es:",
+   "content_es": "En Windows, la herramienta gráfica para crear y formatear particiones es:",
+   "explanation": "Correcta: A - Es la consola de gestión de discos y volúmenes. B - DiskPart es la de comandos; la gráfica es la Administración de discos. C - Desde ahí se abren consolas, pero la de discos es otra. D - Ese lista dispositivos y controladores. Manual: cap. 3 §5. Visto en: Actividad 6 de la clase 02.",
+   "explanation_es": "Correcta: A - Es la consola de gestión de discos y volúmenes. B - DiskPart es la de comandos; la gráfica es la Administración de discos. C - Desde ahí se abren consolas, pero la de discos es otra. D - Ese lista dispositivos y controladores. Manual: cap. 3 §5. Visto en: Actividad 6 de la clase 02.",
+   "quiz": [
+    11
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 5036,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4141,
+  "fields": {
+   "question": 5036,
+   "choice_text": "La Administración de discos",
+   "choice_text_es": "La Administración de discos",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4142,
+  "fields": {
+   "question": 5036,
+   "choice_text": "DiskPart, porque es la de línea de comandos",
+   "choice_text_es": "DiskPart, porque es la de línea de comandos",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4143,
+  "fields": {
+   "question": 5036,
+   "choice_text": "El Administrador del servidor",
+   "choice_text_es": "El Administrador del servidor",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4144,
+  "fields": {
+   "question": 5036,
+   "choice_text": "El Administrador de dispositivos",
+   "choice_text_es": "El Administrador de dispositivos",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 5037,
+  "fields": {
+   "content": "En DiskPart, la orden que elimina toda la información de configuración del disco seleccionado es:",
+   "content_es": "En DiskPart, la orden que elimina toda la información de configuración del disco seleccionado es:",
+   "explanation": "Correcta: B - clean borra la configuración del disco seleccionado. A - delete elimina una partición o un volumen concreto. C - chkdsk comprueba y repara el sistema de archivos. D - convert pasa el disco de básico a dinámico o de MBR a GPT. Manual: cap. 3 §5. Visto en: Actividad 6 de la clase 02.",
+   "explanation_es": "Correcta: B - clean borra la configuración del disco seleccionado. A - delete elimina una partición o un volumen concreto. C - chkdsk comprueba y repara el sistema de archivos. D - convert pasa el disco de básico a dinámico o de MBR a GPT. Manual: cap. 3 §5. Visto en: Actividad 6 de la clase 02.",
+   "quiz": [
+    11
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 5037,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4145,
+  "fields": {
+   "question": 5037,
+   "choice_text": "delete",
+   "choice_text_es": "delete",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4146,
+  "fields": {
+   "question": 5037,
+   "choice_text": "clean",
+   "choice_text_es": "clean",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4147,
+  "fields": {
+   "question": 5037,
+   "choice_text": "chkdsk",
+   "choice_text_es": "chkdsk",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4148,
+  "fields": {
+   "question": 5037,
+   "choice_text": "convert",
+   "choice_text_es": "convert",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 5038,
+  "fields": {
+   "content": "En DiskPart, para crear tres particiones de 500 MB cada una, la orden es:",
+   "content_es": "En DiskPart, para crear tres particiones de 500 MB cada una, la orden es:",
+   "explanation": "Correcta: C - Cada ejecución crea una partición del tamaño indicado. A - assign da letra de unidad, no crea particiones. B - extend agranda una partición existente. D - Eso crea una partición de 1500 MB, no tres de 500. Manual: cap. 3 §5. Visto en: Actividad 6 de la clase 02.",
+   "explanation_es": "Correcta: C - Cada ejecución crea una partición del tamaño indicado. A - assign da letra de unidad, no crea particiones. B - extend agranda una partición existente. D - Eso crea una partición de 1500 MB, no tres de 500. Manual: cap. 3 §5. Visto en: Actividad 6 de la clase 02.",
+   "quiz": [
+    11
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 5038,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4149,
+  "fields": {
+   "question": 5038,
+   "choice_text": "assign size=500",
+   "choice_text_es": "assign size=500",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4150,
+  "fields": {
+   "question": 5038,
+   "choice_text": "extend size=500, tres veces",
+   "choice_text_es": "extend size=500, tres veces",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4151,
+  "fields": {
+   "question": 5038,
+   "choice_text": "create partition primary size=500, repetida tres veces",
+   "choice_text_es": "create partition primary size=500, repetida tres veces",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4152,
+  "fields": {
+   "question": 5038,
+   "choice_text": "create partition primary size=1500",
+   "choice_text_es": "create partition primary size=1500",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 5039,
+  "fields": {
+   "content": "En Linux, la orden que lista los discos y sus particiones con su tamaño y punto de montaje es:",
+   "content_es": "En Linux, la orden que lista los discos y sus particiones con su tamaño y punto de montaje es:",
+   "explanation": "Correcta: D - Es el listado de discos y particiones en árbol. A - lspci lista dispositivos del bus PCI. B - free es de memoria. C - df lista los sistemas de archivos montados, no los discos con sus particiones. Manual: cap. 3 §5. Visto en: Práctica 2, apartado 1.",
+   "explanation_es": "Correcta: D - Es el listado de discos y particiones en árbol. A - lspci lista dispositivos del bus PCI. B - free es de memoria. C - df lista los sistemas de archivos montados, no los discos con sus particiones. Manual: cap. 3 §5. Visto en: Práctica 2, apartado 1.",
+   "quiz": [
+    11
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 5039,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4153,
+  "fields": {
+   "question": 5039,
+   "choice_text": "lspci",
+   "choice_text_es": "lspci",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4154,
+  "fields": {
+   "question": 5039,
+   "choice_text": "free -h",
+   "choice_text_es": "free -h",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4155,
+  "fields": {
+   "question": 5039,
+   "choice_text": "df -h",
+   "choice_text_es": "df -h",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4156,
+  "fields": {
+   "question": 5039,
+   "choice_text": "lsblk",
+   "choice_text_es": "lsblk",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 5040,
+  "fields": {
+   "content": "En Linux, para que un disco se monte al arrancar, su entrada se escribe en:",
+   "content_es": "En Linux, para que un disco se monte al arrancar, su entrada se escribe en:",
+   "explanation": "Correcta: A - El fstab es la tabla de montajes del arranque. B - Ahí va el nombre de la máquina. C - /proc es información del kernel en vivo, no configuración. D - Ahí van las cuentas de usuario. Manual: cap. 3 §5. Visto en: Práctica 2, apartado 4.",
+   "explanation_es": "Correcta: A - El fstab es la tabla de montajes del arranque. B - Ahí va el nombre de la máquina. C - /proc es información del kernel en vivo, no configuración. D - Ahí van las cuentas de usuario. Manual: cap. 3 §5. Visto en: Práctica 2, apartado 4.",
+   "quiz": [
+    11
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 5040,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4157,
+  "fields": {
+   "question": 5040,
+   "choice_text": "/etc/fstab",
+   "choice_text_es": "/etc/fstab",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4158,
+  "fields": {
+   "question": 5040,
+   "choice_text": "/etc/hostname",
+   "choice_text_es": "/etc/hostname",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4159,
+  "fields": {
+   "question": 5040,
+   "choice_text": "/proc/partitions",
+   "choice_text_es": "/proc/partitions",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4160,
+  "fields": {
+   "question": 5040,
+   "choice_text": "/etc/passwd",
+   "choice_text_es": "/etc/passwd",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 5041,
+  "fields": {
+   "content": "Antes de montar un disco nuevo en Linux, hay que:",
+   "content_es": "Antes de montar un disco nuevo en Linux, hay que:",
+   "explanation": "Correcta: B - Sin sistema de archivos no hay nada que montar. A - El formato depende del uso: en Linux se usa ext4 u otro. C - La partición activa es un concepto de MBR para el arranque. D - clean es de DiskPart, de Windows. Manual: cap. 3 §4–§5. Visto en: Práctica 2, apartado 3.",
+   "explanation_es": "Correcta: B - Sin sistema de archivos no hay nada que montar. A - El formato depende del uso: en Linux se usa ext4 u otro. C - La partición activa es un concepto de MBR para el arranque. D - clean es de DiskPart, de Windows. Manual: cap. 3 §4–§5. Visto en: Práctica 2, apartado 3.",
+   "quiz": [
+    11
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 5041,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4161,
+  "fields": {
+   "question": 5041,
+   "choice_text": "Formatear el disco en NTFS, siempre",
+   "choice_text_es": "Formatear el disco en NTFS, siempre",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4162,
+  "fields": {
+   "question": 5041,
+   "choice_text": "Crearle un sistema de archivos con mkfs en la partición",
+   "choice_text_es": "Crearle un sistema de archivos con mkfs en la partición",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4163,
+  "fields": {
+   "question": 5041,
+   "choice_text": "Activar la partición como partición activa",
+   "choice_text_es": "Activar la partición como partición activa",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4164,
+  "fields": {
+   "question": 5041,
+   "choice_text": "Borrar la tabla de particiones con clean",
+   "choice_text_es": "Borrar la tabla de particiones con clean",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 5042,
+  "fields": {
+   "content": "Una copia de seguridad completa, una incremental y una diferencial se distinguen porque:",
+   "content_es": "Una copia de seguridad completa, una incremental y una diferencial se distinguen porque:",
+   "explanation": "Correcta: C - Es la definición de las tres. A - Copian distinto y restauran distinto. B - La diferencial copia los cambios desde la última completa. D - Es al revés. Manual: cap. 6 §2. Visto en: Práctica 6, apartado 1.",
+   "explanation_es": "Correcta: C - Es la definición de las tres. A - Copian distinto y restauran distinto. B - La diferencial copia los cambios desde la última completa. D - Es al revés. Manual: cap. 6 §2. Visto en: Práctica 6, apartado 1.",
+   "quiz": [
+    11
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 5042,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4165,
+  "fields": {
+   "question": 5042,
+   "choice_text": "Las tres copian lo mismo, cambia el formato",
+   "choice_text_es": "Las tres copian lo mismo, cambia el formato",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4166,
+  "fields": {
+   "question": 5042,
+   "choice_text": "La diferencial copia solo los ficheros borrados",
+   "choice_text_es": "La diferencial copia solo los ficheros borrados",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4167,
+  "fields": {
+   "question": 5042,
+   "choice_text": "La completa copia todo; la incremental, lo que cambió desde la última copia de cualquier tipo; la diferencial, desde la última completa",
+   "choice_text_es": "La completa copia todo; la incremental, lo que cambió desde la última copia de cualquier tipo; la diferencial, desde la última completa",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4168,
+  "fields": {
+   "question": 5042,
+   "choice_text": "La incremental copia todo y la completa solo los cambios",
+   "choice_text_es": "La incremental copia todo y la completa solo los cambios",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 5043,
+  "fields": {
+   "content": "Una copia no verificada no es una copia, porque:",
+   "content_es": "Una copia no verificada no es una copia, porque:",
+   "explanation": "Correcta: D - Por eso la práctica calcula el hash del original y del fichero dentro de la copia. A - Se puede programar igual; lo que falta es la prueba de que sirve. B - El hash funciona con cualquier fichero. C - La verificación no va de velocidad. Manual: cap. 6 §2. Visto en: Práctica 6, apartado 2.",
+   "explanation_es": "Correcta: D - Por eso la práctica calcula el hash del original y del fichero dentro de la copia. A - Se puede programar igual; lo que falta es la prueba de que sirve. B - El hash funciona con cualquier fichero. C - La verificación no va de velocidad. Manual: cap. 6 §2. Visto en: Práctica 6, apartado 2.",
+   "quiz": [
+    11
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 5043,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4169,
+  "fields": {
+   "question": 5043,
+   "choice_text": "La copia no se puede programar sin verificar",
+   "choice_text_es": "La copia no se puede programar sin verificar",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4170,
+  "fields": {
+   "question": 5043,
+   "choice_text": "El hash solo funciona con ficheros comprimidos",
+   "choice_text_es": "El hash solo funciona con ficheros comprimidos",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4171,
+  "fields": {
+   "question": 5043,
+   "choice_text": "Los ficheros copian más lentos",
+   "choice_text_es": "Los ficheros copian más lentos",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4172,
+  "fields": {
+   "question": 5043,
+   "choice_text": "Puede estar corrupta o incompleta y no se descubre hasta la restauración",
+   "choice_text_es": "Puede estar corrupta o incompleta y no se descubre hasta la restauración",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 5044,
+  "fields": {
+   "content": "La orden que sincroniza solo los cambios entre dos carpetas en Linux es:",
+   "content_es": "La orden que sincroniza solo los cambios entre dos carpetas en Linux es:",
+   "explanation": "Correcta: A - rsync compara y transfiere solo lo que ha cambiado. B - tar crea un archivo completo cada vez. C - Eso calcula un hash, no copia. D - cp copia todo de nuevo. Manual: cap. 6 §2. Visto en: Práctica 6, apartado 3.",
+   "explanation_es": "Correcta: A - rsync compara y transfiere solo lo que ha cambiado. B - tar crea un archivo completo cada vez. C - Eso calcula un hash, no copia. D - cp copia todo de nuevo. Manual: cap. 6 §2. Visto en: Práctica 6, apartado 3.",
+   "quiz": [
+    11
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 5044,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4173,
+  "fields": {
+   "question": 5044,
+   "choice_text": "rsync -av origen/ destino/",
+   "choice_text_es": "rsync -av origen/ destino/",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4174,
+  "fields": {
+   "question": 5044,
+   "choice_text": "tar -czf copia.tar.gz carpeta",
+   "choice_text_es": "tar -czf copia.tar.gz carpeta",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4175,
+  "fields": {
+   "question": 5044,
+   "choice_text": "sha256sum fichero",
+   "choice_text_es": "sha256sum fichero",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4176,
+  "fields": {
+   "question": 5044,
+   "choice_text": "cp -r origen destino",
+   "choice_text_es": "cp -r origen destino",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 5045,
+  "fields": {
+   "content": "En Windows, la orden que muestra qué copiaría sin ejecutar nada es:",
+   "content_es": "En Windows, la orden que muestra qué copiaría sin ejecutar nada es:",
+   "explanation": "Correcta: B - El /L es el modo de listado: lista y no copia. A - Copy-Item copia de verdad. C - Eso comprime, no lista. D - Eso calcula el hash de un fichero. Manual: cap. 6 §2. Visto en: Práctica 6, apartado 3.",
+   "explanation_es": "Correcta: B - El /L es el modo de listado: lista y no copia. A - Copy-Item copia de verdad. C - Eso comprime, no lista. D - Eso calcula el hash de un fichero. Manual: cap. 6 §2. Visto en: Práctica 6, apartado 3.",
+   "quiz": [
+    11
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 5045,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4177,
+  "fields": {
+   "question": 5045,
+   "choice_text": "Copy-Item origen destino",
+   "choice_text_es": "Copy-Item origen destino",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4178,
+  "fields": {
+   "question": 5045,
+   "choice_text": "robocopy origen destino /E /L",
+   "choice_text_es": "robocopy origen destino /E /L",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4179,
+  "fields": {
+   "question": 5045,
+   "choice_text": "Compress-Archive origen destino",
+   "choice_text_es": "Compress-Archive origen destino",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4180,
+  "fields": {
+   "question": 5045,
+   "choice_text": "Get-FileHash fichero",
+   "choice_text_es": "Get-FileHash fichero",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 5046,
+  "fields": {
+   "content": "Una copia que se guarda en el mismo disco que los datos:",
+   "content_es": "Una copia que se guarda en el mismo disco que los datos:",
+   "explanation": "Correcta: C - Si el disco muere, muere la copia con él. A - Guardar en el mismo disco no cambia el formato. B - La normativa pide lo contrario: copia en otro lugar. D - Estar a mano no la salva del fallo del disco. Manual: cap. 6 §2. Visto en: Práctica 6, apartado 6.",
+   "explanation_es": "Correcta: C - Si el disco muere, muere la copia con él. A - Guardar en el mismo disco no cambia el formato. B - La normativa pide lo contrario: copia en otro lugar. D - Estar a mano no la salva del fallo del disco. Manual: cap. 6 §2. Visto en: Práctica 6, apartado 6.",
+   "quiz": [
+    11
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 5046,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4181,
+  "fields": {
+   "question": 5046,
+   "choice_text": "Se comprime sola",
+   "choice_text_es": "Se comprime sola",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4182,
+  "fields": {
+   "question": 5046,
+   "choice_text": "Es obligatoria por la normativa de protección de datos",
+   "choice_text_es": "Es obligatoria por la normativa de protección de datos",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4183,
+  "fields": {
+   "question": 5046,
+   "choice_text": "No sirve como copia de seguridad, porque cae con el disco",
+   "choice_text_es": "No sirve como copia de seguridad, porque cae con el disco",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4184,
+  "fields": {
+   "question": 5046,
+   "choice_text": "Es la más segura, porque está a mano",
+   "choice_text_es": "Es la más segura, porque está a mano",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 5047,
+  "fields": {
+   "content": "La restauración de una copia se prueba porque:",
+   "content_es": "La restauración de una copia se prueba porque:",
+   "explanation": "Correcta: D - Es el principio que rige la práctica 6. A - Restaurar no borra la copia. B - Ningún programa lo exige. C - El hash se calcula antes y después; la prueba es comparar. Manual: cap. 6 §2. Visto en: Práctica 6, apartado 5.",
+   "explanation_es": "Correcta: D - Es el principio que rige la práctica 6. A - Restaurar no borra la copia. B - Ningún programa lo exige. C - El hash se calcula antes y después; la prueba es comparar. Manual: cap. 6 §2. Visto en: Práctica 6, apartado 5.",
+   "quiz": [
+    11
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 5047,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4185,
+  "fields": {
+   "question": 5047,
+   "choice_text": "Restaurar borra la copia original",
+   "choice_text_es": "Restaurar borra la copia original",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4186,
+  "fields": {
+   "question": 5047,
+   "choice_text": "El programa de copias exige restaurar una vez",
+   "choice_text_es": "El programa de copias exige restaurar una vez",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4187,
+  "fields": {
+   "question": 5047,
+   "choice_text": "El hash solo se puede calcular al restaurar",
+   "choice_text_es": "El hash solo se puede calcular al restaurar",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4188,
+  "fields": {
+   "question": 5047,
+   "choice_text": "Una copia que no se ha restaurado nunca es una hipótesis",
+   "choice_text_es": "Una copia que no se ha restaurado nunca es una hipótesis",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 5048,
+  "fields": {
+   "content": "El nivel de registro de un sistema define:",
+   "content_es": "El nivel de registro de un sistema define:",
+   "explanation": "Correcta: A - Del nivel depende el volumen y la utilidad del registro. B - Eso es la retención, otro apartado. C - El disco es el almacenamiento del registro, no su nivel. D - Firmar es una salvaguarda, no un nivel. Manual: cap. 6 §2. Visto en: Práctica 4, apartado 3.",
+   "explanation_es": "Correcta: A - Del nivel depende el volumen y la utilidad del registro. B - Eso es la retención, otro apartado. C - El disco es el almacenamiento del registro, no su nivel. D - Firmar es una salvaguarda, no un nivel. Manual: cap. 6 §2. Visto en: Práctica 4, apartado 3.",
+   "quiz": [
+    11
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 5048,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4189,
+  "fields": {
+   "question": 5048,
+   "choice_text": "Qué se escribe y qué no: cuánto detalle deja el sistema en sus registros",
+   "choice_text_es": "Qué se escribe y qué no: cuánto detalle deja el sistema en sus registros",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4190,
+  "fields": {
+   "question": 5048,
+   "choice_text": "Cuántos años hay que conservar los ficheros",
+   "choice_text_es": "Cuántos años hay que conservar los ficheros",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4191,
+  "fields": {
+   "question": 5048,
+   "choice_text": "El tipo de disco donde se guardan",
+   "choice_text_es": "El tipo de disco donde se guardan",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4192,
+  "fields": {
+   "question": 5048,
+   "choice_text": "Quién firma los registros",
+   "choice_text_es": "Quién firma los registros",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 5049,
+  "fields": {
+   "content": "La retención de los registros del tráfico de comunicaciones que fija la ley española es:",
+   "content_es": "La retención de los registros del tráfico de comunicaciones que fija la ley española es:",
+   "explanation": "Correcta: B - La LSSI fija doce meses para los datos de tráfico. A - El plazo es más largo. C - Hay plazo legal y además cada empresa define el suyo según su caso. D - Tres años es el plazo de los datos de carácter personal que cita el manual, no el de tráfico. Manual: cap. 6 §3. Visto en: Práctica 4, apartado 3.",
+   "explanation_es": "Correcta: B - La LSSI fija doce meses para los datos de tráfico. A - El plazo es más largo. C - Hay plazo legal y además cada empresa define el suyo según su caso. D - Tres años es el plazo de los datos de carácter personal que cita el manual, no el de tráfico. Manual: cap. 6 §3. Visto en: Práctica 4, apartado 3.",
+   "quiz": [
+    11
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 5049,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4193,
+  "fields": {
+   "question": 5049,
+   "choice_text": "Tres meses",
+   "choice_text_es": "Tres meses",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4194,
+  "fields": {
+   "question": 5049,
+   "choice_text": "Doce meses",
+   "choice_text_es": "Doce meses",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4195,
+  "fields": {
+   "question": 5049,
+   "choice_text": "No hay plazo legal",
+   "choice_text_es": "No hay plazo legal",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4196,
+  "fields": {
+   "question": 5049,
+   "choice_text": "Tres años",
+   "choice_text_es": "Tres años",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 5050,
+  "fields": {
+   "content": "Antes de fijar cuánto espacio de registro se necesita, el dato que hay que medir es:",
+   "content_es": "Antes de fijar cuánto espacio de registro se necesita, el dato que hay que medir es:",
+   "explanation": "Correcta: C - La capacidad sale del ritmo diario y del periodo de retención. A - No entra en el cálculo. B - Las copias son otro sistema, no el registro. D - El número de usuarios no dice cuánto crece el registro. Manual: cap. 6 §2. Visto en: Práctica 4, apartado 3.",
+   "explanation_es": "Correcta: C - La capacidad sale del ritmo diario y del periodo de retención. A - No entra en el cálculo. B - Las copias son otro sistema, no el registro. D - El número de usuarios no dice cuánto crece el registro. Manual: cap. 6 §2. Visto en: Práctica 4, apartado 3.",
+   "quiz": [
+    11
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 5050,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4197,
+  "fields": {
+   "question": 5050,
+   "choice_text": "El número de serie del servidor",
+   "choice_text_es": "El número de serie del servidor",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4198,
+  "fields": {
+   "question": 5050,
+   "choice_text": "Cuántas copias de seguridad se hacen",
+   "choice_text_es": "Cuántas copias de seguridad se hacen",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4199,
+  "fields": {
+   "question": 5050,
+   "choice_text": "Cuánto crece el registro en un día normal",
+   "choice_text_es": "Cuánto crece el registro en un día normal",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4200,
+  "fields": {
+   "question": 5050,
+   "choice_text": "Cuántos usuarios hay en la empresa",
+   "choice_text_es": "Cuántos usuarios hay en la empresa",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 5051,
+  "fields": {
+   "content": "Una salvaguarda de integridad de los registros es:",
+   "content_es": "Una salvaguarda de integridad de los registros es:",
+   "explanation": "Correcta: D - El hash es la prueba de integridad de la ficha del módulo. A - Eso es capacidad, no integridad. B - Eso es otra medida, no específica del registro. C - La compresión cambia el tamaño, no la integridad. Manual: cap. 6 §4. Visto en: Práctica 4, apartado 3.",
+   "explanation_es": "Correcta: D - El hash es la prueba de integridad de la ficha del módulo. A - Eso es capacidad, no integridad. B - Eso es otra medida, no específica del registro. C - La compresión cambia el tamaño, no la integridad. Manual: cap. 6 §4. Visto en: Práctica 4, apartado 3.",
+   "quiz": [
+    11
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 5051,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4201,
+  "fields": {
+   "question": 5051,
+   "choice_text": "Ampliar el disco de registros",
+   "choice_text_es": "Ampliar el disco de registros",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4202,
+  "fields": {
+   "question": 5051,
+   "choice_text": "Cambiar la contraseña del administrador",
+   "choice_text_es": "Cambiar la contraseña del administrador",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4203,
+  "fields": {
+   "question": 5051,
+   "choice_text": "Comprimir los registros para que ocupen menos",
+   "choice_text_es": "Comprimir los registros para que ocupen menos",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4204,
+  "fields": {
+   "question": 5051,
+   "choice_text": "Guardar su hash junto al fichero, para demostrar que no se ha tocado",
+   "choice_text_es": "Guardar su hash junto al fichero, para demostrar que no se ha tocado",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 5052,
+  "fields": {
+   "content": "El responsable de mirar y custodiar los registros de un servicio debe:",
+   "content_es": "El responsable de mirar y custodiar los registros de un servicio debe:",
+   "explanation": "Correcta: A - Es lo que pide el apartado de responsabilidades del manual. B - Puede serlo, pero lo que importa es la designación, no el cargo. C - La revisión es periódica, no solo ante incidentes. D - La ley no exige que sea externa. Manual: cap. 6 §5. Visto en: Práctica 4, apartado 5.",
+   "explanation_es": "Correcta: A - Es lo que pide el apartado de responsabilidades del manual. B - Puede serlo, pero lo que importa es la designación, no el cargo. C - La revisión es periódica, no solo ante incidentes. D - La ley no exige que sea externa. Manual: cap. 6 §5. Visto en: Práctica 4, apartado 5.",
+   "quiz": [
+    11
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 5052,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4205,
+  "fields": {
+   "question": 5052,
+   "choice_text": "Estar designado por nombre, con qué revisa y cada cuánto",
+   "choice_text_es": "Estar designado por nombre, con qué revisa y cada cuánto",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4206,
+  "fields": {
+   "question": 5052,
+   "choice_text": "Ser siempre el administrador del sistema",
+   "choice_text_es": "Ser siempre el administrador del sistema",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4207,
+  "fields": {
+   "question": 5052,
+   "choice_text": "Revisar los registros solo cuando hay un incidente",
+   "choice_text_es": "Revisar los registros solo cuando hay un incidente",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4208,
+  "fields": {
+   "question": 5052,
+   "choice_text": "Ser una empresa externa, por ley",
+   "choice_text_es": "Ser una empresa externa, por ley",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 5053,
+  "fields": {
+   "content": "Una alarma se define también para los registros del sistema; su condición más habitual es:",
+   "content_es": "Una alarma se define también para los registros del sistema; su condición más habitual es:",
+   "explanation": "Correcta: B - Es lo que hacen Monit, los SIEM y el grep programado. A - El formato no dispara alarmas. C - Puede ser una alarma de copias, pero no es la condición habitual del registro. D - Fuera del registro. Manual: cap. 5 §8. Visto en: Práctica 4, apartado 6.",
+   "explanation_es": "Correcta: B - Es lo que hacen Monit, los SIEM y el grep programado. A - El formato no dispara alarmas. C - Puede ser una alarma de copias, pero no es la condición habitual del registro. D - Fuera del registro. Manual: cap. 5 §8. Visto en: Práctica 4, apartado 6.",
+   "quiz": [
+    11
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 5053,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4209,
+  "fields": {
+   "question": 5053,
+   "choice_text": "Que el disco del registro esté formateado en ext4",
+   "choice_text_es": "Que el disco del registro esté formateado en ext4",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4210,
+  "fields": {
+   "question": 5053,
+   "choice_text": "Que aparezca una entrada con el patrón que se vigila, como fallos de acceso",
+   "choice_text_es": "Que aparezca una entrada con el patrón que se vigila, como fallos de acceso",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4211,
+  "fields": {
+   "question": 5053,
+   "choice_text": "Que la copia de seguridad haya tardado más de un minuto",
+   "choice_text_es": "Que la copia de seguridad haya tardado más de un minuto",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4212,
+  "fields": {
+   "question": 5053,
+   "choice_text": "Que el usuario haya borrado su correo",
+   "choice_text_es": "Que el usuario haya borrado su correo",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 5054,
+  "fields": {
+   "content": "Un SIEM se diferencia de un sistema de copias porque:",
+   "content_es": "Un SIEM se diferencia de un sistema de copias porque:",
+   "explanation": "Correcta: C - El SIEM trabaja sobre eventos; las copias, sobre ficheros. A - El precio no define la categoría. B - Hay SIEM en los dos sistemas. D - La retención la fija la política, no el tipo de sistema. Manual: cap. 5 §8. Visto en: Práctica 4, apartado 4.",
+   "explanation_es": "Correcta: C - El SIEM trabaja sobre eventos; las copias, sobre ficheros. A - El precio no define la categoría. B - Hay SIEM en los dos sistemas. D - La retención la fija la política, no el tipo de sistema. Manual: cap. 5 §8. Visto en: Práctica 4, apartado 4.",
+   "quiz": [
+    11
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 5054,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4213,
+  "fields": {
+   "question": 5054,
+   "choice_text": "Es más barato que una copia",
+   "choice_text_es": "Es más barato que una copia",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4214,
+  "fields": {
+   "question": 5054,
+   "choice_text": "Solo funciona en Windows",
+   "choice_text_es": "Solo funciona en Windows",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4215,
+  "fields": {
+   "question": 5054,
+   "choice_text": "Correlaciona eventos de varias fuentes y genera alertas",
+   "choice_text_es": "Correlaciona eventos de varias fuentes y genera alertas",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4216,
+  "fields": {
+   "question": 5054,
+   "choice_text": "Guarda los registros durante doce meses",
+   "choice_text_es": "Guarda los registros durante doce meses",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 5055,
+  "fields": {
+   "content": "En el Visor de eventos de Windows, el registro donde se auditan los inicios de sesión es:",
+   "content_es": "En el Visor de eventos de Windows, el registro donde se auditan los inicios de sesión es:",
+   "explanation": "Correcta: D - Ahí van los eventos de auditoría, si la directiva está activa. A - No es un registro de auditoría de accesos. B - Aplicación es de los programas. C - Sistema es de los servicios y del arranque. Manual: cap. 6 §2. Visto en: Práctica 4, apartado 3.",
+   "explanation_es": "Correcta: D - Ahí van los eventos de auditoría, si la directiva está activa. A - No es un registro de auditoría de accesos. B - Aplicación es de los programas. C - Sistema es de los servicios y del arranque. Manual: cap. 6 §2. Visto en: Práctica 4, apartado 3.",
+   "quiz": [
+    11
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 5055,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4217,
+  "fields": {
+   "question": 5055,
+   "choice_text": "Configuración",
+   "choice_text_es": "Configuración",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4218,
+  "fields": {
+   "question": 5055,
+   "choice_text": "Aplicación",
+   "choice_text_es": "Aplicación",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4219,
+  "fields": {
+   "question": 5055,
+   "choice_text": "Sistema",
+   "choice_text_es": "Sistema",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4220,
+  "fields": {
+   "question": 5055,
+   "choice_text": "Seguridad",
+   "choice_text_es": "Seguridad",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 5056,
+  "fields": {
+   "content": "En Linux, el fichero donde el demonio SSH anota los intentos fallidos de acceso es:",
+   "content_es": "En Linux, el fichero donde el demonio SSH anota los intentos fallidos de acceso es:",
+   "explanation": "Correcta: A - Es el registro de autenticación de la distribución. B - Ahí están las cuentas, no los intentos. C - Ahí van las órdenes del usuario, no los fallos de acceso. D - Puede acabar ahí en algunos sistemas, pero el específico de autenticación es auth.log. Manual: cap. 6 §2. Visto en: Práctica 4, apartado 3.",
+   "explanation_es": "Correcta: A - Es el registro de autenticación de la distribución. B - Ahí están las cuentas, no los intentos. C - Ahí van las órdenes del usuario, no los fallos de acceso. D - Puede acabar ahí en algunos sistemas, pero el específico de autenticación es auth.log. Manual: cap. 6 §2. Visto en: Práctica 4, apartado 3.",
+   "quiz": [
+    11
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 5056,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4221,
+  "fields": {
+   "question": 5056,
+   "choice_text": "/var/log/auth.log",
+   "choice_text_es": "/var/log/auth.log",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4222,
+  "fields": {
+   "question": 5056,
+   "choice_text": "/etc/passwd",
+   "choice_text_es": "/etc/passwd",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4223,
+  "fields": {
+   "question": 5056,
+   "choice_text": "~/.bash history",
+   "choice_text_es": "~/.bash history",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4224,
+  "fields": {
+   "question": 5056,
+   "choice_text": "/var/log/syslog siempre, sea SSH o no",
+   "choice_text_es": "/var/log/syslog siempre, sea SSH o no",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 5057,
+  "fields": {
+   "content": "Los registros del sistema no se borran ni se alteran durante una investigación porque:",
+   "content_es": "Los registros del sistema no se borran ni se alteran durante una investigación porque:",
+   "explanation": "Correcta: B - La práctica 4 lo dice en su punto 3. A - Si se borran, se pierden; el sistema no los recrea con el pasado. C - El procedimiento no depende del correo. D - El tamaño no es el motivo. Manual: cap. 6 §2. Visto en: Práctica 4, apartado 3.",
+   "explanation_es": "Correcta: B - La práctica 4 lo dice en su punto 3. A - Si se borran, se pierden; el sistema no los recrea con el pasado. C - El procedimiento no depende del correo. D - El tamaño no es el motivo. Manual: cap. 6 §2. Visto en: Práctica 4, apartado 3.",
+   "quiz": [
+    11
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 5057,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4225,
+  "fields": {
+   "question": 5057,
+   "choice_text": "El sistema los volvería a crear, y quedaría un duplicado",
+   "choice_text_es": "El sistema los volvería a crear, y quedaría un duplicado",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4226,
+  "fields": {
+   "question": 5057,
+   "choice_text": "Son la evidencia, y alterarlos destruye la prueba",
+   "choice_text_es": "Son la evidencia, y alterarlos destruye la prueba",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4227,
+  "fields": {
+   "question": 5057,
+   "choice_text": "El usuario tiene que pedir el borrado por correo",
+   "choice_text_es": "El usuario tiene que pedir el borrado por correo",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4228,
+  "fields": {
+   "question": 5057,
+   "choice_text": "Ocupan demasiado",
+   "choice_text_es": "Ocupan demasiado",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 5058,
+  "fields": {
+   "content": "Al elegir el sistema de almacenamiento de los registros, el criterio que se valora junto a rendimiento y capacidad es:",
+   "content_es": "Al elegir el sistema de almacenamiento de los registros, el criterio que se valora junto a rendimiento y capacidad es:",
+   "explanation": "Correcta: C - Son las características que el manual lista para las alternativas de almacenamiento. A - Puede estar, pero no es un criterio: lo es la protección del registro. B - La marca no decide el diseño. D - No es un criterio técnico. Manual: cap. 6 §6. Visto en: Práctica 4, apartado 4.",
+   "explanation_es": "Correcta: C - Son las características que el manual lista para las alternativas de almacenamiento. A - Puede estar, pero no es un criterio: lo es la protección del registro. B - La marca no decide el diseño. D - No es un criterio técnico. Manual: cap. 6 §6. Visto en: Práctica 4, apartado 4.",
+   "quiz": [
+    11
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 5058,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4229,
+  "fields": {
+   "question": 5058,
+   "choice_text": "Que el registro esté en la misma máquina que el servicio",
+   "choice_text_es": "Que el registro esté en la misma máquina que el servicio",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4230,
+  "fields": {
+   "question": 5058,
+   "choice_text": "La marca del servidor",
+   "choice_text_es": "La marca del servidor",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4231,
+  "fields": {
+   "question": 5058,
+   "choice_text": "Confidencialidad, integridad y disponibilidad",
+   "choice_text_es": "Confidencialidad, integridad y disponibilidad",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4232,
+  "fields": {
+   "question": 5058,
+   "choice_text": "El color del disco en la consola de gestión",
+   "choice_text_es": "El color del disco en la consola de gestión",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 5059,
+  "fields": {
+   "content": "La orden que comprueba el estado de un sistema de archivos con errores en Linux es:",
+   "content_es": "La orden que comprueba el estado de un sistema de archivos con errores en Linux es:",
+   "explanation": "Correcta: D - Es el comprobador y reparador del sistema de archivos. A - Lista discos y particiones. B - mount monta, no comprueba. C - chkdsk es la orden de Windows. Manual: cap. 3 §5. Visto en: Práctica 2, apartado 5.",
+   "explanation_es": "Correcta: D - Es el comprobador y reparador del sistema de archivos. A - Lista discos y particiones. B - mount monta, no comprueba. C - chkdsk es la orden de Windows. Manual: cap. 3 §5. Visto en: Práctica 2, apartado 5.",
+   "quiz": [
+    11
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 5059,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4233,
+  "fields": {
+   "question": 5059,
+   "choice_text": "lsblk",
+   "choice_text_es": "lsblk",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4234,
+  "fields": {
+   "question": 5059,
+   "choice_text": "mount",
+   "choice_text_es": "mount",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4235,
+  "fields": {
+   "question": 5059,
+   "choice_text": "chkdsk",
+   "choice_text_es": "chkdsk",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4236,
+  "fields": {
+   "question": 5059,
+   "choice_text": "fsck",
+   "choice_text_es": "fsck",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 5060,
+  "fields": {
+   "content": "El registro del journal de Linux se consulta sin filtrar con:",
+   "content_es": "El registro del journal de Linux se consulta sin filtrar con:",
+   "explanation": "Correcta: A - Es la consulta del diario de systemd. B - Eso ya filtra por una unidad; sin filtro se ve todo. C - last muestra los accesos al sistema. D - dmesg es el búfer del kernel, no el diario completo. Manual: cap. 6 §2. Visto en: Práctica 4, apartado 3.",
+   "explanation_es": "Correcta: A - Es la consulta del diario de systemd. B - Eso ya filtra por una unidad; sin filtro se ve todo. C - last muestra los accesos al sistema. D - dmesg es el búfer del kernel, no el diario completo. Manual: cap. 6 §2. Visto en: Práctica 4, apartado 3.",
+   "quiz": [
+    11
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 5060,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4237,
+  "fields": {
+   "question": 5060,
+   "choice_text": "journalctl",
+   "choice_text_es": "journalctl",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4238,
+  "fields": {
+   "question": 5060,
+   "choice_text": "journalctl -u ssh",
+   "choice_text_es": "journalctl -u ssh",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4239,
+  "fields": {
+   "question": 5060,
+   "choice_text": "last",
+   "choice_text_es": "last",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4240,
+  "fields": {
+   "question": 5060,
+   "choice_text": "dmesg",
+   "choice_text_es": "dmesg",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.quiz",
+  "pk": 11,
+  "fields": {
+   "course": 24,
+   "title": "Repaso UA2 - Almacenamiento y registros",
+   "title_es": "Repaso UA2 - Almacenamiento y registros",
+   "slug": "repaso-ua2-mf0490-3",
+   "description": "Repaso de la UA2: dispositivos y sistemas de archivos, particiones, copias de seguridad y sistema de registro. 30 preguntas de opción múltiple. Se corrigen solas y, al responder, sale la respuesta correcta con el motivo de cada opción descartada. Se puede repetir tantas veces como quieras.",
+   "description_es": "Repaso de la UA2: dispositivos y sistemas de archivos, particiones, copias de seguridad y sistema de registro. 30 preguntas de opción múltiple. Se corrigen solas y, al responder, sale la respuesta correcta con el motivo de cada opción descartada. Se puede repetir tantas veces como quieras.",
+   "category": "practice",
+   "draft": false,
+   "single_attempt": false,
+   "pass_mark": 0,
+   "timestamp": "2026-11-13T00:00:00Z",
+   "random_order": true,
+   "answers_at_end": false,
+   "exam_paper": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 5061,
+  "fields": {
+   "content": "En Linux, los permisos 2770 sobre una carpeta significan:",
+   "content_es": "En Linux, los permisos 2770 sobre una carpeta significan:",
+   "explanation": "Correcta: B - El 2 delante es el bit de grupo heredado, para que los ficheros nuevos sigan en el grupo. A - Los dígitos no se leen así. C - El segundo 7 es del grupo. D - El 7 del propietario es lectura, escritura y ejecución. Manual: cap. 5 §3. Visto en: Práctica 3, apartado 3.",
+   "explanation_es": "Correcta: B - El 2 delante es el bit de grupo heredado, para que los ficheros nuevos sigan en el grupo. A - Los dígitos no se leen así. C - El segundo 7 es del grupo. D - El 7 del propietario es lectura, escritura y ejecución. Manual: cap. 5 §3. Visto en: Práctica 3, apartado 3.",
+   "quiz": [
+    12
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 5061,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4241,
+  "fields": {
+   "question": 5061,
+   "choice_text": "Control total para todos y lectura para nadie",
+   "choice_text_es": "Control total para todos y lectura para nadie",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4242,
+  "fields": {
+   "question": 5061,
+   "choice_text": "Lectura, escritura y ejecución para el propietario y el grupo, con el bit de grupo en la carpeta",
+   "choice_text_es": "Lectura, escritura y ejecución para el propietario y el grupo, con el bit de grupo en la carpeta",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4243,
+  "fields": {
+   "question": 5061,
+   "choice_text": "Sin permisos para el grupo",
+   "choice_text_es": "Sin permisos para el grupo",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4244,
+  "fields": {
+   "question": 5061,
+   "choice_text": "Solo lectura para el propietario y escritura para el resto",
+   "choice_text_es": "Solo lectura para el propietario y escritura para el resto",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 5062,
+  "fields": {
+   "content": "La orden que asigna la carpeta al grupo mf0490-ops en Linux es:",
+   "content_es": "La orden que asigna la carpeta al grupo mf0490-ops en Linux es:",
+   "explanation": "Correcta: C - Cambia el propietario y el grupo con chown. A - Eso crea el grupo. B - Eso añade a un usuario al grupo, no cambia el grupo de la carpeta. D - chmod cambia permisos, no grupo. Manual: cap. 5 §3. Visto en: Práctica 3, apartado 3.",
+   "explanation_es": "Correcta: C - Cambia el propietario y el grupo con chown. A - Eso crea el grupo. B - Eso añade a un usuario al grupo, no cambia el grupo de la carpeta. D - chmod cambia permisos, no grupo. Manual: cap. 5 §3. Visto en: Práctica 3, apartado 3.",
+   "quiz": [
+    12
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 5062,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4245,
+  "fields": {
+   "question": 5062,
+   "choice_text": "groupadd mf0490-ops",
+   "choice_text_es": "groupadd mf0490-ops",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4246,
+  "fields": {
+   "question": 5062,
+   "choice_text": "usermod -aG mf0490-ops op01",
+   "choice_text_es": "usermod -aG mf0490-ops op01",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4247,
+  "fields": {
+   "question": 5062,
+   "choice_text": "chown root:mf0490-ops /srv/practica/Operaciones",
+   "choice_text_es": "chown root:mf0490-ops /srv/practica/Operaciones",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4248,
+  "fields": {
+   "question": 5062,
+   "choice_text": "chmod 2770 /srv/practica/Operaciones",
+   "choice_text_es": "chmod 2770 /srv/practica/Operaciones",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 5063,
+  "fields": {
+   "content": "En Windows, el acceso efectivo a una carpeta compartida resulta de combinar:",
+   "content_es": "En Windows, el acceso efectivo a una carpeta compartida resulta de combinar:",
+   "explanation": "Correcta: D - Los dos se aplican y el acceso efectivo es la intersección. A - No se suman: se combina lo más restrictivo. B - NTFS siempre aplica. C - Los dos cuentan. Manual: cap. 5 §2. Visto en: Práctica 3, apartado 2.",
+   "explanation_es": "Correcta: D - Los dos se aplican y el acceso efectivo es la intersección. A - No se suman: se combina lo más restrictivo. B - NTFS siempre aplica. C - Los dos cuentan. Manual: cap. 5 §2. Visto en: Práctica 3, apartado 2.",
+   "quiz": [
+    12
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 5063,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4249,
+  "fields": {
+   "question": 5063,
+   "choice_text": "La suma de los permisos de los dos lados",
+   "choice_text_es": "La suma de los permisos de los dos lados",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4250,
+  "fields": {
+   "question": 5063,
+   "choice_text": "Solo los permisos del recurso compartido, por ser externos",
+   "choice_text_es": "Solo los permisos del recurso compartido, por ser externos",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4251,
+  "fields": {
+   "question": 5063,
+   "choice_text": "Solo los permisos NTFS, porque el compartido se ignora",
+   "choice_text_es": "Solo los permisos NTFS, porque el compartido se ignora",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4252,
+  "fields": {
+   "question": 5063,
+   "choice_text": "Los permisos del recurso compartido y los permisos NTFS, y queda lo más restrictivo",
+   "choice_text_es": "Los permisos del recurso compartido y los permisos NTFS, y queda lo más restrictivo",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 5064,
+  "fields": {
+   "content": "En Active Directory, la unidad organizativa sirve para:",
+   "content_es": "En Active Directory, la unidad organizativa sirve para:",
+   "explanation": "Correcta: A - Es el contenedor con propósito administrativo del directorio. B - Las contraseñas van en los atributos de la cuenta, no en la OU. C - Son servicios distintos. D - Eso lo hace DHCP. Manual: cap. 5 §3. Visto en: Práctica 3, apartado 2.",
+   "explanation_es": "Correcta: A - Es el contenedor con propósito administrativo del directorio. B - Las contraseñas van en los atributos de la cuenta, no en la OU. C - Son servicios distintos. D - Eso lo hace DHCP. Manual: cap. 5 §3. Visto en: Práctica 3, apartado 2.",
+   "quiz": [
+    12
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 5064,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4253,
+  "fields": {
+   "question": 5064,
+   "choice_text": "Organizar objetos por departamentos y poder aplicar directivas y delegar su administración",
+   "choice_text_es": "Organizar objetos por departamentos y poder aplicar directivas y delegar su administración",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4254,
+  "fields": {
+   "question": 5064,
+   "choice_text": "Guardar las contraseñas de los usuarios",
+   "choice_text_es": "Guardar las contraseñas de los usuarios",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4255,
+  "fields": {
+   "question": 5064,
+   "choice_text": "Sustituir al servidor DNS",
+   "choice_text_es": "Sustituir al servidor DNS",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4256,
+  "fields": {
+   "question": 5064,
+   "choice_text": "Repartir direcciones IP",
+   "choice_text_es": "Repartir direcciones IP",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 5065,
+  "fields": {
+   "content": "En Active Directory, el controlador de dominio es el servidor que:",
+   "content_es": "En Active Directory, el controlador de dominio es el servidor que:",
+   "explanation": "Correcta: B - Cada dominio necesita al menos uno. A - Compartir carpetas lo hace un servidor de archivos, con o sin dominio. C - Eso es el servidor web. D - Eso es DHCP. Manual: cap. 5 §3. Visto en: Práctica 3, apartado 2.",
+   "explanation_es": "Correcta: B - Cada dominio necesita al menos uno. A - Compartir carpetas lo hace un servidor de archivos, con o sin dominio. C - Eso es el servidor web. D - Eso es DHCP. Manual: cap. 5 §3. Visto en: Práctica 3, apartado 2.",
+   "quiz": [
+    12
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 5065,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4257,
+  "fields": {
+   "question": 5065,
+   "choice_text": "Solo comparte carpetas",
+   "choice_text_es": "Solo comparte carpetas",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4258,
+  "fields": {
+   "question": 5065,
+   "choice_text": "Almacena los datos del directorio y gestiona la autenticación del dominio",
+   "choice_text_es": "Almacena los datos del directorio y gestiona la autenticación del dominio",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4259,
+  "fields": {
+   "question": 5065,
+   "choice_text": "Sirve las páginas web",
+   "choice_text_es": "Sirve las páginas web",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4260,
+  "fields": {
+   "question": 5065,
+   "choice_text": "Asigna las direcciones IP de la red",
+   "choice_text_es": "Asigna las direcciones IP de la red",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 5066,
+  "fields": {
+   "content": "Un dominio hijo dentro de un árbol de Active Directory:",
+   "content_es": "Un dominio hijo dentro de un árbol de Active Directory:",
+   "explanation": "Correcta: C - Es así como se forman los nombres en un árbol. A - El nombre completo es distinto. B - El bosque agrupa árboles; el hijo cuelga de su padre. D - Comparte recursos y relaciones de confianza. Manual: cap. 5 §3. Visto en: Material de partida de Active Directory.",
+   "explanation_es": "Correcta: C - Es así como se forman los nombres en un árbol. A - El nombre completo es distinto. B - El bosque agrupa árboles; el hijo cuelga de su padre. D - Comparte recursos y relaciones de confianza. Manual: cap. 5 §3. Visto en: Material de partida de Active Directory.",
+   "quiz": [
+    12
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 5066,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4261,
+  "fields": {
+   "question": 5066,
+   "choice_text": "Se llama igual que el dominio raíz",
+   "choice_text_es": "Se llama igual que el dominio raíz",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4262,
+  "fields": {
+   "question": 5066,
+   "choice_text": "Es un bosque distinto",
+   "choice_text_es": "Es un bosque distinto",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4263,
+  "fields": {
+   "question": 5066,
+   "choice_text": "Combina el nombre de su padre con el suyo, como ventas.miempresa.com dentro de miempresa.com",
+   "choice_text_es": "Combina el nombre de su padre con el suyo, como ventas.miempresa.com dentro de miempresa.com",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4264,
+  "fields": {
+   "question": 5066,
+   "choice_text": "No comparte nada con el padre",
+   "choice_text_es": "No comparte nada con el padre",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 5067,
+  "fields": {
+   "content": "Una GPO se aplica a:",
+   "content_es": "Una GPO se aplica a:",
+   "explanation": "Correcta: D - Es el alcance de la directiva y la forma de verificarla en el cliente. A - La GPO se aplica desde el dominio, no del perfil local. B - Los grupos de correo no son el alcance de una GPO. C - Se aplica a equipos y usuarios según su OU. Manual: cap. 5 §3. Visto en: Práctica 3, apartado 4.",
+   "explanation_es": "Correcta: D - Es el alcance de la directiva y la forma de verificarla en el cliente. A - La GPO se aplica desde el dominio, no del perfil local. B - Los grupos de correo no son el alcance de una GPO. C - Se aplica a equipos y usuarios según su OU. Manual: cap. 5 §3. Visto en: Práctica 3, apartado 4.",
+   "quiz": [
+    12
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 5067,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4265,
+  "fields": {
+   "question": 5067,
+   "choice_text": "El perfil local del administrador",
+   "choice_text_es": "El perfil local del administrador",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4266,
+  "fields": {
+   "question": 5067,
+   "choice_text": "Los grupos de correo electrónico",
+   "choice_text_es": "Los grupos de correo electrónico",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4267,
+  "fields": {
+   "question": 5067,
+   "choice_text": "Solo al servidor, nunca a los clientes",
+   "choice_text_es": "Solo al servidor, nunca a los clientes",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4268,
+  "fields": {
+   "question": 5067,
+   "choice_text": "Todo el dominio o a unidades organizativas concretas, y se comprueba con gpresult",
+   "choice_text_es": "Todo el dominio o a unidades organizativas concretas, y se comprueba con gpresult",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 5068,
+  "fields": {
+   "content": "Azure Active Directory frente al Active Directory local:",
+   "content_es": "Azure Active Directory frente al Active Directory local:",
+   "explanation": "Correcta: A - Es lo que dice el material del módulo. B - Son servicios distintos que pueden funcionar juntos. C - Son servicios distintos. D - Soporta usuarios, grupos y aplicaciones. Manual: cap. 5 §3. Visto en: Material de partida de Active Directory.",
+   "explanation_es": "Correcta: A - Es lo que dice el material del módulo. B - Son servicios distintos que pueden funcionar juntos. C - Son servicios distintos. D - Soporta usuarios, grupos y aplicaciones. Manual: cap. 5 §3. Visto en: Material de partida de Active Directory.",
+   "quiz": [
+    12
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 5068,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4269,
+  "fields": {
+   "question": 5068,
+   "choice_text": "Es el servicio de directorio de los entornos de nube de Microsoft, y pueden convivir en un despliegue híbrido",
+   "choice_text_es": "Es el servicio de directorio de los entornos de nube de Microsoft, y pueden convivir en un despliegue híbrido",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4270,
+  "fields": {
+   "question": 5068,
+   "choice_text": "Es la misma cosa con otro nombre",
+   "choice_text_es": "Es la misma cosa con otro nombre",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4271,
+  "fields": {
+   "question": 5068,
+   "choice_text": "Sustituye al servidor DNS",
+   "choice_text_es": "Sustituye al servidor DNS",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4272,
+  "fields": {
+   "question": 5068,
+   "choice_text": "No soporta usuarios",
+   "choice_text_es": "No soporta usuarios",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 5069,
+  "fields": {
+   "content": "LDAP es:",
+   "content_es": "LDAP es:",
+   "explanation": "Correcta: B - Es la vía de consulta del directorio, con los puertos 389 y 636. A - Eso es DHCP. C - No tiene nada que ver con copias. D - El directorio no es un sistema de archivos. Manual: cap. 5 §3. Visto en: Práctica 9, apartado 1.",
+   "explanation_es": "Correcta: B - Es la vía de consulta del directorio, con los puertos 389 y 636. A - Eso es DHCP. C - No tiene nada que ver con copias. D - El directorio no es un sistema de archivos. Manual: cap. 5 §3. Visto en: Práctica 9, apartado 1.",
+   "quiz": [
+    12
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 5069,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4273,
+  "fields": {
+   "question": 5069,
+   "choice_text": "El protocolo que reparte direcciones IP",
+   "choice_text_es": "El protocolo que reparte direcciones IP",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4274,
+  "fields": {
+   "question": 5069,
+   "choice_text": "El protocolo cliente-servidor para consultar y modificar un servicio de directorio",
+   "choice_text_es": "El protocolo cliente-servidor para consultar y modificar un servicio de directorio",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4275,
+  "fields": {
+   "question": 5069,
+   "choice_text": "La herramienta de copias de seguridad",
+   "choice_text_es": "La herramienta de copias de seguridad",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4276,
+  "fields": {
+   "question": 5069,
+   "choice_text": "El sistema de archivos del servidor",
+   "choice_text_es": "El sistema de archivos del servidor",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 5070,
+  "fields": {
+   "content": "Kerberos en un dominio Windows se encarga de:",
+   "content_es": "Kerberos en un dominio Windows se encarga de:",
+   "explanation": "Correcta: C - Es el protocolo de autenticación por defecto de Active Directory. A - El cifrado de discos es otra cosa. B - No tiene función de registro. D - Eso es DHCP. Manual: cap. 5 §3. Visto en: Práctica 9, apartado 4.",
+   "explanation_es": "Correcta: C - Es el protocolo de autenticación por defecto de Active Directory. A - El cifrado de discos es otra cosa. B - No tiene función de registro. D - Eso es DHCP. Manual: cap. 5 §3. Visto en: Práctica 9, apartado 4.",
+   "quiz": [
+    12
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 5070,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4277,
+  "fields": {
+   "question": 5070,
+   "choice_text": "Cifrar los discos de los clientes",
+   "choice_text_es": "Cifrar los discos de los clientes",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4278,
+  "fields": {
+   "question": 5070,
+   "choice_text": "Comprimir los registros del sistema",
+   "choice_text_es": "Comprimir los registros del sistema",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4279,
+  "fields": {
+   "question": 5070,
+   "choice_text": "La autenticación segura mediante tickets, sin enviar la contraseña por la red",
+   "choice_text_es": "La autenticación segura mediante tickets, sin enviar la contraseña por la red",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4280,
+  "fields": {
+   "question": 5070,
+   "choice_text": "Repartir las direcciones IP a los clientes",
+   "choice_text_es": "Repartir las direcciones IP a los clientes",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 5071,
+  "fields": {
+   "content": "Si en un dominio el DNS está parado, lo primero que falla al iniciar sesión es:",
+   "content_es": "Si en un dominio el DNS está parado, lo primero que falla al iniciar sesión es:",
+   "explanation": "Correcta: D - Sin el nombre no hay camino hasta el directorio. A - Dependerá del resolutor externo, no del DNS del dominio. B - El disco local no necesita DNS. C - La impresión no depende del DNS para iniciar sesión. Manual: cap. 5 §2. Visto en: Práctica 9, apartado 6.",
+   "explanation_es": "Correcta: D - Sin el nombre no hay camino hasta el directorio. A - Dependerá del resolutor externo, no del DNS del dominio. B - El disco local no necesita DNS. C - La impresión no depende del DNS para iniciar sesión. Manual: cap. 5 §2. Visto en: Práctica 9, apartado 6.",
+   "quiz": [
+    12
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 5071,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4281,
+  "fields": {
+   "question": 5071,
+   "choice_text": "La conexión a internet",
+   "choice_text_es": "La conexión a internet",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4282,
+  "fields": {
+   "question": 5071,
+   "choice_text": "El acceso al disco local",
+   "choice_text_es": "El acceso al disco local",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4283,
+  "fields": {
+   "question": 5071,
+   "choice_text": "El servicio de impresión",
+   "choice_text_es": "El servicio de impresión",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4284,
+  "fields": {
+   "question": 5071,
+   "choice_text": "La resolución del nombre del controlador de dominio",
+   "choice_text_es": "La resolución del nombre del controlador de dominio",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 5072,
+  "fields": {
+   "content": "En DHCP, la orden del router que excluye un rango de direcciones del reparto es:",
+   "content_es": "En DHCP, la orden del router que excluye un rango de direcciones del reparto es:",
+   "explanation": "Correcta: A - Reserva las direcciones para servidores e impresoras. B - Eso crea el ámbito. C - Eso activa una interfaz. D - Eso define la red del ámbito. Manual: cap. 5 §3. Visto en: Práctica 5, apartado 3.",
+   "explanation_es": "Correcta: A - Reserva las direcciones para servidores e impresoras. B - Eso crea el ámbito. C - Eso activa una interfaz. D - Eso define la red del ámbito. Manual: cap. 5 §3. Visto en: Práctica 5, apartado 3.",
+   "quiz": [
+    12
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 5072,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4285,
+  "fields": {
+   "question": 5072,
+   "choice_text": "ip dhcp excluded-address 192.168.1.1 192.168.1.10",
+   "choice_text_es": "ip dhcp excluded-address 192.168.1.1 192.168.1.10",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4286,
+  "fields": {
+   "question": 5072,
+   "choice_text": "ip dhcp pool CLASE",
+   "choice_text_es": "ip dhcp pool CLASE",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4287,
+  "fields": {
+   "question": 5072,
+   "choice_text": "no shutdown",
+   "choice_text_es": "no shutdown",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4288,
+  "fields": {
+   "question": 5072,
+   "choice_text": "network 192.168.1.0 255.255.255.0",
+   "choice_text_es": "network 192.168.1.0 255.255.255.0",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 5073,
+  "fields": {
+   "content": "En DHCP, el parámetro que fija la puerta de enlace que recibe el cliente es:",
+   "content_es": "En DHCP, el parámetro que fija la puerta de enlace que recibe el cliente es:",
+   "explanation": "Correcta: B - Es la puerta de enlace del ámbito. A - Ese parámetro fija el servidor de nombres. C - Pone nombre al router. D - network define la red del ámbito. Manual: cap. 5 §3. Visto en: Práctica 5, apartado 3.",
+   "explanation_es": "Correcta: B - Es la puerta de enlace del ámbito. A - Ese parámetro fija el servidor de nombres. C - Pone nombre al router. D - network define la red del ámbito. Manual: cap. 5 §3. Visto en: Práctica 5, apartado 3.",
+   "quiz": [
+    12
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 5073,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4289,
+  "fields": {
+   "question": 5073,
+   "choice_text": "dns-server",
+   "choice_text_es": "dns-server",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4290,
+  "fields": {
+   "question": 5073,
+   "choice_text": "default-router",
+   "choice_text_es": "default-router",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4291,
+  "fields": {
+   "question": 5073,
+   "choice_text": "hostname",
+   "choice_text_es": "hostname",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4292,
+  "fields": {
+   "question": 5073,
+   "choice_text": "network",
+   "choice_text_es": "network",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 5074,
+  "fields": {
+   "content": "Una red con un router, dos switches y seis equipos finales en dos subredes distintas necesita que el router:",
+   "content_es": "Una red con un router, dos switches y seis equipos finales en dos subredes distintas necesita que el router:",
+   "explanation": "Correcta: C - Es el diseño de la práctica 5. A - Los switches no encaminan entre subredes. B - Cada subred tiene su ámbito. D - Cada subred necesita su puerta de enlace. Manual: cap. 5 §2. Visto en: Práctica 5, apartado 2.",
+   "explanation_es": "Correcta: C - Es el diseño de la práctica 5. A - Los switches no encaminan entre subredes. B - Cada subred tiene su ámbito. D - Cada subred necesita su puerta de enlace. Manual: cap. 5 §2. Visto en: Práctica 5, apartado 2.",
+   "quiz": [
+    12
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 5074,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4293,
+  "fields": {
+   "question": 5074,
+   "choice_text": "Esté apagado mientras los switches hacen el encaminamiento",
+   "choice_text_es": "Esté apagado mientras los switches hacen el encaminamiento",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4294,
+  "fields": {
+   "question": 5074,
+   "choice_text": "Reparta las direcciones de las dos subredes por el mismo ámbito",
+   "choice_text_es": "Reparta las direcciones de las dos subredes por el mismo ámbito",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4295,
+  "fields": {
+   "question": 5074,
+   "choice_text": "Tenga una interfaz por subred, con la IP de puerta de enlace de cada una",
+   "choice_text_es": "Tenga una interfaz por subred, con la IP de puerta de enlace de cada una",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4296,
+  "fields": {
+   "question": 5074,
+   "choice_text": "Tenga una sola dirección IP para las dos redes",
+   "choice_text_es": "Tenga una sola dirección IP para las dos redes",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 5075,
+  "fields": {
+   "content": "Para comprobar que un cliente recibió dirección, máscara y puerta de enlace por DHCP en Windows, la orden es:",
+   "content_es": "Para comprobar que un cliente recibió dirección, máscara y puerta de enlace por DHCP en Windows, la orden es:",
+   "explanation": "Correcta: D - Muestra las cuatro líneas, incluidas las del DHCP. A - Eso consulta el DNS. B - Muestra el camino, no la configuración. C - El ping prueba conectividad, no la configuración. Manual: cap. 5 §3. Visto en: Práctica 5, apartado 4.",
+   "explanation_es": "Correcta: D - Muestra las cuatro líneas, incluidas las del DHCP. A - Eso consulta el DNS. B - Muestra el camino, no la configuración. C - El ping prueba conectividad, no la configuración. Manual: cap. 5 §3. Visto en: Práctica 5, apartado 4.",
+   "quiz": [
+    12
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 5075,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4297,
+  "fields": {
+   "question": 5075,
+   "choice_text": "nslookup",
+   "choice_text_es": "nslookup",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4298,
+  "fields": {
+   "question": 5075,
+   "choice_text": "tracert 192.168.1.1",
+   "choice_text_es": "tracert 192.168.1.1",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4299,
+  "fields": {
+   "question": 5075,
+   "choice_text": "ping 192.168.1.1",
+   "choice_text_es": "ping 192.168.1.1",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4300,
+  "fields": {
+   "question": 5075,
+   "choice_text": "ipconfig /all",
+   "choice_text_es": "ipconfig /all",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 5076,
+  "fields": {
+   "content": "Un equipo en 192.168.1.2 no llega al 192.168.2.4. La causa más probable es:",
+   "content_es": "Un equipo en 192.168.1.2 no llega al 192.168.2.4. La causa más probable es:",
+   "explanation": "Correcta: A - Es el caso de la práctica 5: sin router configurado, no cruzan. B - Puede ser, pero con la configuración a la vista, lo primero es la subred. C - Los switches no suelen filtrar. D - Con direcciones IP no interviene el DNS. Manual: cap. 5 §2. Visto en: Práctica 5, apartado 4.",
+   "explanation_es": "Correcta: A - Es el caso de la práctica 5: sin router configurado, no cruzan. B - Puede ser, pero con la configuración a la vista, lo primero es la subred. C - Los switches no suelen filtrar. D - Con direcciones IP no interviene el DNS. Manual: cap. 5 §2. Visto en: Práctica 5, apartado 4.",
+   "quiz": [
+    12
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 5076,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4301,
+  "fields": {
+   "question": 5076,
+   "choice_text": "Están en subredes distintas y el encaminamiento entre ellas no está configurado",
+   "choice_text_es": "Están en subredes distintas y el encaminamiento entre ellas no está configurado",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4302,
+  "fields": {
+   "question": 5076,
+   "choice_text": "El cable está mal puesto",
+   "choice_text_es": "El cable está mal puesto",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4303,
+  "fields": {
+   "question": 5076,
+   "choice_text": "El firewall del switch",
+   "choice_text_es": "El firewall del switch",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4304,
+  "fields": {
+   "question": 5076,
+   "choice_text": "El DNS está mal",
+   "choice_text_es": "El DNS está mal",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 5077,
+  "fields": {
+   "content": "En Linux, la orden que lista los puertos que están escuchando es:",
+   "content_es": "En Linux, la orden que lista los puertos que están escuchando es:",
+   "explanation": "Correcta: B - Lista los puertos TCP y UDP en escucha. A - Muestra direcciones, no puertos. C - Muestra discos. D - Muestra el diario, no los puertos. Manual: cap. 5 §5. Visto en: Práctica 9, apartado 4.",
+   "explanation_es": "Correcta: B - Lista los puertos TCP y UDP en escucha. A - Muestra direcciones, no puertos. C - Muestra discos. D - Muestra el diario, no los puertos. Manual: cap. 5 §5. Visto en: Práctica 9, apartado 4.",
+   "quiz": [
+    12
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 5077,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4305,
+  "fields": {
+   "question": 5077,
+   "choice_text": "ip addr",
+   "choice_text_es": "ip addr",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4306,
+  "fields": {
+   "question": 5077,
+   "choice_text": "ss -lntu",
+   "choice_text_es": "ss -lntu",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4307,
+  "fields": {
+   "question": 5077,
+   "choice_text": "df -h",
+   "choice_text_es": "df -h",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4308,
+  "fields": {
+   "question": 5077,
+   "choice_text": "journalctl",
+   "choice_text_es": "journalctl",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 5078,
+  "fields": {
+   "content": "Un sniffer como tcpdump se usa para:",
+   "content_es": "Un sniffer como tcpdump se usa para:",
+   "explanation": "Correcta: C - Es la base de la monitorización de puertos y servicios del módulo. A - Eso es de discos. B - No toca los registros. D - Eso es DHCP. Manual: cap. 5 §6. Visto en: Práctica 4, apartado 4.",
+   "explanation_es": "Correcta: C - Es la base de la monitorización de puertos y servicios del módulo. A - Eso es de discos. B - No toca los registros. D - Eso es DHCP. Manual: cap. 5 §6. Visto en: Práctica 4, apartado 4.",
+   "quiz": [
+    12
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 5078,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4309,
+  "fields": {
+   "question": 5078,
+   "choice_text": "Crear particiones",
+   "choice_text_es": "Crear particiones",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4310,
+  "fields": {
+   "question": 5078,
+   "choice_text": "Borrar los registros del sistema",
+   "choice_text_es": "Borrar los registros del sistema",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4311,
+  "fields": {
+   "question": 5078,
+   "choice_text": "Capturar el tráfico de una interfaz y analizarlo después",
+   "choice_text_es": "Capturar el tráfico de una interfaz y analizarlo después",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4312,
+  "fields": {
+   "question": 5078,
+   "choice_text": "Repartir direcciones IP",
+   "choice_text_es": "Repartir direcciones IP",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 5079,
+  "fields": {
+   "content": "El acceso remoto más habitual para administrar un servidor Linux es:",
+   "content_es": "El acceso remoto más habitual para administrar un servidor Linux es:",
+   "explanation": "Correcta: D - Es el que usan el laboratorio y todas las prácticas. A - Telnet no cifra y no se usa. B - FTP es transferencia de ficheros, no administración. C - Es el de Windows. Manual: cap. 5 §2. Visto en: Clase 00, ficha de la máquina.",
+   "explanation_es": "Correcta: D - Es el que usan el laboratorio y todas las prácticas. A - Telnet no cifra y no se usa. B - FTP es transferencia de ficheros, no administración. C - Es el de Windows. Manual: cap. 5 §2. Visto en: Clase 00, ficha de la máquina.",
+   "quiz": [
+    12
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 5079,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4313,
+  "fields": {
+   "question": 5079,
+   "choice_text": "Telnet, por el 23",
+   "choice_text_es": "Telnet, por el 23",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4314,
+  "fields": {
+   "question": 5079,
+   "choice_text": "FTP, por el 21",
+   "choice_text_es": "FTP, por el 21",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4315,
+  "fields": {
+   "question": 5079,
+   "choice_text": "Escritorio remoto, por el 3389",
+   "choice_text_es": "Escritorio remoto, por el 3389",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4316,
+  "fields": {
+   "question": 5079,
+   "choice_text": "SSH, por el puerto 22",
+   "choice_text_es": "SSH, por el puerto 22",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 5080,
+  "fields": {
+   "content": "Para comprobar que el servicio SSH de una máquina está en marcha, la orden en Linux es:",
+   "content_es": "Para comprobar que el servicio SSH de una máquina está en marcha, la orden en Linux es:",
+   "explanation": "Correcta: A - Devuelve active o lo que esté. B - El ping no mira el servicio, mira la red. C - Muestra discos. D - Lista los puertos; no dice si el servicio está activo. Manual: cap. 2 §5. Visto en: Clase 03, guion de la clase.",
+   "explanation_es": "Correcta: A - Devuelve active o lo que esté. B - El ping no mira el servicio, mira la red. C - Muestra discos. D - Lista los puertos; no dice si el servicio está activo. Manual: cap. 2 §5. Visto en: Clase 03, guion de la clase.",
+   "quiz": [
+    12
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 5080,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4317,
+  "fields": {
+   "question": 5080,
+   "choice_text": "systemctl is-active ssh",
+   "choice_text_es": "systemctl is-active ssh",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4318,
+  "fields": {
+   "question": 5080,
+   "choice_text": "ping 10.0.3.15",
+   "choice_text_es": "ping 10.0.3.15",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4319,
+  "fields": {
+   "question": 5080,
+   "choice_text": "df -h",
+   "choice_text_es": "df -h",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4320,
+  "fields": {
+   "question": 5080,
+   "choice_text": "ss -lntu, sin más",
+   "choice_text_es": "ss -lntu, sin más",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 5081,
+  "fields": {
+   "content": "La regla del mínimo privilegio significa que:",
+   "content_es": "La regla del mínimo privilegio significa que:",
+   "explanation": "Correcta: B - Es el principio que rige el control de accesos del módulo. A - Es lo contrario. C - Los grupos grandes dan más de lo que hace falta. D - El administrador usa una cuenta normal y eleva solo cuando toca. Manual: cap. 5 §1. Visto en: Práctica 3, apartado 1.",
+   "explanation_es": "Correcta: B - Es el principio que rige el control de accesos del módulo. A - Es lo contrario. C - Los grupos grandes dan más de lo que hace falta. D - El administrador usa una cuenta normal y eleva solo cuando toca. Manual: cap. 5 §1. Visto en: Práctica 3, apartado 1.",
+   "quiz": [
+    12
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 5081,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4321,
+  "fields": {
+   "question": 5081,
+   "choice_text": "Todos los usuarios son administradores",
+   "choice_text_es": "Todos los usuarios son administradores",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4322,
+  "fields": {
+   "question": 5081,
+   "choice_text": "Cada cuenta solo tiene los permisos que necesita para su trabajo",
+   "choice_text_es": "Cada cuenta solo tiene los permisos que necesita para su trabajo",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4323,
+  "fields": {
+   "question": 5081,
+   "choice_text": "Los permisos se dan por grupos grandes, para simplificar",
+   "choice_text_es": "Los permisos se dan por grupos grandes, para simplificar",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4324,
+  "fields": {
+   "question": 5081,
+   "choice_text": "El administrador trabaja siempre con la cuenta de administrador",
+   "choice_text_es": "El administrador trabaja siempre con la cuenta de administrador",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 5082,
+  "fields": {
+   "content": "En Linux, la orden que añade a un usuario a un grupo sin quitarle los demás es:",
+   "content_es": "En Linux, la orden que añade a un usuario a un grupo sin quitarle los demás es:",
+   "explanation": "Correcta: C - El -aG añade al grupo manteniendo los otros. A - Eso consulta los grupos del usuario. B - Eso cambia la contraseña. D - Sin el -a sustituye los grupos del usuario. Manual: cap. 5 §3. Visto en: Práctica 3, apartado 3.",
+   "explanation_es": "Correcta: C - El -aG añade al grupo manteniendo los otros. A - Eso consulta los grupos del usuario. B - Eso cambia la contraseña. D - Sin el -a sustituye los grupos del usuario. Manual: cap. 5 §3. Visto en: Práctica 3, apartado 3.",
+   "quiz": [
+    12
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 5082,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4325,
+  "fields": {
+   "question": 5082,
+   "choice_text": "id op01",
+   "choice_text_es": "id op01",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4326,
+  "fields": {
+   "question": 5082,
+   "choice_text": "passwd op01",
+   "choice_text_es": "passwd op01",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4327,
+  "fields": {
+   "question": 5082,
+   "choice_text": "usermod -aG mf0490-ops op01",
+   "choice_text_es": "usermod -aG mf0490-ops op01",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4328,
+  "fields": {
+   "question": 5082,
+   "choice_text": "usermod -G mf0490-ops op01",
+   "choice_text_es": "usermod -G mf0490-ops op01",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 5083,
+  "fields": {
+   "content": "En Linux, para comprobar los grupos efectivos de un usuario, la orden es:",
+   "content_es": "En Linux, para comprobar los grupos efectivos de un usuario, la orden es:",
+   "explanation": "Correcta: D - Muestra usuario, grupos y permisos efectivos. A - Dice quién es el usuario actual, sin grupos. B - Muestra los permisos de la carpeta, no del usuario. C - chmod cambia permisos de ficheros. Manual: cap. 5 §3. Visto en: Práctica 3, apartado 3.",
+   "explanation_es": "Correcta: D - Muestra usuario, grupos y permisos efectivos. A - Dice quién es el usuario actual, sin grupos. B - Muestra los permisos de la carpeta, no del usuario. C - chmod cambia permisos de ficheros. Manual: cap. 5 §3. Visto en: Práctica 3, apartado 3.",
+   "quiz": [
+    12
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 5083,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4329,
+  "fields": {
+   "question": 5083,
+   "choice_text": "whoami",
+   "choice_text_es": "whoami",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4330,
+  "fields": {
+   "question": 5083,
+   "choice_text": "ls -ld /srv",
+   "choice_text_es": "ls -ld /srv",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4331,
+  "fields": {
+   "question": 5083,
+   "choice_text": "chmod USUARIO",
+   "choice_text_es": "chmod USUARIO",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4332,
+  "fields": {
+   "question": 5083,
+   "choice_text": "id USUARIO",
+   "choice_text_es": "id USUARIO",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 5084,
+  "fields": {
+   "content": "Una limitación de uso para los usuarios de un sistema se puede fijar mediante:",
+   "content_es": "Una limitación de uso para los usuarios de un sistema se puede fijar mediante:",
+   "explanation": "Correcta: A - Son las tres formas que da el módulo. B - La marca no limita nada. C - No entra en el control de accesos. D - La RAM no es una limitación de acceso. Manual: cap. 5 §3. Visto en: Práctica 3, apartado 4.",
+   "explanation_es": "Correcta: A - Son las tres formas que da el módulo. B - La marca no limita nada. C - No entra en el control de accesos. D - La RAM no es una limitación de acceso. Manual: cap. 5 §3. Visto en: Práctica 3, apartado 4.",
+   "quiz": [
+    12
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 5084,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4333,
+  "fields": {
+   "question": 5084,
+   "choice_text": "Directivas de grupo, cuotas de disco y horarios de acceso",
+   "choice_text_es": "Directivas de grupo, cuotas de disco y horarios de acceso",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4334,
+  "fields": {
+   "question": 5084,
+   "choice_text": "La marca del ordenador",
+   "choice_text_es": "La marca del ordenador",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4335,
+  "fields": {
+   "question": 5084,
+   "choice_text": "El número de versión del navegador",
+   "choice_text_es": "El número de versión del navegador",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4336,
+  "fields": {
+   "question": 5084,
+   "choice_text": "La cantidad de RAM",
+   "choice_text_es": "La cantidad de RAM",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 5085,
+  "fields": {
+   "content": "En Packet Tracer, el modo que muestra el movimiento de las tramas paso a paso es:",
+   "content_es": "En Packet Tracer, el modo que muestra el movimiento de las tramas paso a paso es:",
+   "explanation": "Correcta: B - Es el que dibuja las PDU avanzando. A - El tiempo real muestra la red funcionando, no las tramas paso a paso. C - Ahí se configura el dispositivo. D - El físico es del equipo, no de las tramas. Manual: cap. 5 §2. Visto en: Práctica 5, apartado 1.",
+   "explanation_es": "Correcta: B - Es el que dibuja las PDU avanzando. A - El tiempo real muestra la red funcionando, no las tramas paso a paso. C - Ahí se configura el dispositivo. D - El físico es del equipo, no de las tramas. Manual: cap. 5 §2. Visto en: Práctica 5, apartado 1.",
+   "quiz": [
+    12
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 5085,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4337,
+  "fields": {
+   "question": 5085,
+   "choice_text": "El modo en tiempo real",
+   "choice_text_es": "El modo en tiempo real",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4338,
+  "fields": {
+   "question": 5085,
+   "choice_text": "El modo de simulación",
+   "choice_text_es": "El modo de simulación",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4339,
+  "fields": {
+   "question": 5085,
+   "choice_text": "El modo de configuración",
+   "choice_text_es": "El modo de configuración",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4340,
+  "fields": {
+   "question": 5085,
+   "choice_text": "El modo físico",
+   "choice_text_es": "El modo físico",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 5086,
+  "fields": {
+   "content": "En Packet Tracer, la pestaña que sirve para configurar la IP de un PC final es:",
+   "content_es": "En Packet Tracer, la pestaña que sirve para configurar la IP de un PC final es:",
+   "explanation": "Correcta: C - Es donde se pone la IP, la máscara y la puerta de enlace. A - El escritorio tiene utilidades, pero la configuración de red va en Config. B - Ahí están los módulos del equipo. D - CLI está en los routers, no en los PC finales. Manual: cap. 5 §2. Visto en: Práctica 5, apartado 1.",
+   "explanation_es": "Correcta: C - Es donde se pone la IP, la máscara y la puerta de enlace. A - El escritorio tiene utilidades, pero la configuración de red va en Config. B - Ahí están los módulos del equipo. D - CLI está en los routers, no en los PC finales. Manual: cap. 5 §2. Visto en: Práctica 5, apartado 1.",
+   "quiz": [
+    12
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 5086,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4341,
+  "fields": {
+   "question": 5086,
+   "choice_text": "Escritorio",
+   "choice_text_es": "Escritorio",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4342,
+  "fields": {
+   "question": 5086,
+   "choice_text": "Físico",
+   "choice_text_es": "Físico",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4343,
+  "fields": {
+   "question": 5086,
+   "choice_text": "Config, dentro de IP Configuration",
+   "choice_text_es": "Config, dentro de IP Configuration",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4344,
+  "fields": {
+   "question": 5086,
+   "choice_text": "CLI",
+   "choice_text_es": "CLI",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 5087,
+  "fields": {
+   "content": "El servicio que reparte las direcciones IP a los equipos que las piden es:",
+   "content_es": "El servicio que reparte las direcciones IP a los equipos que las piden es:",
+   "explanation": "Correcta: D - Es su función: alquilar direcciones por un tiempo. A - HTTP sirve páginas. B - LDAP consulta el directorio. C - DNS traduce nombres. Manual: cap. 5 §3. Visto en: Práctica 5, apartado 3.",
+   "explanation_es": "Correcta: D - Es su función: alquilar direcciones por un tiempo. A - HTTP sirve páginas. B - LDAP consulta el directorio. C - DNS traduce nombres. Manual: cap. 5 §3. Visto en: Práctica 5, apartado 3.",
+   "quiz": [
+    12
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 5087,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4345,
+  "fields": {
+   "question": 5087,
+   "choice_text": "HTTP",
+   "choice_text_es": "HTTP",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4346,
+  "fields": {
+   "question": 5087,
+   "choice_text": "LDAP",
+   "choice_text_es": "LDAP",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4347,
+  "fields": {
+   "question": 5087,
+   "choice_text": "DNS",
+   "choice_text_es": "DNS",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4348,
+  "fields": {
+   "question": 5087,
+   "choice_text": "DHCP",
+   "choice_text_es": "DHCP",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 5088,
+  "fields": {
+   "content": "Antes de configurar un servidor DHCP hay que reservar para servidores e impresoras:",
+   "content_es": "Antes de configurar un servidor DHCP hay que reservar para servidores e impresoras:",
+   "explanation": "Correcta: A - Es lo que hace ip dhcp excluded-address. B - Un servidor necesita dirección estable. C - El ámbito es de la red local. D - La puerta de enlace se asigna al cliente, no se reserva. Manual: cap. 5 §3. Visto en: Práctica 5, apartado 3.",
+   "explanation_es": "Correcta: A - Es lo que hace ip dhcp excluded-address. B - Un servidor necesita dirección estable. C - El ámbito es de la red local. D - La puerta de enlace se asigna al cliente, no se reserva. Manual: cap. 5 §3. Visto en: Práctica 5, apartado 3.",
+   "quiz": [
+    12
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 5088,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4349,
+  "fields": {
+   "question": 5088,
+   "choice_text": "Un rango de direcciones excluido del reparto",
+   "choice_text_es": "Un rango de direcciones excluido del reparto",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4350,
+  "fields": {
+   "question": 5088,
+   "choice_text": "Una dirección dinámica cualquiera",
+   "choice_text_es": "Una dirección dinámica cualquiera",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4351,
+  "fields": {
+   "question": 5088,
+   "choice_text": "Una dirección de la red externa",
+   "choice_text_es": "Una dirección de la red externa",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4352,
+  "fields": {
+   "question": 5088,
+   "choice_text": "La puerta de enlace del cliente",
+   "choice_text_es": "La puerta de enlace del cliente",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 5089,
+  "fields": {
+   "content": "El registro de las concesiones de DHCP de VirtualBox se lee:",
+   "content_es": "El registro de las concesiones de DHCP de VirtualBox se lee:",
+   "explanation": "Correcta: B - Es lo que hace la documentación del laboratorio. A - El ping no lee concesiones. C - Eso renueva la concesión del cliente, no la lista. D - Funciona, pero es más lento y necesita las máquinas encendidas. Manual: cap. 5 §3. Visto en: Documentación del laboratorio.",
+   "explanation_es": "Correcta: B - Es lo que hace la documentación del laboratorio. A - El ping no lee concesiones. C - Eso renueva la concesión del cliente, no la lista. D - Funciona, pero es más lento y necesita las máquinas encendidas. Manual: cap. 5 §3. Visto en: Documentación del laboratorio.",
+   "quiz": [
+    12
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 5089,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4353,
+  "fields": {
+   "question": 5089,
+   "choice_text": "Con ping 10.0.3.1",
+   "choice_text_es": "Con ping 10.0.3.1",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4354,
+  "fields": {
+   "question": 5089,
+   "choice_text": "En el fichero de concesiones de la red, sin entrar en las máquinas",
+   "choice_text_es": "En el fichero de concesiones de la red, sin entrar en las máquinas",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4355,
+  "fields": {
+   "question": 5089,
+   "choice_text": "Con ipconfig /renew",
+   "choice_text_es": "Con ipconfig /renew",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4356,
+  "fields": {
+   "question": 5089,
+   "choice_text": "Entrando por SSH a cada máquina y mirando ip addr",
+   "choice_text_es": "Entrando por SSH a cada máquina y mirando ip addr",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.question",
+  "pk": 5090,
+  "fields": {
+   "content": "Un equipo con el firewall con la política de salida en deny:",
+   "content_es": "Un equipo con el firewall con la política de salida en deny:",
+   "explanation": "Correcta: C - Es la trampa documentada del laboratorio: se mira ufw status antes de culpar a la red. A - El problema está en la máquina, no en el switch. B - Con salida deny, no sale el ping tampoco. D - La IP es correcta; lo que falla es la salida. Manual: cap. 5 §5. Visto en: Documentación del laboratorio.",
+   "explanation_es": "Correcta: C - Es la trampa documentada del laboratorio: se mira ufw status antes de culpar a la red. A - El problema está en la máquina, no en el switch. B - Con salida deny, no sale el ping tampoco. D - La IP es correcta; lo que falla es la salida. Manual: cap. 5 §5. Visto en: Documentación del laboratorio.",
+   "quiz": [
+    12
+   ]
+  }
+ },
+ {
+  "model": "quiz.mcquestion",
+  "pk": 5090,
+  "fields": {
+   "choice_order": ""
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4357,
+  "fields": {
+   "question": 5090,
+   "choice_text": "Se arregla reiniciando el switch",
+   "choice_text_es": "Se arregla reiniciando el switch",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4358,
+  "fields": {
+   "question": 5090,
+   "choice_text": "No puede resolver nombres pero sí hacer ping",
+   "choice_text_es": "No puede resolver nombres pero sí hacer ping",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4359,
+  "fields": {
+   "question": 5090,
+   "choice_text": "Tiene la IP correcta y la red va, pero no sale ni un paquete",
+   "choice_text_es": "Tiene la IP correcta y la red va, pero no sale ni un paquete",
+   "correct": true
+  }
+ },
+ {
+  "model": "quiz.choice",
+  "pk": 4360,
+  "fields": {
+   "question": 5090,
+   "choice_text": "No tiene dirección IP",
+   "choice_text_es": "No tiene dirección IP",
+   "correct": false
+  }
+ },
+ {
+  "model": "quiz.quiz",
+  "pk": 12,
+  "fields": {
+   "course": 24,
+   "title": "Repaso UA3 - Accesos y comunicaciones",
+   "title_es": "Repaso UA3 - Accesos y comunicaciones",
+   "slug": "repaso-ua3-mf0490-3",
+   "description": "Repaso de la UA3: usuarios, grupos y permisos, Active Directory, servicios de comunicaciones y DHCP. 30 preguntas de opción múltiple. Se corrigen solas y, al responder, sale la respuesta correcta con el motivo de cada opción descartada. Se puede repetir tantas veces como quieras.",
+   "description_es": "Repaso de la UA3: usuarios, grupos y permisos, Active Directory, servicios de comunicaciones y DHCP. 30 preguntas de opción múltiple. Se corrigen solas y, al responder, sale la respuesta correcta con el motivo de cada opción descartada. Se puede repetir tantas veces como quieras.",
+   "category": "practice",
+   "draft": false,
+   "single_attempt": false,
+   "pass_mark": 0,
+   "timestamp": "2026-11-13T00:00:00Z",
+   "random_order": true,
+   "answers_at_end": false,
+   "exam_paper": false
+  }
+ }
+]
