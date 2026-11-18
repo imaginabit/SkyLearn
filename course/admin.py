@@ -5,6 +5,7 @@ from .models import (
     Course,
     CourseAllocation,
     Program,
+    UnidadAprendizaje,
     Upload,
     UploadFile,
     UploadVideo,
@@ -71,8 +72,18 @@ class UploadVideoAdmin(admin.ModelAdmin):
         queryset.update(visible=False)
 
 
+class UnidadAprendizajeAdmin(admin.ModelAdmin):
+    """Las unidades de aprendizaje: en que se reparte el material del curso."""
+
+    list_display = ("course", "numero", "nombre", "fecha")
+    list_filter = ("course",)
+    search_fields = ("nombre",)
+    ordering = ("course", "numero")
+
+
 admin.site.register(Program, ProgramAdmin)
 admin.site.register(Course, CourseAdmin)
 admin.site.register(CourseAllocation)
+admin.site.register(UnidadAprendizaje, UnidadAprendizajeAdmin)
 admin.site.register(Upload, UploadAdmin)
 admin.site.register(UploadVideo, UploadVideoAdmin)

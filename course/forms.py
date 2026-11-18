@@ -7,6 +7,7 @@ from .models import (
     EXTENSION_ENTREGA_POR_DEFECTO,
     Program,
     Submission,
+    UnidadAprendizaje,
     Upload,
     UploadFile,
     UploadVideo,
@@ -102,6 +103,22 @@ class EditCourseAllocationForm(forms.ModelForm):
         self.fields["lecturer"].queryset = User.objects.filter(is_lecturer=True)
 
 
+class UnidadAprendizajeForm(forms.ModelForm):
+    """Alta y edicion de una unidad de aprendizaje del curso."""
+
+    class Meta:
+        model = UnidadAprendizaje
+        fields = ("numero", "nombre", "fecha")
+        widgets = {
+            "fecha": forms.DateInput(attrs={"type": "date"}),
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for campo in self.fields.values():
+            campo.widget.attrs.update({"class": "form-control"})
+
+
 # Upload files to specific course
 class UploadFormFile(forms.ModelForm):
     archivos = forms.Field(
@@ -135,9 +152,11 @@ class UploadFormFile(forms.ModelForm):
             "visible",
             "es_principal",
             "extensiones_permitidas",
+            "unidad",
         )
 
     def __init__(self, *args, **kwargs):
+        curso = kwargs.pop("curso", None)
         super().__init__(*args, **kwargs)
         self.fields["title"].widget.attrs.update({"class": "form-control"})
         self.fields["file"].widget.attrs.update({"class": "form-control"})
@@ -145,6 +164,15 @@ class UploadFormFile(forms.ModelForm):
         self.fields["is_evaluable"].widget.attrs.update({"class": "form-check-input"})
         self.fields["visible"].widget.attrs.update({"class": "form-check-input"})
         self.fields["es_principal"].widget.attrs.update({"class": "form-check-input"})
+        # La unidad de aprendizaje: vacia, la deduce el propio curso de la
+        # fecha de subida. Solo se ofrecen las del curso en el que se sube.
+        self.fields["unidad"].required = False
+        self.fields["unidad"].empty_label = "Automatico: la unidad segun la fecha"
+        if curso is not None:
+            self.fields["unidad"].queryset = UnidadAprendizaje.objects.filter(
+                course=curso
+            )
+        self.fields["unidad"].widget.attrs.update({"class": "form-select"})
         # El campo del modelo guarda "pdf,odt"; el formulario trabaja con una
         # lista, asi que el initial hay que darlo ya troceado.
         if self.instance.pk:
@@ -222,9 +250,7 @@ class UploadFormVideo(forms.ModelForm):
         self.fields["title"].widget.attrs.update({"class": "form-control"})
         self.fields["video"].widget.attrs.update({"class": "form-control"})
         self.fields["url"].widget.attrs.update({"class": "form-control"})
-        self.fields["summary"].widget.attrs.update(
-            {"class": "form-control", "rows": 3}
-        )
+        self.fields["summary"].widget.attrs.update({"class": "form-control", "rows": 3})
         self.fields["orden"].widget.attrs.update({"class": "form-control"})
         self.fields["visible"].widget.attrs.update({"class": "form-check-input"})
 

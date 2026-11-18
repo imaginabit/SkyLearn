@@ -1,5 +1,6 @@
 import os
 import tempfile
+from datetime import date, datetime, time
 from decimal import Decimal
 
 from django.conf import settings
@@ -16,10 +17,12 @@ from course.models import (
     CourseAllocation,
     Program,
     Submission,
+    UnidadAprendizaje,
     Upload,
     UploadFile,
     UploadVideo,
 )
+from course.utils import ua_de_fichero
 from result.models import TakenCourse
 
 User = get_user_model()
@@ -686,7 +689,9 @@ class OcultarEntregasCorregidasTests(TestCase):
         self.client.force_login(self.docente)
 
         self.client.post(self.url_check, {"ocultar": "on"})
-        self.assertTrue(User.objects.get(pk=self.docente.pk).ocultar_entregas_corregidas)
+        self.assertTrue(
+            User.objects.get(pk=self.docente.pk).ocultar_entregas_corregidas
+        )
 
         self.client.post(self.url_check, {})
         self.assertFalse(
@@ -751,9 +756,7 @@ class OcultarEntregasCorregidasTests(TestCase):
         response = self.client.post(self.url_check, {"ocultar": "on"})
 
         self.assertEqual(response.status_code, 302)
-        self.assertFalse(
-            User.objects.get(pk=alumno.pk).ocultar_entregas_corregidas
-        )
+        self.assertFalse(User.objects.get(pk=alumno.pk).ocultar_entregas_corregidas)
 
     def test_el_check_solo_se_cambia_por_post(self):
         self.client.force_login(self.docente)
@@ -784,7 +787,9 @@ class DeckDownloadTests(TestCase):
         )
 
     def test_404_si_el_curso_no_tiene_presentacion(self):
-        self.client.force_login(User.objects.create_user(username="tmp-lector", password="password"))
+        self.client.force_login(
+            User.objects.create_user(username="tmp-lector", password="password")
+        )
 
         self.assertEqual(self.client.get(self.url).status_code, 404)
 
@@ -801,7 +806,9 @@ class DeckDownloadTests(TestCase):
                 self.assertEqual(response.status_code, 200)
                 self.assertIn("attachment", response["Content-Disposition"])
                 self.assertIn("presentacion.html", response["Content-Disposition"])
-                self.assertEqual(b"".join(response.streaming_content), b"<html>mazo</html>")
+                self.assertEqual(
+                    b"".join(response.streaming_content), b"<html>mazo</html>"
+                )
 
     def test_el_embed_y_la_descarga_coinciden_en_el_mismo_fichero(self):
         # hay dos .html en el curso: la vista y la descarga tienen que teachcar
@@ -838,7 +845,9 @@ class DeckDownloadTests(TestCase):
                     reverse("course_detail", kwargs={"slug": self.curso.slug})
                 ).content.decode()
 
-                self.assertIn(reverse("deck_download", kwargs={"slug": self.curso.slug}), html)
+                self.assertIn(
+                    reverse("deck_download", kwargs={"slug": self.curso.slug}), html
+                )
                 self.assertIn("Descargar HTML", html)
 
 
@@ -939,7 +948,9 @@ class MaterialDownloadTests(TestCase):
                 self.assertIn("E2_", response["Content-Disposition"])
                 self.assertIn(self.alumno.username, response["Content-Disposition"])
                 self.assertIn(".docx", response["Content-Disposition"])
-                self.assertEqual(b"".join(response.streaming_content), b"contenido docx")
+                self.assertEqual(
+                    b"".join(response.streaming_content), b"contenido docx"
+                )
                 response.close()
 
     def test_sin_codigo_usa_el_titulo(self):
@@ -951,7 +962,9 @@ class MaterialDownloadTests(TestCase):
 
                 response = self.client.get(self._url(upload))
 
-                self.assertIn("practica-de-cortafuegos", response["Content-Disposition"])
+                self.assertIn(
+                    "practica-de-cortafuegos", response["Content-Disposition"]
+                )
                 response.close()
 
     def test_exige_sesion_iniciada(self):
@@ -1277,7 +1290,9 @@ class MazosDelCursoTests(TestCase):
 
                 self.assertEqual(response.status_code, 200)
                 self.assertIn("inline", response["Content-Disposition"])
-                self.assertEqual(b"".join(response.streaming_content), b"<html>mazo</html>")
+                self.assertEqual(
+                    b"".join(response.streaming_content), b"<html>mazo</html>"
+                )
 
     def test_abrir_un_documento_que_no_es_mazo_da_404(self):
         with tempfile.TemporaryDirectory() as media:
@@ -1346,7 +1361,12 @@ class VideoEnlaceTests(TestCase):
         TakenCourse.objects.create(student=student, course=self.curso)
         self.url_curso = reverse("course_detail", kwargs={"slug": self.curso.slug})
 
-    def _video(self, titulo="Clase decriptaci�n", url="https://www.youtube.com/watch?v=gtuKuryDFuE", visible=True):
+    def _video(
+        self,
+        titulo="Clase decriptaci�n",
+        url="https://www.youtube.com/watch?v=gtuKuryDFuE",
+        visible=True,
+    ):
         return UploadVideo.objects.create(
             title=titulo, course=self.curso, url=url, visible=visible
         )
@@ -1491,7 +1511,9 @@ class VideoEnlaceTests(TestCase):
         response = self.client.post(url, {"title": "Ni una cosa ni la otra"})
 
         self.assertEqual(response.status_code, 200)
-        self.assertFalse(UploadVideo.objects.filter(title="Ni una cosa ni la otra").exists())
+        self.assertFalse(
+            UploadVideo.objects.filter(title="Ni una cosa ni la otra").exists()
+        )
 
     def test_un_docente_de_otro_curso_no_sube_videos(self):
         otro = Course.objects.create(
@@ -1589,3 +1611,160 @@ class MazoOcultoTests(TestCase):
         # El fichero se sirve abierto: si no se cierra, al borrar el directorio
         # temporal el sistema dice que el archivo esta en uso.
         respuesta.close()
+
+
+class UnidadesDeAprendizajeTests(TestCase):
+    """El material del curso se reparte por unidades de aprendizaje.
+
+    Cada unidad se cierra en su fecha: lo que se sube hasta ese dia va a esa
+    unidad, lo de antes a la primera y lo de despues a la ultima. Y un
+    fichero puede llevar la unidad puesta a mano, que manda sobre la fecha.
+    """
+
+    def setUp(self):
+        self.program = Program.objects.create(title="Programa de prueba")
+        self.curso = Course.objects.create(
+            title="Curso con unidades",
+            code="UAS-1",
+            program=self.program,
+            level="Bachelor",
+            year=1,
+            semester="First",
+        )
+        self.docente = User.objects.create_superuser(
+            username="docente-unidades",
+            email="docente@example.com",
+            password="password",
+        )
+        self.ua1 = UnidadAprendizaje.objects.create(
+            course=self.curso,
+            numero=1,
+            nombre="Procesos",
+            fecha=date(2026, 11, 13),
+        )
+        self.ua2 = UnidadAprendizaje.objects.create(
+            course=self.curso,
+            numero=2,
+            nombre="Almacenamiento",
+            fecha=date(2026, 11, 19),
+        )
+        self.ua3 = UnidadAprendizaje.objects.create(
+            course=self.curso,
+            numero=3,
+            nombre="Comunicaciones",
+            fecha=date(2026, 11, 23),
+        )
+        self.unidades = [self.ua1, self.ua2, self.ua3]
+        self.url = reverse("course_detail", kwargs={"slug": self.curso.slug})
+
+    def _fichero(self, titulo, fecha, **kwargs):
+        """Un fichero del curso subido en una fecha concreta."""
+        fichero = Upload.objects.create(
+            title=titulo, course=self.curso, file=f"{titulo}.pdf", **kwargs
+        )
+        # `upload_time` es automatico: se corrige despues de crear la fila.
+        Upload.objects.filter(pk=fichero.pk).update(
+            upload_time=datetime.combine(fecha, time(12, 0))
+        )
+        fichero.refresh_from_db()
+        return fichero
+
+    def test_lo_subido_antes_de_la_primera_unidad_va_a_la_primera(self):
+        fichero = self._fichero("Antes de empezar", date(2026, 10, 30))
+
+        self.assertEqual(ua_de_fichero(self.unidades, fichero), self.ua1)
+
+    def test_cada_unidad_va_desde_la_fecha_de_la_anterior_hasta_la_suya(self):
+        # hasta el 13/11 va a la UA1
+        antes = self._fichero("Del tramo uno", date(2026, 11, 10))
+        # del 14/11 al 19/11 va a la UA2
+        en_medio = self._fichero("Del tramo dos", date(2026, 11, 17))
+        el_dia_del_cierre = self._fichero("El dia del cierre", date(2026, 11, 19))
+        # del 20/11 al 23/11 va a la UA3
+        el_tercer_tramo = self._fichero("Del tramo tres", date(2026, 11, 21))
+
+        self.assertEqual(ua_de_fichero(self.unidades, antes), self.ua1)
+        self.assertEqual(ua_de_fichero(self.unidades, en_medio), self.ua2)
+        self.assertEqual(ua_de_fichero(self.unidades, el_dia_del_cierre), self.ua2)
+        self.assertEqual(ua_de_fichero(self.unidades, el_tercer_tramo), self.ua3)
+
+    def test_lo_subido_despues_de_la_ultima_unidad_va_a_la_ultima(self):
+        fichero = self._fichero("Tarde", date(2026, 12, 1))
+
+        self.assertEqual(ua_de_fichero(self.unidades, fichero), self.ua3)
+
+    def test_la_unidad_puesta_a_mano_manda(self):
+        fichero = self._fichero("A mano", date(2026, 10, 30), unidad=self.ua2)
+
+        self.assertEqual(ua_de_fichero(self.unidades, fichero), self.ua2)
+
+    def test_sin_unidades_no_hay_reparto(self):
+        fichero = self._fichero("Sin unidades", date(2026, 11, 15))
+
+        self.assertIsNone(ua_de_fichero([], fichero))
+
+    def test_la_pagina_muestra_la_cabecera_de_cada_unidad(self):
+        self._fichero("Apuntes de la UA1", date(2026, 11, 10))
+        self._fichero("Apuntes de la UA2", date(2026, 11, 17))
+        self.client.force_login(self.docente)
+
+        html = self.client.get(self.url).content.decode()
+
+        self.assertIn("UA1 · Procesos", html)
+        self.assertIn("UA2 · Almacenamiento", html)
+        # cada cabecera va antes que el material de su unidad
+        self.assertLess(html.index("UA1 · Procesos"), html.index("Apuntes de la UA1"))
+        self.assertLess(
+            html.index("UA2 · Almacenamiento"), html.index("Apuntes de la UA2")
+        )
+        self.assertLess(
+            html.index("Apuntes de la UA1"), html.index("UA2 · Almacenamiento")
+        )
+
+    def test_el_docente_puede_crear_y_borrar_unidades(self):
+        self.client.force_login(self.docente)
+        alta = reverse("course_unidad_add", kwargs={"slug": self.curso.slug})
+
+        respuesta = self.client.post(
+            alta, {"numero": 4, "nombre": "Comunicaciones", "fecha": "2026-11-23"}
+        )
+
+        self.assertEqual(respuesta.status_code, 302)
+        unidad = UnidadAprendizaje.objects.get(course=self.curso, numero=4)
+        self.assertEqual(unidad.nombre, "Comunicaciones")
+
+        borrado = reverse(
+            "course_unidad_delete",
+            kwargs={"slug": self.curso.slug, "unidad_id": unidad.pk},
+        )
+        respuesta = self.client.post(borrado)
+
+        self.assertEqual(respuesta.status_code, 302)
+        self.assertFalse(UnidadAprendizaje.objects.filter(pk=unidad.pk).exists())
+
+    def test_no_se_puede_repetir_el_numero_de_unidad(self):
+        self.client.force_login(self.docente)
+        alta = reverse("course_unidad_add", kwargs={"slug": self.curso.slug})
+
+        respuesta = self.client.post(
+            alta, {"numero": 1, "nombre": "Repetida", "fecha": "2026-11-13"}
+        )
+
+        self.assertEqual(respuesta.status_code, 200)
+        self.assertEqual(UnidadAprendizaje.objects.filter(course=self.curso).count(), 3)
+        self.assertContains(respuesta, "Ya hay otra unidad con ese numero")
+
+    def test_el_alumnado_no_ve_la_pestana_de_unidades(self):
+        alumno = User.objects.create_user(
+            username="alumno-unidades", password="password", is_student=True
+        )
+        alumno = User.objects.get(pk=alumno.pk)
+        Student.objects.create(student=alumno, level="Bachelor", program=self.program)
+        TakenCourse.objects.create(
+            student=Student.objects.get(student=alumno), course=self.curso
+        )
+        self.client.force_login(alumno)
+
+        html = self.client.get(self.url).content.decode()
+
+        self.assertNotIn("?tab=unidades", html)

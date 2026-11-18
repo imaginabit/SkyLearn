@@ -16,6 +16,21 @@ urlpatterns = [
         views.course_ocultar_corregidas,
         name="course_ocultar_corregidas",
     ),
+    path(
+        "course/<slug>/unidades/add/",
+        views.course_unidad_editar,
+        name="course_unidad_add",
+    ),
+    path(
+        "course/<slug>/unidades/<int:unidad_id>/edit/",
+        views.course_unidad_editar,
+        name="course_unidad_edit",
+    ),
+    path(
+        "course/<slug>/unidades/<int:unidad_id>/delete/",
+        views.course_unidad_borrar,
+        name="course_unidad_delete",
+    ),
     path("course/<slug>/deck/download/", views.deck_download, name="deck_download"),
     path(
         "course/<slug>/deck/<int:file_id>/abrir/",

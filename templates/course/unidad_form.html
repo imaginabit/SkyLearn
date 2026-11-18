@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %}{{ title }} | {% trans 'Learning management system' %}{% endblock title %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">{% trans 'Home' %}</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'programs' %}">{% trans 'Programs' %}</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'program_detail' course.program.id %}">{{ course.program }}</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'course_detail' course.slug %}">{{ course }}</a></li>
+        <li class="breadcrumb-item active" aria-current="page">{% trans 'Unidad de aprendizaje' %}</li>
+    </ol>
+</nav>
+
+<p class="title-1">{% trans 'Unidad de aprendizaje de' %} {{ course|truncatechars:25 }}</p>
+<br><br>
+
+{% include 'snippets/messages.html' %}
+
+<div class="row">
+    <div class="col-md-8 p-0 mx-auto">
+        <div class="card">
+            <p class="form-title">
+                {% if unidad %}{% trans 'Editar unidad' %}{% else %}{% trans 'Nueva unidad' %}{% endif %}
+            </p>
+
+            <div class="card-body">
+                <p class="text-muted small">
+                    <i class="fas fa-circle-info me-1"></i>
+                    {% trans "La unidad se cierra en su fecha: todo el material subido hasta ese dia va a ella. Lo subido antes de la primera unidad va a la primera, y lo de despues de la ultima, a la ultima." %}
+                </p>
+                <form action="" method="POST">{% csrf_token %}
+                    {{ form|crispy }}
+
+                    <div class="form-group">
+                        <button class="btn btn-primary" type="submit">{% trans 'Save' %}</button>
+                        <a class="btn btn-danger" href="{% url 'course_detail' course.slug %}?tab=unidades"
+                            style="float: right;">{% trans 'Cancel' %}</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

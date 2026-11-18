@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.db.models import Count, Q, Sum
 from django.http import FileResponse, Http404
-from django.db import transaction
+from django.db import IntegrityError, transaction
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from django.utils import timezone
@@ -29,6 +29,7 @@ from course.forms import (
     ProgramForm,
     SubmissionForm,
     SubmissionGradeForm,
+    UnidadAprendizajeForm,
     UploadFormFile,
     UploadFormVideo,
 )
@@ -37,15 +38,21 @@ from course.models import (
     CourseAllocation,
     Program,
     Submission,
+    UnidadAprendizaje,
     Upload,
     UploadFile,
     UploadVideo,
 )
 from course.utils import (
+    agrupa_por_ua,
     curso_asignado,
     deck_del_curso,
     decks_del_curso,
     es_docente_asignado,
+    marca_ua,
+    numera_grupos,
+    ua_de_fichero,
+    unidades_del_curso,
 )
 from result.models import TakenCourse
 
@@ -59,7 +66,11 @@ PESTANAS = (
     "entregas",
     "videos",
     "documentacion",
+    "unidades",
 )
+
+# Las pestanas que solo ve el docente.
+PESTANAS_DEL_DOCENTE = ("unidades",)
 
 
 def al_curso(slug, tab):
@@ -266,6 +277,11 @@ def course_single(request, slug):
     tab = request.GET.get("tab", "presentaciones")
     if tab not in PESTANAS:
         tab = "presentaciones"
+    # El docente solo ve y toca lo de los cursos que tiene asignados.
+    is_editor = es_docente_asignado(request.user, course)
+    # Las unidades de aprendizaje las gestiona el docente: el alumnado no las ve.
+    if tab in PESTANAS_DEL_DOCENTE and not is_editor:
+        tab = "presentaciones"
     # prefetch de los ficheros adicionales: sin esto, la tabla del curso hace
     # una consulta por actividad para listar sus .odt y .docx alternativos
     # por fecha de subida: el material sale en el orden de las clases, y no
@@ -277,9 +293,8 @@ def course_single(request, slug):
     )
     videos = UploadVideo.objects.filter(course__slug=slug)
     lecturers = CourseAllocation.objects.filter(courses__pk=course.id)
-    # El docente solo ve lo oculto y las entregas de sus cursos asignados:
-    # el flag is_lecturer a secas dejaba verlo todo en cualquier curso.
-    is_editor = es_docente_asignado(request.user, course)
+    # Las unidades de aprendizaje del curso: el material se reparte por ellas.
+    unidades = unidades_del_curso(course)
     # Los documentos ocultos son los que el profesorado sube antes de tiempo: una
     # prueba que no debe ver el alumnado hasta que toque. El docente los ve
     # siempre, para poder prepararlos.
@@ -307,6 +322,11 @@ def course_single(request, slug):
     # documento solo se consulta.
     actividades = [d for d in files if d.is_activity]
     documentos = [d for d in files if not d.is_activity]
+    # Cada fichero lleva su unidad de aprendizaje (la que tiene puesta a mano o
+    # la que le toca por la fecha de subida) y su numero de fila, que es global
+    # dentro de cada tabla.
+    marca_ua(unidades, actividades)
+    marca_ua(unidades, documentos)
     # solo se entrega si hay matricula: antes cualquier cuenta que entraba
     # podia entregar en cualquier curso
     matriculado = TakenCourse.objects.filter(
@@ -318,6 +338,11 @@ def course_single(request, slug):
     decks = sorted(
         decks_del_curso(course, solo_visibles=not is_editor), key=_orden_de_lectura
     )
+    marca_ua(unidades, decks)
+    # Los grupos por unidad de aprendizaje: cada tabla sale partida por UAs.
+    grupos_decks = agrupa_por_ua(decks, unidades)
+    grupos_actividades = agrupa_por_ua(actividades, unidades)
+    grupos_documentos = agrupa_por_ua(documentos, unidades)
 
     if request.method == "POST":
         # ponytail: entrega del alumno; el profesor solo revisa la tabla de abajo
@@ -386,6 +411,9 @@ def course_single(request, slug):
     entregas_evaluables = None
     entregas_ordinarias = None
     submissions = None
+    grupos_entregas = None
+    grupos_evaluables = None
+    grupos_ordinarias = None
     entregas_ocultas = 0
     entregas_totales = 0
     entregas_visibles = 0
@@ -413,6 +441,11 @@ def course_single(request, slug):
         entregas_visibles = submissions.count()
         entregas_ocultas = entregas_totales - entregas_visibles
         entregas_sin_calificar = entregas_totales - entregas_calificadas
+        # La tabla del docente sale partida por unidades de aprendizaje: cada
+        # entrega va con la de su actividad.
+        for entrega in submissions:
+            entrega.ua = ua_de_fichero(unidades, entrega.document)
+        grupos_entregas = numera_grupos(agrupa_por_ua(submissions, unidades))
     else:
         my_submissions = (
             Submission.objects.filter(course=course, student=request.user)
@@ -430,6 +463,21 @@ def course_single(request, slug):
             # lectura.
             entregas_evaluables = [f for f in filas if f["actividad"].is_evaluable]
             entregas_ordinarias = [f for f in filas if not f["actividad"].is_evaluable]
+            # Y cada una partida por unidades de aprendizaje.
+            grupos_evaluables = numera_grupos(
+                agrupa_por_ua(
+                    entregas_evaluables,
+                    unidades,
+                    obtener_ua=lambda fila: fila["actividad"].ua,
+                )
+            )
+            grupos_ordinarias = numera_grupos(
+                agrupa_por_ua(
+                    entregas_ordinarias,
+                    unidades,
+                    obtener_ua=lambda fila: fila["actividad"].ua,
+                )
+            )
 
     return render(
         request,
@@ -445,6 +493,17 @@ def course_single(request, slug):
             "is_editor": is_editor,
             "deck": deck,
             "decks": decks,
+            "grupos_decks": grupos_decks,
+            "grupos_actividades": grupos_actividades,
+            "grupos_documentos": grupos_documentos,
+            "grupos_entregas": grupos_entregas,
+            "grupos_evaluables": grupos_evaluables,
+            "grupos_ordinarias": grupos_ordinarias,
+            "unidades": unidades,
+            # El numero de columnas de cada tabla, para que la cabecera de la
+            # unidad ocupe la fila entera.
+            "columnas_ficheros": 6 if is_editor else 5,
+            "columnas_decks": 5 if is_editor else 4,
             "tab_activa": tab,
             "submission_form": form,
             "my_submissions": my_submissions,
@@ -480,6 +539,72 @@ def course_ocultar_corregidas(request, slug):
     else:
         messages.success(request, "Se veran todas las entregas.")
     return al_curso(course.slug, "entregas")
+
+
+@login_required
+@lecturer_required
+def course_unidad_editar(request, slug, unidad_id=None):
+    """Alta o edicion de una unidad de aprendizaje del curso.
+
+    Sin `unidad_id` se crea una nueva; con el, se edita la existente. El curso
+    sale de la URL: una unidad es siempre de un curso, y no se puede cambiar.
+    """
+    course = curso_asignado(request, slug)
+    unidad = None
+    if unidad_id is not None:
+        unidad = get_object_or_404(UnidadAprendizaje, pk=unidad_id, course=course)
+    if request.method == "POST":
+        form = UnidadAprendizajeForm(request.POST, instance=unidad)
+        # El curso se pone antes de validar: sin el, el aviso de numero
+        # repetido no se puede dar (el numero es unico dentro del curso).
+        form.instance.course = course
+        if form.is_valid():
+            try:
+                # En un bloque propio: si el numero esta repetido, la
+                # transaccion no se rompe y el formulario puede seguir.
+                with transaction.atomic():
+                    form.save()
+            except IntegrityError:
+                # El numero ya existe en el curso. El aviso del formulario no
+                # lo pilla (el curso no esta en el formulario), asi que se
+                # dice aqui: con un 500 no se explica nada.
+                form.add_error(
+                    "numero",
+                    "Ya hay otra unidad con ese numero en este curso.",
+                )
+            else:
+                messages.success(request, f"Unidad {form.instance.numero} guardada.")
+                return al_curso(slug, "unidades")
+        messages.error(request, "Corrige los errores del formulario.")
+    else:
+        form = UnidadAprendizajeForm(instance=unidad)
+    return render(
+        request,
+        "course/unidad_form.html",
+        {
+            "title": "Unidad de aprendizaje",
+            "form": form,
+            "course": course,
+            "unidad": unidad,
+        },
+    )
+
+
+@require_POST
+@login_required
+@lecturer_required
+def course_unidad_borrar(request, slug, unidad_id):
+    """Borra una unidad de aprendizaje.
+
+    Los ficheros que tenia asignados a mano se quedan sin unidad: vuelven a
+    la que les toca por la fecha de subida.
+    """
+    course = curso_asignado(request, slug)
+    unidad = get_object_or_404(UnidadAprendizaje, pk=unidad_id, course=course)
+    numero = unidad.numero
+    unidad.delete()
+    messages.success(request, f"Unidad {numero} borrada.")
+    return al_curso(slug, "unidades")
 
 
 @require_POST
@@ -829,7 +954,7 @@ def handle_file_upload(request, slug):
     # URL; sus hermanas edit/delete ya lo hacian asi.
     course = curso_asignado(request, slug)
     if request.method == "POST":
-        form = UploadFormFile(request.POST, request.FILES)
+        form = UploadFormFile(request.POST, request.FILES, curso=course)
         if form.is_valid():
             upload = form.save(commit=False)
             upload.course = course
@@ -839,7 +964,7 @@ def handle_file_upload(request, slug):
             return al_curso(slug, pestana_de(upload, course))
         messages.error(request, "Correct the error(s) below.")
     else:
-        form = UploadFormFile()
+        form = UploadFormFile(curso=course)
     return render(
         request,
         "upload/upload_file_form.html",
@@ -853,7 +978,9 @@ def handle_file_edit(request, slug, file_id):
     course = curso_asignado(request, slug)
     upload = get_object_or_404(Upload, pk=file_id, course=course)
     if request.method == "POST":
-        form = UploadFormFile(request.POST, request.FILES, instance=upload)
+        form = UploadFormFile(
+            request.POST, request.FILES, instance=upload, curso=course
+        )
         if form.is_valid():
             with transaction.atomic():
                 # Si se sube un fichero nuevo, el anterior queda en el disco
@@ -871,7 +998,7 @@ def handle_file_edit(request, slug, file_id):
             return al_curso(slug, pestana_de(upload, course))
         messages.error(request, "Correct the error(s) below.")
     else:
-        form = UploadFormFile(instance=upload)
+        form = UploadFormFile(instance=upload, curso=course)
     return render(
         request,
         "upload/upload_file_form.html",

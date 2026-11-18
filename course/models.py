@@ -201,6 +201,53 @@ def log_course_delete(sender, instance, **kwargs):
     ActivityLog.objects.create(message=_(f"The course '{instance}' has been deleted."))
 
 
+class UnidadAprendizaje(models.Model):
+    """Una unidad de aprendizaje del curso: su numero, su nombre y su fecha.
+
+    La fecha es la de cierre de la unidad (la de su evaluacion). Todo el
+    material subido hasta ese dia va a esa unidad; el de antes, a la primera;
+    el de despues, a la ultima. Asi el material sale ordenado por unidades y
+    no por el dia en que se subio.
+    """
+
+    course = models.ForeignKey(
+        Course,
+        on_delete=models.CASCADE,
+        related_name="unidades",
+    )
+    numero = models.PositiveSmallIntegerField(
+        default=1,
+        verbose_name=_("Numero"),
+        help_text=_("El orden de la unidad: 1, 2, 3..."),
+    )
+    nombre = models.CharField(
+        max_length=200,
+        verbose_name=_("Nombre"),
+        help_text=_("De que va la unidad: 'Procesos y rendimiento', por ejemplo."),
+    )
+    fecha = models.DateField(
+        verbose_name=_("Fecha de cierre"),
+        help_text=_(
+            "El dia en que se cierra la unidad (el de su evaluacion). Todo lo "
+            "subido hasta ese dia va a esta unidad."
+        ),
+    )
+
+    class Meta:
+        ordering = ["numero", "pk"]
+        constraints = [
+            models.UniqueConstraint(
+                fields=["course", "numero"],
+                name="una_unidad_por_numero_en_el_curso",
+            )
+        ]
+        verbose_name = _("Unidad de aprendizaje")
+        verbose_name_plural = _("Unidades de aprendizaje")
+
+    def __str__(self):
+        return f"UA{self.numero} · {self.nombre}"
+
+
 class CourseAllocation(models.Model):
     lecturer = models.ForeignKey(
         settings.AUTH_USER_MODEL,
@@ -283,6 +330,18 @@ class Upload(models.Model):
             "Solo para los mazos de diapositivas (.html): el que se muestra "
             "embebido arriba del curso, encima de las pestanas. Uno solo por "
             "curso; al marcarlo se desmarcan los demas."
+        ),
+    )
+    unidad = models.ForeignKey(
+        "UnidadAprendizaje",
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name="ficheros",
+        verbose_name=_("Unidad de aprendizaje"),
+        help_text=_(
+            "Vacio: la unidad se deduce de la fecha de subida. Ponlo a mano "
+            "solo cuando el fichero no vaya con su fecha."
         ),
     )
 
@@ -422,9 +481,7 @@ class UploadVideo(models.Model):
 
     title = models.CharField(max_length=100)
     slug = models.SlugField(unique=True, blank=True)
-    course = models.ForeignKey(
-        Course, on_delete=models.CASCADE, related_name="videos"
-    )
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name="videos")
     video = models.FileField(
         upload_to="course_videos/",
         blank=True,
@@ -475,7 +532,9 @@ class UploadVideo(models.Model):
         """O un fichero o un enlace: un vídeo sin nada no vale."""
         if not self.video and not self.url:
             raise ValidationError(
-                _("Sube un fichero o indica un enlace externo: hace falta uno de los dos.")
+                _(
+                    "Sube un fichero o indica un enlace externo: hace falta uno de los dos."
+                )
             )
 
     @property

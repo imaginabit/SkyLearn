@@ -133,6 +133,16 @@ primer mazo, como se hacia antes.
             <span class="badge bg-secondary ms-1">{{ documentos|length }}</span>
         </a>
     </li>
+    {% if is_editor %}
+    <li class="nav-item" role="presentation">
+        <a class="nav-link {% if tab_activa == 'unidades' %}active{% endif %}"
+           data-bs-toggle="tab" href="?tab=unidades" data-bs-target="#tab-unidades" role="tab"
+           title="{% trans 'Las unidades de aprendizaje en las que se reparte el material' %}">
+            <i class="fas fa-layer-group me-1"></i>{% trans "Unidades" %}
+            <span class="badge bg-secondary ms-1">{{ unidades|length }}</span>
+        </a>
+    </li>
+    {% endif %}
 </ul>
 
 <div class="tab-content" id="contenido-pestanas-curso">
@@ -165,9 +175,11 @@ primer mazo, como se hacia antes.
                         </tr>
                     </thead>
                     <tbody>
-                        {% for mazo in decks %}
+                        {% for grupo in grupos_decks %}
+                        {% include "snippets/cabecera_ua.html" with grupo=grupo columnas=columnas_decks %}
+                        {% for mazo in grupo.elementos %}
                         <tr>
-                            <td>{{ forloop.counter }}</td>
+                            <td>{{ mazo.num }}</td>
                             <td>
                                 <a href="{% url 'deck_abrir' slug=course.slug file_id=mazo.pk %}" target="_blank"
                                     rel="noopener" class="d-flex align-items-center text-decoration-none"
@@ -220,6 +232,7 @@ primer mazo, como se hacia antes.
                             {% endif %}
                         </tr>
                         {% endfor %}
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>
@@ -248,7 +261,7 @@ primer mazo, como se hacia antes.
         <div class="container-fluid mt-3 mb-4">
             {% trans 'Todavia no hay ninguna actividad en el curso.' as sin_actividades %}
             {% trans "¿Borrar esta actividad y todos sus ficheros? Esta acción no se puede deshacer." as confirmar_actividad %}
-            {% include "snippets/tabla_ficheros.html" with lista=actividades vacio=sin_actividades confirmar_borrado=confirmar_actividad %}
+            {% include "snippets/tabla_ficheros.html" with grupos=grupos_actividades vacio=sin_actividades confirmar_borrado=confirmar_actividad %}
         </div>
     </div>
 
@@ -289,9 +302,11 @@ primer mazo, como se hacia antes.
                         </tr>
                     </thead>
                     <tbody>
-                        {% for s in submissions %}
+                        {% for grupo in grupos_entregas %}
+                        {% include "snippets/cabecera_ua.html" with grupo=grupo columnas=7 %}
+                        {% for s in grupo.elementos %}
                         <tr>
-                            <td>{{ forloop.counter }}</td>
+                            <td>{{ s.num }}</td>
                             <td>{{ s.student.get_full_name|default:s.student.username }}</td>
                             <td>
                                 {{ s.document.title|default:"-" }}
@@ -318,6 +333,7 @@ primer mazo, como se hacia antes.
                             {% trans "Todavia no ha entregado nadie." %}
                             {% endif %}
                         </td></tr>
+                        {% endfor %}
                         {% endfor %}
                     </tbody>
                 </table>
@@ -361,9 +377,9 @@ primer mazo, como se hacia antes.
             {% if entregas_evaluables or entregas_ordinarias %}
             {% trans "Actividades evaluables" as titulo_evaluables %}
             {% trans "Cuentan para la nota final del curso." as nota_evaluables %}
-            {% include "snippets/tabla_entregas.html" with lista=entregas_evaluables titulo=titulo_evaluables subtitulo=nota_evaluables destacada="1" %}
+            {% include "snippets/tabla_entregas.html" with grupos=grupos_evaluables titulo=titulo_evaluables subtitulo=nota_evaluables destacada="1" %}
             {% trans "Otras actividades" as titulo_ordinarias %}
-            {% include "snippets/tabla_entregas.html" with lista=entregas_ordinarias titulo=titulo_ordinarias subtitulo="" %}
+            {% include "snippets/tabla_entregas.html" with grupos=grupos_ordinarias titulo=titulo_ordinarias subtitulo="" %}
             {% else %}
             <div class="card p-3">
                 <p class="text-muted small mb-2">{% trans "Todavia no hay ninguna actividad en el curso." %}</p>
@@ -518,9 +534,68 @@ primer mazo, como se hacia antes.
         <div class="container-fluid mt-3 mb-4">
             {% trans 'No File Uploaded.' as sin_documentos %}
             {% trans "¿Borrar este documento y todos sus ficheros? Esta acción no se puede deshacer." as confirmar_documento %}
-            {% include "snippets/tabla_ficheros.html" with lista=documentos vacio=sin_documentos confirmar_borrado=confirmar_documento %}
+            {% include "snippets/tabla_ficheros.html" with grupos=grupos_documentos vacio=sin_documentos confirmar_borrado=confirmar_documento %}
         </div>
     </div>
+
+    {% comment %}
+    Unidades: las unidades de aprendizaje del curso. El material se reparte
+    por ellas: lo que se sube hasta la fecha de cierre de una unidad va a esa
+    unidad. Solo la ve el docente.
+    {% endcomment %}
+    {% if is_editor %}
+    <div class="tab-pane fade {% if tab_activa == 'unidades' %}show active{% endif %}"
+         id="tab-unidades" role="tabpanel" tabindex="0">
+        <div class="container-fluid mt-3 mb-4">
+            <p class="text-muted small">
+                <i class="fas fa-layer-group me-1"></i>
+                {% trans "El material del curso se reparte por unidades de aprendizaje. Cada unidad se cierra en su fecha: lo que se sube hasta ese dia va a esa unidad, lo de antes a la primera y lo de despues a la ultima." %}
+                <a href="{% url 'course_unidad_add' course.slug %}">{% trans "Anadir una" %}</a>.
+            </p>
+            <div class="table-responsive">
+                <table class="table table-shadow table-light table-striped m-0">
+                    <thead>
+                        <tr>
+                            <th>UA</th>
+                            <th>{% trans "Nombre" %}</th>
+                            <th>{% trans "Fecha de cierre" %}</th>
+                            <th>{% trans "Ficheros con la unidad puesta a mano" %}</th>
+                            <th>{% trans "Acciones" %}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for unidad in unidades %}
+                        <tr>
+                            <td>UA{{ unidad.numero }}</td>
+                            <td>{{ unidad.nombre }}</td>
+                            <td>{{ unidad.fecha|date:"SHORT_DATE_FORMAT" }}</td>
+                            <td>{{ unidad.ficheros.count }}</td>
+                            <td>
+                                <div class="update-delete">
+                                    <a href="{% url 'course_unidad_edit' course.slug unidad.pk %}"
+                                        class="update" title="{% trans 'Edit' %}">
+                                        <i class="fas fa-pencil-alt"></i>
+                                    </a>
+                                    {% url 'course_unidad_delete' course.slug unidad.pk as borrar_url %}{% trans 'Delete' as label %}{% include "snippets/delete_form.html" with url=borrar_url clase="border-0 bg-transparent p-0 align-baseline" titulo=label etiqueta="" confirmar="¿Borrar esta unidad de aprendizaje? Los ficheros que tenia asignados a mano vuelven a la unidad que les toca por la fecha." %}
+                                </div>
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="5" class="text-muted">
+                                {% trans "Este curso no tiene unidades de aprendizaje: el material sale todo junto, por orden de subida." %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <a class="btn btn-sm btn-primary mt-3" href="{% url 'course_unidad_add' course.slug %}">
+                <i class="fas fa-plus me-1"></i>{% trans "Anadir unidad de aprendizaje" %}
+            </a>
+        </div>
+    </div>
+    {% endif %}
 
 </div>
 

@@ -2,7 +2,10 @@
 La tabla de estado de las entregas del alumno, para una lista de actividades.
 Quien la incluye pasa:
 
-  lista       las filas: dicts con `actividad` (Upload) y `entrega` (Submission o None)
+  grupos      los grupos por unidad de aprendizaje: cada uno es
+               {"unidad": UnidadAprendizaje|None, "elementos": [...]}, y cada
+               elemento es un dict con `actividad` (Upload) y `entrega`
+               (Submission o None)
   titulo      el titulo de la tabla, ya traducido
   subtitulo   la aclaracion de debajo, ya traducida
   destacada   si es "1", las filas salen resaltadas (tabla-warning)
@@ -30,9 +33,11 @@ la tabla, porque Bootstrap no se lleva bien con los modales dentro de
             </tr>
         </thead>
         <tbody>
-            {% for fila in lista %}
+            {% for grupo in grupos %}
+            {% include "snippets/cabecera_ua.html" with grupo=grupo columnas=6 %}
+            {% for fila in grupo.elementos %}
             <tr class="{% if fila.actividad.resaltado_activo %}resaltada{% endif %}{% if destacada == "1" %} table-warning{% endif %}">
-                <td>{{ forloop.counter }}</td>
+                <td>{{ fila.num }}</td>
                 <td>
                     {% url 'upload_file_download' slug=course.slug file_id=fila.actividad.pk as enlace_actividad %}
                     <a href="{{ enlace_actividad }}" title="{{ fila.actividad }}" class="d-flex align-items-center">
@@ -109,11 +114,13 @@ la tabla, porque Bootstrap no se lleva bien con los modales dentro de
                 </td>
             </tr>
             {% endfor %}
+            {% endfor %}
         </tbody>
     </table>
 </div>
 
-{% for fila in lista %}
+{% for grupo in grupos %}
+{% for fila in grupo.elementos %}
 {% if fila.entrega and fila.entrega.mark is None %}
 <div class="modal fade" id="modal-borrar-entrega-{{ fila.entrega.pk }}" tabindex="-1"
     aria-labelledby="titulo-modal-borrar-entrega-{{ fila.entrega.pk }}" aria-hidden="true">
@@ -141,4 +148,5 @@ la tabla, porque Bootstrap no se lleva bien con los modales dentro de
     </div>
 </div>
 {% endif %}
+{% endfor %}
 {% endfor %}

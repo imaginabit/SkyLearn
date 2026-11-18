@@ -1,0 +1,24 @@
+{% load i18n %}{% comment %}
+La fila de cabecera de una unidad de aprendizaje, dentro de una tabla.
+
+Quien lo incluye pasa:
+
+  grupo      el grupo: {"unidad": UnidadAprendizaje|None, "elementos": [...]}
+  columnas   el numero de columnas de la tabla, para que la cabecera ocupe
+             la fila entera
+
+Sin unidades definidas (un curso que no las tiene) no sale ninguna cabecera:
+la tabla se queda como estaba.
+{% endcomment %}
+{% if grupo.unidad %}
+<tr>
+    <td colspan="{{ columnas }}" class="bg-light">
+        <i class="fas fa-layer-group me-1"></i>
+        <strong>UA{{ grupo.unidad.numero }} · {{ grupo.unidad.nombre }}</strong>
+        <span class="text-muted small ms-2">
+            {% trans "hasta el" %} {{ grupo.unidad.fecha|date:"SHORT_DATE_FORMAT" }}
+        </span>
+        <span class="badge bg-secondary ms-2">{{ grupo.elementos|length }}</span>
+    </td>
+</tr>
+{% endif %}

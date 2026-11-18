@@ -3,7 +3,8 @@ La tabla de ficheros del curso, para la pestana de Actividades y la de
 Documentacion. Es la misma tabla: cambia la lista que se recorre y los
 textos. Quien la incluye pasa:
 
-  lista               la lista de ficheros (actividades o documentos)
+  grupos              los grupos por unidad de aprendizaje: cada uno es
+                       {"unidad": UnidadAprendizaje|None, "elementos": [...]}
   vacio               el texto del estado vacio, ya traducido
   confirmar_borrado   el texto del confirm al borrar el fichero principal
 
@@ -26,9 +27,11 @@ el alumnado y se edita igual.
             </tr>
         </thead>
         <tbody>
-            {% for file in lista %}
+            {% for grupo in grupos %}
+            {% include "snippets/cabecera_ua.html" with grupo=grupo columnas=columnas_ficheros %}
+            {% for file in grupo.elementos %}
             <tr class="{% if file.resaltado_activo %}resaltada{% endif %}">
-                <td>{{ forloop.counter }}</td>
+                <td>{{ file.num }}</td>
                 <td>
                     {% url 'upload_file_download' slug=course.slug file_id=file.pk as enlace %}
                     <a href="{{ enlace }}" title="{{ file }}" class="d-flex align-items-center">
@@ -77,6 +80,7 @@ el alumnado y se edita igual.
                 </td>
                 {% endif %}
             </tr>
+            {% endfor %}
             {% empty %}
             <tr>
                 <td></td>
