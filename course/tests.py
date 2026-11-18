@@ -1768,3 +1768,41 @@ class UnidadesDeAprendizajeTests(TestCase):
         html = self.client.get(self.url).content.decode()
 
         self.assertNotIn("?tab=unidades", html)
+
+    def test_el_alumnado_ve_su_tabla_de_entregas_partida_por_unidades(self):
+        media = tempfile.TemporaryDirectory()
+        self.addCleanup(media.cleanup)
+        ajustes = self.settings(MEDIA_ROOT=media.name)
+        ajustes.enable()
+        self.addCleanup(ajustes.disable)
+        alumno = User.objects.create_user(
+            username="alumno-entregas", password="password", is_student=True
+        )
+        alumno = User.objects.get(pk=alumno.pk)
+        Student.objects.create(student=alumno, level="Bachelor", program=self.program)
+        TakenCourse.objects.create(
+            student=Student.objects.get(student=alumno), course=self.curso
+        )
+        actividad = Upload.objects.create(
+            title="Actividad 1",
+            course=self.curso,
+            file=SimpleUploadedFile("actividad1.pdf", b"%PDF-1.4"),
+            is_activity=True,
+        )
+        Upload.objects.filter(pk=actividad.pk).update(
+            upload_time=datetime.combine(date(2026, 11, 10), time(12, 0))
+        )
+        Submission.objects.create(
+            course=self.curso,
+            student=alumno,
+            document=actividad,
+            file=SimpleUploadedFile("trabajo.pdf", b"%PDF-1.4"),
+        )
+        self.client.force_login(alumno)
+
+        respuesta = self.client.get(self.url)
+        html = respuesta.content.decode()
+
+        self.assertEqual(respuesta.status_code, 200)
+        self.assertIn("UA1 · Procesos", html)
+        self.assertIn("Actividad 1", html)
