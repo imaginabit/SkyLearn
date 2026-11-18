@@ -110,13 +110,17 @@ class UnidadAprendizajeForm(forms.ModelForm):
         model = UnidadAprendizaje
         fields = ("numero", "nombre", "fecha")
         widgets = {
-            "fecha": forms.DateInput(attrs={"type": "date"}),
+            # El navegador solo entiende el formato ISO en un campo de fecha:
+            # con el formato del idioma (13/11/2026) el campo se leeria vacio.
+            "fecha": forms.DateInput(attrs={"type": "date"}, format="%Y-%m-%d"),
         }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for campo in self.fields.values():
             campo.widget.attrs.update({"class": "form-control"})
+        # Al enviar se acepta el ISO y tambien el formato espanol.
+        self.fields["fecha"].input_formats = ["%Y-%m-%d", "%d/%m/%Y"]
 
 
 # Upload files to specific course

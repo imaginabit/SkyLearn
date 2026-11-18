@@ -12,6 +12,7 @@ from django.urls import reverse
 
 from accounts.models import Student
 from core.models import Semester, Session
+from course.forms import UnidadAprendizajeForm
 from course.models import (
     Course,
     CourseAllocation,
@@ -1741,6 +1742,16 @@ class UnidadesDeAprendizajeTests(TestCase):
 
         self.assertEqual(respuesta.status_code, 302)
         self.assertFalse(UnidadAprendizaje.objects.filter(pk=unidad.pk).exists())
+
+    def test_la_fecha_se_pinta_en_iso_para_el_navegador(self):
+        """Un campo de fecha del navegador solo entiende el formato ISO.
+
+        Con el formato del idioma (13/11/2026) el campo se leeria vacio al
+        editar una unidad, y al guardar no habria fecha.
+        """
+        form = UnidadAprendizajeForm(instance=self.ua1)
+
+        self.assertIn('value="2026-11-13"', str(form["fecha"]))
 
     def test_no_se_puede_repetir_el_numero_de_unidad(self):
         self.client.force_login(self.docente)
