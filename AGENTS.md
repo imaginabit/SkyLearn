@@ -1,14 +1,15 @@
 # AGENTS.md — SkyLearn (fork imaginabit)
 
-Django **4.0.8** monolítico (sin build de frontend, sin framework JS). Fork de
+Django **5.2** monolítico (sin build de frontend, sin framework JS). Fork de
 `imaginabit/SkyLearn` para https://curso.imaginabit.com — servidor "Rocinante".
 `CONTRIBUTING.md` es boilerplate del upstream: **ignóralo**, el flujo real está en
 `DEPLOY.md`.
 
 ## Entorno
 
-- **Usa un venv con Python 3.9/3.10.** El `python3` del sistema es 3.14 y Django
-  4.0.8 no arranca ahí. La matriz de CI es 3.8–3.10.
+- **Usa un venv con Python 3.11 o 3.12.** El servidor (Rocinante) corre
+  **Python 3.11.2 con Django 5.2**; es lo que instala `requirements/base.txt`.
+  Django 5.2 no arranca en Python 3.8 ni 3.9.
 - `pip install -r requirements.txt` (= `requirements/local.txt`).
 - **`.env` es obligatorio para cualquier comando `manage.py`**: `config/settings.py`
   lee `EMAIL_HOST_USER`, `EMAIL_HOST_PASSWORD` y `EMAIL_FROM_ADDRESS` con
@@ -37,8 +38,12 @@ python manage.py collectstatic --noinput
 - **Lint**: no hay script. El CI corre `pylint` (`.pylintrc`, `max-line-length=100`)
   sobre `git ls-files '*.py'` excluyendo `migrations/`, y `black` **sin
   `pyproject.toml`** → 88 columnas por defecto. Formatea con black.
-- **Tests reales: solo `accounts/tests/`** (`test_decorators.py`, `test_filters.py`).
-  El `tests.py` del resto de apps son stubs vacíos.
+- **Tests reales**: `accounts/tests/`, `course/tests.py`, `config/tests.py` y
+  `quiz/tests.py`. Los `tests.py` del resto de apps son stubs vacíos.
+- La suite **ya tiene fallos** (los de mazos ocultos y el check de "ocultar las
+  ya corregidas" en `course.tests`, los de `config.tests` y los de
+  `quiz.tests`): compara siempre contra el árbol sin tus cambios antes de
+  echarle la culpa a lo tuyo.
 - Datos de prueba: `scripts/generate_fake_data.py` (factory_boy) **no tiene CLI**,
   impórtalo desde `manage.py shell`, y necesita `pip install faker` (no está en
   `requirements/`).
