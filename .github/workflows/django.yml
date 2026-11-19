@@ -21,7 +21,9 @@ jobs:
     strategy:
       max-parallel: 4
       matrix:
-        python-version: [3.8, 3.9]
+        # Django 5.2 (lo que instala requirements.txt) no arranca en Python 3.8
+        # ni 3.9: el servidor corre 3.11 y el CI va con 3.11 y 3.12.
+        python-version: [3.11, 3.12]
 
     steps:
     - uses: actions/checkout@v4
