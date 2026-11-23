@@ -1,5 +1,7 @@
+import io
 import os
 import tempfile
+import zipfile
 from datetime import date, datetime, time
 from decimal import Decimal
 
@@ -7,8 +9,9 @@ from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
 from django.core.files.uploadedfile import SimpleUploadedFile
-from django.test import TestCase
+from django.test import TestCase, override_settings
 from django.urls import reverse
+from django.utils import timezone
 
 from accounts.models import Student
 from core.models import Semester, Session
@@ -1817,3 +1820,176 @@ class UnidadesDeAprendizajeTests(TestCase):
         self.assertEqual(respuesta.status_code, 200)
         self.assertIn("UA1 · Procesos", html)
         self.assertIn("Actividad 1", html)
+
+
+class DossierAlumnoTests(TestCase):
+    """El dossier en ZIP: material visible del curso, las entregas del alumno
+    y el feedback recibido, y nada mas.
+
+    El alumno solo se baja el suyo y solo si esta matriculado; el docente
+    asignado puede bajar el de cualquiera de sus alumnos. El material oculto
+    y las entregas ajenas no van en el archivo.
+    """
+
+    def setUp(self):
+        # Los ficheros del dossier se escriben de verdad: que vayan a un
+        # temporal, no a media/ del repositorio.
+        self._media = tempfile.TemporaryDirectory()
+        self.addCleanup(self._media.cleanup)
+        media_override = override_settings(MEDIA_ROOT=self._media.name)
+        media_override.enable()
+        self.addCleanup(media_override.disable)
+
+        self.program = Program.objects.create(title="Programa de prueba")
+        self.curso = Course.objects.create(
+            title="Curso con dossier",
+            code="TEST-D",
+            program=self.program,
+            level="Bachelor",
+            year=1,
+            semester="First",
+        )
+        self.docente = User.objects.create_user(
+            username="tmp-docente-dossier", password="password", is_lecturer=True
+        )
+        self.docente = User.objects.get(pk=self.docente.pk)
+        CourseAllocation.objects.create(lecturer=self.docente).courses.set([self.curso])
+
+        self.alumno = User.objects.create_user(
+            username="tmp-alumno-dossier", password="password", is_student=True
+        )
+        self.alumno = User.objects.get(pk=self.alumno.pk)
+        self.ficha = Student.objects.create(
+            student=self.alumno, level="Bachelor", program=self.program
+        )
+        TakenCourse.objects.create(student=self.ficha, course=self.curso)
+
+        self.otro = User.objects.create_user(
+            username="tmp-otro-dossier", password="password", is_student=True
+        )
+        self.otro = User.objects.get(pk=self.otro.pk)
+        self.ficha_otro = Student.objects.create(
+            student=self.otro, level="Bachelor", program=self.program
+        )
+        TakenCourse.objects.create(student=self.ficha_otro, course=self.curso)
+
+        self.actividad = Upload.objects.create(
+            title="Actividad E1",
+            course=self.curso,
+            file=SimpleUploadedFile("enunciado-e1.pdf", b"enunciado de la E1"),
+            is_activity=True,
+            is_evaluable=True,
+        )
+        self.documento = Upload.objects.create(
+            title="Guia del curso",
+            course=self.curso,
+            file=SimpleUploadedFile("guia.pdf", b"guia del curso"),
+        )
+        self.oculto = Upload.objects.create(
+            title="Prueba oculta",
+            course=self.curso,
+            file=SimpleUploadedFile("oculta.pdf", b"material oculto"),
+            visible=False,
+        )
+        self.entrega = Submission.objects.create(
+            course=self.curso,
+            document=self.actividad,
+            student=self.alumno,
+            file=SimpleUploadedFile("trabajo-alumno.pdf", b"trabajo del alumno"),
+            mark=Decimal("8.50"),
+            graded_at=timezone.now(),
+            feedback="Bien hecho, revisa la parte del firewall.",
+        )
+        Submission.objects.create(
+            course=self.curso,
+            document=self.actividad,
+            student=self.otro,
+            file=SimpleUploadedFile("trabajo-ajeno.pdf", b"trabajo del otro"),
+        )
+        self.url_propio = reverse("dossier_curso", kwargs={"slug": self.curso.slug})
+        self.url_ajeno = reverse(
+            "dossier_alumno",
+            kwargs={"slug": self.curso.slug, "alumno_id": self.alumno.pk},
+        )
+
+    def _zip_de(self, respuesta):
+        return zipfile.ZipFile(io.BytesIO(respuesta.content))
+
+    def test_el_alumno_se_baja_lo_suyo_y_lo_publico(self):
+        self.client.force_login(self.alumno)
+
+        respuesta = self.client.get(self.url_propio)
+
+        self.assertEqual(respuesta.status_code, 200)
+        self.assertEqual(respuesta["Content-Type"], "application/zip")
+        self.assertTrue(respuesta["Content-Disposition"].endswith('.zip"'))
+        archivo = self._zip_de(respuesta)
+        nombres = archivo.namelist()
+        self.assertIn("LEEME.txt", nombres)
+        self.assertIn("feedback.md", nombres)
+        self.assertIn("videos.md", nombres)
+        # el material visible, con sus ficheros
+        self.assertTrue(any(n.startswith("material/") for n in nombres))
+        self.assertIn("guia.pdf", " ".join(nombres))
+        self.assertIn("enunciado-e1.pdf", " ".join(nombres))
+        # su entrega
+        self.assertIn("trabajo-alumno.pdf", " ".join(nombres))
+        # y el feedback del docente
+        feedback = archivo.read("feedback.md").decode()
+        self.assertIn("Bien hecho, revisa la parte del firewall.", feedback)
+        self.assertIn("8.50", feedback)
+
+    def test_el_dossier_no_lleva_oculto_ni_entregas_ajenas(self):
+        self.client.force_login(self.alumno)
+
+        archivo = self._zip_de(self.client.get(self.url_propio))
+        nombres = " ".join(archivo.namelist())
+
+        self.assertNotIn("oculta.pdf", nombres)
+        self.assertNotIn("trabajo-ajeno.pdf", nombres)
+
+    def test_sin_matricula_no_hay_dossier(self):
+        alumno_fuera = User.objects.create_user(
+            username="tmp-fuera-dossier", password="password", is_student=True
+        )
+        self.client.force_login(alumno_fuera)
+
+        respuesta = self.client.get(self.url_propio)
+
+        self.assertEqual(respuesta.status_code, 404)
+
+    def test_el_alumno_no_se_baja_el_dossier_de_otro(self):
+        self.client.force_login(self.otro)
+
+        respuesta = self.client.get(self.url_ajeno)
+
+        self.assertEqual(respuesta.status_code, 404)
+
+    def test_el_docente_asignado_se_baja_el_dossier_de_un_alumno(self):
+        self.client.force_login(self.docente)
+
+        respuesta = self.client.get(self.url_ajeno)
+
+        self.assertEqual(respuesta.status_code, 200)
+        archivo = self._zip_de(respuesta)
+        nombres = " ".join(archivo.namelist())
+        self.assertIn("trabajo-alumno.pdf", nombres)
+        self.assertIn(
+            "Bien hecho, revisa la parte del firewall.",
+            archivo.read("feedback.md").decode(),
+        )
+
+    def test_un_docente_ajeno_da_404(self):
+        docente_ajeno = User.objects.create_user(
+            username="tmp-docente-ajeno", password="password", is_lecturer=True
+        )
+        self.client.force_login(docente_ajeno)
+
+        respuesta = self.client.get(self.url_ajeno)
+
+        self.assertEqual(respuesta.status_code, 404)
+
+    def test_anonimo_redirige_al_login(self):
+        respuesta = self.client.get(self.url_propio)
+
+        self.assertEqual(respuesta.status_code, 302)

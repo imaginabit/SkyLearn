@@ -323,6 +323,9 @@ primer mazo, como se hacia antes.
                             <td>
                                 <a href="{% url 'submission_grade' slug=course.slug pk=s.pk %}" title="{% trans 'Calificar' %}">
                                     <i class="fas fa-pencil-alt"></i> {% trans "Calificar" %}</a>
+                                <a class="ms-2" href="{% url 'dossier_alumno' slug=course.slug alumno_id=s.student_id %}"
+                                    title="{% trans 'Descargar el dossier del alumno: material del curso, sus entregas y el feedback recibido' %}">
+                                    <i class="fas fa-file-archive"></i> ZIP</a>
                             </td>
                         </tr>
                         {% empty %}
@@ -339,7 +342,16 @@ primer mazo, como se hacia antes.
                 </table>
             </div>
             {% else %}
-            <p class="form-title m-0">{% trans "Tus entregas" %}</p>
+            <p class="form-title m-0">
+                {% trans "Tus entregas" %}
+                {% if submission_form %}
+                <a class="btn btn-sm btn-outline-primary ms-2"
+                   href="{% url 'dossier_curso' course.slug %}"
+                   title="{% trans 'Descarga el material visible del curso, tus entregas y el feedback recibido, todo en un ZIP' %}">
+                    <i class="fas fa-file-archive me-1"></i>{% trans "Descargar todo lo mío (ZIP)" %}
+                </a>
+                {% endif %}
+            </p>
             {% if submission_form %}
             <div class="card p-3">
                 <p class="small text-muted mb-2">

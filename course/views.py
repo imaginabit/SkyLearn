@@ -5,9 +5,10 @@ from datetime import timedelta
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import get_user_model
 from django.core.paginator import Paginator
 from django.db.models import Count, Q, Sum
-from django.http import FileResponse, Http404
+from django.http import FileResponse, Http404, HttpResponse
 from django.db import IntegrityError, transaction
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
@@ -21,6 +22,7 @@ from django_filters.views import FilterView
 from accounts.decorators import lecturer_required, student_required
 from accounts.models import Student
 from core.models import Semester
+from course.dossier import genera_dossier
 from course.filters import CourseAllocationFilter, ProgramFilter
 from course.forms import (
     CourseAddForm,
@@ -710,6 +712,36 @@ def submission_download(request, slug, pk):
         as_attachment=True,
         filename=submission.filename,
     )
+
+
+@login_required
+def dossier_alumno_zip(request, slug, alumno_id=None):
+    """El dossier del alumno en un ZIP: material visible, sus entregas y el
+    feedback recibido.
+
+    El alumno solo puede bajar el suyo (y solo si esta matriculado); el
+    docente asignado al curso puede bajar el de cualquiera de sus alumnos
+    pasando su id. Nadie lleva material oculto ni entregas ajenas: el archivo
+    contiene lo publico del curso y lo del alumno que lo pide.
+    """
+    course = get_object_or_404(Course, slug=slug)
+    if alumno_id is not None:
+        # El docente pide el dossier de un alumno concreto; un docente ajeno
+        # o el propio alumno pidiendo el de otro, igual que si no existiera.
+        if not es_docente_asignado(request.user, course):
+            raise Http404
+        alumno = get_object_or_404(get_user_model(), pk=alumno_id)
+    else:
+        alumno = request.user
+    # Sin matricula no hay dossier: tambien vale para el docente, que no
+    # tiene ficha de alumno en el curso.
+    if not TakenCourse.objects.filter(student__student=alumno, course=course).exists():
+        raise Http404
+    contenido = genera_dossier(course, alumno)
+    nombre = f"dossier-{slugify(course.title)[:40]}-{alumno.username}.zip"
+    respuesta = HttpResponse(contenido, content_type="application/zip")
+    respuesta["Content-Disposition"] = f'attachment; filename="{nombre}"'
+    return respuesta
 
 
 @login_required

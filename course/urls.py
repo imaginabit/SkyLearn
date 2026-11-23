@@ -58,6 +58,16 @@ urlpatterns = [
         name="submission_download",
     ),
     path(
+        "course/<slug>/dossier/",
+        views.dossier_alumno_zip,
+        name="dossier_curso",
+    ),
+    path(
+        "course/<slug>/dossier/<int:alumno_id>/",
+        views.dossier_alumno_zip,
+        name="dossier_alumno",
+    ),
+    path(
         "course/<slug>/submission/<int:pk>/grade/",
         views.submission_grade,
         name="submission_grade",
