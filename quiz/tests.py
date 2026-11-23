@@ -2,8 +2,10 @@ from django.contrib.auth import get_user_model
 from django.test import TestCase
 from django.urls import reverse
 
+from accounts.models import Student
 from course.models import Course, CourseAllocation, Program
 from quiz.models import EssayQuestion, Quiz, Sitting
+from result.models import TakenCourse
 
 User = get_user_model()
 
@@ -28,8 +30,12 @@ class QuizDesarrolloTests(TestCase):
             semester="First",
         )
         self.alumno = User.objects.create_user(
-            username="tmp-alumno-2", password="password"
+            username="tmp-alumno-2", password="password", is_student=True
         )
+        self.ficha_alumno = Student.objects.create(
+            student=self.alumno, level="Bachelor", program=self.program
+        )
+        TakenCourse.objects.create(student=self.ficha_alumno, course=self.curso)
         self.pregunta = EssayQuestion.objects.create(content="Explica que es un CAAT")
         self.quiz = Quiz.objects.create(
             course=self.curso,
@@ -121,3 +127,92 @@ class QuizDeleteAuthorizationTests(TestCase):
 
         self.assertEqual(response.status_code, 405)
         self.assertTrue(Quiz.objects.filter(pk=self.quiz.pk).exists())
+
+
+class SittingQuestionListSinComaTests(TestCase):
+    """Terminar un cuestionario con `question_list` sin coma final.
+
+    Hay sittings antiguas editadas a mano (al retirar preguntas de un
+    cuestionario cargado con fixture) cuyas listas quedaron sin la coma
+    final que pone `new_sitting`. `remove_first_question` hacia un split de
+    dos partes y reventaba con ValueError (HTTP 500) al contestar la ultima
+    pregunta: los alumnos no podian terminar el cuestionario.
+    """
+
+    def setUp(self):
+        self.program = Program.objects.create(title="Programa de prueba")
+        self.curso = Course.objects.create(
+            title="Curso sin coma",
+            code="MIO-3",
+            program=self.program,
+            level="Bachelor",
+            year=1,
+            semester="First",
+        )
+        self.alumno = User.objects.create_user(
+            username="tmp-alumno-3", password="password", is_student=True
+        )
+        self.ficha_alumno = Student.objects.create(
+            student=self.alumno, level="Bachelor", program=self.program
+        )
+        TakenCourse.objects.create(student=self.ficha_alumno, course=self.curso)
+        self.pregunta_1 = EssayQuestion.objects.create(content="Pregunta 1")
+        self.pregunta_2 = EssayQuestion.objects.create(content="Pregunta 2")
+        self.quiz = Quiz.objects.create(
+            course=self.curso,
+            title="Repaso sin coma",
+            category="practice",
+            single_attempt=False,
+            answers_at_end=False,
+            exam_paper=True,
+        )
+        self.quiz.question_set.add(self.pregunta_1, self.pregunta_2)
+        self.url = reverse(
+            "quiz_take", kwargs={"slug": self.quiz.slug, "pk": self.curso.pk}
+        )
+        self.client.force_login(self.alumno)
+
+    def _sitting_sin_coma(self):
+        ids = f"{self.pregunta_1.id},{self.pregunta_2.id}"
+        return Sitting.objects.create(
+            user=self.alumno,
+            quiz=self.quiz,
+            course=self.curso,
+            question_order=ids,
+            question_list=ids,
+            incorrect_questions="",
+            current_score=0,
+            complete=False,
+            user_answers="{}",
+        )
+
+    def test_contestar_todas_las_preguntas_termina_sin_500(self):
+        self._sitting_sin_coma()
+        for pregunta in (self.pregunta_1, self.pregunta_2):
+            response = self.client.post(
+                self.url,
+                {"question_id": pregunta.id, "answers": "Respuesta de prueba."},
+            )
+            self.assertEqual(response.status_code, 200)
+
+        sitting = Sitting.objects.get(user=self.alumno, quiz=self.quiz)
+        self.assertTrue(sitting.complete)
+        self.assertEqual(sitting.question_list, "")
+
+    def test_una_sola_pregunta_restante_sin_coma_tambien_termina(self):
+        sitting = self._sitting_sin_coma()
+        # El alumno ya habia contestado la primera: solo queda la segunda y
+        # ni siquiera al principio lleva coma.
+        sitting.question_list = str(self.pregunta_2.id)
+        sitting.user_answers = f'{{"{self.pregunta_1.id}": "a"}}'
+        sitting.save()
+
+        response = self.client.post(
+            self.url,
+            {"question_id": self.pregunta_2.id, "answers": "Respuesta final."},
+        )
+
+        self.assertEqual(response.status_code, 200)
+        sitting.refresh_from_db()
+        self.assertTrue(sitting.complete)
+        self.assertEqual(sitting.question_list, "")

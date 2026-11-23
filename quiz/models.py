@@ -279,8 +279,12 @@ class Sitting(models.Model):
     def remove_first_question(self):
         if not self.question_list:
             return
-        _, remaining_questions = self.question_list.split(",", 1)
-        self.question_list = remaining_questions
+        # Con o sin coma final: hay sittings antiguas editadas a mano (al
+        # retirar preguntas de un cuestionario) que no la llevan, y el split
+        # de dos partes reventaba con ValueError (HTTP 500) al contestar la
+        # ultima pregunta.
+        ids = [q for q in self.question_list.split(",") if q]
+        self.question_list = ",".join(ids[1:])
         self.save()
 
     def add_to_score(self, points):
