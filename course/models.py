@@ -513,6 +513,18 @@ class UploadVideo(models.Model):
             "como se hace con las pruebas."
         ),
     )
+    unidad = models.ForeignKey(
+        "UnidadAprendizaje",
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="videos",
+        verbose_name=_("Unidad de aprendizaje"),
+        help_text=_(
+            "La unidad a la que pertenece el vídeo. Si se deja vacía, sale en "
+            "la que le toque por la fecha de subida."
+        ),
+    )
     timestamp = models.DateTimeField(auto_now_add=True)
 
     class Meta:

@@ -106,6 +106,30 @@ def marca_ua(unidades, ficheros):
     return ficheros
 
 
+def ua_de_video(unidades, video):
+    """La unidad de un vídeo: la que tiene puesta a mano, o la que le toca.
+
+    Un vídeo no es material de una clase: se graba y se sube el día que
+    toca, así que su fecha dice poco. La unidad se pone a mano; la fecha solo
+    decide cuando nadie la ha puesto.
+    """
+    if video.unidad_id:
+        return video.unidad
+    return ua_de_fecha(unidades, video.timestamp.date())
+
+
+def marca_ua_video(unidades, videos):
+    """Pone a cada vídeo su unidad (`video.ua`) y su número de fila.
+
+    El número es global: sigue contando aunque los vídeos se agrupen por
+    unidades, para que la columna `#` no se reinicie en cada grupo.
+    """
+    for numero, video in enumerate(videos, start=1):
+        video.ua = ua_de_video(unidades, video)
+        video.num = numero
+    return videos
+
+
 def agrupa_por_ua(elementos, unidades, obtener_ua=None):
     """Agrupa elementos por unidad de aprendizaje.
 

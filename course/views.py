@@ -50,6 +50,7 @@ from course.utils import (
     decks_del_curso,
     es_docente_asignado,
     marca_ua,
+    marca_ua_video,
     numera_grupos,
     ua_de_fichero,
     unidades_del_curso,
@@ -343,6 +344,10 @@ def course_single(request, slug):
     grupos_decks = agrupa_por_ua(decks, unidades)
     grupos_actividades = agrupa_por_ua(actividades, unidades)
     grupos_documentos = agrupa_por_ua(documentos, unidades)
+    # Los vídeos, igual que el resto del material: con su unidad de
+    # aprendizaje y agrupados por ella.
+    marca_ua_video(unidades, videos)
+    grupos_videos = agrupa_por_ua(videos, unidades)
 
     if request.method == "POST":
         # ponytail: entrega del alumno; el profesor solo revisa la tabla de abajo
@@ -496,6 +501,8 @@ def course_single(request, slug):
             "grupos_decks": grupos_decks,
             "grupos_actividades": grupos_actividades,
             "grupos_documentos": grupos_documentos,
+            "grupos_videos": grupos_videos,
+            "columnas_videos": 5 if is_editor else 4,
             "grupos_entregas": grupos_entregas,
             "grupos_evaluables": grupos_evaluables,
             "grupos_ordinarias": grupos_ordinarias,
@@ -1074,7 +1081,7 @@ def handle_video_upload(request, slug):
     # un curso ajeno cambiando la URL.
     course = curso_asignado(request, slug)
     if request.method == "POST":
-        form = UploadFormVideo(request.POST, request.FILES)
+        form = UploadFormVideo(request.POST, request.FILES, curso=course)
         if form.is_valid():
             video = form.save(commit=False)
             video.course = course
@@ -1083,7 +1090,7 @@ def handle_video_upload(request, slug):
             return al_curso(slug, "videos")
         messages.error(request, "Correct the error(s) below.")
     else:
-        form = UploadFormVideo()
+        form = UploadFormVideo(curso=course)
     return render(
         request,
         "upload/upload_video_form.html",

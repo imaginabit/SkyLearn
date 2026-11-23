@@ -247,9 +247,11 @@ class UploadFormVideo(forms.ModelForm):
             "summary",
             "orden",
             "visible",
+            "unidad",
         )
 
     def __init__(self, *args, **kwargs):
+        curso = kwargs.pop("curso", None)
         super().__init__(*args, **kwargs)
         self.fields["title"].widget.attrs.update({"class": "form-control"})
         self.fields["video"].widget.attrs.update({"class": "form-control"})
@@ -257,6 +259,15 @@ class UploadFormVideo(forms.ModelForm):
         self.fields["summary"].widget.attrs.update({"class": "form-control", "rows": 3})
         self.fields["orden"].widget.attrs.update({"class": "form-control"})
         self.fields["visible"].widget.attrs.update({"class": "form-check-input"})
+        # La unidad de aprendizaje: vacia, la deduce el propio curso de la
+        # fecha. Solo se ofrecen las del curso en el que se sube.
+        self.fields["unidad"].required = False
+        self.fields["unidad"].empty_label = "Automatico: la unidad segun la fecha"
+        if curso is not None:
+            self.fields["unidad"].queryset = UnidadAprendizaje.objects.filter(
+                course=curso
+            )
+        self.fields["unidad"].widget.attrs.update({"class": "form-select"})
 
 
 class SubmissionForm(forms.ModelForm):

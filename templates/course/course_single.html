@@ -464,9 +464,11 @@ primer mazo, como se hacia antes.
                         </tr>
                     </thead>
                     <tbody>
-                        {% for video in videos %}
+                        {% for grupo in grupos_videos %}
+                        {% include "snippets/cabecera_ua.html" with grupo=grupo columnas=columnas_videos %}
+                        {% for video in grupo.elementos %}
                         <tr>
-                            <td>{{ forloop.counter }}</td>
+                            <td>{{ video.num }}</td>
                             <td>
                                 <a href="{{ video.get_absolute_url }}" title="{{ video }}" class="d-flex align-items-center">
                                     <i class="fas fa-video me-1"></i> {{ video.title }}
@@ -496,6 +498,7 @@ primer mazo, como se hacia antes.
                             </td>
                             {% endif %}
                         </tr>
+                        {% endfor %}
                         {% empty %}
                         <tr>
                             <td></td>

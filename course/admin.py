@@ -56,9 +56,9 @@ class UploadVideoAdmin(admin.ModelAdmin):
     cada ficha.
     """
 
-    list_display = ("title", "course", "visible", "orden", "timestamp")
+    list_display = ("title", "course", "visible", "orden", "unidad", "timestamp")
     list_editable = ("visible", "orden")
-    list_filter = ("visible", "course")
+    list_filter = ("visible", "course", "unidad")
     search_fields = ("title", "url", "summary")
     ordering = ("course", "orden", "timestamp")
     actions = ("mostrar_al_alumnado", "ocultar_al_alumnado")
