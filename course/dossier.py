@@ -30,8 +30,10 @@ Contenido:
                             entrega.
   material/documentacion/   El resto de documentos del curso.
   entregas/                 Las entregas de {nombre_corto}, una carpeta por
-                            actividad.
-  feedback.md               La nota y los comentarios del docente para cada
+                            actividad: el fichero entregado y, junto a el,
+                            el feedback.md con la nota y los comentarios
+                            del docente para esa entrega.
+  feedback.md               Resumen de todo: nota y comentarios de cada
                             actividad, junto a las que quedan sin entregar.
   videos.md                 Los videos publicados del curso con su enlace.
                             No se incluyen como fichero: pesan demasiado.
@@ -69,6 +71,28 @@ def _escribe(zip_file, carpeta, campo, usados):
         zip_file.writestr(ruta, origen.read())
 
 
+def _lineas_feedback(entrega):
+    """Las lineas de nota, fecha y comentarios de una entrega."""
+    lineas = []
+    if entrega.mark is not None:
+        lineas.append(f"- Nota: **{entrega.mark}**")
+    else:
+        lineas.append("- Nota: sin calificar todavia")
+    if entrega.graded_at:
+        calificada = timezone.localtime(entrega.graded_at).strftime("%d/%m/%Y")
+        lineas.append(f"- Calificada el {calificada}")
+    subida = timezone.localtime(entrega.uploaded_at).strftime("%d/%m/%Y %H:%M")
+    lineas.append(f"- Entregada el {subida} ({entrega.filename})")
+    lineas.append("")
+    if entrega.feedback:
+        lineas.append("Comentarios del docente:")
+        for parrafo in entrega.feedback.strip().splitlines() or [""]:
+            lineas.append(f"> {parrafo}".rstrip())
+    else:
+        lineas.append("El docente todavia no ha escrito comentarios.")
+    return lineas
+
+
 def _feedback_md(curso, alumno, actividades, entregas):
     """El feedback del docente, actividad a actividad, en Markdown."""
     fecha = timezone.localtime(timezone.now()).strftime("%d/%m/%Y %H:%M")
@@ -87,20 +111,7 @@ def _feedback_md(curso, alumno, actividades, entregas):
             sin_entregar.append(actividad)
             continue
         lineas.append(f"## {actividad.title}")
-        if entrega.mark is not None:
-            lineas.append(f"- Nota: **{entrega.mark}**")
-        else:
-            lineas.append("- Nota: sin calificar todavia")
-        if entrega.graded_at:
-            calificada = timezone.localtime(entrega.graded_at).strftime("%d/%m/%Y")
-            lineas.append(f"- Calificada el {calificada}")
-        subida = timezone.localtime(entrega.uploaded_at).strftime("%d/%m/%Y %H:%M")
-        lineas.append(f"- Entregada el {subida} ({entrega.filename})")
-        if entrega.feedback:
-            lineas.append("")
-            lineas.append("Comentarios del docente:")
-            for parrafo in entrega.feedback.strip().splitlines() or [""]:
-                lineas.append(f"> {parrafo}".rstrip())
+        lineas.extend(_lineas_feedback(entrega))
         lineas.append("")
     if sin_entregar:
         lineas.append("## Sin entregar")
@@ -198,5 +209,11 @@ def genera_dossier(curso, alumno):
             titulo = entrega.document.title if entrega.document else ""
             carpeta = f"entregas/{_carpeta(indice, titulo or 'sin-actividad')}"
             _escribe(zip_file, carpeta, entrega.file, usados)
+            # El feedback de esta entrega, junto al fichero entregado
+            cabecera = f"# Feedback: {titulo or 'Sin actividad'}"
+            zip_file.writestr(
+                f"{carpeta}/feedback.md",
+                "\n".join([cabecera, ""] + _lineas_feedback(entrega)) + "\n",
+            )
 
     return buffer.getvalue()

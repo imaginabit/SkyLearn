@@ -1946,6 +1946,16 @@ class DossierAlumnoTests(TestCase):
         feedback = archivo.read("feedback.md").decode()
         self.assertIn("Bien hecho, revisa la parte del firewall.", feedback)
         self.assertIn("8.50", feedback)
+        # y junto a la propia entrega
+        self.assertIn(
+            "entregas/01-actividad-e1/feedback.md",
+            nombres,
+        )
+        junto_a_la_entrega = archivo.read(
+            "entregas/01-actividad-e1/feedback.md"
+        ).decode()
+        self.assertIn("Bien hecho, revisa la parte del firewall.", junto_a_la_entrega)
+        self.assertIn("8.50", junto_a_la_entrega)
 
     def test_el_dossier_no_lleva_oculto_ni_entregas_ajenas(self):
         self.client.force_login(self.alumno)
