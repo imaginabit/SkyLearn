@@ -25,17 +25,20 @@ Generado el {fecha}
 
 Contenido:
 
-  material/    Todo el material visible del curso, una carpeta por documento
-               (enunciados, guias, presentaciones). Los ficheros adicionales
-               de cada documento van en su misma carpeta.
-  entregas/    Las entregas de {nombre_corto}, una carpeta por actividad.
-  feedback.md  La nota y los comentarios del docente para cada actividad,
-               junto a las que quedan sin entregar.
-  videos.md    Los videos publicados del curso con su enlace. No se incluyen
-               como fichero: pesan demasiado.
+  material/presentaciones/  Los mazos de diapositivas del curso.
+  material/actividades/     Los enunciados de las actividades: lo que se
+                            entrega.
+  material/documentacion/   El resto de documentos del curso.
+  entregas/                 Las entregas de {nombre_corto}, una carpeta por
+                            actividad.
+  feedback.md               La nota y los comentarios del docente para cada
+                            actividad, junto a las que quedan sin entregar.
+  videos.md                 Los videos publicados del curso con su enlace.
+                            No se incluyen como fichero: pesan demasiado.
 
-El material oculto del curso no va en el archivo: solo lo que se puede ver
-en la web, y lo que es de {nombre_corto}.
+Dentro de cada pestaña, una carpeta numerada por documento, como en la
+pagina del curso. El material oculto del curso no va en el archivo: solo lo
+que se puede ver en la web, y lo que es de {nombre_corto}.
 """
 
 
@@ -144,6 +147,19 @@ def genera_dossier(curso, alumno):
     videos = UploadVideo.objects.filter(course=curso, visible=True).order_by(
         "orden", "pk"
     )
+    # El material, repartido por las mismas pestañas del curso: los mazos de
+    # diapositivas van a Presentaciones, las actividades (lo que se entrega)
+    # a la suya y el resto de documentos a Documentacion.
+    presentaciones = []
+    actividades = []
+    documentacion = []
+    for material in materiales:
+        if material.es_html:
+            presentaciones.append(material)
+        elif material.is_activity:
+            actividades.append(material)
+        else:
+            documentacion.append(material)
 
     buffer = io.BytesIO()
     with zipfile.ZipFile(buffer, "w", zipfile.ZIP_DEFLATED) as zip_file:
@@ -161,17 +177,22 @@ def genera_dossier(curso, alumno):
         )
         zip_file.writestr(
             "feedback.md",
-            _feedback_md(
-                curso, alumno, [m for m in materiales if m.is_activity], entregas
-            ),
+            _feedback_md(curso, alumno, actividades, entregas),
         )
         zip_file.writestr("videos.md", _videos_md(curso, videos))
 
-        for indice, material in enumerate(materiales, start=1):
-            carpeta = f"material/{_carpeta(indice, material.title)}"
-            _escribe(zip_file, carpeta, material.file, usados)
-            for adicional in material.archivos.all():
-                _escribe(zip_file, carpeta, adicional.file, usados)
+        # Cada pestaña numera sus carpetas por su cuenta, igual que las
+        # tablas de la pagina del curso.
+        for carpeta_pestana, grupo in (
+            ("material/presentaciones", presentaciones),
+            ("material/actividades", actividades),
+            ("material/documentacion", documentacion),
+        ):
+            for indice, material in enumerate(grupo, start=1):
+                carpeta = f"{carpeta_pestana}/{_carpeta(indice, material.title)}"
+                _escribe(zip_file, carpeta, material.file, usados)
+                for adicional in material.archivos.all():
+                    _escribe(zip_file, carpeta, adicional.file, usados)
 
         for indice, entrega in enumerate(entregas, start=1):
             titulo = entrega.document.title if entrega.document else ""

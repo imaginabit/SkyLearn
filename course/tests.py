@@ -1891,6 +1891,11 @@ class DossierAlumnoTests(TestCase):
             file=SimpleUploadedFile("oculta.pdf", b"material oculto"),
             visible=False,
         )
+        self.mazo = Upload.objects.create(
+            title="Presentacion del curso",
+            course=self.curso,
+            file=SimpleUploadedFile("diapositivas.html", b"<html>mazo</html>"),
+        )
         self.entrega = Submission.objects.create(
             course=self.curso,
             document=self.actividad,
@@ -1928,10 +1933,13 @@ class DossierAlumnoTests(TestCase):
         self.assertIn("LEEME.txt", nombres)
         self.assertIn("feedback.md", nombres)
         self.assertIn("videos.md", nombres)
-        # el material visible, con sus ficheros
-        self.assertTrue(any(n.startswith("material/") for n in nombres))
-        self.assertIn("guia.pdf", " ".join(nombres))
-        self.assertIn("enunciado-e1.pdf", " ".join(nombres))
+        # el material, repartido por las mismas pestañas del curso
+        self.assertIn(
+            "material/presentaciones/01-presentacion-del-curso/diapositivas.html",
+            nombres,
+        )
+        self.assertIn("material/actividades/01-actividad-e1/enunciado-e1.pdf", nombres)
+        self.assertIn("material/documentacion/01-guia-del-curso/guia.pdf", nombres)
         # su entrega
         self.assertIn("trabajo-alumno.pdf", " ".join(nombres))
         # y el feedback del docente
