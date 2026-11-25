@@ -352,6 +352,12 @@ primer mazo, como se hacia antes.
                 </a>
                 {% endif %}
             </p>
+            {% if dossier_hash %}
+            <p class="small text-muted mb-2">
+                {% trans "SHA-256 del ZIP" %}: <code class="text-break">{{ dossier_hash }}</code><br>
+                {% trans "Para comprobar la descarga: en Linux, `sha256sum` y compara el resultado; en Windows, `certutil -hashfile` sobre el fichero." %}
+            </p>
+            {% endif %}
             {% if submission_form %}
             <div class="card p-3">
                 <p class="small text-muted mb-2">

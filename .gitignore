@@ -147,6 +147,9 @@ media/registration_form/*
 media/result_sheet/*
 !media/result_sheet/README.txt
 
+# Los ZIP del dossier de cada alumno: llevan sus entregas y sus notas
+dossier/
+
 # Datos locales del servidor (no se versionan)
 .server.local.md
 

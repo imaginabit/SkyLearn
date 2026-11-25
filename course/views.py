@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
 from django.core.paginator import Paginator
 from django.db.models import Count, Q, Sum
-from django.http import FileResponse, Http404, HttpResponse
+from django.http import FileResponse, Http404
 from django.db import IntegrityError, transaction
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
@@ -22,7 +22,12 @@ from django_filters.views import FilterView
 from accounts.decorators import lecturer_required, student_required
 from accounts.models import Student
 from core.models import Semester
-from course.dossier import genera_dossier
+from course.dossier import (
+    borra_dossier,
+    borra_dossiers,
+    dossier_en_disco,
+    hash_dossier,
+)
 from course.filters import CourseAllocationFilter, ProgramFilter
 from course.forms import (
     CourseAddForm,
@@ -335,6 +340,12 @@ def course_single(request, slug):
     matriculado = TakenCourse.objects.filter(
         student__student=request.user, course=course
     ).exists()
+    # El SHA-256 del ZIP del dossier del alumno, para que pueda comprobar que
+    # lo que ha bajado esta completo. El ZIP esta en disco (es el mismo que se
+    # descarga), asi que esto no lo rehace: solo lo lee.
+    dossier_hash = None
+    if matriculado and not is_editor:
+        dossier_hash = hash_dossier(course, request.user)
     # el mazo de diapositivas, si lo hay: se muestra embebido arriba del curso
     deck = deck_del_curso(course, solo_visibles=not is_editor)
     # todos los mazos, para la pestana de presentaciones
@@ -394,6 +405,8 @@ def course_single(request, slug):
                 submission.save()
                 if fichero_viejo:
                     fichero_viejo.delete(save=False)
+            # La entrega ha cambiado: el dossier del alumno se rehace.
+            borra_dossier(course, request.user)
             if entrega_previa:
                 messages.success(
                     request,
@@ -515,6 +528,7 @@ def course_single(request, slug):
             "columnas_decks": 5 if is_editor else 4,
             "tab_activa": tab,
             "submission_form": form,
+            "dossier_hash": dossier_hash,
             "my_submissions": my_submissions,
             "entregas_evaluables": entregas_evaluables,
             "entregas_ordinarias": entregas_ordinarias,
@@ -692,6 +706,8 @@ def submission_delete(request, slug, pk):
         )
         submission.file.delete(save=False)
         submission.delete()
+    # La entrega ya no esta: el dossier del alumno se rehace.
+    borra_dossier(course, submission.student)
     messages.success(request, f"Se ha borrado tu entrega de '{titulo}'.")
     return al_curso(course.slug, "entregas")
 
@@ -737,10 +753,18 @@ def dossier_alumno_zip(request, slug, alumno_id=None):
     # tiene ficha de alumno en el curso.
     if not TakenCourse.objects.filter(student__student=alumno, course=course).exists():
         raise Http404
-    contenido = genera_dossier(course, alumno)
+    # El ZIP que se baja es el que esta en disco, byte a byte: asi su SHA-256
+    # es el que se publica en la pagina del curso y sirve para comprobar la
+    # descarga. Se genera aqui si aun no existe.
+    ruta = dossier_en_disco(course, alumno)
     nombre = f"dossier-{slugify(course.title)[:40]}-{alumno.username}.zip"
-    respuesta = HttpResponse(contenido, content_type="application/zip")
-    respuesta["Content-Disposition"] = f'attachment; filename="{nombre}"'
+    respuesta = FileResponse(
+        ruta.open("rb"),
+        content_type="application/zip",
+        as_attachment=True,
+        filename=nombre,
+    )
+    respuesta["X-SHA256"] = hash_dossier(course, alumno)
     return respuesta
 
 
@@ -841,6 +865,9 @@ def submission_grade(request, slug, pk):
             submission = form.save(commit=False)
             submission.graded_at = timezone.now()
             submission.save()
+            # La nota y el comentario van en el dossier del alumno: su ZIP se
+            # rehace en la proxima descarga.
+            borra_dossier(course, submission.student)
             messages.success(request, "Calificacion guardada.")
             return al_curso(slug, "entregas")
         messages.error(request, "Revisa los errores del formulario.")
@@ -999,6 +1026,9 @@ def handle_file_upload(request, slug):
             upload.course = course
             upload.save()
             form.guardar_archivos(upload)
+            # El material del curso ha cambiado: los dossiers que hay en
+            # disco se rehacen en la proxima descarga.
+            borra_dossiers(course)
             messages.success(request, f"{upload.title} has been uploaded.")
             return al_curso(slug, pestana_de(upload, course))
         messages.error(request, "Correct the error(s) below.")
@@ -1033,6 +1063,8 @@ def handle_file_edit(request, slug, file_id):
                     and fichero_viejo.name != upload.file.name
                 ):
                     fichero_viejo.delete(save=False)
+            # El material ha cambiado: los dossiers del curso se rehacen.
+            borra_dossiers(course)
             messages.success(request, f"{upload.title} has been updated.")
             return al_curso(slug, pestana_de(upload, course))
         messages.error(request, "Correct the error(s) below.")
@@ -1056,6 +1088,8 @@ def handle_file_delete(request, slug, file_id):
     # del disco y deja el nombre a None, asi que luego ya no se sabe.
     pestana = pestana_de(upload, course)
     upload.delete()
+    # El material ha cambiado: los dossiers del curso se rehacen.
+    borra_dossiers(course)
     messages.success(request, f"{title} has been deleted.")
     return al_curso(slug, pestana)
 
@@ -1096,6 +1130,8 @@ def handle_archivo_delete(request, slug, file_id, archivo_id):
     archivo = get_object_or_404(UploadFile, pk=archivo_id, upload=upload)
     nombre = archivo.file.name
     archivo.delete()
+    # El material ha cambiado: los dossiers del curso se rehacen.
+    borra_dossiers(course)
     messages.success(request, f"{nombre} has been deleted.")
     return al_curso(slug, pestana_de(upload, course))
 
@@ -1118,6 +1154,8 @@ def handle_video_upload(request, slug):
             video = form.save(commit=False)
             video.course = course
             video.save()
+            # Los videos salen en el `videos.md` del dossier: los ZIP se rehacen.
+            borra_dossiers(course)
             messages.success(request, f"{video.title} has been uploaded.")
             return al_curso(slug, "videos")
         messages.error(request, "Correct the error(s) below.")
@@ -1156,6 +1194,8 @@ def handle_video_edit(request, slug, video_slug):
         form = UploadFormVideo(request.POST, request.FILES, instance=video)
         if form.is_valid():
             video = form.save()
+            # Los videos salen en el `videos.md` del dossier: los ZIP se rehacen.
+            borra_dossiers(course)
             messages.success(request, f"{video.title} has been updated.")
             return al_curso(slug, "videos")
         messages.error(request, "Correct the error(s) below.")
@@ -1176,6 +1216,8 @@ def handle_video_delete(request, slug, video_slug):
     video = get_object_or_404(UploadVideo, slug=video_slug, course=course)
     title = video.title
     video.delete()
+    # Los videos salen en el `videos.md` del dossier: los ZIP se rehacen.
+    borra_dossiers(course)
     messages.success(request, f"{title} has been deleted.")
     return al_curso(slug, "videos")
 
