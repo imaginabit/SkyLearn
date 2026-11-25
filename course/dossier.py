@@ -20,6 +20,7 @@ rehace cuando cambia el material del curso o la entrega del alumno:
 import hashlib
 import io
 import zipfile
+from pathlib import Path
 
 from django.conf import settings
 from django.utils import timezone
@@ -270,7 +271,7 @@ def _carpeta_dossiers():
     dossier lleva las entregas del alumno y sus notas. aqui solo llega
     Django, que pide la sesion antes de servirlo.
     """
-    return settings.BASE_DIR / "dossier"
+    return Path(settings.BASE_DIR) / "dossier"
 
 
 def ruta_dossier(curso, alumno):
